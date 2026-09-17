@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Tutoring by Deni - Bilangan Cacah Sampai 100.000</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Arial, Helvetica, sans-serif; }
+        .prompt-box { max-width: 650px; margin-left: auto; margin-right: auto; display: flex; flex-direction: column; align-items: center; text-align: left; }
+        .prompt-box p { width: 100%; }
+        .prompt-box img { width: 100%; height: auto; max-width: 300px; display: block; margin-top: 0.5rem; }
+        .translation { font-style: italic; font-size: 0.85rem; color: #6b7280; margin-top: 0.25rem; display: block; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .page { display: none; }
+        .page.active { display: block; }
+        .option-btn { transition: all 0.2s; }
+        .option-btn:hover { transform: translateX(5px); }
+        .collapse-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out, padding 0.4s, border 0.4s, background 0.4s; padding: 0; border: 0; background: transparent; }
+        .collapse-content.open { max-height: 2000px; padding: 1.5rem; border: 1px solid #bfdbfe; background: #eff6ff; border-radius: 0.5rem; margin-top: 1rem; }
+        @media print {
+            body * { visibility: hidden; }
+            #printArea, #printArea * { visibility: visible; }
+            #printArea { display: block !important; position: absolute; left: 0; top: 0; width: 100%; padding: 10px; box-sizing: border-box; }
+            .no-print { display: none !important; }
+            #printArea table { table-layout: fixed; width: 100%; font-size: 9px; }
+            #printArea td, #printArea th { word-wrap: break-word; padding: 2px !important; }
+            @page { size: A4; margin: 5mm; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col h-screen overflow-hidden">
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <marker id="arr1" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+            </marker>
+        </defs>
+    </svg>
+
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white p-4 flex justify-between items-center shadow-md no-print shrink-0 z-50">
+        <div>
+            <h1 class="text-xl font-bold">Math Tutoring by Deni</h1>
+            <p class="text-sm">Topic: Bilangan Cacah Sampai 100.000</p>
+            <p class="translation text-indigo-200">Topik: Counting Numbers Up to 100,000</p>
+        </div>
+        <div>
+            <button onclick="openModal()" class="bg-yellow-400 hover:bg-yellow-500 text-indigo-900 font-bold py-2 px-4 rounded flex items-center gap-2">
+                <i class="fas fa-gavel"></i> Class Rules
+            </button>
+        </div>
+    </header>
+
+    <!-- Modal Class Rules -->
+    <div id="classRulesModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 no-print">
+        <div class="bg-white rounded-lg p-6 w-80 max-w-sm">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-indigo-600">Class Rules <br><span class="translation text-gray-500">Aturan Kelas</span></h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-red-500"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start gap-2">
+                    <i class="fas fa-comments text-indigo-500 mt-1"></i>
+                    <div>Berbicara secara bergantian. <span class="translation">Take turns speaking.</span></div>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fas fa-door-open text-indigo-500 mt-1"></i>
+                    <div>Meminta izin jika ingin meninggalkan kelas. <span class="translation">Ask permission if you want to leave the class.</span></div>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fas fa-video text-indigo-500 mt-1"></i>
+                    <div>Menyalakan kamera dan microphone jika diperlukan. <span class="translation">Turn on camera and microphone if needed.</span></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="flex flex-1 overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-lg no-print border-r border-gray-200 flex flex-col">
+            <div class="p-4 bg-indigo-600 text-white">
+                <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-book-open"></i> Class Agenda</h3>
+                <p class="text-xs text-indigo-200 mt-1">Pilih topik untuk navigasi <span class="translation text-indigo-300 block">Select topic to navigate</span></p>
+            </div>
+            <nav class="flex-1 overflow-y-auto p-2">
+                <ul class="space-y-1">
+                    <li><a href="javascript:void(0)" onclick="showSection('warmup')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-800 transition-colors cursor-pointer" data-section="warmup"><div class="font-semibold text-sm text-gray-800">Spiral Review Warm-up</div><div class="text-xs text-gray-500 flex items-center gap-1 mt-1"><i class="far fa-clock"></i> 00:00 - 00:10</div></a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('intro')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-800 transition-colors cursor-pointer" data-section="intro"><div class="font-semibold text-sm text-gray-800">Introduction & Real-World</div><div class="text-xs text-gray-500 flex items-center gap-1 mt-1"><i class="far fa-clock"></i> 00:10 - 00:15</div></a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('review')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-800 transition-colors cursor-pointer" data-section="review"><div class="font-semibold text-sm text-gray-800">Review of Prior Knowledge</div><div class="text-xs text-gray-500 flex items-center gap-1 mt-1"><i class="far fa-clock"></i> 00:15 - 00:20</div></a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('problem')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-800 transition-colors cursor-pointer" data-section="problem"><div class="font-semibold text-sm text-gray-800">Problem Introduction</div><div class="text-xs text-gray-500 flex items-center gap-1 mt-1"><i class="far fa-clock"></i> 00:20 - 00:30</div></a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('guided')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-800 transition-colors cursor-pointer" data-section="guided"><div class="font-semibold text-sm text-gray-800">Guided Practice</div><div class="text-xs text-gray-500 flex items-center gap-1 mt-1"><i class="far fa-clock"></i> 00:30 - 00:45</div></a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('independent')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-800 transition-colors cursor-pointer" data-section="independent"><div class="font-semibold text-sm text-gray-800">Independent Practice</div><div class="text-xs text-gray-500 flex items-center gap-1 mt-1"><i class="far fa-clock"></i> 00:45 - 00:55</div></a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('consolidation')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-800 transition-colors cursor-pointer" data-section="consolidation"><div class="font-semibold text-sm text-gray-800">Consolidation & Reflection</div><div class="text-xs text-gray-500 flex items-center gap-1 mt-1"><i class="far fa-clock"></i> 00:55 - 01:00</div></a></li>
+                    <hr class="my-3 border-gray-200">
+                    <li><a href="javascript:void(0)" onclick="showSection('task1')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-orange-50 hover:text-orange-800 transition-colors cursor-pointer" data-section="task1"><div class="font-bold text-sm text-indigo-800 flex items-center gap-2"><i class="fas fa-clipboard-list text-xs"></i> Task 1</div><div class="text-xs text-gray-500 mt-1">10 Mixed Questions</div></a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('task2')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-orange-50 hover:text-orange-800 transition-colors cursor-pointer" data-section="task2"><div class="font-bold text-sm text-indigo-800 flex items-center gap-2"><i class="fas fa-clipboard-list text-xs"></i> Task 2</div><div class="text-xs text-gray-500 mt-1">10 Mixed Questions</div></a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('task3')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-orange-50 hover:text-orange-800 transition-colors cursor-pointer" data-section="task3"><div class="font-bold text-sm text-indigo-800 flex items-center gap-2"><i class="fas fa-clipboard-list text-xs"></i> Task 3</div><div class="text-xs text-gray-500 mt-1">10 Mixed Questions</div></a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('task4')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-orange-50 hover:text-orange-800 transition-colors cursor-pointer" data-section="task4"><div class="font-bold text-sm text-indigo-800 flex items-center gap-2"><i class="fas fa-clipboard-list text-xs"></i> Task 4</div><div class="text-xs text-gray-500 mt-1">10 Mixed Questions</div></a></li>
+                    <li><a href="javascript:void(0)" onclick="showSection('task5')" class="sidebar-item block px-4 py-2 rounded-lg hover:bg-orange-50 hover:text-orange-800 transition-colors cursor-pointer" data-section="task5"><div class="font-bold text-sm text-indigo-800 flex items-center gap-2"><i class="fas fa-clipboard-list text-xs"></i> Task 5</div><div class="text-xs text-gray-500 mt-1">10 Mixed Questions</div></a></li>
+                </ul>
+            </nav>
+            <div class="p-4 bg-gray-50 border-t border-gray-200 text-center">
+                <p class="text-xs text-gray-500 font-medium">Math Tutoring System</p>
+                <p class="text-xs text-gray-400">by Deni</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <div id="contentScrollArea" class="flex-1 overflow-y-auto p-6">
+
+            <!-- ========================================== -->
+            <!-- SECTION: SPIRAL REVIEW WARM-UP             -->
+            <!-- ========================================== -->
+            <div id="warmup" class="content-section active">
+                <!-- PAGE 1: THEORY 1 -->
+                <div class="page active" data-page="1">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-indigo-500">
+                        <h2 class="text-2xl font-bold text-indigo-600 mb-2">Mengenal Bilangan Cacah <i class="fas fa-child text-indigo-400 ml-2"></i></h2>
+                        <p class="translation">Getting to Know Counting Numbers</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-indigo-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <circle cx="30" cy="40" r="15" fill="#6366f1"/>
+                                    <text x="30" y="45" font-size="14" text-anchor="middle" fill="white">0</text>
+                                    <circle cx="70" cy="40" r="15" fill="#10b981"/>
+                                    <text x="70" y="45" font-size="14" text-anchor="middle" fill="white">1</text>
+                                    <circle cx="110" cy="40" r="15" fill="#f59e0b"/>
+                                    <text x="110" y="45" font-size="14" text-anchor="middle" fill="white">2</text>
+                                    <circle cx="150" cy="40" r="15" fill="#ef4444"/>
+                                    <text x="150" y="45" font-size="14" text-anchor="middle" fill="white">3</text>
+                                    <path d="M 20 80 L 160 80" stroke="#333" stroke-width="2"/>
+                                    <path d="M 20 80 L 20 110" stroke="#333" stroke-width="2"/>
+                                    <path d="M 160 80 L 160 110" stroke="#333" stroke-width="2"/>
+                                    <text x="90" y="125" font-size="12" text-anchor="middle" fill="#333">Bilangan Cacah (Counting Numbers)</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p><b>Bilangan cacah</b> adalah bilangan yang dimulai dari nol \( (0) \) dan berlanjut ke satu \( (1) \), dua \( (2) \), dan seterusnya tanpa ada akhir. <span class="translation">Counting numbers start from zero and continue without ending.</span></p>
+                                <p class="mt-2">Bilangan cacah tidak mengenal bilangan negatif \( (-1, -2) \) maupun pecahan \( (\frac{1}{2}) \). <span class="translation">Counting numbers do not include negative numbers or fractions.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Nol itu Ada!</p>
+                            <p class="mt-1">Ingat bahwa \( 0 \) adalah bagian dari bilangan cacah. Jika ditanya bilangan cacah antara \( 1 \) sampai \( 5 \), maka itu \( 1, 2, 3, 4, 5 \). Tapi jika ditanya mulai dari \( 0 \), jangan lupa masukkan \( 0 \). <span class="translation">Remember that 0 is a counting number. Don't forget to include it if asked from 0.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: \( \{0, 1, 2, 3, 4, \dots\} \).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="2" data-task-id="w-task1"></div>
+                <div class="page" data-page="3" data-task-id="w-task2"></div>
+                <div class="page" data-page="4" data-task-id="w-task3"></div>
+
+                <!-- PAGE 5: THEORY 2 -->
+                <div class="page" data-page="5">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+                        <h2 class="text-2xl font-bold text-green-600 mb-2">Kenapa Angka Nol Penting? <i class="fas fa-dragon text-green-400 ml-2"></i></h2>
+                        <p class="translation">Why is Zero Important?</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-green-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <circle cx="90" cy="70" r="40" fill="none" stroke="#10b981" stroke-width="4"/>
+                                    <path d="M 20 70 L 50 70" stroke="#333" stroke-width="2" marker-end="url(#arr1)"/>
+                                    <text x="10" y="75" font-size="12" fill="#333">Nol</text>
+                                    <path d="M 130 70 L 160 70" stroke="#333" stroke-width="2" marker-end="url(#arr1)"/>
+                                    <text x="155" y="75" font-size="12" fill="#333">Tak Terhingga</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Angka nol \( (0) \) ditemukan untuk mewakili "tidak ada". Tanpa nol, kita tidak bisa menulis bilangan besar seperti \( 1\,000 \) atau \( 10\,000 \). <span class="translation">Zero was invented to represent "nothing". Without zero, we can't write large numbers.</span></p>
+                                <p class="mt-2">Nol juga berfungsi sebagai penanda tempat, misalnya membedakan angka \( 15 \) dengan \( 105 \). <span class="translation">Zero acts as a placeholder, differentiating 15 and 105.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Penanda Tempat</p>
+                            <p class="mt-1">Bayangkan nol sebagai "ruang kosong" yang menahan bilangan lain agar tidak ikut bergeser. <span class="translation">Imagine zero as a placeholder keeping other numbers in line.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: \( 105 \neq 15 \).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="6" data-task-id="w-task4"></div>
+                <div class="page" data-page="7" data-task-id="w-task5"></div>
+                <div class="page" data-page="8" data-task-id="w-task6"></div>
+
+                <!-- PAGE 9: THEORY 3 -->
+                <div class="page" data-page="9">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500">
+                        <h2 class="text-2xl font-bold text-purple-600 mb-2">Mengenal Bilangan Ribuan <i class="fas fa-coins text-purple-400 ml-2"></i></h2>
+                        <p class="translation">Getting to Know Thousands</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-purple-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <rect x="20" y="50" width="20" height="40" fill="#8b5cf6"/>
+                                    <rect x="45" y="40" width="20" height="50" fill="#8b5cf6"/>
+                                    <rect x="70" y="30" width="20" height="60" fill="#8b5cf6"/>
+                                    <rect x="95" y="20" width="20" height="70" fill="#8b5cf6"/>
+                                    <text x="105" y="15" font-size="12" text-anchor="middle" fill="#333">1000</text>
+                                    <path d="M 125 55 L 155 55" stroke="#ef4444" stroke-width="2" marker-end="url(#arr1)"/>
+                                    <text x="140" y="75" font-size="12" text-anchor="middle" fill="#ef4444">Ribuan</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Bilangan ribuan adalah bilangan yang memiliki empat digit, dimulai dari \( 1\,000 \) hingga \( 9\,999 \). <span class="translation">Thousands are numbers with four digits, from 1,000 to 9,999.</span></p>
+                                <p class="mt-2">Contoh: Uang Rp \( 5\,000 \) adalah bilangan ribuan. <span class="translation">Example: Rp 5,000 is a thousands number.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Tiga Nol</p>
+                            <p class="mt-1">Bilangan ribuan pasti memiliki tiga angka nol di belakangnya jika habis dibagi seribu. <span class="translation">Thousands have three zeros if evenly divisible by a thousand.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: \( 1\,000 = 10 \times 100 \).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="10" data-task-id="w-task7"></div>
+                <div class="page" data-page="11" data-task-id="w-task8"></div>
+                <div class="page" data-page="12" data-task-id="w-task9"></div>
+                <div class="page" data-page="13" data-task-id="w-task10"></div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION: INTRO & REAL-WORLD CONNECTION     -->
+            <!-- ========================================== -->
+            <div id="intro" class="content-section">
+                <div class="page active" data-page="1">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-indigo-500">
+                        <h2 class="text-2xl font-bold text-indigo-600 mb-2">Bilangan Besar di Sekitar Kita <i class="fas fa-city text-indigo-400 ml-2"></i></h2>
+                        <p class="translation">Large Numbers Around Us</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-indigo-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <rect x="20" y="50" width="30" height="70" fill="#6366f1"/>
+                                    <rect x="55" y="30" width="40" height="90" fill="#6366f1"/>
+                                    <rect x="100" y="60" width="20" height="60" fill="#6366f1"/>
+                                    <rect x="125" y="20" width="35" height="100" fill="#6366f1"/>
+                                    <text x="90" y="15" font-size="12" text-anchor="middle" fill="#333">Penduduk: 50.000 jiwa</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Kamu pasti sering melihat bilangan besar, seperti jumlah penduduk sebuah kota \( (50\,000 \text{ jiwa}) \) atau harga sepeda motor \( (\text{Rp } 15\,000\,000) \). <span class="translation">You often see large numbers, like city populations or motorcycle prices.</span></p>
+                                <p class="mt-2">Hari ini, kita akan belajar membaca dan menulis bilangan cacah yang lebih besar, yaitu sampai \( 100\,000 \) (seratus ribu). <span class="translation">Today, we will learn to read and write counting numbers up to 100,000.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Angka 100.000</p>
+                            <p class="mt-1">Angka \( 100\,000 \) memiliki lima angka nol! Itu berarti seribu dikali seratus. <span class="translation">100,000 has five zeros! It means one thousand times one hundred.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: \( 100\,000 = 100 \times 1\,000 \).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="2" data-task-id="i-task1"></div>
+                <div class="page" data-page="3" data-task-id="i-task2"></div>
+                <div class="page" data-page="4" data-task-id="i-task3"></div>
+                <div class="page" data-page="5">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+                        <h2 class="text-2xl font-bold text-green-600 mb-2">Bagaimana Cara Membaca Bilangan? <i class="fas fa-book-reader text-green-400 ml-2"></i></h2>
+                        <p class="translation">How to Read Numbers?</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-green-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <rect x="20" y="40" width="140" height="40" rx="5" fill="none" stroke="#10b981" stroke-width="2"/>
+                                    <text x="90" y="65" font-size="14" text-anchor="middle" fill="#333">25.450</text>
+                                    <path d="M 90 80 L 90 100" stroke="#10b981" stroke-width="2" marker-end="url(#arr1)"/>
+                                    <text x="90" y="120" font-size="12" text-anchor="middle" fill="#333">"Dua puluh lima ribu empat ratus lima puluh"</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Membaca bilangan besar itu mudah! Kita kelompokkan angkanya dari belakang, tiga-tiga. Lalu baca dari kiri ke kanan. <span class="translation">Reading large numbers is easy! Group the digits by three from the right. Then read left to right.</span></p>
+                                <p class="mt-2">Contoh: \( 25\,450 \) dibaca "Dua puluh lima ribu, empat ratus lima puluh". <span class="translation">Example: 25,450 is read "Twenty-five thousand, four hundred fifty".</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Kelompok Tiga</p>
+                            <p class="mt-1">Gunakan titik (.) sebagai pemisah kelompok ribuan. Ini membantu matamu melihat angka lebih jelas. <span class="translation">Use a dot as a thousands separator. It helps your eyes see clearly.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: Baca kelompok ribuan, lalu ratusan, lalu puluhan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="6" data-task-id="i-task4"></div>
+                <div class="page" data-page="7" data-task-id="i-task5"></div>
+                <div class="page" data-page="8" data-task-id="i-task6"></div>
+
+                <div class="page" data-page="9">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500">
+                        <h2 class="text-2xl font-bold text-purple-600 mb-2">Tanda Titik vs Koma <i class="fas fa-exclamation-circle text-purple-400 ml-2"></i></h2>
+                        <p class="translation">Dot vs Comma</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-purple-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <text x="90" y="40" font-size="16" text-anchor="middle" fill="#10b981">50.000</text>
+                                    <text x="90" y="60" font-size="10" text-anchor="middle" fill="#333">(Indonesia: Titik untuk Ribuan)</text>
+                                    <text x="90" y="90" font-size="16" text-anchor="middle" fill="#ef4444">50,000</text>
+                                    <text x="90" y="110" font-size="10" text-anchor="middle" fill="#333">(Inggris: Koma untuk Ribuan)</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Di Indonesia, kita menggunakan <b>titik</b> \( (.) \) untuk memisahkan ribuan, dan <b>koma</b> \( (,) \) untuk pecahan. <span class="translation">In Indonesia, we use a dot for thousands and a comma for fractions.</span></p>
+                                <p class="mt-2">Jadi, \( 10\,000 \) ditulis dengan titik, bukan koma. <span class="translation">So, 10,000 is written with a dot.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Ikuti Aturan Indonesia</p>
+                            <p class="mt-1">Jangan tertukar! \( 1.5 \) di buku Inggris artinya satu setengah, tapi di Indonesia \( 1.000 \) artinya seribu. <span class="translation">Don't swap them! Follow Indonesian rules.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: Titik = Ribuan, Koma = Pecahan (di Indonesia).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="10" data-task-id="i-task7"></div>
+                <div class="page" data-page="11" data-task-id="i-task8"></div>
+                <div class="page" data-page="12" data-task-id="i-task9"></div>
+                <div class="page" data-page="13" data-task-id="i-task10"></div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION: REVIEW OF PRIOR KNOWLEDGE         -->
+            <!-- ========================================== -->
+            <div id="review" class="content-section">
+                <div class="page active" data-page="1">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-indigo-500">
+                        <h2 class="text-2xl font-bold text-indigo-600 mb-2">Menulis Bilangan dalam Huruf <i class="fas fa-pen-nib text-indigo-400 ml-2"></i></h2>
+                        <p class="translation">Writing Numbers in Words</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-indigo-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <text x="90" y="40" font-size="12" text-anchor="middle" fill="#333">3.250</text>
+                                    <path d="M 90 50 L 90 70" stroke="#6366f1" stroke-width="2" marker-end="url(#arr1)"/>
+                                    <text x="90" y="90" font-size="10" text-anchor="middle" fill="#6366f1">Tiga ribu dua ratus</text>
+                                    <text x="90" y="105" font-size="10" text-anchor="middle" fill="#6366f1">lima puluh</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Saat menulis bilangan dalam huruf, kita menulisnya sesuai dengan bacaannya. <span class="translation">When writing numbers in words, we write them according to how they are read.</span></p>
+                                <p class="mt-2">Contoh: \( 3\,250 \) ditulis "Tiga ribu, dua ratus lima puluh". <span class="translation">Example: 3,250 is written "Three thousand, two hundred fifty".</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Pisahkan dengan Koma</p>
+                            <p class="mt-1">Saat menulis, gunakan koma untuk memisahkan kelompok ribuan dengan ratusan agar mudah dibaca. <span class="translation">When writing, use a comma to separate thousands from hundreds.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: Ratusan ribu, ribu, ratusan, puluhan, satuan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="2" data-task-id="r-task1"></div>
+                <div class="page" data-page="3" data-task-id="r-task2"></div>
+                <div class="page" data-page="4" data-task-id="r-task3"></div>
+
+                <div class="page" data-page="5">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+                        <h2 class="text-2xl font-bold text-green-600 mb-2">Mengenal Nilai Tempat (Puluhan Ribu) <i class="fas fa-table text-green-400 ml-2"></i></h2>
+                        <p class="translation">Understanding Place Value (Ten Thousands)</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-green-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <rect x="20" y="20" width="140" height="40" fill="none" stroke="#10b981" stroke-width="2"/>
+                                    <line x1="48" y1="20" x2="48" y2="60" stroke="#10b981" stroke-width="2"/>
+                                    <line x1="76" y1="20" x2="76" y2="60" stroke="#10b981" stroke-width="2"/>
+                                    <line x1="104" y1="20" x2="104" y2="60" stroke="#10b981" stroke-width="2"/>
+                                    <line x1="132" y1="20" x2="132" y2="60" stroke="#10b981" stroke-width="2"/>
+                                    <text x="34" y="45" font-size="10" text-anchor="middle" fill="#333">1</text>
+                                    <text x="62" y="45" font-size="10" text-anchor="middle" fill="#333">2</text>
+                                    <text x="90" y="45" font-size="10" text-anchor="middle" fill="#333">3</text>
+                                    <text x="118" y="45" font-size="10" text-anchor="middle" fill="#333">4</text>
+                                    <text x="146" y="45" font-size="10" text-anchor="middle" fill="#333">5</text>
+                                    <text x="34" y="75" font-size="8" text-anchor="middle" fill="#10b981">RM</text>
+                                    <text x="62" y="75" font-size="8" text-anchor="middle" fill="#10b981">JT</text>
+                                    <text x="90" y="75" font-size="8" text-anchor="middle" fill="#10b981">RB</text>
+                                    <text x="118" y="75" font-size="8" text-anchor="middle" fill="#10b981">R</text>
+                                    <text x="146" y="75" font-size="8" text-anchor="middle" fill="#10b981">S</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Setiap posisi angka memiliki nama tempat. Dari kanan: Satuan, Puluhan, Ratusan, Ribu (Ribuan), Puluhan Ribu (Puluhribuan). <span class="translation">Each digit position has a place value. From right: Ones, Tens, Hundreds, Thousands, Ten Thousands.</span></p>
+                                <p class="mt-2">Pada angka \( 12\,345 \), angka \( 1 \) berada di nilai tempat Puluh Ribu. <span class="translation">In 12,345, the digit 1 is in the Ten Thousands place.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Mulai dari Kanan</p>
+                            <p class="mt-1">Selalu tentukan nilai tempat dimulai dari paling kanan (Satuan) agar tidak salah. <span class="translation">Always determine place value starting from the rightmost digit.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: S, P, R, Rb, PR (dari kanan ke kiri).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="6" data-task-id="r-task4"></div>
+                <div class="page" data-page="7" data-task-id="r-task5"></div>
+                <div class="page" data-page="8" data-task-id="r-task6"></div>
+
+                <div class="page" data-page="9">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500">
+                        <h2 class="text-2xl font-bold text-purple-600 mb-2">Perbedaan Nilai Tempat dan Nilai Angka <i class="fas fa-not-equal text-purple-400 ml-2"></i></h2>
+                        <p class="translation">Difference Between Place Value and Digit Value</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-purple-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <text x="90" y="40" font-size="14" text-anchor="middle" fill="#333">45.320</text>
+                                    <text x="90" y="70" font-size="12" text-anchor="middle" fill="#8b5cf6">Nilai Tempat: Ribu</text>
+                                    <text x="90" y="90" font-size="12" text-anchor="middle" fill="#8b5cf6">Nilai Angka: 5.000</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p><b>Nilai tempat</b> adalah posisi angkanya (misal: Ribu). <b>Nilai angka</b> adalah hasil kali angka dengan nilainya (misal: \( 5 \times 1\,000 = 5\,000 \)). <span class="translation">Place value is the position. Digit value is digit multiplied by its place value.</span></p>
+                                <p class="mt-2">Pada angka \( 45\,320 \), nilai tempat angka 5 adalah Ribu, dan nilai angkanya adalah \( 5\,000 \). <span class="translation">In 45,320, the place value of 5 is Thousands, and its digit value is 5,000.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Kalikan!</p>
+                            <p class="mt-1">Untuk mencari nilai angka, cukup kalikan angkanya dengan nilai tempatnya. <span class="translation">To find digit value, multiply the digit by its place value.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: Nilai Angka = Angka \( \times \) Nilai Tempat.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="10" data-task-id="r-task7"></div>
+                <div class="page" data-page="11" data-task-id="r-task8"></div>
+                <div class="page" data-page="12" data-task-id="r-task9"></div>
+                <div class="page" data-page="13" data-task-id="r-task10"></div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION: PROBLEM INTRODUCTION              -->
+            <!-- ========================================== -->
+            <div id="problem" class="content-section">
+                <!-- PAGE 1: THEORY 1 -->
+                <div class="page active" data-page="1">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-indigo-500">
+                        <h2 class="text-2xl font-bold text-indigo-600 mb-2">Membaca Bilangan 5 Digit <i class="fas fa-glasses text-indigo-400 ml-2"></i></h2>
+                        <p class="translation">Reading 5-Digit Numbers</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-indigo-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <rect x="20" y="40" width="140" height="50" fill="none" stroke="#6366f1" stroke-width="2" rx="5"/>
+                                    <line x1="48" y1="40" x2="48" y2="90" stroke="#6366f1" stroke-width="2"/>
+                                    <line x1="76" y1="40" x2="76" y2="90" stroke="#6366f1" stroke-width="2"/>
+                                    <line x1="104" y1="40" x2="104" y2="90" stroke="#6366f1" stroke-width="2"/>
+                                    <line x1="132" y1="40" x2="132" y2="90" stroke="#6366f1" stroke-width="2"/>
+                                    <text x="34" y="70" font-size="14" text-anchor="middle" fill="#333">8</text>
+                                    <text x="62" y="70" font-size="14" text-anchor="middle" fill="#333">5</text>
+                                    <text x="90" y="70" font-size="14" text-anchor="middle" fill="#333">4</text>
+                                    <text x="118" y="70" font-size="14" text-anchor="middle" fill="#333">2</text>
+                                    <text x="146" y="70" font-size="14" text-anchor="middle" fill="#333">0</text>
+                                    <text x="34" y="110" font-size="8" text-anchor="middle" fill="#6366f1">PR</text>
+                                    <text x="62" y="110" font-size="8" text-anchor="middle" fill="#6366f1">RB</text>
+                                    <text x="90" y="110" font-size="8" text-anchor="middle" fill="#6366f1">R</text>
+                                    <text x="118" y="110" font-size="8" text-anchor="middle" fill="#6366f1">P</text>
+                                    <text x="146" y="110" font-size="8" text-anchor="middle" fill="#6366f1">S</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Bilangan cacah hingga \( 100\,000 \) dapat terdiri dari 5 atau 6 digit. <span class="translation">Counting numbers up to 100,000 can have 5 or 6 digits.</span></p>
+                                <p class="mt-2">Contoh: \( 85\,420 \) dibaca "Delapan puluh lima ribu, empat ratus dua puluh". <span class="translation">Example: 85,420 is read "Eighty-five thousand, four hundred twenty".</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Baca Bertahap</p>
+                            <p class="mt-1">Bagi angka menjadi dua kelompok: ribuan dan satuan. Baca dari kiri. <span class="translation">Divide into thousands and units. Read from left.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: Kelompok Ribuan + Kelompok Satuan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="2" data-task-id="p-task1"></div>
+                <div class="page" data-page="3" data-task-id="p-task2"></div>
+                <div class="page" data-page="4" data-task-id="p-task3"></div>
+
+                <div class="page" data-page="5">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+                        <h2 class="text-2xl font-bold text-green-600 mb-2">Menulis Bilangan dari Huruf <i class="fas fa-keyboard text-green-400 ml-2"></i></h2>
+                        <p class="translation">Writing Numbers from Words</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-green-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <text x="90" y="50" font-size="12" text-anchor="middle" fill="#333">"Tujuh ribu dua ratus lima"</text>
+                                    <path d="M 90 60 L 90 80" stroke="#10b981" stroke-width="2" marker-end="url(#arr1)"/>
+                                    <rect x="50" y="90" width="80" height="30" rx="5" fill="#d1fae5" stroke="#10b981"/>
+                                    <text x="90" y="110" font-size="14" text-anchor="middle" fill="#333">7.205</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Saat menulis bilangan dari huruf, tentukan dulu bagian ribuannya. <span class="translation">When writing numbers from words, determine the thousands part first.</span></p>
+                                <p class="mt-2">"Tujuh ribu" = \( 7\,000 \), "dua ratus lima" = \( 205 \). Gabungkan menjadi \( 7\,205 \). <span class="translation">Combine them to get 7,205.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Cari Kata "Ribu"</p>
+                            <p class="mt-1">Kata "ribu" menandakan ada pemisah titik untuk angka ribuan. <span class="translation">The word "thousand" indicates a separator dot.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: [Ribuan] + [Ratusan/Puluhan/Satuan].</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="6" data-task-id="p-task4"></div>
+                <div class="page" data-page="7" data-task-id="p-task5"></div>
+                <div class="page" data-page="8" data-task-id="p-task6"></div>
+
+                <div class="page" data-page="9">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500">
+                        <h2 class="text-2xl font-bold text-purple-600 mb-2">Membandingkan Bilangan Cacah <i class="fas fa-balance-scale-right text-purple-400 ml-2"></i></h2>
+                        <p class="translation">Comparing Counting Numbers</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-purple-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <line x1="90" y1="30" x2="90" y2="100" stroke="#8b5cf6" stroke-width="3"/>
+                                    <line x1="30" y1="70" x2="150" y2="70" stroke="#8b5cf6" stroke-width="4"/>
+                                    <rect x="20" y="80" width="40" height="20" fill="#f3e8ff" stroke="#8b5cf6"/>
+                                    <text x="40" y="95" font-size="10" text-anchor="middle" fill="#333">45.000</text>
+                                    <rect x="120" y="60" width="40" height="20" fill="#f3e8ff" stroke="#8b5cf6"/>
+                                    <text x="140" y="75" font-size="10" text-anchor="middle" fill="#333">54.000</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Untuk membandingkan bilangan besar, lihat jumlah digitnya. Bilangan dengan lebih banyak digit nilainya lebih besar. <span class="translation">To compare large numbers, look at the number of digits. More digits mean larger value.</span></p>
+                                <p class="mt-2">Jika digit sama, bandingkan dari digit paling kiri. \( 54\,000 > 45\,000 \). <span class="translation">If digits are equal, compare from the leftmost digit.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Tanding dari Kiri</p>
+                            <p class="mt-1">Mulai bandingkan angka dari posisi puluh ribu, lalu ribu, dan seterusnya. <span class="translation">Start comparing from the ten thousands place, then thousands, etc.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: Banyak Digit > Digit Paling Kiri Besar.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="10" data-task-id="p-task7"></div>
+                <div class="page" data-page="11" data-task-id="p-task8"></div>
+                <div class="page" data-page="12" data-task-id="p-task9"></div>
+                <div class="page" data-page="13" data-task-id="p-task10"></div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION: GUIDED PRACTICE                   -->
+            <!-- ========================================== -->
+            <div id="guided" class="content-section">
+                <div class="page active" data-page="1">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-indigo-500">
+                        <h2 class="text-2xl font-bold text-indigo-600 mb-2">Mengurutkan Bilangan Cacah <i class="fas fa-sort-amount-down-alt text-indigo-400 ml-2"></i></h2>
+                        <p class="translation">Ordering Counting Numbers</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-indigo-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <path d="M 20 100 L 50 80 L 80 60 L 110 40 L 140 20" stroke="#6366f1" stroke-width="3" fill="none"/>
+                                    <circle cx="20" cy="100" r="5" fill="#ef4444"/>
+                                    <text x="20" y="115" font-size="10" text-anchor="middle" fill="#333">10.000</text>
+                                    <circle cx="50" cy="80" r="5" fill="#ef4444"/>
+                                    <text x="50" y="95" font-size="10" text-anchor="middle" fill="#333">20.000</text>
+                                    <circle cx="80" cy="60" r="5" fill="#ef4444"/>
+                                    <text x="80" y="75" font-size="10" text-anchor="middle" fill="#333">30.000</text>
+                                    <circle cx="110" cy="40" r="5" fill="#ef4444"/>
+                                    <text x="110" y="55" font-size="10" text-anchor="middle" fill="#333">40.000</text>
+                                    <circle cx="140" cy="20" r="5" fill="#ef4444"/>
+                                    <text x="140" y="35" font-size="10" text-anchor="middle" fill="#333">50.000</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Mengurutkan bilangan bisa dilakukan secara menaik (kecil ke besar) atau menurun (besar ke kecil). <span class="translation">Ordering can be ascending (small to large) or descending (large to small).</span></p>
+                                <p class="mt-2">Contoh menaik: \( 10\,000 \), \( 20\,000 \), \( 30\,000 \), \( 40\,000 \). <span class="translation">Example ascending: 10,000; 20,000; 30,000; 40,000.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Gunakan Garis Bilangan</p>
+                            <p class="mt-1">Membayangkan angka pada garis bilangan membantu melihat urutannya. <span class="translation">Visualizing numbers on a number line helps see the order.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: Menaik = Kecil ke Besar; Menurun = Besar ke Kecil.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="2" data-task-id="g-task1"></div>
+                <div class="page" data-page="3" data-task-id="g-task2"></div>
+                <div class="page" data-page="4" data-task-id="g-task3"></div>
+
+                <div class="page" data-page="5">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+                        <h2 class="text-2xl font-bold text-green-600 mb-2">Tabel Nilai Tempat <i class="fas fa-table text-green-400 ml-2"></i></h2>
+                        <p class="translation">Place Value Chart</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-green-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <rect x="10" y="20" width="160" height="100" fill="none" stroke="#10b981" stroke-width="2"/>
+                                    <line x1="42" y1="20" x2="42" y2="120" stroke="#10b981" stroke-width="2"/>
+                                    <line x1="74" y1="20" x2="74" y2="120" stroke="#10b981" stroke-width="2"/>
+                                    <line x1="106" y1="20" x2="106" y2="120" stroke="#10b981" stroke-width="2"/>
+                                    <line x1="138" y1="20" x2="138" y2="120" stroke="#10b981" stroke-width="2"/>
+                                    <line x1="10" y1="60" x2="170" y2="60" stroke="#10b981" stroke-width="2"/>
+                                    <text x="26" y="45" font-size="10" text-anchor="middle" fill="#10b981">PR</text>
+                                    <text x="58" y="45" font-size="10" text-anchor="middle" fill="#10b981">RB</text>
+                                    <text x="90" y="45" font-size="10" text-anchor="middle" fill="#10b981">R</text>
+                                    <text x="122" y="45" font-size="10" text-anchor="middle" fill="#10b981">P</text>
+                                    <text x="154" y="45" font-size="10" text-anchor="middle" fill="#10b981">S</text>
+                                    <text x="26" y="85" font-size="12" text-anchor="middle" fill="#333">2</text>
+                                    <text x="58" y="85" font-size="12" text-anchor="middle" fill="#333">3</text>
+                                    <text x="90" y="85" font-size="12" text-anchor="middle" fill="#333">4</text>
+                                    <text x="122" y="85" font-size="12" text-anchor="middle" fill="#333">5</text>
+                                    <text x="154" y="85" font-size="12" text-anchor="middle" fill="#333">6</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Tabel nilai tempat membantu melihat posisi angka. Puluhan Ribu (PR), Ribuan (Rb), Ratusan (R), Puluhan (P), Satuan (S). <span class="translation">A place value chart helps see digit positions.</span></p>
+                                <p class="mt-2">Pada \( 23\,456 \), angka 2 berada di posisi Puluhan Ribu. <span class="translation">In 23,456, the digit 2 is in the Ten Thousands place.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Tulis di Tabel</p>
+                            <p class="mt-1">Saat bingung dengan nilai tempat, gambar tabel kecil dan masukkan angkanya dari kanan. <span class="translation">When confused, draw a small chart and fill from the right.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: PR, Rb, R, P, S.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="6" data-task-id="g-task4"></div>
+                <div class="page" data-page="7" data-task-id="g-task5"></div>
+                <div class="page" data-page="8" data-task-id="g-task6"></div>
+
+                <div class="page" data-page="9">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500">
+                        <h2 class="text-2xl font-bold text-purple-600 mb-2">Mencari Nilai Angka <i class="fas fa-search-dollar text-purple-400 ml-2"></i></h2>
+                        <p class="translation">Finding Digit Value</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-purple-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <circle cx="60" cy="70" r="30" fill="none" stroke="#8b5cf6" stroke-width="3"/>
+                                    <line x1="80" y1="90" x2="110" y2="120" stroke="#8b5cf6" stroke-width="3"/>
+                                    <text x="90" y="40" font-size="14" text-anchor="middle" fill="#333">75.000</text>
+                                    <path d="M 90 45 L 90 65" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arr1)"/>
+                                    <text x="60" y="75" font-size="12" text-anchor="middle" fill="#8b5cf6">5</text>
+                                    <text x="140" y="115" font-size="10" text-anchor="middle" fill="#333">Nilai: 5.000</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Nilai angka didapat dari angka dikali nilai tempatnya. <span class="translation">Digit value is digit multiplied by its place value.</span></p>
+                                <p class="mt-2">Pada \( 75\,000 \), nilai angka 5 adalah \( 5 \times 1\,000 = 5\,000 \). <span class="translation">In 75,000, the digit value of 5 is 5,000.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Lihat Posisi</p>
+                            <p class="mt-1">Angka 5 di posisi ribuan nilainya pasti 5.000. Angka 5 di posisi puluhan ribu nilainya 50.000. <span class="translation">Digit 5 in thousands is 5,000. In ten thousands is 50,000.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: Angka \( \times \) Nilai Tempat = Nilai Angka.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="10" data-task-id="g-task7"></div>
+                <div class="page" data-page="11" data-task-id="g-task8"></div>
+                <div class="page" data-page="12" data-task-id="g-task9"></div>
+                <div class="page" data-page="13" data-task-id="g-task10"></div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION: INDEPENDENT PRACTICE               -->
+            <!-- ========================================== -->
+            <div id="independent" class="content-section">
+                <div class="page active" data-page="1">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-indigo-500">
+                        <h2 class="text-2xl font-bold text-indigo-600 mb-2">Soal Cerita Bilangan Cacah <i class="fas fa-book-open text-indigo-400 ml-2"></i></h2>
+                        <p class="translation">Word Problems with Counting Numbers</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-indigo-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <rect x="30" y="50" width="40" height="60" fill="#6366f1"/>
+                                    <rect x="80" y="30" width="40" height="80" fill="#6366f1"/>
+                                    <rect x="130" y="60" width="30" height="50" fill="#6366f1"/>
+                                    <circle cx="90" cy="20" r="10" fill="#f59e0b"/>
+                                    <text x="90" y="25" font-size="12" text-anchor="middle" fill="white">Rp</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Dalam soal cerita, baca perlahan dan tentukan apa yang diketahui dan ditanya. <span class="translation">In word problems, read slowly and identify what is given and asked.</span></p>
+                                <p class="mt-2">Contoh: "Pak Budi memiliki uang Rp \( 50\,000 \), lalu membeli sembako seharga Rp \( 25\,000 \)". Ini melibatkan operasi hitung. <span class="translation">Example: This involves arithmetic operations.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Coretu Informasi</p>
+                            <p class="mt-1">Ambil pensil, coret angka penting pada soal cerita agar tidak lupa. <span class="translation">Use a pencil to underline key numbers.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: Pahami kalimat akhir untuk tahu operasi (+, -, dll).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="2" data-task-id="ind-task1"></div>
+                <div class="page" data-page="3" data-task-id="ind-task2"></div>
+                <div class="page" data-page="4" data-task-id="ind-task3"></div>
+
+                <div class="page" data-page="5">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+                        <h2 class="text-2xl font-bold text-green-600 mb-2">Pola Bilangan Cacah <i class="fas fa-wave-square text-green-400 ml-2"></i></h2>
+                        <p class="translation">Number Patterns</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-green-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <circle cx="30" cy="70" r="15" fill="#10b981"/>
+                                    <text x="30" y="75" font-size="10" text-anchor="middle" fill="white">5.000</text>
+                                    <circle cx="70" cy="70" r="15" fill="#10b981"/>
+                                    <text x="70" y="75" font-size="10" text-anchor="middle" fill="white">10.000</text>
+                                    <circle cx="110" cy="70" r="15" fill="#10b981"/>
+                                    <text x="110" y="75" font-size="10" text-anchor="middle" fill="white">15.000</text>
+                                    <circle cx="150" cy="70" r="15" fill="none" stroke="#10b981" stroke-width="2"/>
+                                    <text x="150" y="75" font-size="10" text-anchor="middle" fill="#10b981">?</text>
+                                    <path d="M 45 70 L 55 70" stroke="#333" stroke-width="1" marker-end="url(#arr1)"/>
+                                    <path d="M 85 70 L 95 70" stroke="#333" stroke-width="1" marker-end="url(#arr1)"/>
+                                    <path d="M 125 70 L 135 70" stroke="#333" stroke-width="1" marker-end="url(#arr1)"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Pola bilangan adalah urutan angka yang mengikuti aturan tertentu. <span class="translation">A number pattern is a sequence following a specific rule.</span></p>
+                                <p class="mt-2">Contoh: \( 5\,000 \), \( 10\,000 \), \( 15\,000 \), ... Aturannya bertambah \( 5\,000 \). <span class="translation">Example: Rule is add 5,000.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Cari Selisih</p>
+                            <p class="mt-1">Kurangkan dua angka yang berurutan untuk menemukan aturan polanya. <span class="translation">Subtract two consecutive numbers to find the rule.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: Angka kedua - Angka pertama = Aturan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="6" data-task-id="ind-task4"></div>
+                <div class="page" data-page="7" data-task-id="ind-task5"></div>
+                <div class="page" data-page="8" data-task-id="ind-task6"></div>
+
+                <div class="page" data-page="9">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500">
+                        <h2 class="text-2xl font-bold text-purple-600 mb-2">Bilangan Cacah dalam Transaksi <i class="fas fa-cash-register text-purple-400 ml-2"></i></h2>
+                        <p class="translation">Counting Numbers in Transactions</p>
+                        <div class="flex gap-4 my-4 items-center">
+                            <div class="bg-purple-50 p-4 rounded flex justify-center shrink-0">
+                                <svg width="180" height="140" viewBox="0 0 180 140">
+                                    <rect x="20" y="40" width="50" height="80" rx="5" fill="#8b5cf6"/>
+                                    <text x="45" y="85" font-size="12" text-anchor="middle" fill="white">Rp</text>
+                                    <text x="45" y="100" font-size="10" text-anchor="middle" fill="white">100.000</text>
+                                    <rect x="90" y="50" width="40" height="70" rx="5" fill="#10b981"/>
+                                    <text x="110" y="90" font-size="10" text-anchor="middle" fill="white">50.000</text>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Uang sering menggunakan bilangan cacah. Uang Rp \( 100\,000 \) disebut "Uang Seratus Ribu Rupiah". <span class="translation">Money often uses counting numbers. Rp 100,000 is "One Hundred Thousand Rupiah".</span></p>
+                                <p class="mt-2">Saat bertransaksi, kita menjumlahkan atau mengurangkan bilangan cacah ini. <span class="translation">In transactions, we add or subtract these numbers.</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+                            <p class="font-bold text-yellow-800"><i class="fas fa-lightbulb mr-1"></i> Tips & Trik: Hati-hati Nolnya</p>
+                            <p class="mt-1">Uang Rp \( 100\,000 \) memiliki lima nol. Jangan tertukar dengan Rp \( 10\,000 \). <span class="translation">Rp 100,000 has five zeros. Don't confuse with Rp 10,000.</span></p>
+                            <p class="mt-1 font-bold"><i class="fas fa-flag mr-1"></i> Rumus To The Point: \( 100\,000 \) = 5 nol, \( 10\,000 \) = 4 nol.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" data-page="10" data-task-id="ind-task7"></div>
+                <div class="page" data-page="11" data-task-id="ind-task8"></div>
+                <div class="page" data-page="12" data-task-id="ind-task9"></div>
+                <div class="page" data-page="13" data-task-id="ind-task10"></div>
+            </div>
+            
+            <!-- TASK SECTIONS WRAPPERS -->
+            <div id="task1" class="content-section">
+                <div class="page active" data-page="1"><div data-task-id="t1-task1"></div></div>
+                <div class="page" data-page="2"><div data-task-id="t1-task2"></div></div>
+                <div class="page" data-page="3"><div data-task-id="t1-task3"></div></div>
+                <div class="page" data-page="4"><div data-task-id="t1-task4"></div></div>
+                <div class="page" data-page="5"><div data-task-id="t1-task5"></div></div>
+                <div class="page" data-page="6"><div data-task-id="t1-task6"></div></div>
+                <div class="page" data-page="7"><div data-task-id="t1-task7"></div></div>
+                <div class="page" data-page="8"><div data-task-id="t1-task8"></div></div>
+                <div class="page" data-page="9"><div data-task-id="t1-task9"></div></div>
+                <div class="page" data-page="10"><div data-task-id="t1-task10"></div></div>
+            </div>
+            <div id="task2" class="content-section">
+                <div class="page active" data-page="1"><div data-task-id="t2-task1"></div></div>
+                <div class="page" data-page="2"><div data-task-id="t2-task2"></div></div>
+                <div class="page" data-page="3"><div data-task-id="t2-task3"></div></div>
+                <div class="page" data-page="4"><div data-task-id="t2-task4"></div></div>
+                <div class="page" data-page="5"><div data-task-id="t2-task5"></div></div>
+                <div class="page" data-page="6"><div data-task-id="t2-task6"></div></div>
+                <div class="page" data-page="7"><div data-task-id="t2-task7"></div></div>
+                <div class="page" data-page="8"><div data-task-id="t2-task8"></div></div>
+                <div class="page" data-page="9"><div data-task-id="t2-task9"></div></div>
+                <div class="page" data-page="10"><div data-task-id="t2-task10"></div></div>
+            </div>
+            <div id="task3" class="content-section">
+                <div class="page active" data-page="1"><div data-task-id="t3-task1"></div></div>
+                <div class="page" data-page="2"><div data-task-id="t3-task2"></div></div>
+                <div class="page" data-page="3"><div data-task-id="t3-task3"></div></div>
+                <div class="page" data-page="4"><div data-task-id="t3-task4"></div></div>
+                <div class="page" data-page="5"><div data-task-id="t3-task5"></div></div>
+                <div class="page" data-page="6"><div data-task-id="t3-task6"></div></div>
+                <div class="page" data-page="7"><div data-task-id="t3-task7"></div></div>
+                <div class="page" data-page="8"><div data-task-id="t3-task8"></div></div>
+                <div class="page" data-page="9"><div data-task-id="t3-task9"></div></div>
+                <div class="page" data-page="10"><div data-task-id="t3-task10"></div></div>
+            </div>
+            <div id="task4" class="content-section">
+                <div class="page active" data-page="1"><div data-task-id="t4-task1"></div></div>
+                <div class="page" data-page="2"><div data-task-id="t4-task2"></div></div>
+                <div class="page" data-page="3"><div data-task-id="t4-task3"></div></div>
+                <div class="page" data-page="4"><div data-task-id="t4-task4"></div></div>
+                <div class="page" data-page="5"><div data-task-id="t4-task5"></div></div>
+                <div class="page" data-page="6"><div data-task-id="t4-task6"></div></div>
+                <div class="page" data-page="7"><div data-task-id="t4-task7"></div></div>
+                <div class="page" data-page="8"><div data-task-id="t4-task8"></div></div>
+                <div class="page" data-page="9"><div data-task-id="t4-task9"></div></div>
+                <div class="page" data-page="10"><div data-task-id="t4-task10"></div></div>
+            </div>
+            <div id="task5" class="content-section">
+                <div class="page active" data-page="1"><div data-task-id="t5-task1"></div></div>
+                <div class="page" data-page="2"><div data-task-id="t5-task2"></div></div>
+                <div class="page" data-page="3"><div data-task-id="t5-task3"></div></div>
+                <div class="page" data-page="4"><div data-task-id="t5-task4"></div></div>
+                <div class="page" data-page="5"><div data-task-id="t5-task5"></div></div>
+                <div class="page" data-page="6"><div data-task-id="t5-task6"></div></div>
+                <div class="page" data-page="7"><div data-task-id="t5-task7"></div></div>
+                <div class="page" data-page="8"><div data-task-id="t5-task8"></div></div>
+                <div class="page" data-page="9"><div data-task-id="t5-task9"></div></div>
+                <div class="page" data-page="10"><div data-task-id="t5-task10"></div></div>
+            </div>
+            
+            <div id="consolidation" class="content-section">
+                 <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <h2 class="text-2xl font-bold text-gray-800">Konsolidasi & Refleksi</h2>
+                    <p class="translation">Consolidation & Reflection</p>
+                    <p>Kerja bagus! Kamu telah menyelesaikan materi Bilangan Cacah Sampai 100.000. Teruslah berlatih membaca, menulis, dan menentukan nilai tempatnya. <span class="translation">Excellent work! You've completed the material on Counting Numbers Up to 100,000. Keep practicing.</span></p>
+                    <p class="mt-2">Untuk menguji pemahamanmu lebih lanjut, silakan kerjakan Task 1 hingga Task 5. <span class="translation">To test your understanding further, please complete Task 1 to Task 5.</span></p>
+                    <a href="https://learn.algonova.id" target="_blank" class="mt-4 inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded">
+                        Pergi ke learn.algonova.id <span class="translation text-sm italic">Go to learn.algonova.id</span>
+                    </a>
+                </div>
+            </div>
+
+            </div> <!-- Penutup #contentScrollArea -->
+            <div id="paginationBar" class="shrink-0 bg-white p-3 border-t border-gray-200 flex justify-center items-center gap-1 no-print z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"></div>
+        </main>
+    </div>
+    
+    <!-- Print Area -->
+    <div id="printArea" class="hidden p-8">
+        <div class="text-center border-b-2 border-black pb-4 mb-4">
+            <h1 class="text-xl font-bold">Math Tutoring by Deni</h1>
+            <p>Topic: Bilangan Cacah Sampai 100.000</p>
+            <div class="flex justify-around mt-4 text-sm">
+                <p>Name: ..............................</p>
+                <p>Date: ..............................</p>
+                <p>Task: <span id="printTaskNum">1</span></p>
+                <p>Score: <span id="printScore">0</span>/10</p>
+            </div>
+        </div>
+        <table class="w-full border-collapse border border-black text-sm">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border border-black p-1">No.</th>
+                    <th class="border border-black p-1">Question</th>
+                    <th class="border border-black p-1">Student Answer</th>
+                    <th class="border border-black p-1">Correct Answer</th>
+                    <th class="border border-black p-1">Note (❌/✔️)</th>
+                </tr>
+            </thead>
+            <tbody id="printTableBody"></tbody>
+        </table>
+        <div class="mt-8 text-right">
+            <p>Checked by,</p>
+            <br><br>
+            <p class="font-bold">Deni</p>
+        </div>
+    </div>
+    
+    <script>
+        const questions = {};
+        
+        Object.assign(questions, {
+            // SECTION 1: SPIRAL REVIEW WARM-UP
+            "w-task1": { type: "single", q: "Manakah dari berikut ini yang merupakan bilangan cacah? <i class='fas fa-list-ol text-indigo-500 ml-2'></i>", q_trans: "Which of the following is a counting number?", opts: ["\\( -5 \\)", "\\( \\frac{1}{2} \\)", "\\( 1.5 \\)", "\\( 10\\,000 \\)", "\\( -1 \\)"], ans: "\\( 10\\,000 \\)", exp: "Bilangan cacah dimulai dari 0, 1, 2, 3, dan seterusnya. Bilangan cacah tidak boleh negatif atau pecahan. <span class='translation'>Counting numbers start from 0, 1, 2, 3, and so on. They cannot be negative or fractions.</span>", exp_trans: "Counting numbers start from 0 and are whole numbers." },
+            "w-task2": { type: "fill", q: "Tuliskan bilangan cacah untuk 'Lima ribu'. <i class='fas fa-pen text-indigo-500 ml-2'></i>", q_trans: "Write the counting number for 'Five thousand'.", ans: "5000", exp: "Lima ribu ditulis dengan angka 5 diikuti tiga nol, yaitu 5000. <span class='translation'>Five thousand is written with 5 followed by three zeros.</span>", exp_trans: "Five thousand is 5000." },
+            "w-task3": { type: "tf_table", q: "Evaluasi pernyataan berikut tentang bilangan cacah. <i class='fas fa-check-circle text-indigo-500 ml-2'></i>", q_trans: "Evaluate the following statements about counting numbers.", opts: ["Bilangan cacah dimulai dari angka 1", "Angka 0 termasuk bilangan cacah", "Bilangan negatif adalah bilangan cacah", "Bilangan cacah tidak memiliki pecahan"], ans: ["S", "B", "S", "B"], exp: "1. Salah, dimulai dari 0. 2. Benar. 3. Salah, negatif bukan cacah. 4. Benar, cacah bilangan bulat positif dan nol. <span class='translation'>1. False, starts from 0. 2. True. 3. False. 4. True.</span>", exp_trans: "Counting numbers start from 0." },
+            "w-task4": { type: "single", q: "Pak Budi memiliki uang Rp \( 5.000 \). Ia membeli minuman seharga Rp \( 2.000 \). Berapakah sisa uang Pak Budi? <i class='fas fa-wallet text-indigo-500 ml-2'></i>", q_trans: "Mr. Budi has Rp 5,000. He buys a drink for Rp 2,000. How much money is left?", opts: ["\\( 2.000 \\)", "\\( 3.000 \\)", "\\( 7.000 \\)", "\\( 1.000 \\)", "\\( 4.000 \\)"], ans: "\\( 3.000 \\)", exp: "Uang Rp 5.000 dikurangi belanja Rp 2.000 sama dengan Rp 3.000. \\( 5.000 - 2.000 = 3.000 \\). <span class='translation'>Rp 5,000 minus Rp 2,000 equals Rp 3,000.</span>", exp_trans: "5000 - 2000 = 3000." },
+            "w-task5": { type: "complex", q: "Manakah dari bilangan berikut yang termasuk dalam bilangan ribuan (memiliki 4 digit)? <i class='fas fa-dice text-indigo-500 ml-2'></i>", q_trans: "Which of the following numbers are thousands (have 4 digits)?", opts: ["\\( 500 \\)", "\\( 5.000 \\)", "\\( 50.000 \\)", "\\( 999 \\)"], ans: [1], exp: "Bilangan ribuan memiliki 4 digit. Hanya 5.000 yang memiliki 4 digit. 500 (3 digit), 50.000 (5 digit), 999 (3 digit). <span class='translation'>Thousands have 4 digits. Only 5,000 has 4 digits.</span>", exp_trans: "Thousands have 4 digits." },
+            "w-task6": { type: "fill", q: "Sebuah stadion memiliki kapasitas 10.000 penonton. Jika 1.000 orang sudah masuk, berapa banyak kursi yang tersisa? <i class='fas fa-chair text-indigo-500 ml-2'></i>", q_trans: "A stadium has a capacity of 10,000 spectators. If 1,000 people have entered, how many seats are left?", ans: "9000", exp: "Kapasitas 10.000 dikurangi 1.000 yang masuk adalah 9.000. \\( 10.000 - 1.000 = 9.000 \\). <span class='translation'>10,000 capacity minus 1,000 entered is 9,000.</span>", exp_trans: "10000 - 1000 = 9000." },
+            "w-task7": { type: "tf_table", q: "Evaluasi penggunaan angka nol. <i class='fas fa-circle text-indigo-500 ml-2'></i>", q_trans: "Evaluate the use of the number zero.", opts: ["Nol digunakan sebagai penanda tempat", "Nol tidak memiliki nilai apa pun", "Tanpa nol, kita tidak bisa menulis 10.000", "Nol adalah bilangan cacah terkecil"], ans: ["B", "S", "B", "B"], exp: "1. Benar. 2. Salah, nol mewakili 'tidak ada' tapi penting untuk nilai tempat. 3. Benar. 4. Benar. <span class='translation'>1. True. 2. False. 3. True. 4. True.</span>", exp_trans: "Zero is a placeholder." },
+            "w-task8": { type: "complex", q: "Manakah persamaan matematika berikut yang menghasilkan bilangan cacah? <i class='fas fa-equals text-indigo-500 ml-2'></i>", q_trans: "Which of the following math equations results in a counting number?", opts: ["\\( 5 - 5 = 0 \\)", "\\( 10 - 15 = -5 \\)", "\\( 1 \\div 2 = \\frac{1}{2} \\)", "\\( 100 + 20 = 120 \\)"], ans: [0, 3], exp: "Bilangan cacah adalah 0 dan bilangan positif tanpa pecahan. 0 dan 120 adalah bilangan cacah. <span class='translation'>Counting numbers are 0 and positive whole numbers. 0 and 120 are counting numbers.</span>", exp_trans: "0 and 120 are counting numbers." },
+            "w-task9": { type: "fill", q: "Andi mengumpulkan 2.000 perangko dan Budi mengumpulkan 3.000 perangko. Berapa jumlah perangko mereka? <i class='fas fa-stamp text-indigo-500 ml-2'></i>", q_trans: "Andi collects 2,000 stamps and Budi collects 3,000 stamps. What is their total stamps?", ans: "5000", exp: "2.000 + 3.000 = 5.000. <span class='translation'>2000 + 3000 = 5000.</span>", exp_trans: "2000 + 3000 = 5000." },
+            "w-task10": { type: "single", q: "Ibu membeli beras 10 kg dengan harga Rp 50.000. Jika ibu membayar dengan uang Rp 100.000, berapakah kembaliannya? <i class='fas fa-shopping-basket text-indigo-500 ml-2'></i>", q_trans: "Mother buys 10 kg of rice for Rp 50,000. If she pays with Rp 100,000, what is the change?", opts: ["\\( 20.000 \\)", "\\( 30.000 \\)", "\\( 40.000 \\)", "\\( 50.000 \\)", "\\( 60.000 \\)"], ans: "\\( 50.000 \\)", exp: "Uang Rp 100.000 dikurangi harga Rp 50.000 adalah Rp 50.000. <span class='translation'>Rp 100,000 minus Rp 50,000 is Rp 50,000.</span>", exp_trans: "100000 - 50000 = 50000." },
+
+            // SECTION 2: INTRODUCTION & REAL-WORLD
+            "i-task1": { type: "single", q: "Sebuah kota memiliki populasi 75.430 jiwa. Bagaimana cara membaca bilangan tersebut? <i class='fas fa-city text-green-500 ml-2'></i>", q_trans: "A city has a population of 75,430. How do you read this number?", opts: ["Tujuh lima empat tiga nol", "Tujuh puluh lima ribu empat ratus tiga puluh", "Tujuh ratus lima ribu empat ratus tiga", "Tujuh ribu lima ratus empat puluh tiga", "Tujuh puluh lima empat ratus tiga"], ans: "Tujuh puluh lima ribu empat ratus tiga puluh", exp: "Dibagi menjadi 75 (Tujuh puluh lima ribu) dan 430 (empat ratus tiga puluh). <span class='translation'>75 is Seventy-five thousand, 430 is four hundred thirty.</span>", exp_trans: "Seventy-five thousand, four hundred thirty." },
+            "i-task2": { type: "fill", q: "Tuliskan angka untuk 'Dua puluh ribu lima ratus'. <i class='fas fa-keyboard text-green-500 ml-2'></i>", q_trans: "Write the number for 'Twenty thousand five hundred'.", ans: "20500", exp: "'Dua puluh ribu' = 20.000, 'lima ratus' = 500. Jadi, 20.500. <span class='translation'>20,000 + 500 = 20,500.</span>", exp_trans: "20500." },
+            "i-task3": { type: "tf_table", q: "Evaluasi cara membaca bilangan. <i class='fas fa-book-reader text-green-500 ml-2'></i>", q_trans: "Evaluate how to read numbers.", opts: ["15.000 dibaca lima belas ribu", "1.500 dibaca seribu lima ratus", "50.000 dibaca lima puluh ribu", "5.005 dibaca lima ribu lima"], ans: ["B", "B", "B", "B"], exp: "Semua pernyataan benar tentang cara membaca bilangan. <span class='translation'>All statements are true about reading numbers.</span>", exp_trans: "All are correct." },
+            "i-task4": { type: "single", q: "Di Indonesia, tanda titik (.) pada bilangan 10.000 berfungsi sebagai... <i class='fas fa-grip-lines text-green-500 ml-2'></i>", q_trans: "In Indonesia, the dot (.) in 10,000 serves as...", opts: ["Penanda pecahan", "Pemisah ribuan", "Tanda kurang", "Penanda desimal", "Pemisah satuan"], ans: "Pemisah ribuan", exp: "Di Indonesia, titik memisahkan ribuan (seperti 10.000), sedangkan koma untuk pecahan (seperti 1,5). <span class='translation'>In Indonesia, dot separates thousands, comma is for fractions.</span>", exp_trans: "Dot is thousands separator." },
+            "i-task5": { type: "complex", q: "Manakah penulisan bilangan berikut yang BENAR menurut aturan Indonesia? <i class='fas fa-check-double text-green-500 ml-2'></i>", q_trans: "Which of the following number writings is CORRECT according to Indonesian rules?", opts: ["\\( 10,000 \\)", "\\( 10.000 \\)", "\\( 100.00 \\)", "\\( 1.0000 \\)"], ans: [1], exp: "Penulisan yang benar adalah 10.000 (titik setiap 3 digit dari kanan). <span class='translation'>Correct writing is 10.000 (dot every 3 digits from right).</span>", exp_trans: "10.000 is correct." },
+            "i-task6": { type: "fill", q: "Harga sepeda motor adalah Rp 15.000.000. Jika dibayar dengan uang Rp 20.000.000, berapakah kembaliannya? <i class='fas fa-motorcycle text-green-500 ml-2'></i>", q_trans: "A motorcycle costs Rp 15,000,000. If paid with Rp 20,000,000, what is the change?", ans: "5000000", exp: "20.000.000 - 15.000.000 = 5.000.000. <span class='translation'>20 million - 15 million = 5 million.</span>", exp_trans: "5000000." },
+            "i-task7": { type: "single", q: "Jumlah pengunjung taman bermain hari ini adalah 45.300 orang. Bagaimana menuliskannya dalam huruf? <i class='fas fa-tree text-green-500 ml-2'></i>", q_trans: "The number of amusement park visitors today is 45,300. How to write it in words?", opts: ["Empat puluh lima ribu tiga ratus", "Empat ribu lima ratus tiga", "Empat lima tiga nol", "Empat puluh lima ratus tiga puluh", "Empat ratus lima puluh tiga ribu"], ans: "Empat puluh lima ribu tiga ratus", exp: "45.300 dibaca 'Empat puluh lima ribu tiga ratus'. <span class='translation'>45,300 is read 'Forty-five thousand three hundred'.</span>", exp_trans: "Forty-five thousand three hundred." },
+            "i-task8": { type: "tf_table", q: "Evaluasi penulisan bilangan dalam huruf. <i class='fas fa-pen-nib text-green-500 ml-2'></i>", q_trans: "Evaluate writing numbers in words.", opts: ["12.500 = Dua belas ribu lima ratus", "21.050 = Dua puluh satu ribu lima puluh", "10.000 = Sepuluh ribu", "100.000 = Seratus ribu"], ans: ["B", "B", "B", "B"], exp: "12.500 dibagi menjadi 12 (Dua belas ribu) dan 500 (lima ratus). Semua penulisan bilangan dalam huruf tersebut benar. <span class='translation'>All statements are true.</span>", exp_trans: "All are correct." },
+            "i-task9": { type: "fill", q: "Sebuah pabrik memproduksi 10.000 botol air per hari. Jika beroperasi 5 hari, berapa total botol yang diproduksi? <i class='fas fa-industry text-green-500 ml-2'></i>", q_trans: "A factory produces 10,000 water bottles per day. If it operates for 5 days, what is the total bottles produced?", ans: "50000", exp: "10.000 x 5 = 50.000 botol. <span class='translation'>10,000 x 5 = 50,000 bottles.</span>", exp_trans: "50000." },
+            "i-task10": { type: "complex", q: "Manakah dari berikut ini yang merupakan bilangan 5 digit (Puluhan Ribu)? <i class='fas fa-dice-5 text-green-500 ml-2'></i>", q_trans: "Which of the following are 5-digit numbers (Ten Thousands)?", opts: ["\\( 1.000 \\)", "\\( 10.000 \\)", "\\( 99.999 \\)", "\\( 100.000 \\)"], ans: [1, 2], exp: "10.000 dan 99.999 memiliki 5 digit. 1.000 (4 digit), 100.000 (6 digit). <span class='translation'>10,000 and 99,999 have 5 digits.</span>", exp_trans: "10,000 and 99,999." },
+
+            // SECTION 3: REVIEW OF PRIOR KNOWLEDGE
+            "r-task1": { type: "single", q: "Tuliskan angka untuk 'Sembilan puluh sembilan ribu sembilan ratus sembilan puluh'. <i class='fas fa-pen text-indigo-500 ml-2'></i>", q_trans: "Write the number for 'Ninety-nine thousand nine hundred ninety'.", opts: ["\\( 9.999 \\)", "\\( 99.999 \\)", "\\( 999.999 \\)", "\\( 90.999 \\)", "\\( 99.090 \\)"], ans: "\\( 99.999 \\)", exp: "Sembilan puluh sembilan ribu (99.000) + sembilan ratus (900) + sembilan puluh (90) = 99.999. <span class='translation'>99,000 + 900 + 90 = 99,999.</span>", exp_trans: "99,999." },
+            "r-task2": { type: "fill", q: "Nilai tempat angka 4 pada 84.250 adalah... <i class='fas fa-table text-indigo-500 ml-2'></i>", q_trans: "The place value of the digit 4 in 84,250 is...", ans: "Ribu", exp: "84.250: 8(Puluhan Ribu), 4(Ribuan), 2(Ratusan), 5(Puluhan), 0(Satuan). Jadi nilai tempat 4 adalah Ribu. <span class='translation'>84,250: 8(Ten Thousands), 4(Thousands), 2(Hundreds), 5(Tens), 0(Ones). So, it's Thousands.</span>", exp_trans: "Thousands." },
+            "r-task3": { type: "tf_table", q: "Evaluasi nilai tempat pada bilangan 56.789. <i class='fas fa-layer-group text-indigo-500 ml-2'></i>", q_trans: "Evaluate place values in 56,789.", opts: ["Nilai tempat 5 adalah Puluhan Ribu", "Nilai tempat 6 adalah Ratusan", "Nilai tempat 7 adalah Ratusan", "Nilai tempat 9 adalah Satuan"], ans: ["B", "S", "B", "B"], exp: "5(PR), 6(Ribu), 7(Ratus), 8(Puluhan), 9(Satuan). Pernyataan 2 salah karena 6 adalah Ribu. <span class='translation'>5(Ten Thou), 6(Thou), 7(Hund), 8(Tens), 9(Ones). Statement 2 is false.</span>", exp_trans: "6 is Thousands." },
+            "r-task4": { type: "single", q: "Berapakah nilai angka dari 8 pada bilangan 88.888? <i class='fas fa-search-dollar text-indigo-500 ml-2'></i>", q_trans: "What is the digit value of 8 in 88,888?", opts: ["\\( 8 \\)", "\\( 80 \\)", "\\( 800 \\)", "\\( 8.000 \\)", "\\( 80.000 \\)"], ans: "\\( 80.000 \\)", exp: "Angka 8 pertama dari kiri (Puluhan Ribu) memiliki nilai 8 x 10.000 = 80.000. <span class='translation'>First 8 from left (Ten Thousands) is 8 x 10,000 = 80,000.</span>", exp_trans: "80,000." },
+            "r-task5": { type: "complex", q: "Manakah pernyataan yang benar tentang nilai tempat dan nilai angka? <i class='fas fa-balance-scale text-indigo-500 ml-2'></i>", q_trans: "Which statements are true about place value and digit value?", opts: ["Nilai angka = Angka x Nilai Tempat", "Nilai tempat selalu lebih kecil dari nilai angka", "Setiap angka memiliki nilai tempat yang berbeda", "Angka 0 tidak memiliki nilai tempat"], ans: [0, 2], exp: "1. Benar. 2. Salah, bisa lebih besar. 3. Benar. 4. Salah, 0 tetap memiliki posisi nilai tempat. <span class='translation'>1. True. 2. False. 3. True. 4. False.</span>", exp_trans: "0 has a place value." },
+            "r-task6": { type: "fill", q: "Pada bilangan 45.230, berapakah jumlah nilai angka dari 5 dan 3? <i class='fas fa-plus-circle text-indigo-500 ml-2'></i>", q_trans: "In 45,230, what is the sum of the digit values of 5 and 3?", ans: "5300", exp: "Nilai 5 = 5.000, Nilai 3 = 300. 5.000 + 300 = 5.300. <span class='translation'>Value of 5 = 5,000, Value of 3 = 300. 5,000 + 300 = 5,300.</span>", exp_trans: "5300." },
+            "r-task7": { type: "single", q: "Bilangan 'Tujuh puluh tujuh ribu tujuh ratus tujuh' ditulis sebagai... <i class='fas fa-pencil-alt text-indigo-500 ml-2'></i>", q_trans: "The number 'Seventy-seven thousand seven hundred seven' is written as...", opts: ["\\( 77.777 \\)", "\\( 77.707 \\)", "\\( 77.770 \\)", "\\( 7.777 \\)", "\\( 70.777 \\)"], ans: "\\( 77.707 \\)", exp: "77.000 (Tujuh puluh tujuh ribu) + 700 (tujuh ratus) + 7 (tujuh) = 77.707. <span class='translation'>77,000 + 700 + 7 = 77,707.</span>", exp_trans: "77,707." },
+            "r-task8": { type: "tf_table", q: "Evaluasi penulisan angka dari huruf. <i class='fas fa-spell-check text-indigo-500 ml-2'></i>", q_trans: "Evaluate writing numbers from words.", opts: ["Lima ribu lima = 5.005", "Lima puluh ribu = 55.000", "Lima ratus ribu = 500.000", "Lima puluh lima = 55"], ans: ["B", "S", "B", "B"], exp: "1. Benar. 2. Salah, Lima puluh ribu = 50.000. 3. Benar. 4. Benar. <span class='translation'>1. True. 2. False, 50,000. 3. True. 4. True.</span>", exp_trans: "50,000 is 50.000." },
+            "r-task9": { type: "fill", q: "Sebuah sekolah memiliki 2.500 siswa laki-laki dan 1.500 siswa perempuan. Berapa total siswa di sekolah tersebut? <i class='fas fa-users text-indigo-500 ml-2'></i>", q_trans: "A school has 2,500 male students and 1,500 female students. What is the total number of students?", ans: "4000", exp: "2.500 + 1.500 = 4.000. <span class='translation'>2,500 + 1,500 = 4,000.</span>", exp_trans: "4000." },
+            "r-task10": { type: "complex", q: "Manakah bilangan yang memiliki angka 5 di nilai tempat Ratusan? <i class='fas fa-bullseye text-indigo-500 ml-2'></i>", q_trans: "Which numbers have the digit 5 in the Hundreds place?", opts: ["\\( 4.505 \\)", "\\( 4.550 \\)", "\\( 5.005 \\)", "\\( 4.055 \\)"], ans: [0, 1], exp: "Opsi 1 (4.505) dan Opsi 2 (4.550) memiliki 5 di posisi ratusan. <span class='translation'>Options 1 and 2 have 5 in the hundreds place.</span>", exp_trans: "4.505 and 4.550." }
+        });
+        
+        Object.assign(questions, {
+            // SECTION 4: PROBLEM INTRODUCTION
+            "p-task1": { type: "single", q: "Bagaimana cara membaca bilangan 102.500? <i class='fas fa-glasses text-orange-500 ml-2'></i>", q_trans: "How do you read the number 102,500?", opts: ["Seratus dua ribu lima ratus", "Sepuluh ribu dua ratus lima puluh", "Seratus dua puluh lima ribu", "Satu juta dua puluh lima ribu", "Seratus ribu dua ratus lima"], ans: "Seratus dua ribu lima ratus", exp: "102.500 dibagi menjadi 102 (Seratus dua ribu) dan 500 (lima ratus). <span class='translation'>102 is one hundred two thousand, 500 is five hundred.</span>", exp_trans: "One hundred two thousand five hundred." },
+            "p-task2": { type: "fill", q: "Tulis angka untuk 'Tujuh puluh ribu tiga ratus dua belas'. <i class='fas fa-keyboard text-orange-500 ml-2'></i>", q_trans: "Write the number for 'Seventy thousand three hundred twelve'.", ans: "70312", exp: "70.000 + 300 + 12 = 70.312. <span class='translation'>70,000 + 300 + 12 = 70,312.</span>", exp_trans: "70312." },
+            "p-task3": { type: "tf_table", q: "Evaluasi membaca bilangan besar. <i class='fas fa-book-reader text-orange-500 ml-2'></i>", q_trans: "Evaluate reading large numbers.", opts: ["100.000 dibaca Seratus ribu", "10.010 dibaca Sepuluh ribu sepuluh", "10.100 dibaca Sepuluh ribu seratus", "100.100 dibaca Seratus ribu seratus"], ans: ["B", "B", "B", "B"], exp: "Semua membaca bilangan benar. <span class='translation'>All reading numbers are correct.</span>", exp_trans: "All are correct." },
+            "p-task4": { type: "single", q: "Jarak Jakarta ke Surabaya adalah 600 km. Sebuah mobil menempuh jarak 250 km. Berapakah sisa jarak yang harus ditempuh? <i class='fas fa-car text-orange-500 ml-2'></i>", q_trans: "The distance from Jakarta to Surabaya is 600 km. A car travels 250 km. What is the remaining distance?", opts: ["\\( 300 \\text{ km} \\)", "\\( 350 \\text{ km} \\)", "\\( 400 \\text{ km} \\)", "\\( 450 \\text{ km} \\)", "\\( 850 \\text{ km} \\)"], ans: "\\( 350 \\text{ km} \\)", exp: "600 - 250 = 350 km. <span class='translation'>600 - 250 = 350 km.</span>", exp_trans: "350 km." },
+            "p-task5": { type: "complex", q: "Manakah bilangan yang lebih besar dari 50.000? <i class='fas fa-greater-than text-orange-500 ml-2'></i>", q_trans: "Which numbers are greater than 50,000?", opts: ["\\( 45.000 \\)", "\\( 55.000 \\)", "\\( 49.999 \\)", "\\( 50.001 \\)"], ans: [1, 3], exp: "55.000 dan 50.001 lebih besar dari 50.000. <span class='translation'>55,000 and 50,001 are greater than 50,000.</span>", exp_trans: "55,000 and 50,001." },
+            "p-task6": { type: "fill", q: "Sebuah toko menjual 1.200 kg gula dalam seminggu. Jika toko buka 6 hari, berapa rata-rata gula terjual per hari? <i class='fas fa-store text-orange-500 ml-2'></i>", q_trans: "A store sells 1,200 kg of sugar in a week. If the store is open 6 days, what is the average sugar sold per day?", ans: "200", exp: "1.200 / 6 = 200 kg per hari. <span class='translation'>1,200 / 6 = 200 kg per day.</span>", exp_trans: "200." },
+            "p-task7": { type: "single", q: "Bilangan manakah yang lebih kecil: 45.000 atau 54.000? <i class='fas fa-less-than text-orange-500 ml-2'></i>", q_trans: "Which number is smaller: 45,000 or 54,000?", opts: ["\\( 45.000 \\)", "\\( 54.000 \\)", "Sama besar", "Tidak bisa ditentukan", "Keduanya salah"], ans: "\\( 45.000 \\)", exp: "Karena 45.000 memiliki digit puluh ribu (4) yang lebih kecil dari 54.000 (5), maka 45.000 lebih kecil. <span class='translation'>Since 4 < 5, 45,000 is smaller.</span>", exp_trans: "45,000 is smaller." },
+            "p-task8": { type: "tf_table", q: "Evaluasi perbandingan bilangan. <i class='fas fa-balance-scale text-orange-500 ml-2'></i>", q_trans: "Evaluate number comparisons.", opts: ["\\( 10.000 > 9.999 \\)", "\\( 50.000 < 40.000 \\)", "\\( 99.999 < 100.000 \\)", "\\( 15.000 > 15.001 \\)"], ans: ["B", "S", "B", "S"], exp: "1. Benar. 2. Salah, 50.000 > 40.000. 3. Benar. 4. Salah, 15.000 < 15.001. <span class='translation'>1. True. 2. False. 3. True. 4. False.</span>", exp_trans: "1T, 2F, 3T, 4F." },
+            "p-task9": { type: "fill", q: "Urutkan dari terkecil ke terbesar: 3000, 1000, 2000. Gabungkan tanpa spasi dengan koma (cth: 1000,2000,3000). <i class='fas fa-sort-numeric-down text-orange-500 ml-2'></i>", q_trans: "Order from smallest to largest: 3000, 1000, 2000. Combine without spaces with commas.", ans: "1000,2000,3000", exp: "Urutannya adalah 1000, lalu 2000, lalu 3000. <span class='translation'>Order is 1000, then 2000, then 3000.</span>", exp_trans: "1000,2000,3000." },
+            "p-task10": { type: "complex", q: "Manakah urutan bilangan yang benar dari terbesar ke terkecil? <i class='fas fa-sort-numeric-down-alt text-orange-500 ml-2'></i>", q_trans: "Which sequence of numbers is correct from largest to smallest?", opts: ["\\( 1.000, 2.000, 3.000 \\)", "\\( 10.000, 9.000, 8.000 \\)", "\\( 5.000, 50.000, 500 \\)", "\\( 99.000, 9.999, 100.000 \\)"], ans: [1], exp: "Opsi 2 (10.000, 9.000, 8.000) adalah urutan menurun yang benar. <span class='translation'>Option 2 is correct descending order.</span>", exp_trans: "10.000, 9.000, 8.000." },
+
+            // SECTION 5: GUIDED PRACTICE
+            "g-task1": { type: "single", q: "Urutkan bilangan berikut dari yang terkecil: 12.000, 10.500, 12.500, 10.000. <i class='fas fa-sort-amount-down-alt text-blue-500 ml-2'></i>", q_trans: "Order the following numbers from smallest: 12,000; 10,500; 12,500; 10,000.", opts: ["10.000, 10.500, 12.000, 12.500", "10.500, 10.000, 12.000, 12.500", "12.500, 12.000, 10.500, 10.000", "10.000, 12.000, 10.500, 12.500", "12.000, 10.000, 12.500, 10.500"], ans: "10.000, 10.500, 12.000, 12.500", exp: "Bandingkan puluhan ribu dulu. Jika sama, bandingkan ribuan. 10.000 < 10.500 < 12.000 < 12.500. <span class='translation'>Compare ten thousands first, then thousands. 10,000 < 10,500 < 12,000 < 12,500.</span>", exp_trans: "10.000, 10.500, 12.000, 12.500." },
+            "g-task2": { type: "fill", q: "Pada bilangan 89.432, berapakah nilai angka 9? <i class='fas fa-search-dollar text-blue-500 ml-2'></i>", q_trans: "In 89,432, what is the digit value of 9?", ans: "9000", exp: "Angka 9 ada di posisi Ribuan. Nilai = 9 x 1.000 = 9.000. <span class='translation'>9 is in Thousands place. Value = 9 x 1,000 = 9,000.</span>", exp_trans: "9000." },
+            "g-task3": { type: "tf_table", q: "Evaluasi tabel nilai tempat untuk 75.204. <i class='fas fa-table text-blue-500 ml-2'></i>", q_trans: "Evaluate place value chart for 75,204.", opts: ["7 adalah Puluhan Ribu", "5 adalah Ribuan", "2 adalah Puluhan", "4 adalah Satuan"], ans: ["B", "B", "S", "B"], exp: "7(PR), 5(Rb), 2(Ratus), 0(Puluhan), 4(Satuan). Pernyataan 3 salah karena 2 ada di posisi Ratusan, bukan Puluhan. <span class='translation'>Statement 3 is false because 2 is in the Hundreds place, not Tens.</span>", exp_trans: "2 is Hundreds." },
+            "g-task4": { type: "single", q: "Sebuah pabrik sepatu memproduksi 15.500 pasang sepatu bulan ini dan 12.300 pasang bulan lalu. Berapa selisih produksinya? <i class='fas fa-shoe-prints text-blue-500 ml-2'></i>", q_trans: "A shoe factory produces 15,500 pairs this month and 12,300 pairs last month. What is the difference?", opts: ["\\( 2.200 \\)", "\\( 3.200 \\)", "\\( 27.800 \\)", "\\( 2.500 \\)", "\\( 3.500 \\)"], ans: "\\( 3.200 \\)", exp: "15.500 - 12.300 = 3.200 pasang. <span class='translation'>15,500 - 12,300 = 3,200 pairs.</span>", exp_trans: "3200." },
+            "g-task5": { type: "complex", q: "Manakah bilangan yang memiliki angka 0 di nilai tempat Puluhan? <i class='fas fa-bullseye text-blue-500 ml-2'></i>", q_trans: "Which numbers have the digit 0 in the Tens place?", opts: ["\\( 12.305 \\)", "\\( 45.010 \\)", "\\( 9.909 \\)", "\\( 78.005 \\)"], ans: [0, 2, 3], exp: "Opsi 1 (12.305), Opsi 3 (9.909), dan Opsi 4 (78.005) memiliki 0 di posisi puluhan. Opsi 2 (45.010) puluhannya adalah 1. <span class='translation'>Options 1, 3, and 4 have 0 in the tens place.</span>", exp_trans: "12.305, 9.909, 78.005." },
+            "g-task6": { type: "fill", q: "Pak Joni menabung Rp 25.000 setiap minggu. Berapa total tabungan Pak Joni dalam 4 minggu? <i class='fas fa-piggy-bank text-blue-500 ml-2'></i>", q_trans: "Mr. Joni saves Rp 25,000 every week. What is his total savings in 4 weeks?", ans: "100000", exp: "25.000 x 4 = 100.000. <span class='translation'>25,000 x 4 = 100,000.</span>", exp_trans: "100000." },
+            "g-task7": { type: "single", q: "Nilai angka dari 4 pada 64.250 adalah... <i class='fas fa-money-bill-wave text-blue-500 ml-2'></i>", q_trans: "The digit value of 4 in 64,250 is...", opts: ["\\( 40 \\)", "\\( 400 \\)", "\\( 4.000 \\)", "\\( 40.000 \\)", "\\( 4 \\)"], ans: "\\( 4.000 \\)", exp: "Angka 4 ada di posisi ribuan. 4 x 1.000 = 4.000. <span class='translation'>4 is in thousands place. 4 x 1,000 = 4,000.</span>", exp_trans: "4000." },
+            "g-task8": { type: "tf_table", q: "Evaluasi pernyataan tentang nilai angka. <i class='fas fa-clipboard-check text-blue-500 ml-2'></i>", q_trans: "Evaluate statements about digit value.", opts: ["Nilai angka 5 pada 50.000 adalah 50.000", "Nilai angka 2 pada 12.000 adalah 20", "Nilai angka 1 pada 10.000 adalah 10.000", "Nilai angka 3 pada 3.500 adalah 3.000"], ans: ["B", "S", "B", "B"], exp: "1. Benar. 2. Salah, nilainya 2.000. 3. Benar. 4. Benar. <span class='translation'>1. True. 2. False. 3. True. 4. True.</span>", exp_trans: "2 is 2000." },
+            "g-task9": { type: "fill", q: "Jumlah nilai angka dari 8 dan 2 pada bilangan 82.000 adalah... <i class='fas fa-plus text-blue-500 ml-2'></i>", q_trans: "The sum of the digit values of 8 and 2 in 82,000 is...", ans: "82000", exp: "Nilai 8 = 80.000, Nilai 2 = 2.000. 80.000 + 2.000 = 82.000. <span class='translation'>Value of 8 = 80,000, Value of 2 = 2,000. Sum = 82,000.</span>", exp_trans: "82000." },
+            "g-task10": { type: "complex", q: "Manakah bilangan yang nilai angka dari 5 sama dengan 500? <i class='fas fa-search text-blue-500 ml-2'></i>", q_trans: "Which numbers have the digit value of 5 equal to 500?", opts: ["\\( 5.000 \\)", "\\( 1.500 \\)", "\\( 50.000 \\)", "\\( 15.500 \\)"], ans: [1, 3], exp: "Opsi 2 (1.500) dan Opsi 4 (15.500) memiliki 5 di posisi ratusan. <span class='translation'>Option 2 and 4 have 5 in hundreds place.</span>", exp_trans: "1.500 and 15.500." },
+
+            // SECTION 6: INDEPENDENT PRACTICE
+            "ind-task1": { type: "single", q: "Sebuah mesin fotokopi mencetak 1.500 lembar dalam 1 jam. Berapa banyak lembar yang dicetak dalam 8 jam? <i class='fas fa-copy text-indigo-500 ml-2'></i>", q_trans: "A copy machine prints 1,500 sheets in 1 hour. How many sheets are printed in 8 hours?", opts: ["\\( 8.500 \\)", "\\( 10.000 \\)", "\\( 12.000 \\)", "\\( 15.000 \\)", "\\( 12.500 \\)"], ans: "\\( 12.000 \\)", exp: "1.500 x 8 = 12.000 lembar. <span class='translation'>1,500 x 8 = 12,000 sheets.</span>", exp_trans: "12000." },
+            "ind-task2": { type: "fill", q: "Pola bilangan: 10.000, 20.000, 30.000, ... . Berapakah bilangan ke-5 pada pola tersebut? <i class='fas fa-wave-square text-indigo-500 ml-2'></i>", q_trans: "Number pattern: 10,000, 20,000, 30,000, ... What is the 5th number?", ans: "50000", exp: "Pola bertambah 10.000. Ke-4 adalah 40.000, ke-5 adalah 50.000. <span class='translation'>Pattern adds 10,000. 4th is 40,000, 5th is 50,000.</span>", exp_trans: "50000." },
+            "ind-task3": { type: "tf_table", q: "Evaluasi pola bilangan. <i class='fas fa-list-ol text-indigo-500 ml-2'></i>", q_trans: "Evaluate number patterns.", opts: ["Pola 5, 10, 15, 20 bertambah 5", "Pola 2.000, 4.000, 8.000 bertambah 2.000", "Pola 100, 200, 300 bertambah 100", "Pola 10, 20, 30, 40 selanjutnya adalah 50"], ans: ["B", "S", "B", "B"], exp: "1. Benar. 2. Salah, polanya dikali 2. 3. Benar. 4. Benar. <span class='translation'>1. True. 2. False, multiplied by 2. 3. True. 4. True.</span>", exp_trans: "2 is multiply by 2." },
+            "ind-task4": { type: "single", q: "Ibu membeli 5 kg apel seharga Rp 15.000 per kg. Ibu membayar dengan uang Rp 100.000. Berapakah uang kembalian ibu? <i class='fas fa-apple-alt text-indigo-500 ml-2'></i>", q_trans: "Mother buys 5 kg of apples for Rp 15,000 per kg. She pays with Rp 100,000. What is the change?", opts: ["\\( 15.000 \\)", "\\( 25.000 \\)", "\\( 35.000 \\)", "\\( 75.000 \\)", "\\( 85.000 \\)"], ans: "\\( 25.000 \\)", exp: "Total harga = 5 x 15.000 = 75.000. Kembalian = 100.000 - 75.000 = 25.000. <span class='translation'>Total = 75,000. Change = 100,000 - 75,000 = 25,000.</span>", exp_trans: "25000." },
+            "ind-task5": { type: "complex", q: "Manakah bilangan yang memiliki nilai tempat Puluhan Ribu sama dengan 3? <i class='fas fa-bullseye text-indigo-500 ml-2'></i>", q_trans: "Which numbers have a Ten Thousands place value of 3?", opts: ["\\( 3.000 \\)", "\\( 30.000 \\)", "\\( 35.000 \\)", "\\( 13.000 \\)"], ans: [1, 2], exp: "Opsi 2 (30.000) dan Opsi 3 (35.000) memiliki 3 di posisi Puluhan Ribu. <span class='translation'>Option 2 and 3 have 3 in Ten Thousands place.</span>", exp_trans: "30.000 and 35.000." },
+            "ind-task6": { type: "fill", q: "Sebuah perpustakaan memiliki 12.500 buku. Jika 2.500 buku dipinjam, berapa sisa buku di perpustakaan? <i class='fas fa-book text-indigo-500 ml-2'></i>", q_trans: "A library has 12,500 books. If 2,500 books are borrowed, how many books are left?", ans: "10000", exp: "12.500 - 2.500 = 10.000 buku. <span class='translation'>12,500 - 2,500 = 10,000 books.</span>", exp_trans: "10000." },
+            "ind-task7": { type: "single", q: "Pak Supir mengemudi sejauh 125 km, 250 km, dan 125 km. Berapa total jarak yang ditempuh? <i class='fas fa-truck text-indigo-500 ml-2'></i>", q_trans: "A driver drives 125 km, 250 km, and 125 km. What is the total distance?", opts: ["\\( 400 \\text{ km} \\)", "\\( 450 \\text{ km} \\)", "\\( 500 \\text{ km} \\)", "\\( 550 \\text{ km} \\)", "\\( 600 \\text{ km} \\)"], ans: "\\( 500 \\text{ km} \\)", exp: "125 + 250 + 125 = 500 km. <span class='translation'>125 + 250 + 125 = 500 km.</span>", exp_trans: "500 km." },
+            "ind-task8": { type: "tf_table", q: "Evaluasi soal cerita uang. <i class='fas fa-cash-register text-indigo-500 ml-2'></i>", q_trans: "Evaluate money word problems.", opts: ["2 lembar Rp 10.000 = Rp 20.000", "5 lembar Rp 20.000 = Rp 100.000", "10 lembar Rp 5.000 = Rp 50.000", "3 lembar Rp 50.000 = Rp 100.000"], ans: ["B", "B", "B", "S"], exp: "1. Benar. 2. Benar. 3. Benar. 4. Salah, 3 x 50.000 = 150.000. <span class='translation'>1. True. 2. True. 3. True. 4. False, 150,000.</span>", exp_trans: "3 x 50000 = 150000." },
+            "ind-task9": { type: "fill", q: "Sebuah biosko memiliki 12 baris kursi, tiap baris berisi 100 kursi. Berapa total kursi di biosko? <i class='fas fa-film text-indigo-500 ml-2'></i>", q_trans: "A cinema has 12 rows of seats, each row has 100 seats. What is the total seats?", ans: "1200", exp: "12 x 100 = 1.200 kursi. <span class='translation'>12 x 100 = 1,200 seats.</span>", exp_trans: "1200." },
+            "ind-task10": { type: "complex", q: "Manakah bilangan yang jika dibulatkan ke ribuan terdekat menjadi 10.000? <i class='fas fa-calculator text-indigo-500 ml-2'></i>", q_trans: "Which numbers, when rounded to the nearest thousands, become 10,000?", opts: ["\\( 9.500 \\)", "\\( 10.499 \\)", "\\( 11.000 \\)", "\\( 8.999 \\)"], ans: [0, 1], exp: "9.500 dibulatkan ke atas jadi 10.000. 10.499 dibulatkan ke bawah jadi 10.000. <span class='translation'>9,500 rounds up to 10,000. 10,499 rounds down to 10,000.</span>", exp_trans: "9.500 and 10.499." }
+        });
+        
+        Object.assign(questions, {
+            // TASK 1: Membaca dan Menulis Bilangan Cacah
+            "t1-task1": { type: "single", q: "Bilangan 54.321 dibaca sebagai... <i class='fas fa-book-open text-orange-500 ml-2'></i>", q_trans: "The number 54,321 is read as...", opts: ["Lima puluh empat ribu tiga ratus dua puluh satu", "Lima empat tiga dua satu", "Lima ratus ribu empat ribu", "Lima ribu empat ratus tiga puluh dua", "Empat puluh lima ribu tiga ratus"], ans: "Lima puluh empat ribu tiga ratus dua puluh satu", exp: "54 dibaca 'lima puluh empat ribu', 321 dibaca 'tiga ratus dua puluh satu'. <span class='translation'>54 is 'fifty-four thousand', 321 is 'three hundred twenty-one'.</span>", exp_trans: "Fifty-four thousand three hundred twenty-one." },
+            "t1-task2": { type: "fill", q: "Tulislah angka untuk 'Dua puluh tiga ribu empat ratus lima'. <i class='fas fa-keyboard text-orange-500 ml-2'></i>", q_trans: "Write the number for 'Twenty-three thousand four hundred five'.", ans: "23405", exp: "Dua puluh tiga ribu (23.000) + empat ratus lima (405) = 23.405. <span class='translation'>Twenty-three thousand (23,000) + four hundred five (405) = 23,405.</span>", exp_trans: "23405." },
+            "t1-task3": { type: "tf_table", q: "Evaluasi cara membaca bilangan. <i class='fas fa-list-ul text-orange-500 ml-2'></i>", q_trans: "Evaluate how to read numbers.", opts: ["10.001 dibaca sepuluh ribu satu", "20.200 dibaca dua puluh ribu dua ratus", "100.000 dibaca sepuluh ribu", "50.050 dibaca lima puluh ribu lima puluh"], ans: ["B", "B", "S", "B"], exp: "1. Benar. 2. Benar. 3. Salah, 100.000 dibaca seratus ribu. 4. Benar. <span class='translation'>3. False, 100,000 is one hundred thousand.</span>", exp_trans: "100.000 is one hundred thousand." },
+            "t1-task4": { type: "single", q: "Penduduk desa A berjumlah 12.500 jiwa. Cara menuliskan jumlah penduduk desa A dengan huruf adalah... <i class='fas fa-users text-orange-500 ml-2'></i>", q_trans: "Village A has 12,500 residents. How to write it in words?", opts: ["Dua belas ribu lima ratus", "Satu dua lima nol nol", "Seratus dua puluh lima ribu", "Dua belas lima ratus", "Satu juta dua puluh lima ribu"], ans: "Dua belas ribu lima ratus", exp: "12.500 dibagi menjadi 12 (Dua belas ribu) dan 500 (lima ratus). <span class='translation'>12 is twelve thousand, 500 is five hundred.</span>", exp_trans: "Twelve thousand five hundred." },
+            "t1-task5": { type: "complex", q: "Manakah dari berikut ini yang merupakan penulisan angka yang benar dari hurufnya? <i class='fas fa-check-double text-orange-500 ml-2'></i>", q_trans: "Which of the following is the correct number writing from words?", opts: ["Seratus ribu = 10.000", "Sepuluh ribu = 10.000", "Seribu = 100.000", "Lima puluh ribu = 50.000"], ans: [1, 3], exp: "Sepuluh ribu = 10.000 (benar). Lima puluh ribu = 50.000 (benar). Seratus ribu = 100.000. Seribu = 1.000. <span class='translation'>Ten thousand = 10,000. Fifty thousand = 50,000.</span>", exp_trans: "Options 2 and 4." },
+            "t1-task6": { type: "fill", q: "Seorang anak menabung uang 'Tujuh ribu lima ratus' rupiah. Tuliskan nominal uang tersebut dengan angka! <i class='fas fa-piggy-bank text-orange-500 ml-2'></i>", q_trans: "A child saves 'Seven thousand five hundred' rupiah. Write the amount in numbers!", ans: "7500", exp: "Tujuh ribu (7.000) + lima ratus (500) = 7.500. <span class='translation'>Seven thousand (7,000) + five hundred (500) = 7,500.</span>", exp_trans: "7500." },
+            "t1-task7": { type: "single", q: "Bilangan 'Seratus ribu' jika ditulis dengan angka adalah... <i class='fas fa-pencil-alt text-orange-500 ml-2'></i>", q_trans: "The number 'One hundred thousand' written in numbers is...", opts: ["\\( 10.000 \\)", "\\( 100.000 \\)", "\\( 1.000.000 \\)", "\\( 10.100 \\)", "\\( 100.001 \\)"], ans: "\\( 100.000 \\)", exp: "Seratus ribu ditulis dengan angka 1 diikuti lima angka 0, yaitu 100.000. <span class='translation'>One hundred thousand is 1 followed by five zeros.</span>", exp_trans: "100,000." },
+            "t1-task8": { type: "tf_table", q: "Evaluasi penulisan angka. <i class='fas fa-spell-check text-orange-500 ml-2'></i>", q_trans: "Evaluate writing numbers.", opts: ["Penulisan lima belas ribu lima adalah 15.005", "Penulisan tujuh puluh ribu tujuh adalah 70.007", "Penulisan sembilan ribu sembilan puluh adalah 9.900", "Penulisan delapan ribu delapan adalah 8.008"], ans: ["B", "B", "B", "B"], exp: "Semua penulisan angka dari huruf tersebut benar. <span class='translation'>All writings are correct.</span>", exp_trans: "All are correct." },
+            "t1-task9": { type: "fill", q: "Jarak rumah ke kantor Pak Budi adalah 'Tiga ribu dua ratus lima puluh' meter. Tuliskan jarak tersebut dengan angka (tanpa satuan)! <i class='fas fa-ruler-horizontal text-orange-500 ml-2'></i>", q_trans: "The distance from home to Mr. Budi's office is 'Three thousand two hundred fifty' meters. Write the distance in numbers!", ans: "3250", exp: "Tiga ribu (3.000) + dua ratus (200) + lima puluh (50) = 3.250. <span class='translation'>Three thousand (3,000) + two hundred (200) + fifty (50) = 3,250.</span>", exp_trans: "3250." },
+            "t1-task10": { type: "complex", q: "Manakah dari bentuk berikut yang bernilai seratus ribu? <i class='fas fa-equals text-orange-500 ml-2'></i>", q_trans: "Which of the following forms equals one hundred thousand?", opts: ["\\( 100 \\times 1.000 \\)", "\\( 10 \\times 1.000 \\)", "\\( 1.000 \\times 10 \\)", "\\( 1.000 \\times 100 \\)"], ans: [0, 3], exp: "100 x 1.000 = 100.000 dan 1.000 x 100 = 100.000. <span class='translation'>100 x 1,000 = 100,000 and 1,000 x 100 = 100,000.</span>", exp_trans: "Options 1 and 4." },
+
+            // TASK 2: Nilai Tempat dan Nilai Angka
+            "t2-task1": { type: "single", q: "Nilai tempat dari angka 7 pada bilangan 87.654 adalah... <i class='fas fa-table text-orange-500 ml-2'></i>", q_trans: "The place value of the digit 7 in 87,654 is...", opts: ["Satuan", "Puluhan", "Ratusan", "Ribuan", "Puluhan Ribu"], ans: "Ribuan", exp: "87.654: 8(PR), 7(Ribu), 6(Ratus), 5(Puluhan), 4(Satuan). Jadi 7 ada di nilai tempat Ribuan. <span class='translation'>7 is in the Thousands place.</span>", exp_trans: "Thousands." },
+            "t2-task2": { type: "fill", q: "Pada bilangan 45.980, berapakah nilai angka 5? <i class='fas fa-search-dollar text-orange-500 ml-2'></i>", q_trans: "In 45,980, what is the digit value of 5?", ans: "5000", exp: "Angka 5 ada di posisi Ribuan, sehingga nilainya adalah 5 x 1.000 = 5.000. <span class='translation'>5 is in Thousands place, so 5 x 1,000 = 5,000.</span>", exp_trans: "5000." },
+            "t2-task3": { type: "tf_table", q: "Evaluasi nilai angka pada 90.801. <i class='fas fa-layer-group text-orange-500 ml-2'></i>", q_trans: "Evaluate digit values in 90,801.", opts: ["Angka 9 bernilai 90.000", "Angka 8 bernilai 800", "Angka 0 bernilai 0", "Angka 1 bernilai 10"], ans: ["B", "B", "B", "S"], exp: "1. Benar. 2. Benar. 3. Benar, 0 di posisi ratusan dan puluhan nilainya 0. 4. Salah, 1 bernilai 1 (satuan). <span class='translation'>4. False, 1 is worth 1.</span>", exp_trans: "1 is worth 1." },
+            "t2-task4": { type: "single", q: "Uang Rp 50.000 memiliki angka 5. Berapakah nilai angka 5 tersebut? <i class='fas fa-money-bill-wave text-orange-500 ml-2'></i>", q_trans: "Rp 50,000 has the digit 5. What is the digit value of 5?", opts: ["\\( 500 \\)", "\\( 5.000 \\)", "\\( 50.000 \\)", "\\( 500.000 \\)", "\\( 5 \\)"], ans: "\\( 50.000 \\)", exp: "Angka 5 berada di posisi Puluhan Ribu, sehingga nilainya 5 x 10.000 = 50.000. <span class='translation'>5 is in Ten Thousands place, so 5 x 10,000 = 50,000.</span>", exp_trans: "50.000." },
+            "t2-task5": { type: "complex", q: "Manakah bilangan yang memiliki angka 9 di nilai tempat Puluhan Ribu? <i class='fas fa-bullseye text-orange-500 ml-2'></i>", q_trans: "Which numbers have the digit 9 in the Ten Thousands place?", opts: ["\\( 9.000 \\)", "\\( 19.000 \\)", "\\( 90.000 \\)", "\\( 900.000 \\)"], ans: [2], exp: "Hanya Opsi 3 (90.000) yang memiliki 9 di posisi Puluhan Ribu. <span class='translation'>Only Option 3 has 9 in the Ten Thousands place.</span>", exp_trans: "90.000." },
+            "t2-task6": { type: "fill", q: "Jumlahkan nilai angka dari 1 dan 2 pada bilangan 12.345. <i class='fas fa-plus-circle text-orange-500 ml-2'></i>", q_trans: "Sum the digit values of 1 and 2 in 12,345.", ans: "12000", exp: "Nilai 1 = 10.000, Nilai 2 = 2.000. 10.000 + 2.000 = 12.000. <span class='translation'>Value of 1 = 10,000, Value of 2 = 2,000. Sum = 12,000.</span>", exp_trans: "12000." },
+            "t2-task7": { type: "single", q: "Sebuah mesin terbang memiliki nomor seri 73.210. Nilai angka 3 pada nomor seri tersebut adalah... <i class='fas fa-rocket text-orange-500 ml-2'></i>", q_trans: "A flying machine has serial number 73,210. The digit value of 3 is...", opts: ["\\( 30 \\)", "\\( 300 \\)", "\\( 3.000 \\)", "\\( 30.000 \\)", "\\( 300.000 \\)"], ans: "\\( 3.000 \\)", exp: "73.210: 7(PR), 3(Ribu), 2(Ratus), 1(Puluhan), 0(Satuan). Nilai angka 3 = 3 x 1.000 = 3.000. <span class='translation'>3 is in Thousands, value is 3,000.</span>", exp_trans: "3000." },
+            "t2-task8": { type: "tf_table", q: "Evaluasi pernyataan nilai angka dan nilai tempat. <i class='fas fa-clipboard-check text-orange-500 ml-2'></i>", q_trans: "Evaluate statements about digit value and place value.", opts: ["Nilai angka tidak bergantung pada posisi", "Angka yang sama di posisi berbeda memiliki nilai yang berbeda", "Nilai angka didapat dari angka dikali nilai tempat", "Nilai tempat 4 pada 45.000 adalah puluhan"], ans: ["S", "B", "B", "S"], exp: "1. Salah, sangat bergantung. 2. Benar. 3. Benar. 4. Salah, 4 itu Puluhan Ribu. <span class='translation'>1. False. 4. False, it's Ten Thousands.</span>", exp_trans: "1F, 4F." },
+            "t2-task9": { type: "fill", q: "Sebuah rak buku berisi 12.500 buku. Berapakah nilai angka dari 2 pada jumlah buku tersebut? <i class='fas fa-book text-orange-500 ml-2'></i>", q_trans: "A bookshelf contains 12,500 books. What is the digit value of 2?", ans: "2000", exp: "12.500: 1(PR), 2(Ribu), 5(Ratus). Nilai 2 adalah 2 x 1.000 = 2.000. <span class='translation'>12,500: 2 is in Thousands. Value is 2,000.</span>", exp_trans: "2000." },
+            "t2-task10": { type: "complex", q: "Manakah bilangan yang memiliki angka 0 di nilai tempat Ribuan? <i class='fas fa-search text-orange-500 ml-2'></i>", q_trans: "Which numbers have the digit 0 in the Thousands place?", opts: ["\\( 10.505 \\)", "\\( 50.050 \\)", "\\( 55.005 \\)", "\\( 12.345 \\)"], ans: [0, 1], exp: "10.505 (Ribu=0) dan 50.050 (Ribu=0). 55.005 (Ribu=5), 12.345 (Ribu=2). <span class='translation'>10.505 and 50.050 have 0 in the thousands place.</span>", exp_trans: "10.505 and 50.050." },
+
+            // TASK 3: Membandingkan dan Mengurutkan Bilangan
+            "t3-task1": { type: "single", q: "Manakah tanda yang tepat untuk membandingkan 45.600 dan 46.500? <i class='fas fa-balance-scale text-orange-500 ml-2'></i>", q_trans: "Which sign is correct to compare 45,600 and 46,500?", opts: ["\\( > \\)", "\\( < \\)", "\\( = \\)", "\\( \\geq \\)", "\\( \\leq \\)"], ans: "\\( < \\)", exp: "Karena 45.600 lebih kecil dari 46.500, tanda yang benar adalah <. <span class='translation'>45,600 is smaller than 46,500, so < is correct.</span>", exp_trans: "<." },
+            "t3-task2": { type: "fill", q: "Urutkan dari terkecil ke terbesar: 5000, 500, 50000. Pisahkan dengan koma tanpa spasi (cth: 500,5000,50000). <i class='fas fa-sort-amount-down-alt text-orange-500 ml-2'></i>", q_trans: "Order from smallest to largest: 5000, 500, 50000. Separate with commas without spaces.", ans: "500,5000,50000", exp: "500 (3 digit) < 5.000 (4 digit) < 50.000 (5 digit). <span class='translation'>500 < 5,000 < 50,000.</span>", exp_trans: "500,5000,50000." },
+            "t3-task3": { type: "tf_table", q: "Evaluasi aturan membandingkan bilangan. <i class='fas fa-list-ul text-orange-500 ml-2'></i>", q_trans: "Evaluate rules for comparing numbers.", opts: ["Bilangan dengan lebih banyak digit nilainya lebih besar", "Bilangan 100.000 lebih besar dari 99.999", "Untuk membandingkan, lihat digit paling kanan lebih dulu", "Jika digit paling kiri sama, lihat digit berikutnya"], ans: ["B", "B", "S", "B"], exp: "1. Benar. 2. Benar. 3. Salah, lihat digit paling kiri lebih dulu. 4. Benar. <span class='translation'>3. False, look at leftmost digit first.</span>", exp_trans: "Look at leftmost digit." },
+            "t3-task4": { type: "single", q: "Pabrik A memproduksi 12.500 botol, Pabrik B memproduksi 15.200 botol. Pernyataan yang benar adalah... <i class='fas fa-industry text-orange-500 ml-2'></i>", q_trans: "Factory A produces 12,500 bottles, Factory B produces 15,200 bottles. The correct statement is...", opts: ["Produksi A > B", "Produksi A < B", "Produksi A = B", "Produksi B < A", "Tidak bisa dibandingkan"], ans: "Produksi A < B", exp: "12.500 lebih kecil dari 15.200, jadi produksi A < B. <span class='translation'>12,500 is less than 15,200, so A < B.</span>", exp_trans: "A < B." },
+            "t3-task5": { type: "complex", q: "Manakah dari bilangan berikut yang lebih besar dari 88.000 dan lebih kecil dari 100.000? <i class='fas fa-filter text-orange-500 ml-2'></i>", q_trans: "Which numbers are greater than 88,000 and less than 100,000?", opts: ["\\( 85.000 \\)", "\\( 92.500 \\)", "\\( 99.999 \\)", "\\( 100.001 \\)"], ans: [1, 2], exp: "92.500 dan 99.999 berada di antara 88.000 dan 100.000. <span class='translation'>92,500 and 99,999 are between 88,000 and 100,000.</span>", exp_trans: "92.500 and 99.999." },
+            "t3-task6": { type: "fill", q: "Urutkan dari terbesar ke terkecil: 9000, 9900, 9990. Pisahkan dengan koma tanpa spasi. <i class='fas fa-sort-amount-down text-orange-500 ml-2'></i>", q_trans: "Order from largest to smallest: 9000, 9900, 9990. Separate with commas without spaces.", ans: "9990,9900,9000", exp: "9.990 > 9.900 > 9.000. <span class='translation'>9,990 > 9,900 > 9,000.</span>", exp_trans: "9990,9900,9000." },
+            "t3-task7": { type: "single", q: "Tiga bilangan: 23.400, 24.300, 23.040. Urutan dari terkecil ke terbesar adalah... <i class='fas fa-sort-numeric-down text-orange-500 ml-2'></i>", q_trans: "Three numbers: 23,400; 24,300; 23,040. The order from smallest to largest is...", opts: ["23.040, 23.400, 24.300", "23.400, 23.040, 24.300", "24.300, 23.400, 23.040", "23.040, 24.300, 23.400", "23.400, 24.300, 23.040"], ans: "23.040, 23.400, 24.300", exp: "Bandingkan puluhan ribunya: semua 2. Bandingkan ribunya: 3. Lalu ratusannya: 23.040 < 23.400 < 24.300. <span class='translation'>23,040 < 23,400 < 24,300.</span>", exp_trans: "23.040, 23.400, 24.300." },
+            "t3-task8": { type: "tf_table", q: "Evaluasi urutan bilangan. <i class='fas fa-clipboard-check text-orange-500 ml-2'></i>", q_trans: "Evaluate number ordering.", opts: ["Menaik artinya dari besar ke kecil", "Menurun artinya dari kecil ke besar", "Pada urutan menaik, angka berikutnya lebih besar", "Mengurutkan membantu membandingkan nilai"], ans: ["S", "S", "B", "B"], exp: "1. Salah, menaik dari kecil ke besar. 2. Salah, menurun dari besar ke kecil. 3. Benar. 4. Benar. <span class='translation'>1. False. 2. False.</span>", exp_trans: "Ascending is small to large." },
+            "t3-task9": { type: "fill", q: "Nilai uang Andi Rp 25.000, Budi Rp 15.000. Berapa selisih uang mereka? (Tulis angka saja) <i class='fas fa-wallet text-orange-500 ml-2'></i>", q_trans: "Andi has Rp 25,000, Budi has Rp 15,000. What is the difference? (Write numbers only)", ans: "10000", exp: "25.000 - 15.000 = 10.000. <span class='translation'>25,000 - 15,000 = 10,000.</span>", exp_trans: "10000." },
+            "t3-task10": { type: "complex", q: "Manakah urutan bilangan menurun yang benar? <i class='fas fa-sort-numeric-down-alt text-orange-500 ml-2'></i>", q_trans: "Which is the correct descending order?", opts: ["\\( 1.000, 2.000, 3.000 \\)", "\\( 15.000, 14.000, 13.000 \\)", "\\( 50.000, 5.000, 500 \\)", "\\( 9.999, 10.000, 11.000 \\)"], ans: [1, 2], exp: "15.000 > 14.000 > 13.000 dan 50.000 > 5.000 > 500 adalah urutan menurun yang benar. <span class='translation'>Options 2 and 3 are correct descending orders.</span>", exp_trans: "15.000,14.000,13.000 and 50.000,5.000,500." },
+
+            // TASK 4: Operasi Hitung Bilangan Cacah
+            "t4-task1": { type: "single", q: "Hasil dari 12.500 + 3.200 adalah... <i class='fas fa-plus text-orange-500 ml-2'></i>", q_trans: "The result of 12,500 + 3,200 is...", opts: ["\\( 14.700 \\)", "\\( 15.700 \\)", "\\( 15.800 \\)", "\\( 16.700 \\)", "\\( 13.700 \\)"], ans: "\\( 15.700 \\)", exp: "12.500 + 3.200 = 15.700. <span class='translation'>12,500 + 3,200 = 15,700.</span>", exp_trans: "15700." },
+            "t4-task2": { type: "fill", q: "Sebuah toko memiliki 20.000 butir telur. Terjual 8.500 butir. Berapa sisa telurnya? (Tulis angka) <i class='fas fa-egg text-orange-500 ml-2'></i>", q_trans: "A store has 20,000 eggs. 8,500 were sold. How many eggs are left? (Numbers only)", ans: "11500", exp: "20.000 - 8.500 = 11.500. <span class='translation'>20,000 - 8,500 = 11,500.</span>", exp_trans: "11500." },
+            "t4-task3": { type: "tf_table", q: "Evaluasi operasi hitung. <i class='fas fa-calculator text-orange-500 ml-2'></i>", q_trans: "Evaluate arithmetic operations.", opts: ["\\( 1.000 + 1.000 = 2.000 \\)", "\\( 50.000 - 25.000 = 25.000 \\)", "\\( 100 \\times 100 = 100.000 \\)", "\\( 80.000 \\div 8 = 1.000 \\)"], ans: ["B", "B", "S", "S"], exp: "1. Benar. 2. Benar. 3. Salah, 100x100=10.000. 4. Salah, 80.000/8=10.000. <span class='translation'>3. False, 100x100=10,000. 4. False, 80,000/8=10,000.</span>", exp_trans: "100x100=10000." },
+            "t4-task4": { type: "single", q: "Harga motor Rp 15.000.000. Pak Joko membayar tunai Rp 10.000.000. Berapa sisa yang harus dilunasi? <i class='fas fa-motorcycle text-orange-500 ml-2'></i>", q_trans: "Motor price is Rp 15,000,000. Mr. Joko paid cash Rp 10,000,000. What is the remaining balance?", opts: ["\\( 5.000.000 \\)", "\\( 10.000.000 \\)", "\\( 15.000.000 \\)", "\\( 2.500.000 \\)", "\\( 25.000.000 \\)"], ans: "\\( 5.000.000 \\)", exp: "15.000.000 - 10.000.000 = 5.000.000. <span class='translation'>15,000,000 - 10,000,000 = 5,000,000.</span>", exp_trans: "5000000." },
+            "t4-task5": { type: "complex", q: "Manakah operasi pengurangan berikut yang menghasilkan bilangan cacah? <i class='fas fa-minus text-orange-500 ml-2'></i>", q_trans: "Which subtraction operations result in a counting number?", opts: ["\\( 5.000 - 10.000 \\)", "\\( 10.000 - 5.000 \\)", "\\( 5 \\div 2 \\)", "\\( 100 - 50 \\)"], ans: [1, 3], exp: "10.000 - 5.000 = 5.000 (cacah). 100 - 50 = 50 (cacah). 5.000-10.000 = -5.000 (negatif). 5/2 = 2.5 (pecahan). <span class='translation'>10,000 - 5,000 and 100 - 50 are counting numbers.</span>", exp_trans: "Options 2 and 4." },
+            "t4-task6": { type: "fill", q: "Sebuah truk mengangkut 5 karung gula, masing-masing berisi 2.000 kg. Berapa total berat gula? (Tulis angka) <i class='fas fa-truck text-orange-500 ml-2'></i>", q_trans: "A truck carries 5 sacks of sugar, each weighing 2,000 kg. What is the total weight?", ans: "10000", exp: "5 x 2.000 = 10.000 kg. <span class='translation'>5 x 2,000 = 10,000 kg.</span>", exp_trans: "10000." },
+            "t4-task7": { type: "single", q: "Sebuah pabrik membagikan 12.000 botol air ke 6 toko secara merata. Berapa botol yang diterima setiap toko? <i class='fas fa-store text-orange-500 ml-2'></i>", q_trans: "A factory distributes 12,000 water bottles to 6 stores equally. How many bottles does each store receive?", opts: ["\\( 1.000 \\)", "\\( 2.000 \\)", "\\( 3.000 \\)", "\\( 4.000 \\)", "\\( 5.000 \\)"], ans: "\\( 2.000 \\)", exp: "12.000 / 6 = 2.000 botol. <span class='translation'>12,000 / 6 = 2,000 bottles.</span>", exp_trans: "2000." },
+            "t4-task8": { type: "tf_table", q: "Evaluasi sifat operasi hitung bilangan cacah. <i class='fas fa-clipboard-check text-orange-500 ml-2'></i>", q_trans: "Evaluate properties of counting number operations.", opts: ["Penjumlahan bilangan cacah selalu menghasilkan bilangan cacah", "Pengurangan bilangan cacah selalu menghasilkan bilangan cacah", "Perkalian bilangan cacah selalu menghasilkan bilangan cacah", "Pembagian bilangan cacah selalu menghasilkan bilangan cacah"], ans: ["B", "S", "B", "S"], exp: "1. Benar. 2. Salah, bisa negatif (5-10=-5). 3. Benar. 4. Salah, bisa pecahan (5/2=2.5). <span class='translation'>2. False. 4. False.</span>", exp_trans: "Subtraction and division might not." },
+            "t4-task9": { type: "fill", q: "Andi punya uang Rp 50.000. Ia membeli buku seharga Rp 12.000 dan pulpen Rp 5.000. Berapa sisa uang Andi? (Tulis angka) <i class='fas fa-money-bill text-orange-500 ml-2'></i>", q_trans: "Andi has Rp 50,000. He buys a book for Rp 12,000 and a pen for Rp 5,000. How much money is left?", ans: "33000", exp: "Pengeluaran = 12.000 + 5.000 = 17.000. Sisa = 50.000 - 17.000 = 33.000. <span class='translation'>Expense = 17,000. Left = 33,000.</span>", exp_trans: "33000." },
+            "t4-task10": { type: "complex", q: "Manakah perhitungan berikut yang hasilnya 10.000? <i class='fas fa-equals text-orange-500 ml-2'></i>", q_trans: "Which calculations result in 10,000?", opts: ["\\( 1.500 + 8.500 \\)", "\\( 15.000 - 5.000 \\)", "\\( 50 \\times 200 \\)", "\\( 90.000 \\div 9 \\)"], ans: [0, 1, 2, 3], exp: "1.500+8.500=10.000. 15.000-5.000=10.000. 50x200=10.000. 90.000/9=10.000. Semuanya benar! <span class='translation'>All calculations equal 10,000!</span>", exp_trans: "All are 10000." },
+
+            // TASK 5: Pola Bilangan dan Pembulatan
+            "t5-task1": { type: "single", q: "Pola bilangan: 10.000, 20.000, 30.000, ... . Berapakah bilangan ke-4 pada pola tersebut? <i class='fas fa-wave-square text-orange-500 ml-2'></i>", q_trans: "Number pattern: 10,000, 20,000, 30,000, ... What is the 4th number?", opts: ["\\( 35.000 \\)", "\\( 40.000 \\)", "\\( 45.000 \\)", "\\( 50.000 \\)", "\\( 60.000 \\)"], ans: "\\( 40.000 \\)", exp: "Pola bertambah 10.000. Maka ke-4 adalah 30.000 + 10.000 = 40.000. <span class='translation'>Pattern adds 10,000. 4th is 40,000.</span>", exp_trans: "40000." },
+            "t5-task2": { type: "fill", q: "Sebuah pola: 5.000, 10.000, 20.000, 40.000, ... . Berapakah bilangan berikutnya? (Tulis angka) <i class='fas fa-chart-line text-orange-500 ml-2'></i>", q_trans: "A pattern: 5,000, 10,000, 20,000, 40,000, ... What is the next number?", ans: "80000", exp: "Pola dikali 2. 40.000 x 2 = 80.000. <span class='translation'>Pattern multiplies by 2. 40,000 x 2 = 80,000.</span>", exp_trans: "80000." },
+            "t5-task3": { type: "tf_table", q: "Evaluasi aturan pola bilangan. <i class='fas fa-list-ul text-orange-500 ml-2'></i>", q_trans: "Evaluate number pattern rules.", opts: ["Pola 2, 4, 6, 8 bertambah 2", "Pola 100, 200, 300 bertambah 100", "Pola 1, 3, 9, 27 bertambah 2", "Pola 50.000, 40.000, 30.000 berkurang 10.000"], ans: ["B", "B", "S", "B"], exp: "1. Benar. 2. Benar. 3. Salah, polanya dikali 3. 4. Benar. <span class='translation'>3. False, multiplied by 3.</span>", exp_trans: "1,3,9,27 is multiplied by 3." },
+            "t5-task4": { type: "single", q: "Bilangan 78.500 jika dibulatkan ke ribuan terdekat menjadi... <i class='fas fa-calculator text-orange-500 ml-2'></i>", q_trans: "The number 78,500 rounded to the nearest thousands is...", opts: ["\\( 78.000 \\)", "\\( 78.400 \\)", "\\( 78.500 \\)", "\\( 79.000 \\)", "\\( 80.000 \\)"], ans: "\\( 79.000 \\)", exp: "Angka ratusan adalah 5, aturan pembulatan jika 5 atau lebih dibulatkan ke atas. Jadi 78.000 + 1.000 = 79.000. <span class='translation'>Hundreds digit is 5, round up. So 79,000.</span>", exp_trans: "79000." },
+            "t5-task5": { type: "complex", q: "Manakah bilangan yang jika dibulatkan ke ribuan terdekat menjadi 50.000? <i class='fas fa-filter text-orange-500 ml-2'></i>", q_trans: "Which numbers, when rounded to the nearest thousands, become 50,000?", opts: ["\\( 49.400 \\)", "\\( 50.499 \\)", "\\( 49.600 \\)", "\\( 51.500 \\)"], ans: [1, 2], exp: "49.600 (ratusan 6, bulat ke atas jadi 50.000). 50.499 (ratusan 4, bulat ke bawah jadi 50.000). <span class='translation'>49,600 rounds up. 50,499 rounds down.</span>", exp_trans: "49.600 and 50.499." },
+            "t5-task6": { type: "fill", q: "Jarak rumah ke sekolah 4.250 meter. Jika dibulatkan ke ribuan terdekat, berapa meter jaraknya? (Tulis angka) <i class='fas fa-ruler text-orange-500 ml-2'></i>", q_trans: "Distance from home to school is 4,250 meters. Rounded to the nearest thousands, how many meters?", ans: "4000", exp: "Ratusan adalah 2, dibulatkan ke bawah. 4.250 -> 4.000. <span class='translation'>Hundreds is 2, round down. 4,000.</span>", exp_trans: "4000." },
+            "t5-task7": { type: "single", q: "Pola bilangan menurun: 50.000, 45.000, 40.000, ... . Berapakah bilangan berikutnya? <i class='fas fa-arrow-down text-orange-500 ml-2'></i>", q_trans: "Descending pattern: 50,000, 45,000, 40,000, ... What is the next number?", opts: ["\\( 35.000 \\)", "\\( 30.000 \\)", "\\( 38.000 \\)", "\\( 25.000 \\)", "\\( 15.000 \\)"], ans: "\\( 35.000 \\)", exp: "Pola berkurang 5.000. 40.000 - 5.000 = 35.000. <span class='translation'>Pattern subtracts 5,000. 40,000 - 5,000 = 35,000.</span>", exp_trans: "35000." },
+            "t5-task8": { type: "tf_table", q: "Evaluasi pembulatan bilangan. <i class='fas fa-clipboard-check text-orange-500 ml-2'></i>", q_trans: "Evaluate number rounding.", opts: ["Pembulatan ke ribuan melihat angka ratusan", "Jika angka ratusan 5 atau lebih, dibulatkan ke atas", "Jika angka ratusan 4 atau kurang, dibulatkan ke bawah", "Bilangan 12.300 dibulatkan menjadi 13.000"], ans: ["B", "B", "B", "S"], exp: "1. Benar. 2. Benar. 3. Benar. 4. Salah, 12.300 ratusannya 3, jadi 12.000. <span class='translation'>4. False, 12,300 is 12,000.</span>", exp_trans: "12.300 rounds to 12.000." },
+            "t5-task9": { type: "fill", q: "Pola bilangan: 10, 100, 1.000, ... . Berapakah bilangan berikutnya? (Tulis angka) <i class='fas fa-sort-numeric-up text-orange-500 ml-2'></i>", q_trans: "Number pattern: 10, 100, 1,000, ... What is the next number?", ans: "10000", exp: "Pola dikali 10. 1.000 x 10 = 10.000. <span class='translation'>Pattern multiplies by 10. 1,000 x 10 = 10,000.</span>", exp_trans: "10000." },
+            "t5-task10": { type: "complex", q: "Manakah pernyataan pembulatan yang benar? <i class='fas fa-check-circle text-orange-500 ml-2'></i>", q_trans: "Which rounding statements are correct?", opts: ["\\( 55.550 \\text{ dibulatkan ke } 56.000 \\)", "\\( 12.345 \\text{ dibulatkan ke } 12.000 \\)", "\\( 99.999 \\text{ dibulatkan ke } 99.000 \\)", "\\( 100.499 \\text{ dibulatkan ke } 100.000 \\)"], ans: [0, 1, 3], exp: "1. Benar (ratusan 5 -> naik). 2. Benar (ratusan 3 -> turun). 3. Salah (ratusan 9 -> naik jadi 100.000). 4. Benar (ratusan 4 -> turun jadi 100.000). <span class='translation'>1. True. 2. True. 3. False. 4. True.</span>", exp_trans: "99.999 rounds to 100.000." }
+        });
+        
+        // ====== JAVASCRIPT LOGIC ======
+        let currentPage = 1;
+        let currentTaskSection = ""; 
+        
+        function openModal() {
+            const modal = document.getElementById('classRulesModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        function closeModal() {
+            const modal = document.getElementById('classRulesModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('bg-indigo-100', 'text-indigo-800', 'font-bold', 'bg-orange-100', 'text-orange-800');
+            });
+            const activeLink = document.querySelector(`.sidebar-item[data-section="${sectionId}"]`);
+            if (activeLink) {
+                if(sectionId.startsWith('task')) {
+                    activeLink.classList.add('bg-orange-100', 'text-orange-800', 'font-bold');
+                } else {
+                    activeLink.classList.add('bg-indigo-100', 'text-indigo-800', 'font-bold');
+                }
+            }
+            currentPage = 1;
+            currentTaskSection = sectionId;
+            
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const firstPage = document.querySelector(`#${sectionId} .page[data-page="1"]`);
+            if(firstPage) firstPage.classList.add('active');
+            
+            renderMath();
+            renderPagination(sectionId, currentPage);
+            document.getElementById('contentScrollArea').scrollTo(0, 0);
+        }
+        function changePage(direction) {
+            const activeSection = document.querySelector('.content-section.active');
+            if(!activeSection) return;
+            const pages = activeSection.querySelectorAll('.page');
+            let newPage = currentPage + direction;
+            if(newPage >= 1 && newPage <= pages.length) {
+                pages[currentPage - 1].classList.remove('active');
+                pages[newPage - 1].classList.add('active');
+                currentPage = newPage;
+                renderMath();
+                renderPagination(currentTaskSection, currentPage);
+                document.getElementById('contentScrollArea').scrollTo(0, 0);
+            }
+        }
+
+        function goToPage(pageNum) {
+            const activeSection = document.querySelector('.content-section.active');
+            if(!activeSection) return;
+            const pages = activeSection.querySelectorAll('.page');
+            if(pageNum >= 1 && pageNum <= pages.length) {
+                pages[currentPage - 1].classList.remove('active');
+                pages[pageNum - 1].classList.add('active');
+                currentPage = pageNum;
+                renderMath();
+                renderPagination(currentTaskSection, currentPage);
+                document.getElementById('contentScrollArea').scrollTo(0, 0);
+            }
+        }
+        function renderPagination(sectionId, pageNum) {
+            const activeSection = document.getElementById(sectionId);
+            if (!activeSection) return;
+            const pages = activeSection.querySelectorAll('.page');
+            const totalPages = pages.length;
+            let html = '';
+            const isMainTask = sectionId.startsWith('t');
+            const theoryPages = [1, 5, 9]; 
+            
+            html += `<button onclick="goToPage(${pageNum - 1})" class="px-3 py-1.5 rounded-md text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 ${pageNum === 1 ? 'opacity-50 cursor-not-allowed' : ''}" ${pageNum === 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i> Prev</button>`;
+            
+            for (let i = 1; i <= totalPages; i++) {
+                let btnColor = 'bg-gray-100 hover:bg-gray-200 text-gray-700';
+                if (!isMainTask && theoryPages.includes(i)) {
+                    btnColor = 'bg-indigo-100 hover:bg-indigo-200 text-indigo-800'; 
+                } else {
+                    btnColor = 'bg-orange-100 hover:bg-orange-200 text-orange-800'; 
+                }
+                if (i === pageNum) {
+                    if (!isMainTask && theoryPages.includes(i)) {
+                        btnColor = 'bg-indigo-600 text-white shadow-md'; 
+                    } else {
+                        btnColor = 'bg-orange-500 text-white shadow-md'; 
+                    }
+                }
+                html += `<button onclick="goToPage(${i})" class="w-9 h-9 rounded-md text-sm font-semibold transition-all ${btnColor}">${i}</button>`;
+            }
+            
+            html += `<button onclick="goToPage(${pageNum + 1})" class="px-3 py-1.5 rounded-md text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 ${pageNum === totalPages ? 'opacity-50 cursor-not-allowed' : ''}" ${pageNum === totalPages ? 'disabled' : ''}>Next <i class="fas fa-chevron-right"></i></button>`;
+            document.getElementById('paginationBar').innerHTML = html;
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        let studentAnswers = {};
+        function renderTasks() {
+            document.querySelectorAll('[data-task-id]').forEach(div => {
+                const taskId = div.getAttribute('data-task-id');
+                renderSingleTask(taskId, div);
+            });
+            renderMath();
+        }
+        
+        function renderSingleTask(taskId, div) {
+            const data = questions[taskId];
+            if(!data) return;
+
+            const isMainTask = taskId.startsWith('t');
+            const taskNum = isMainTask ? taskId[1] : 0;
+            let taskType = data.type || 'single';
+            
+            let questionHTML = `
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-orange-500">
+                    <div class="flex justify-between items-center mb-4 no-print">
+                        <h2 class="text-xl font-bold text-orange-600">
+                            ${isMainTask ? `Task ${taskNum}` : 'Latihan'} 
+                            ${taskType === 'complex' ? '<span class="text-sm bg-purple-200 text-purple-800 px-2 py-1 rounded ml-2">PG Kompleks</span>' : ''}
+                            ${taskType === 'fill' ? '<span class="text-sm bg-blue-200 text-blue-800 px-2 py-1 rounded ml-2">Isian Singkat</span>' : ''}
+                            ${taskType === 'tf_table' ? '<span class="text-sm bg-teal-200 text-teal-800 px-2 py-1 rounded ml-2">Tabel Benar/Salah</span>' : ''}
+                            <span class="translation text-gray-500 text-sm">Exercise</span>
+                        </h2>
+                        <div class="flex gap-2">
+                            <button onclick="resetTask('${taskId}')" class="text-sm bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                            ${isMainTask ? `<button onclick="printTask(${taskNum})" class="text-sm bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">
+                                <i class="fas fa-print"></i> Print
+                            </button>` : ''}
+                        </div>
+                    </div>
+                    <div class="mb-6 flex gap-4 items-start">
+                        <div class="bg-orange-100 p-3 rounded-full shrink-0">
+                            <i class="fas fa-question text-orange-500 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-lg">${data.q}</p>
+                            <p class="translation">${data.q_trans}</p>
+                        </div>
+                    </div>
+            `;
+
+            if (taskType === 'single') {
+                const shuffledOpts = shuffleArray([...data.opts]);
+                questionHTML += `
+                    <div id="options-${taskId}" class="space-y-3">
+                        ${shuffledOpts.map((opt, i) => `
+                            <button onclick="checkAnswer('${taskId}', this.getAttribute('data-opt'), 'single')" 
+                                    class="option-btn w-full text-left p-3 border-2 border-gray-200 rounded hover:border-orange-500 flex items-center gap-3" 
+                                    data-opt="${opt}">
+                                <span class="w-6 h-6 flex items-center justify-center bg-gray-100 rounded-full font-bold shrink-0">${String.fromCharCode(65 + i)}</span>
+                                <span class="katex">${opt}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (taskType === 'complex') {
+                questionHTML += `
+                    <p class="text-sm text-gray-600 mb-3">*Pilih semua jawaban yang benar. <span class="translation">*Select all correct answers.</span></p>
+                    <div id="options-${taskId}" class="space-y-3">
+                        ${data.opts.map((opt, i) => `
+                            <label class="option-btn w-full text-left p-3 border-2 border-gray-200 rounded hover:border-purple-500 flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" class="w-5 h-5 complex-checkbox shrink-0" data-opt-index="${i}">
+                                <span class="katex">${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <button onclick="checkAnswer('${taskId}', null, 'complex')" class="mt-4 bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded font-bold">Submit Jawaban</button>
+                `;
+            } else if (taskType === 'fill') {
+                questionHTML += `
+                    <div class="flex gap-2 items-center mt-2">
+                        <input type="text" id="input-${taskId}" class="border-2 border-gray-200 rounded p-2 w-32 text-lg text-center focus:border-orange-500 outline-none" placeholder="Jawaban...">
+                        <button onclick="checkAnswer('${taskId}', null, 'fill')" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-bold">Submit</button>
+                    </div>
+                `;
+            } else if (taskType === 'tf_table') {
+                questionHTML += `
+                    <p class="text-sm text-gray-600 mb-3">*Tentukan Benar atau Salah. <span class="translation">*Determine True or False.</span></p>
+                    <div id="options-${taskId}" class="overflow-x-auto">
+                        <table class="w-full border-collapse border border-gray-300 text-sm">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-300 p-2 w-10">No.</th>
+                                    <th class="border border-gray-300 p-2 text-left">Pernyataan <span class="translation text-xs">Statement</span></th>
+                                    <th class="border border-gray-300 p-2 w-20">Benar <span class="translation text-xs block">True</span></th>
+                                    <th class="border border-gray-300 p-2 w-20">Salah <span class="translation text-xs block">False</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.opts.map((opt, i) => `
+                                    <tr>
+                                        <td class="border border-gray-300 p-2 text-center font-bold">${i + 1}</td>
+                                        <td class="border border-gray-300 p-2"><span class="katex">${opt}</span></td>
+                                        <td class="border border-gray-300 p-2 text-center">
+                                            <input type="radio" name="tf-${taskId}-${i}" value="B" class="tf-radio w-5 h-5 cursor-pointer">
+                                        </td>
+                                        <td class="border border-gray-300 p-2 text-center">
+                                            <input type="radio" name="tf-${taskId}-${i}" value="S" class="tf-radio w-5 h-5 cursor-pointer">
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    <button onclick="checkAnswer('${taskId}', null, 'tf_table')" class="mt-4 bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded font-bold">Submit Jawaban</button>
+                `;
+            }
+
+            questionHTML += `
+                    <div id="result-${taskId}" class="mt-4 hidden p-4 rounded"></div>
+
+                    <div class="mt-4 no-print">
+                        <button onclick="toggleCollapse('${taskId}')" id="collapse-btn-${taskId}" class="hidden text-blue-600 underline">
+                            Tampilkan Penjelasan <span class="translation text-gray-500 text-xs" style="display: inline-block; margin-left: 4px;">Show Explanation</span>
+                        </button>
+                        <div id="collapse-${taskId}" class="collapse-content w-full">
+                            <h3 class="font-bold text-blue-800">Penjelasan: <span class="translation text-gray-500 text-sm">Explanation:</span></h3>
+                            <p class="mt-2">${data.exp}</p>
+                            <p class="translation">${data.exp_trans}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            div.innerHTML = questionHTML;
+        }
+
+        function checkAnswer(taskId, selectedOpt, type) {
+            const data = questions[taskId];
+            const resultDiv = document.getElementById(`result-${taskId}`);
+            const collapseBtn = document.getElementById(`collapse-btn-${taskId}`);
+            let isCorrect = false;
+            let correctAnsText = '';
+
+            if (type === 'single') {
+                const buttons = document.querySelectorAll(`#options-${taskId} button`);
+                buttons.forEach(btn => {
+                    btn.disabled = true;
+                    btn.classList.add('opacity-70', 'cursor-not-allowed');
+                    if(btn.getAttribute('data-opt') === data.ans) {
+                        btn.classList.remove('border-gray-200', 'hover:border-orange-500');
+                        btn.classList.add('border-green-500', 'bg-green-50');
+                    } else if (btn.getAttribute('data-opt') === selectedOpt) {
+                        btn.classList.remove('border-gray-200', 'hover:border-orange-500');
+                        btn.classList.add('border-red-500', 'bg-red-50');
+                    }
+                });
+                isCorrect = (selectedOpt === data.ans);
+                correctAnsText = data.ans;
+                studentAnswers[taskId] = selectedOpt; 
+            } 
+            else if (type === 'complex') {
+                const checkboxes = document.querySelectorAll(`#options-${taskId} input[type="checkbox"]`);
+                let selectedAns = [];
+                checkboxes.forEach((cb, i) => {
+                    if (cb.checked) selectedAns.push(i);
+                    cb.disabled = true;
+                });
+                const correctAnsStr = [...data.ans].sort().join(',');
+                const selectedAnsStr = [...selectedAns].sort().join(',');
+                isCorrect = (correctAnsStr === selectedAnsStr);
+                
+                let correctComplexText = [];
+                data.ans.forEach(i => correctComplexText.push(data.opts[i]));
+                correctAnsText = correctComplexText.join(', ');
+
+                checkboxes.forEach((cb, i) => {
+                    if(data.ans.includes(i)) {
+                        cb.parentElement.classList.remove('border-gray-200', 'hover:border-purple-500');
+                        cb.parentElement.classList.add('border-green-500', 'bg-green-50');
+                    } else if (cb.checked) {
+                        cb.parentElement.classList.remove('border-gray-200', 'hover:border-purple-500');
+                        cb.parentElement.classList.add('border-red-500', 'bg-red-50');
+                    }
+                });
+                studentAnswers[taskId] = selectedAns;
+            } 
+            else if (type === 'fill') {
+                const inputField = document.getElementById(`input-${taskId}`);
+                // Fungsi bantu untuk membersihkan format angka (titik, koma, spasi, Rp)
+                const normalize = (str) => str.toString().toLowerCase().replace(/rp/g, '').replace(/rb/g, '').replace(/[\s.,]/g, '');
+                
+                let userVal = normalize(inputField.value);
+                let correctAns = normalize(data.ans);
+                
+                inputField.disabled = true;
+                isCorrect = (userVal === correctAns);
+                if(!isCorrect) inputField.classList.add('border-red-500', 'bg-red-50');
+                else inputField.classList.add('border-green-500', 'bg-green-50');
+                correctAnsText = data.ans;
+                studentAnswers[taskId] = inputField.value;
+            }
+            else if (type === 'tf_table') {
+                const rows = document.querySelectorAll(`#options-${taskId} tbody tr`);
+                let userAns = [];
+                let allFilled = true;
+
+                rows.forEach((row, i) => {
+                    const radios = row.querySelectorAll('input[type="radio"]');
+                    let rowVal = null;
+                    radios.forEach(r => {
+                        r.disabled = true;
+                        if (r.checked) rowVal = r.value;
+                    });
+                    if (rowVal === null) allFilled = false;
+                    userAns.push(rowVal);
+                });
+
+                if (!allFilled) {
+                    alert("Harap isi semua pernyataan terlebih dahulu! / Please answer all statements first!");
+                    rows.forEach((row, i) => {
+                        let radios = row.querySelectorAll('input[type="radio"]');
+                        radios.forEach(r => r.disabled = false);
+                    });
+                    return;
+                }
+
+                let correctCount = 0;
+                let correctTFText = [];
+                rows.forEach((row, i) => {
+                    const userVal = userAns[i];
+                    const correctVal = data.ans[i];
+                    correctTFText.push(`${i+1}. ${correctVal}`);
+                    if (userVal === correctVal) {
+                        correctCount++;
+                        row.classList.add('bg-green-50');
+                    } else {
+                        row.classList.add('bg-red-50');
+                    }
+                });
+
+                isCorrect = (correctCount === data.ans.length);
+                correctAnsText = correctTFText.join(' | ');
+                studentAnswers[taskId] = userAns;
+            }
+
+            if(isCorrect) {
+                resultDiv.innerHTML = `<p class="text-green-600 font-bold"><i class="fas fa-check-circle"></i> Benar! <span class="translation text-gray-600 font-normal" style="display: inline-block; margin-left: 4px;">Correct!</span></p>`;
+                resultDiv.className = "mt-4 p-4 rounded bg-green-50 border border-green-200";
+            } else {
+                resultDiv.innerHTML = `<p class="text-red-600 font-bold"><i class="fas fa-times-circle"></i> Salah! Jawaban yang benar adalah: ${correctAnsText}. <span class="translation text-gray-600 font-normal" style="display: inline-block; margin-left: 4px;">Wrong! The correct answer is: ${correctAnsText}.</span></p>`;
+                resultDiv.className = "mt-4 p-4 rounded bg-red-50 border border-red-200";
+            }
+            resultDiv.classList.remove('hidden');
+            collapseBtn.classList.remove('hidden');
+            
+            const collapseContent = document.getElementById(`collapse-${taskId}`);
+            collapseContent.classList.add('open');
+            collapseBtn.innerHTML = 'Sembunyikan Penjelasan <span class="translation text-gray-500 text-xs" style="display: inline-block; margin-left: 4px;">Hide Explanation</span>';
+            
+            renderMath();
+        }
+
+        function resetTask(taskId) {
+            delete studentAnswers[taskId];
+            const taskDiv = document.querySelector(`[data-task-id="${taskId}"]`);
+            if(taskDiv) {
+                renderSingleTask(taskId, taskDiv);
+                renderMath();
+            }
+        }
+
+        function printTask(taskNum) {
+            let score = 0;
+            let tableBody = '';
+            for(let i=1; i<=10; i++) {
+                const taskId = `t${taskNum}-task${i}`;
+                const data = questions[taskId];
+                if(!data) continue;
+                
+                let studentAns = studentAnswers[taskId] || 'Tidak Dijawab';
+                let correctAns = data.ans;
+                
+                let sAnsStr = '';
+                let cAnsStr = '';
+                let isCorrect = false;
+				const normalize = (str) => str.toString().toLowerCase().replace(/rp/g, '').replace(/rb/g, '').replace(/[\s.,]/g, '');
+                
+                if (data.type === 'complex') {
+                    let sArr = Array.isArray(studentAns) ? studentAns : [];
+                    let cArr = Array.isArray(correctAns) ? correctAns : [];
+                    sAnsStr = sArr.length > 0 ? sArr.slice().sort().map(idx => data.opts[idx]).join(', ') : 'Tidak Dijawab';
+                    cAnsStr = cArr.length > 0 ? cArr.slice().sort().map(idx => data.opts[idx]).join(', ') : 'Tidak Dijawab';
+                    isCorrect = (sArr.length > 0 && sArr.slice().sort().join(',') === cArr.slice().sort().join(','));
+                } else if (data.type === 'tf_table') {
+                    let sArr = Array.isArray(studentAns) ? studentAns : [];
+                    let cArr = Array.isArray(correctAns) ? correctAns : [];
+                    sAnsStr = sArr.length > 0 ? sArr.join(' | ') : 'Tidak Dijawab';
+                    cAnsStr = cArr.join(' | ');
+                    isCorrect = (sArr.length > 0 && sArr.join(',') === cArr.join(','));
+                } else {
+                    sAnsStr = studentAns || 'Tidak Dijawab';
+                    cAnsStr = correctAns;
+                    let userValNorm = normalize(studentAns || '');
+                    let correctAnsNorm = normalize(correctAns);
+                    isCorrect = (userValNorm === correctAnsNorm);
+                }
+                
+                let note = '❌';
+                if(isCorrect) { score++; note = '✔️'; }
+                
+                let qText = data.q.replace(/<[^>]+>/g, '');
+                if (data.type === 'tf_table') {
+                    qText += " | Statements: " + data.opts.map((opt, idx) => `${idx+1}. ${opt}`).join(" ; ");
+                }
+                
+                tableBody += `<tr>
+                    <td class="border border-black p-1 text-center">${i}</td>
+                    <td class="border border-black p-1">${qText}</td>
+                    <td class="border border-black p-1">${sAnsStr}</td>
+                    <td class="border border-black p-1">${cAnsStr}</td>
+                    <td class="border border-black p-1 text-center">${note}</td>
+                </tr>`;
+            }
+            document.getElementById('printTableBody').innerHTML = tableBody;
+            document.getElementById('printTaskNum').innerText = taskNum;
+            document.getElementById('printScore').innerText = score;
+            
+            renderMathInElement(document.getElementById('printArea'), {
+                delimiters: [
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ]
+            });
+            setTimeout(() => {
+                window.print();
+            }, 500);
+        }
+
+        function toggleCollapse(taskId) {
+            const content = document.getElementById(`collapse-${taskId}`);
+            const btn = document.getElementById(`collapse-btn-${taskId}`);
+            content.classList.toggle('open');
+            if(content.classList.contains('open')) {
+                btn.innerHTML = 'Sembunyikan Penjelasan <span class="translation text-gray-500 text-xs" style="display: inline-block; margin-left: 4px;">Hide Explanation</span>';
+            } else {
+                btn.innerHTML = 'Tampilkan Penjelasan <span class="translation text-gray-500 text-xs">Show Explanation</span>';
+            }
+        }
+
+        function renderMath() {
+            if (typeof renderMathInElement === 'undefined') return;
+            
+            const target = document.querySelector('.content-section.active') || document.body;
+            try {
+                renderMathInElement(target, {
+                    delimiters: [
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                    ],
+                    throwOnError: false
+                });
+            } catch(e) {
+                console.error("KaTeX rendering error:", e);
+            }
+        }
+        
+        window.onload = () => {
+            renderTasks();
+            setTimeout(() => {
+                showSection('warmup');
+                renderMath();
+            }, 100);
+        };
+        
+    </script>
+</body>
+</html>
