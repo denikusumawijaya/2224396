@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Tutoring by Deni - KPK dan FPB: Kelipatan</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2563eb;--primary-dark:#1e40af;--secondary:#f59e0b;--success:#10b981;--danger:#ef4444;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+.tr{font-style:italic;font-size:.82em;color:var(--muted);display:block;margin-top:2px}
+header{background:var(--primary);color:#fff;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.12);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:8px}
+header .brand{font-weight:700;font-size:1.05em}
+header .topic{font-size:.88em;text-align:center;flex:1}
+header .topic .tr{color:rgba(255,255,255,.85)}
+header button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:.85em;white-space:nowrap}
+header button:hover{background:rgba(255,255,255,.25)}
+.main-container{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 52px)}
+.sidebar{background:var(--card);border-right:1px solid var(--border);padding:14px;overflow-y:auto;position:sticky;top:52px;height:calc(100vh - 52px)}
+.sidebar h3{font-size:.72em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;letter-spacing:1px}
+.nav-link{display:block;padding:8px 10px;border-radius:6px;cursor:pointer;margin-bottom:3px;font-size:.84em;border:1px solid transparent;transition:all .15s}
+.nav-link:hover{background:#eff6ff}
+.nav-link.active{background:var(--primary);color:#fff;pointer-events:none;cursor:default}
+.nav-link .nl-title{display:block;font-weight:600}
+.nav-link .time{font-size:.76em;color:var(--muted);display:block;margin-top:2px}
+.nav-link.active .time,.nav-link.active .tr{color:rgba(255,255,255,.85)}
+.nav-link.disabled{opacity:.45;cursor:not-allowed;font-size:.8em;padding:6px 10px}
+.content-area{padding:22px 28px;overflow-y:auto;max-width:1100px;margin:0 auto;width:100%}
+.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--border);flex-wrap:wrap;gap:8px}
+.page-header h2{color:var(--primary-dark);font-size:1.1em}
+.page-header .badge{background:var(--secondary);color:#fff;padding:4px 10px;border-radius:20px;font-size:.76em;font-weight:600}
+.card{background:var(--card);border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:16px;border:1px solid var(--border)}
+.card.explain{border-left:4px solid var(--primary)}
+.card.task{border-left:4px solid var(--secondary)}
+.card h3{color:var(--primary-dark);margin-bottom:12px;font-size:1.1em}
+.math-block{background:#f1f5f9;padding:12px 14px;border-radius:8px;margin:12px 0;overflow-x:auto}
+.example-box{background:#fef3c7;border-left:4px solid var(--secondary);padding:12px 16px;margin:12px 0;border-radius:6px}
+.example-box h4{color:#92400e;margin-bottom:6px;font-size:.95em}
+.tip-box{background:#dbeafe;border-left:4px solid var(--primary);padding:10px 14px;margin:10px 0;border-radius:6px}
+.tip-box h4{color:#1e40af;margin-bottom:4px;font-size:.9em}
+.illustration{text-align:center;margin:14px 0;padding:14px;background:#f1f5f9;border-radius:8px}
+.q-text{font-size:1em;margin-bottom:12px;line-height:1.7}
+.options{display:flex;flex-direction:column;gap:8px}
+.option{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:2px solid var(--border);border-radius:8px;cursor:pointer;background:#fff;transition:all .15s}
+.option:hover{border-color:var(--primary);background:#eff6ff}
+.option.selected{border-color:var(--primary);background:#dbeafe}
+.option.correct{border-color:var(--success);background:#d1fae5}
+.option.incorrect{border-color:var(--danger);background:#fee2e2}
+.option .marker{min-width:18px;width:18px;height:18px;border:2px solid var(--muted);border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:.7em;color:#fff}
+.option.selected .marker{background:var(--primary);border-color:var(--primary)}
+.option.correct .marker{background:var(--success);border-color:var(--success)}
+.option.incorrect .marker{background:var(--danger);border-color:var(--danger)}
+.option.checkbox .marker{border-radius:3px}
+.option .opt-text{flex:1}
+.fill-input{padding:8px 12px;border:2px solid var(--border);border-radius:6px;font-size:1em;width:100%;margin:8px 0;font-family:inherit}
+.fill-input:focus{border-color:var(--primary);outline:none}
+.btn-submit{background:var(--primary);color:#fff;border:none;padding:9px 20px;border-radius:6px;cursor:pointer;font-size:.88em;font-weight:600;margin-top:12px}
+.btn-submit:hover{background:var(--primary-dark)}
+.feedback{margin-top:12px;padding:14px;border-radius:8px;display:none}
+.feedback.show{display:block}
+.feedback.correct{background:#d1fae5;border:1px solid var(--success)}
+.feedback.incorrect{background:#fee2e2;border:1px solid var(--danger)}
+.feedback h4{margin-bottom:6px}
+.feedback ol,.feedback ul{margin:6px 0;padding-left:22px}
+.feedback li{margin:4px 0}
+.card ol, .card ul { padding-left: 26px; margin: 10px 0; }
+.card li { margin: 5px 0; }
+.example-box ol, .example-box ul { padding-left: 22px; margin: 8px 0; }
+.tip-box ol, .tip-box ul { padding-left: 22px; margin: 8px 0; }
+.math-block ol, .math-block ul { padding-left: 22px; margin: 8px 0; }
+.pagination{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
+.pagination button{background:var(--primary);color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:.84em}
+.pagination button:disabled{background:#cbd5e1;cursor:not-allowed}
+.pagination .indicator{font-size:.82em;color:var(--muted);text-align:center;flex:1;padding:0 10px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center}
+.modal.active{display:flex}
+.modal-content{background:#fff;padding:22px;border-radius:12px;max-width:460px;width:90%}
+.modal-content h3{color:var(--primary-dark);margin-bottom:12px}
+.modal-content ul{list-style:none;padding-left:0}
+.modal-content li{padding:10px 0;border-bottom:1px solid var(--border)}
+.modal-content li:last-child{border-bottom:none}
+.modal-close{background:var(--primary);color:#fff;border:none;padding:8px 18px;border-radius:6px;cursor:pointer;margin-top:12px}
+.sort-list{display:flex;flex-direction:column;gap:6px}
+.sort-item{padding:10px 12px;border:2px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .15s}
+.sort-item:hover{border-color:var(--primary)}
+.sort-item.selected{border-color:var(--primary);background:#dbeafe}
+.sort-item .pos{background:var(--primary);color:#fff;min-width:24px;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8em;flex-shrink:0}
+.sort-item .sort-text{flex:1}
+.pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pair-col h4{font-size:.85em;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
+.pair-col{display:flex;flex-direction:column;gap:6px}
+.pair-item{padding:10px 12px;border:2px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;text-align:center;font-size:.92em}
+.pair-item.selected{border-color:var(--primary);background:#dbeafe}
+.pair-item.paired{opacity:.5;cursor:default;border-color:var(--success);background:#d1fae5}
+.pairs-list{margin-top:10px}
+.pair-row{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:#f1f5f9;border-radius:6px;margin-bottom:4px;font-size:.85em}
+.pair-row .remove{cursor:pointer;color:var(--danger);font-weight:700;margin-left:6px}
+.page-numbers {display:flex;gap:3px;flex-wrap:nowrap;justify-content:center;flex:1;overflow-x:auto;padding:0 3px;}
+.page-num {min-width:28px;height:26px;border:1px solid var(--border);background:#fff;border-radius:4px;cursor:pointer;font-size:.7em;display:flex;align-items:center;justify-content:center;padding:0 4px;white-space:nowrap;transition:all .15s;flex-shrink:0;}
+.page-num.page-num-e {background:#eff6ff;border-color:#93c5fd;color:#1e40af;}
+.page-num.page-num-t {background:#fffbeb;border-color:#fcd34d;color:#92400e;}
+.page-num.page-num-e:hover {background:#dbeafe;border-color:var(--primary);}
+.page-num.page-num-t:hover {background:#fef3c7;border-color:var(--secondary);}
+.page-num.page-num-e.active {background:var(--primary);color:#fff;border-color:var(--primary);font-weight:600;}
+.page-num.page-num-t.active {background:var(--secondary);color:#fff;border-color:var(--secondary);font-weight:600;}
+.page-num:disabled {opacity:1;cursor:default;}
+@media(max-width:1100px){.main-container{grid-template-columns:180px 1fr}.content-area{padding:18px 20px}}
+@media(max-width:760px){.main-container{grid-template-columns:1fr}.sidebar{display:none}.content-area{padding:16px}header{font-size:.9em}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Math Tutoring by Deni</div>
+  <div class="topic">Topik: KPK dan FPB: Kelipatan <span class="tr">Topic: LCM and GCD: Multiples</span></div>
+  <button id="classRulesBtn">Aturan Kelas <span class="tr">Class Rules</span></button>
+</header>
+<div class="main-container">
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="content-area">
+    <div id="pageContent"></div>
+    <div class="pagination">
+      <button id="prevBtn">← Sebelumnya <span class="tr">Previous</span></button>
+      <div class="page-numbers" id="pageNums"></div>
+      <button id="nextBtn">Berikutnya <span class="tr">Next</span> →</button>
+    </div>
+  </main>
+</div>
+<div id="classRulesModal" class="modal">
+  <div class="modal-content">
+    <h3>Aturan Kelas <span class="tr">Class Rules</span></h3>
+    <ul>
+      <li>Berbicara secara bergantian <span class="tr">Speak in turn</span></li>
+      <li>Meminta izin jika ingin meninggalkan kelas <span class="tr">Ask permission before leaving the class</span></li>
+      <li>Menyalakan microphone dan camera jika diperlukan <span class="tr">Turn on microphone and camera when needed</span></li>
+    </ul>
+    <button class="modal-close">Tutup <span class="tr">Close</span></button>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if(!window.renderMathInElement){setTimeout(arguments.callee,50);return;}
+  const sectionsData = {
+    a: {
+      title: 'Spiral Review Warm-up', titleEn: 'Spiral Review Warm-up', time: '00:00 - 00:10',
+      pages: [
+        { type:'explanation', pageTitle:'E1: Bilangan Cacah', pageTitleEn:'Whole Numbers',
+          body:`<p><strong>Bilangan Cacah</strong> adalah angka yang dimulai dari 0, 1, 2, 3, dan seterusnya. <span class="tr"><strong>Whole Numbers</strong> are numbers starting from 0, 1, 2, 3, and so on.</span></p>
+          <p>Sebelumnya, kita telah mempelajari bilangan cacah sampai 1.000. <span class="tr">Previously, we learned about whole numbers up to 1,000.</span></p>
+          <div class="math-block">Contoh bilangan cacah: <span class="tr">Examples of whole numbers:</span> $0, 45, 150, 500, 999, 1000$. <span class="tr">$0, 45, 150, 500, 999, 1000$.</span></div>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          Hitung $250 + 150$. <span class="tr">Calculate $250 + 150$.</span>
+          <ol><li>Tambahkan puluhan: $50 + 50 = 100$. <span class="tr">Add tens: $50 + 50 = 100$.</span></li><li>Tambahkan ratusan: $200 + 100 = 300$. <span class="tr">Add hundreds: $200 + 100 = 300$.</span></li><li>Hasil akhir: $300$. <span class="tr">Final result: $300$.</span></li></ol></div>`
+        },
+        { type:'task', pageTitle:'T1: Penjumlahan Cacah', pageTitleEn:'Whole Number Addition', taskType:'fill',
+          question:'Hitung $180 + 220$. Hasilnya adalah $\\dots$', questionEn:'Calculate $180 + 220$. The result is $\\dots$',
+          correctAnswer:'400', acceptableAnswers:['400'],
+          explanation:`<p>Penyelesaian: <span class="tr">Solution:</span></p><ol><li>$180 + 220 = 400$ <span class="tr">$180 + 220 = 400$</span></li><li>Jadi, hasilnya adalah 400. <span class="tr">So, the result is 400.</span></li></ol>`
+        },
+        { type:'task', pageTitle:'T2: Bilangan Terbesar', pageTitleEn:'Largest Number', taskType:'radio',
+          question:'Manakah bilangan cacah terbesar di bawah ini?', questionEn:'Which is the largest whole number below?',
+          options:[{text:'$850$ <span class="tr">850</span>', correct:false},{text:'$905$ <span class="tr">905</span>', correct:false},{text:'$950$ <span class="tr">950</span>', correct:true},{text:'$899$ <span class="tr">899</span>', correct:false}],
+          explanation:`<p>Bilangan 950 lebih besar dari 905, 850, dan 899. <span class="tr">The number 950 is greater than 905, 850, and 899.</span></p>`
+        },
+        { type:'task', pageTitle:'T3: Identifikasi Cacah', pageTitleEn:'Identify Whole Numbers', taskType:'checkbox',
+          question:'Pilih semua bilangan cacah yang kurang dari 500.', questionEn:'Select all whole numbers less than 500.',
+          options:[{text:'$120$ <span class="tr">120</span>', correct:true},{text:'$450$ <span class="tr">450</span>', correct:true},{text:'$750$ <span class="tr">750</span>', correct:false},{text:'$499$ <span class="tr">499</span>', correct:true}],
+          explanation:`<p>Bilangan di bawah 500 adalah 120, 450, dan 499. <span class="tr">Numbers below 500 are 120, 450, and 499.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E2: Konsep Dasar Kelipatan', pageTitleEn:'Basic Concept of Multiples',
+          body:`<p><strong>Kelipatan</strong> suatu bilangan adalah hasil perkalian bilangan tersebut dengan bilangan asli $(1, 2, 3, \\dots)$. <span class="tr"><strong>Multiples</strong> of a number are the result of multiplying that number by natural numbers $(1, 2, 3, \\dots)$.</span></p>
+          <div class="math-block">Kelipatan 3: <span class="tr">Multiples of 3:</span><br>$3 \\times 1 = 3$ <span class="tr">$3 \\times 1 = 3$</span><br>$3 \\times 2 = 6$ <span class="tr">$3 \\times 2 = 6$</span><br>$3 \\times 3 = 9$ <span class="tr">$3 \\times 3 = 9$</span></div>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          Tentukan 3 kelipatan pertama dari 4. <span class="tr">Determine the first 3 multiples of 4.</span>
+          <ol><li>$4 \\times 1 = 4$ <span class="tr">$4 \\times 1 = 4$</span></li><li>$4 \\times 2 = 8$ <span class="tr">$4 \\times 2 = 8$</span></li><li>$4 \\times 3 = 12$ <span class="tr">$4 \\times 3 = 12$</span></li></ol></div>`
+        },
+        { type:'task', pageTitle:'T4: Kelipatan Pertama', pageTitleEn:'First Multiple', taskType:'fill',
+          question:'Tuliskan kelipatan ke-3 dari 4.', questionEn:'Write the 3rd multiple of 4.',
+          correctAnswer:'12', acceptableAnswers:['12'],
+          explanation:`<p>$4 \\times 3 = 12$. <span class="tr">$4 \\times 3 = 12$.</span></p>`
+        },
+        { type:'task', pageTitle:'T5: Cek Kelipatan', pageTitleEn:'Check Multiple', taskType:'truefalse',
+          question:'Benar atau salah: 14 adalah kelipatan dari 7.', questionEn:'True or false: 14 is a multiple of 7.',
+          correctAnswer:'true',
+          explanation:`<p>$7 \\times 2 = 14$. Jadi benar. <span class="tr">$7 \\times 2 = 14$. So true.</span></p>`
+        },
+        { type:'task', pageTitle:'T6: Pasangkan Kelipatan', pageTitleEn:'Match Multiples', taskType:'pairing',
+          question:'Pasangkan bilangan dengan kelipatan ke-2 nya.', questionEn:'Match the number with its 2nd multiple.',
+          pairs:[{left:'2', right:'4 <span class="tr">4</span>'},{left:'5', right:'10 <span class="tr">10</span>'},{left:'6', right:'12 <span class="tr">12</span>'},{left:'9', right:'18 <span class="tr">18</span>'}],
+          explanation:`<p>Kelipatan ke-2 didapat dari bilangan dikali 2. <span class="tr">The 2nd multiple is obtained by multiplying the number by 2.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E3: Pola Kelipatan', pageTitleEn:'Multiples Pattern',
+          body:`<p>Kelipatan selalu membentuk pola yang konsisten. Selisih antar suku kelipatan selalu sama dengan bilangan asalnya. <span class="tr">Multiples always form a consistent pattern. The difference between consecutive multiples is always equal to the original number.</span></p>
+          <div class="illustration"><svg width="280" height="80" viewBox="0 0 280 80"><circle cx="40" cy="40" r="18" fill="#dbeafe" stroke="#2563eb"/><text x="40" y="45" text-anchor="middle" fill="#1e40af" font-size="14">5</text><text x="80" y="45" font-size="14" fill="#333">+</text><text x="100" y="45" font-size="14" fill="#333">5</text><circle cx="140" cy="40" r="18" fill="#fef3c7" stroke="#f59e0b"/><text x="140" y="45" text-anchor="middle" fill="#92400e" font-size="14">10</text><text x="180" y="45" font-size="14" fill="#333">+</text><text x="200" y="45" font-size="14" fill="#333">5</text><circle cx="240" cy="40" r="18" fill="#d1fae5" stroke="#10b981"/><text x="240" y="45" text-anchor="middle" fill="#065f46" font-size="14">15</text></svg><div style="font-size:.82em;color:var(--muted);margin-top:6px">Pola kelipatan 5 <span class="tr">Pattern of multiples of 5</span></div></div>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          Kelipatan 6: 6, 12, 18, 24. <span class="tr">Multiples of 6: 6, 12, 18, 24.</span></div>`
+        },
+        { type:'task', pageTitle:'T7: Urutkan Kelipatan', pageTitleEn:'Order Multiples', taskType:'sorting',
+          question:'Urutkan kelipatan 6 dari terkecil.', questionEn:'Order the multiples of 6 from smallest.',
+          items:['6 <span class="tr">6</span>','12 <span class="tr">12</span>','18 <span class="tr">18</span>','24 <span class="tr">24</span>'], correctOrder:[0,1,2,3],
+          explanation:`<p>Kelipatan 6 berurutan adalah 6, 12, 18, 24. <span class="tr">The sequence of multiples of 6 is 6, 12, 18, 24.</span></p>`
+        },
+        { type:'task', pageTitle:'T8: Kelipatan Berikutnya', pageTitleEn:'Next Multiple', taskType:'radio',
+          question:'Kelipatan 5 berikutnya setelah 20 adalah?', questionEn:'The next multiple of 5 after 20 is?',
+          options:[{text:'$21$ <span class="tr">21</span>', correct:false},{text:'$25$ <span class="tr">25</span>', correct:true},{text:'$30$ <span class="tr">30</span>', correct:false},{text:'$26$ <span class="tr">26</span>', correct:false}],
+          explanation:`<p>Kelipatan 5 setelah 20 adalah $5 \\times 5 = 25$. <span class="tr">The multiple of 5 after 20 is $5 \\times 5 = 25$.</span></p>`
+        },
+        { type:'task', pageTitle:'T9: Identifikasi Kelipatan', pageTitleEn:'Identify Multiples', taskType:'checkbox',
+          question:'Pilih semua bilangan yang merupakan kelipatan 8.', questionEn:'Select all numbers that are multiples of 8.',
+          options:[{text:'$16$ <span class="tr">16</span>', correct:true},{text:'$24$ <span class="tr">24</span>', correct:true},{text:'$30$ <span class="tr">30</span>', correct:false},{text:'$32$ <span class="tr">32</span>', correct:true}],
+          explanation:`<p>16, 24, dan 32 habis dibagi 8. <span class="tr">16, 24, and 32 are divisible by 8.</span></p>`
+        },
+        { type:'task', pageTitle:'T10: Kelipatan ke-n', pageTitleEn:'nth Multiple', taskType:'fill',
+          question:'Berapa kelipatan ke-10 dari 10?', questionEn:'What is the 10th multiple of 10?',
+          correctAnswer:'100', acceptableAnswers:['100'],
+          explanation:`<p>$10 \\times 10 = 100$. <span class="tr">$10 \\times 10 = 100$.</span></p>`
+        }
+      ]
+    },
+    b: {
+      title: 'Introduction & Real-World Connection', titleEn: 'Introduction & Real-World Connection', time: '00:10 - 00:15',
+      pages: [
+        { type:'explanation', pageTitle:'E1: Lusin dan Kemasan', pageTitleEn:'Dozens and Packaging',
+          body:`<p>Konsep kelipatan sangat berguna dalam kehidupan sehari-hari, seperti saat membeli barang secara grosir. <span class="tr">The concept of multiples is very useful in daily life, such as when buying items in bulk.</span></p>
+          <div class="math-block">$1 \\text{ lusin} = 12 \\text{ buah}$. <span class="tr">$1 \\text{ dozen} = 12 \\text{ items}$.</span></div>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          Jika membeli 3 lusin telur, jumlahnya adalah $12 \\times 3 = 36$ butir. <span class="tr">If you buy 3 dozen eggs, the total is $12 \\times 3 = 36$ eggs.</span></div>`
+        },
+        { type:'task', pageTitle:'T1: Hitung Lusin', pageTitleEn:'Calculate Dozen', taskType:'fill',
+          question:'Jumlah buah apel dalam 4 lusin adalah $\\dots$ buah.', questionEn:'The number of apples in 4 dozen is $\\dots$ apples.',
+          correctAnswer:'48', acceptableAnswers:['48'],
+          explanation:`<p>$12 \\times 4 = 48$. <span class="tr">$12 \\times 4 = 48$.</span></p>`
+        },
+        { type:'task', pageTitle:'T2: Kemasan Susu', pageTitleEn:'Milk Packaging', taskType:'radio',
+          question:'Jika 1 kardus berisi 6 kotak susu, berapa kotak susu dalam 5 kardus?', questionEn:'If 1 carton holds 6 milk boxes, how many milk boxes are in 5 cartons?',
+          options:[{text:'$11$ <span class="tr">11</span>', correct:false},{text:'$25$ <span class="tr">25</span>', correct:false},{text:'$30$ <span class="tr">30</span>', correct:true},{text:'$36$ <span class="tr">36</span>', correct:false}],
+          explanation:`<p>$6 \\times 5 = 30$. <span class="tr">$6 \\times 5 = 30$.</span></p>`
+        },
+        { type:'task', pageTitle:'T3: Situasi Kelipatan', pageTitleEn:'Multiple Situations', taskType:'checkbox',
+          question:'Pilih situasi yang melibatkan konsep kelipatan.', questionEn:'Select situations that involve the concept of multiples.',
+          options:[{text:'Membeli 2 lusin pisang <span class="tr">Buying 2 dozen bananas</span>', correct:true},{text:'Membagi 10 permen ke 2 teman <span class="tr">Dividing 10 candies to 2 friends</span>', correct:false},{text:'1 rantai sepeda terdiri dari 100 mata rantai, 3 rantai berisi 300 <span class="tr">1 bike chain has 100 links, 3 chains have 300</span>', correct:true},{text:'Mengurangi 5 kg gula dari 10 kg <span class="tr">Reducing 5 kg of sugar from 10 kg</span>', correct:false}],
+          explanation:`<p>Membeli barang per lusin dan menghitung unit berulang menggunakan kelipatan. <span class="tr">Buying items per dozen and calculating repeated units use multiples.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E2: Siklus Waktu', pageTitleEn:'Time Cycles',
+          body:`<p>Siklus waktu seperti lampu lalu lintas atau jadwal bus juga menggunakan konsep kelipatan. <span class="tr">Time cycles like traffic lights or bus schedules also use the concept of multiples.</span></p>
+          <div class="illustration"><svg width="200" height="100" viewBox="0 0 200 100"><rect x="10" y="10" width="180" height="80" fill="#f1f5f9" rx="8"/><rect x="30" y="30" width="20" height="50" fill="#ef4444"/><text x="40" y="60" text-anchor="middle" font-size="12" fill="#fff">3m</text><rect x="90" y="30" width="20" height="50" fill="#10b981"/><text x="100" y="60" text-anchor="middle" font-size="12" fill="#fff">4m</text><text x="150" y="60" font-size="10" fill="#333">Siklus</text></svg><div style="font-size:.82em;color:var(--muted);margin-top:6px">Lampu Merah 3 menit, Lampu Hijau 4 menit <span class="tr">Red Light 3 mins, Green Light 4 mins</span></div></div>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          Lampu merah berkedip setiap 3 menit. Menit ke berapa ia berkedip untuk ke-4 kalinya? <span class="tr">The red light flashes every 3 minutes. At what minute does it flash for the 4th time?</span>
+          <p>$3 \\times 4 = 12$ menit. <span class="tr">$3 \\times 4 = 12$ minutes.</span></p></div>`
+        },
+        { type:'task', pageTitle:'T4: Hitung Perkalian', pageTitleEn:'Calculate Multiplication', taskType:'fill',
+          question:'Hitung $7 \\times 5 = \\dots$', questionEn:'Calculate $7 \\times 5 = \\dots$',
+          correctAnswer:'35', acceptableAnswers:['35'],
+          explanation:`<p>$7 \\times 5 = 35$. <span class="tr">$7 \\times 5 = 35$.</span></p>`
+        },
+        { type:'task', pageTitle:'T5: Akhiran Nol', pageTitleEn:'Zero Ending', taskType:'truefalse',
+          question:'Benar atau salah: Hasil perkalian bilangan asli dengan 10 selalu berakhiran 0.', questionEn:'True or false: The result of multiplying a natural number by 10 always ends in 0.',
+          correctAnswer:'true',
+          explanation:`<p>Setiap bilangan dikali 10 akan menambahkan satu nol di belakangnya. <span class="tr">Every number multiplied by 10 adds a zero at the end.</span></p>`
+        },
+        { type:'task', pageTitle:'T6: Pasangkan Hasil', pageTitleEn:'Match Results', taskType:'pairing',
+          question:'Pasangkan perkalian dengan hasil yang benar.', questionEn:'Match the multiplication with the correct result.',
+          pairs:[{left:'$6 \\times 3$', right:'18 <span class="tr">18</span>'},{left:'$8 \\times 4$', right:'32 <span class="tr">32</span>'},{left:'$9 \\times 5$', right:'45 <span class="tr">45</span>'},{left:'$7 \\times 6$', right:'42 <span class="tr">42</span>'}],
+          explanation:`<p>Hitung perkalian untuk mencari hasilnya. <span class="tr">Calculate the multiplication to find the result.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E3: Menyelaraskan Kejadian', pageTitleEn:'Synchronizing Events',
+          body:`<p>Jika dua peristiwa berulang dengan waktu yang berbeda, kita ingin mencari kapan keduanya terjadi bersamaan. <span class="tr">If two events repeat at different times, we want to find when they occur together.</span></p>
+          <p>Lampu A menyala setiap 2 menit, Lampu B setiap 3 menit. <span class="tr">Light A is on every 2 minutes, Light B every 3 minutes.</span></p>
+          <div class="math-block">Lampu A: 2, 4, <strong>6</strong>, 8 <span class="tr">Light A: 2, 4, 6, 8</span><br>Lampu B: 3, <strong>6</strong>, 9, 12 <span class="tr">Light B: 3, 6, 9, 12</span><br>Bersamaan: <strong>6</strong> menit. <span class="tr">Together: 6 minutes.</span></div>`
+        },
+        { type:'task', pageTitle:'T7: Urutkan Waktu', pageTitleEn:'Order Time', taskType:'sorting',
+          question:'Urutkan menit menyala lampu B (kelipatan 4).', questionEn:'Order the minutes light B is on (multiples of 4).',
+          items:['4 <span class="tr">4</span>','8 <span class="tr">8</span>','12 <span class="tr">12</span>','16 <span class="tr">16</span>'], correctOrder:[0,1,2,3],
+          explanation:`<p>Kelipatan 4 adalah 4, 8, 12, 16. <span class="tr">Multiples of 4 are 4, 8, 12, 16.</span></p>`
+        },
+        { type:'task', pageTitle:'T8: Waktu Bersamaan', pageTitleEn:'Simultaneous Time', taskType:'radio',
+          question:'Lampu A (setiap 2 menit) dan Lampu B (setiap 3 menit) menyala bersama pada menit ke?', questionEn:'Light A (every 2 mins) and Light B (every 3 mins) turn on together at what minute?',
+          options:[{text:'$4$ <span class="tr">4</span>', correct:false},{text:'$5$ <span class="tr">5</span>', correct:false},{text:'$6$ <span class="tr">6</span>', correct:true},{text:'$8$ <span class="tr">8</span>', correct:false}],
+          explanation:`<p>6 adalah kelipatan persekutuan pertama dari 2 dan 3. <span class="tr">6 is the first common multiple of 2 and 3.</span></p>`
+        },
+        { type:'task', pageTitle:'T9: Pilih Kelipatan', pageTitleEn:'Select Multiples', taskType:'checkbox',
+          question:'Pilih menit saat Lampu A (kelipatan 2) menyala.', questionEn:'Select minutes when Light A (multiples of 2) is on.',
+          options:[{text:'$2$ <span class="tr">2</span>', correct:true},{text:'$5$ <span class="tr">5</span>', correct:false},{text:'$8$ <span class="tr">8</span>', correct:true},{text:'$10$ <span class="tr">10</span>', correct:true}],
+          explanation:`<p>2, 8, dan 10 adalah kelipatan 2. <span class="tr">2, 8, and 10 are multiples of 2.</span></p>`
+        },
+        { type:'task', pageTitle:'T10: Kejadian ke-3', pageTitleEn:'3rd Event', taskType:'fill',
+          question:'Lampu menyala bersama setiap 6 menit. Pada menit berapa mereka menyala bersama untuk ke-3 kalinya?', questionEn:'The lights turn on together every 6 minutes. At what minute do they turn on together for the 3rd time?',
+          correctAnswer:'18', acceptableAnswers:['18'],
+          explanation:`<p>$6 \\times 3 = 18$ menit. <span class="tr">$6 \\times 3 = 18$ minutes.</span></p>`
+        }
+      ]
+    },
+    c: {
+      title: 'Review of Prior Knowledge', titleEn: 'Review of Prior Knowledge', time: '00:15 - 00:20',
+      pages: [
+        { type:'explanation', pageTitle:'E1: Bilangan Prima', pageTitleEn:'Prime Numbers',
+          body:`<p><strong>Bilangan Prima</strong> adalah bilangan asli lebih dari 1 yang hanya memiliki dua faktor, yaitu 1 dan dirinya sendiri. <span class="tr"><strong>Prime Numbers</strong> are natural numbers greater than 1 that have only two factors, 1 and themselves.</span></p>
+          <div class="math-block">Bilangan prima: $2, 3, 5, 7, 11, 13, \\dots$ <span class="tr">Prime numbers: $2, 3, 5, 7, 11, 13, \\dots$</span></div>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          Apakah 9 bilangan prima? Tidak, karena $9 = 3 \\times 3$. <span class="tr">Is 9 a prime number? No, because $9 = 3 \\times 3$.</span></div>`
+        },
+        { type:'task', pageTitle:'T1: Identifikasi Prima', pageTitleEn:'Identify Prime', taskType:'fill',
+          question:'Faktor dari 10 adalah 1, 2, 5, dan $\\dots$', questionEn:'The factors of 10 are 1, 2, 5, and $\\dots$',
+          correctAnswer:'10', acceptableAnswers:['10'],
+          explanation:`<p>$10$ adalah faktor dari dirinya sendiri. <span class="tr">$10$ is a factor of itself.</span></p>`
+        },
+        { type:'task', pageTitle:'T2: Pilih Prima', pageTitleEn:'Select Prime', taskType:'radio',
+          question:'Manakah bilangan prima?', questionEn:'Which is a prime number?',
+          options:[{text:'$4$ <span class="tr">4</span>', correct:false},{text:'$6$ <span class="tr">6</span>', correct:false},{text:'$7$ <span class="tr">7</span>', correct:true},{text:'$9$ <span class="tr">9</span>', correct:false}],
+          explanation:`<p>7 hanya bisa dibagi 1 dan 7. <span class="tr">7 can only be divided by 1 and 7.</span></p>`
+        },
+        { type:'task', pageTitle:'T3: Faktor Suatu Bilangan', pageTitleEn:'Factors of a Number', taskType:'checkbox',
+          question:'Pilih semua faktor dari 15.', questionEn:'Select all factors of 15.',
+          options:[{text:'$1$ <span class="tr">1</span>', correct:true},{text:'$3$ <span class="tr">3</span>', correct:true},{text:'$5$ <span class="tr">5</span>', correct:true},{text:'$15$ <span class="tr">15</span>', correct:true}],
+          explanation:`<p>15 habis dibagi 1, 3, 5, dan 15. <span class="tr">15 is divisible by 1, 3, 5, and 15.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E2: Kelipatan Persekutuan', pageTitleEn:'Common Multiples',
+          body:`<p><strong>Kelipatan Persekutuan</strong> adalah kelipatan yang sama dari dua atau lebih bilangan. <span class="tr"><strong>Common Multiples</strong> are the same multiples of two or more numbers.</span></p>
+          <div class="math-block">Kelipatan 2: 2, 4, <strong>6</strong>, 8, 10, <strong>12</strong> <span class="tr">Multiples of 2: 2, 4, 6, 8, 10, 12</span><br>Kelipatan 3: 3, <strong>6</strong>, 9, <strong>12</strong>, 15 <span class="tr">Multiples of 3: 3, 6, 9, 12, 15</span><br>Kelipatan persekutuan: 6, 12 <span class="tr">Common multiples: 6, 12</span></div>`
+        },
+        { type:'task', pageTitle:'T4: Kelipatan Persekutuan Pertama', pageTitleEn:'First Common Multiple', taskType:'fill',
+          question:'Kelipatan persekutuan pertama dari 2 dan 4 adalah $\\dots$', questionEn:'The first common multiple of 2 and 4 is $\\dots$',
+          correctAnswer:'4', acceptableAnswers:['4'],
+          explanation:`<p>4 adalah kelipatan dari 2 ($2 \\times 2$) dan juga dari 4 ($4 \\times 1$). <span class="tr">4 is a multiple of 2 ($2 \\times 2$) and also of 4 ($4 \\times 1$).</span></p>`
+        },
+        { type:'task', pageTitle:'T5: Cek Kelipatan Persekutuan', pageTitleEn:'Check Common Multiple', taskType:'truefalse',
+          question:'Benar atau salah: 12 adalah kelipatan persekutuan dari 3 dan 4.', questionEn:'True or false: 12 is a common multiple of 3 and 4.',
+          correctAnswer:'true',
+          explanation:`<p>$3 \\times 4 = 12$ dan $4 \\times 3 = 12$. <span class="tr">$3 \\times 4 = 12$ and $4 \\times 3 = 12$.</span></p>`
+        },
+        { type:'task', pageTitle:'T6: Pasangkan Kelipatan', pageTitleEn:'Match Multiples', taskType:'pairing',
+          question:'Pasangkan pasangan bilangan dengan kelipatan persekutuan pertamanya.', questionEn:'Match number pairs with their first common multiple.',
+          pairs:[{left:'2 dan 5', right:'10 <span class="tr">10</span>'},{left:'3 dan 4', right:'12 <span class="tr">12</span>'},{left:'4 dan 5', right:'20 <span class="tr">20</span>'},{left:'2 dan 7', right:'14 <span class="tr">14</span>'}],
+          explanation:`<p>Cari hasil perkalian yang sama. <span class="tr">Find the same multiplication result.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E3: Menemukan Kelipatan Persekutuan', pageTitleEn:'Finding Common Multiples',
+          body:`<p>Untuk menemukan kelipatan persekutuan, kita bisa mencari kelipatan masing-masing bilangan lalu mencari angka yang sama. <span class="tr">To find common multiples, we can find the multiples of each number and then find the same numbers.</span></p>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          Cari kelipatan persekutuan pertama dari 3 dan 6. <span class="tr">Find the first common multiple of 3 and 6.</span>
+          <p>Kelipatan 3: 3, <strong>6</strong>, 9 <span class="tr">Multiples of 3: 3, 6, 9</span></p>
+          <p>Kelipatan 6: <strong>6</strong>, 12 <span class="tr">Multiples of 6: 6, 12</span></p>
+          <p>Jadi, kelipatan persekutuan pertamanya adalah 6. <span class="tr">So, the first common multiple is 6.</span></p></div>`
+        },
+        { type:'task', pageTitle:'T7: Urutkan Langkah', pageTitleEn:'Order Steps', taskType:'sorting',
+          question:'Urutkan langkah mencari kelipatan persekutuan.', questionEn:'Order the steps to find common multiples.',
+          items:['Tulis kelipatan bilangan pertama <span class="tr">List multiples of the first number</span>','Tulis kelipatan bilangan kedua <span class="tr">List multiples of the second number</span>','Cari angka yang sama dari kedua daftar <span class="tr">Find the same number from both lists</span>','Itulah kelipatan persekutuan <span class="tr">That is the common multiple</span>'], correctOrder:[0,1,2,3],
+          explanation:`<p>Ikuti langkah-langkah sistematis tersebut. <span class="tr">Follow those systematic steps.</span></p>`
+        },
+        { type:'task', pageTitle:'T8: Kelipatan Persekutuan', pageTitleEn:'Common Multiple', taskType:'radio',
+          question:'Kelipatan persekutuan pertama dari 4 dan 5 adalah?', questionEn:'The first common multiple of 4 and 5 is?',
+          options:[{text:'$9$ <span class="tr">9</span>', correct:false},{text:'$10$ <span class="tr">10</span>', correct:false},{text:'$20$ <span class="tr">20</span>', correct:true},{text:'$24$ <span class="tr">24</span>', correct:false}],
+          explanation:`<p>$4 \\times 5 = 20$. <span class="tr">$4 \\times 5 = 20$.</span></p>`
+        },
+        { type:'task', pageTitle:'T9: Cek Persekutuan', pageTitleEn:'Check Common', taskType:'checkbox',
+          question:'Pilih kelipatan persekutuan dari 3 dan 6.', questionEn:'Select common multiples of 3 and 6.',
+          options:[{text:'$6$ <span class="tr">6</span>', correct:true},{text:'$9$ <span class="tr">9</span>', correct:false},{text:'$12$ <span class="tr">12</span>', correct:true},{text:'$18$ <span class="tr">18</span>', correct:true}],
+          explanation:`<p>6, 12, dan 18 adalah kelipatan dari 3 dan 6. <span class="tr">6, 12, and 18 are multiples of 3 and 6.</span></p>`
+        },
+        { type:'task', pageTitle:'T10: Kelipatan Persekutuan ke-3', pageTitleEn:'3rd Common Multiple', taskType:'fill',
+          question:'Kelipatan persekutuan ke-3 dari 2 dan 5 adalah $\\dots$', questionEn:'The 3rd common multiple of 2 and 5 is $\\dots$',
+          correctAnswer:'30', acceptableAnswers:['30'],
+          explanation:`<p>Kelipatan persekutuan dari 2 dan 5 adalah 10, 20, 30. <span class="tr">Common multiples of 2 and 5 are 10, 20, 30.</span></p>`
+        }
+      ]
+    },
+    d: {
+      title: 'Problem Introduction', titleEn: 'Problem Introduction', time: '00:20 - 00:30',
+      pages: [
+        { type:'explanation', pageTitle:'E1: Konsep KPK', pageTitleEn:'LCM Concept',
+          body:`<p><strong>Kelipatan Persekutuan Terkecil (KPK)</strong> adalah kelipatan persekutuan terkecil dari dua atau lebih bilangan. <span class="tr"><strong>Least Common Multiple (LCM)</strong> is the smallest common multiple of two or more numbers.</span></p>
+          <div class="math-block">$\\text{KPK}(4, 6) = ?$ <span class="tr">$\\text{LCM}(4, 6) = ?$</span><br>Kelipatan 4: 4, 8, <strong>12</strong>, 16 <span class="tr">Multiples of 4: 4, 8, 12, 16</span><br>Kelipatan 6: 6, <strong>12</strong>, 18 <span class="tr">Multiples of 6: 6, 12, 18</span><br>Jadi, $\\text{KPK}(4, 6) = 12$. <span class="tr">So, $\\text{LCM}(4, 6) = 12$.</span></div>`
+        },
+        { type:'task', pageTitle:'T1: KPK dengan Daftar', pageTitleEn:'LCM with List', taskType:'fill',
+          question:'Tentukan KPK dari 3 dan 5. KPK = $\\dots$', questionEn:'Determine the LCM of 3 and 5. LCM = $\\dots$',
+          correctAnswer:'15', acceptableAnswers:['15'],
+          explanation:`<p>Kelipatan 3: 3, 6, 9, 12, <strong>15</strong>. <span class="tr">Multiples of 3: 3, 6, 9, 12, 15.</span></p><p>Kelipatan 5: 5, 10, <strong>15</strong>. <span class="tr">Multiples of 5: 5, 10, 15.</span></p>`
+        },
+        { type:'task', pageTitle:'T2: KPK Sederhana', pageTitleEn:'Simple LCM', taskType:'radio',
+          question:'Berapakah KPK dari 4 dan 8?', questionEn:'What is the LCM of 4 and 8?',
+          options:[{text:'$4$ <span class="tr">4</span>', correct:false},{text:'$8$ <span class="tr">8</span>', correct:true},{text:'$12$ <span class="tr">12</span>', correct:false},{text:'$16$ <span class="tr">16</span>', correct:false}],
+          explanation:`<p>8 adalah kelipatan dari 4, jadi 8 adalah KPK-nya. <span class="tr">8 is a multiple of 4, so 8 is the LCM.</span></p>`
+        },
+        { type:'task', pageTitle:'T3: KPK Bilangan Prima', pageTitleEn:'LCM of Primes', taskType:'truefalse',
+          question:'Benar atau salah: KPK dari dua bilangan prima selalu hasil kalinya.', questionEn:'True or false: The LCM of two prime numbers is always their product.',
+          correctAnswer:'true',
+          explanation:`<p>Misal 3 dan 7, KPK-nya $3 \\times 7 = 21$. <span class="tr">For example 3 and 7, LCM is $3 \\times 7 = 21$.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E2: Faktorisasi Prima', pageTitleEn:'Prime Factorization',
+          body:`<p>Kita bisa mencari KPK dengan memfaktorkan bilangan menjadi perkalian bilangan prima. <span class="tr">We can find the LCM by factoring numbers into the product of prime numbers.</span></p>
+          <div class="math-block">$12 = 2 \\times 2 \\times 3 = 2^2 \\times 3$ <span class="tr">$12 = 2 \\times 2 \\times 3 = 2^2 \\times 3$</span><br>$18 = 2 \\times 3 \\times 3 = 2 \\times 3^2$ <span class="tr">$18 = 2 \\times 3 \\times 3 = 2 \\times 3^2$</span></div>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          KPK(12, 18) = perkalian faktor prima dengan pangkat tertinggi. <span class="tr">LCM(12, 18) = multiplication of prime factors with the highest exponent.</span>
+          <p>$2^2 \\times 3^2 = 4 \\times 9 = 36$. <span class="tr">$2^2 \\times 3^2 = 4 \\times 9 = 36$.</span></p></div>`
+        },
+        { type:'task', pageTitle:'T4: Faktorisasi Prima', pageTitleEn:'Prime Factorization', taskType:'fill',
+          question:'Faktorisasi prima dari 18 adalah $2 \\times \\dots^2$', questionEn:'The prime factorization of 18 is $2 \\times \\dots^2$',
+          correctAnswer:'3', acceptableAnswers:['3'],
+          explanation:`<p>$18 = 2 \\times 3 \\times 3 = 2 \\times 3^2$. <span class="tr">$18 = 2 \\times 3 \\times 3 = 2 \\times 3^2$.</span></p>`
+        },
+        { type:'task', pageTitle:'T5: Hitung KPK', pageTitleEn:'Calculate LCM', taskType:'radio',
+          question:'Tentukan KPK dari 6 dan 8.', questionEn:'Determine the LCM of 6 and 8.',
+          options:[{text:'$12$ <span class="tr">12</span>', correct:false},{text:'$16$ <span class="tr">16</span>', correct:false},{text:'$24$ <span class="tr">24</span>', correct:true},{text:'$32$ <span class="tr">32</span>', correct:false}],
+          explanation:`<p>$6 = 2 \\times 3$. <span class="tr">$6 = 2 \\times 3$.</span></p><p>$8 = 2^3$. <span class="tr">$8 = 2^3$.</span></p><p>KPK = $2^3 \\times 3 = 24$. <span class="tr">LCM = $2^3 \\times 3 = 24$.</span></p>`
+        },
+        { type:'task', pageTitle:'T6: Pasangkan KPK', pageTitleEn:'Match LCM', taskType:'pairing',
+          question:'Pasangkan pasangan bilangan dengan KPK-nya.', questionEn:'Match number pairs with their LCM.',
+          pairs:[{left:'4 dan 6', right:'12 <span class="tr">12</span>'},{left:'5 dan 10', right:'10 <span class="tr">10</span>'},{left:'6 dan 9', right:'18 <span class="tr">18</span>'},{left:'8 dan 12', right:'24 <span class="tr">24</span>'}],
+          explanation:`<p>Gunakan faktorisasi prima atau daftar kelipatan. <span class="tr">Use prime factorization or list multiples.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E3: Pembagian Bersusun', pageTitleEn:'Repeated Division',
+          body:`<p>Cara lain mencari KPK adalah dengan pembagian bersusun menggunakan faktor prima. <span class="tr">Another way to find LCM is by repeated division using prime factors.</span></p>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          KPK(12, 15) <span class="tr">LCM(12, 15)</span>
+          <ol><li>Bagi 12 dan 15 dengan prima yang sama (3): $12/3=4$, $15/3=5$. <span class="tr">Divide 12 and 15 by the same prime (3): $12/3=4$, $15/3=5$.</span></li><li>Bagi 4 dengan 2, 5 tidak bisa dibagi 2. <span class="tr">Divide 4 by 2, 5 cannot be divided by 2.</span></li><li>Kalikan semua pembagi dan sisa: $3 \\times 2 \\times 2 \\times 5 = 60$. <span class="tr">Multiply all divisors and remainders: $3 \\times 2 \\times 2 \\times 5 = 60$.</span></li></ol></div>`
+        },
+        { type:'task', pageTitle:'T7: Urutkan Pembagian', pageTitleEn:'Order Division', taskType:'sorting',
+          question:'Urutkan langkah mencari KPK dengan pembagian.', questionEn:'Order the steps to find LCM by division.',
+          items:['Tulis kedua bilangan bersebelahan <span class="tr">Write both numbers side by side</span>','Bagi dengan faktor prima yang sama <span class="tr">Divide by the same prime factor</span>','Ulangi hingga hasil bagi 1 <span class="tr">Repeat until the quotient is 1</span>','Kalikan semua faktor pembaginya <span class="tr">Multiply all division factors</span>'], correctOrder:[0,1,2,3],
+          explanation:`<p>Ikuti prosedur pembagian bersusun dengan benar. <span class="tr">Follow the repeated division procedure correctly.</span></p>`
+        },
+        { type:'task', pageTitle:'T8: Hasil Pembagian', pageTitleEn:'Division Result', taskType:'fill',
+          question:'KPK dari 4 dan 6 adalah $\\dots$', questionEn:'The LCM of 4 and 6 is $\\dots$',
+          correctAnswer:'12', acceptableAnswers:['12'],
+          explanation:`<p>$2 \\times 2 \\times 3 = 12$. <span class="tr">$2 \\times 2 \\times 3 = 12$.</span></p>`
+        },
+        { type:'task', pageTitle:'T9: Analisis KPK', pageTitleEn:'LCM Analysis', taskType:'checkbox',
+          question:'Pilih pasangan bilangan yang KPK-nya 12.', questionEn:'Select number pairs whose LCM is 12.',
+          options:[{text:'3 dan 4 <span class="tr">3 and 4</span>', correct:true},{text:'4 dan 6 <span class="tr">4 and 6</span>', correct:true},{text:'6 dan 8 <span class="tr">6 and 8</span>', correct:false},{text:'2 dan 12 <span class="tr">2 and 12</span>', correct:true}],
+          explanation:`<p>3 dan 4: 12. 4 dan 6: 12. 2 dan 12: 12. <span class="tr">3 and 4: 12. 4 and 6: 12. 2 and 12: 12.</span></p>`
+        },
+        { type:'task', pageTitle:'T10: KPK Tiga Bilangan', pageTitleEn:'LCM of Three Numbers', taskType:'radio',
+          question:'Berapakah KPK dari 3, 4, dan 6?', questionEn:'What is the LCM of 3, 4, and 6?',
+          options:[{text:'$12$ <span class="tr">12</span>', correct:true},{text:'$24$ <span class="tr">24</span>', correct:false},{text:'$36$ <span class="tr">36</span>', correct:false},{text:'$6$ <span class="tr">6</span>', correct:false}],
+          explanation:`<p>12 adalah kelipatan terkecil yang bisa dibagi 3, 4, dan 6. <span class="tr">12 is the smallest multiple divisible by 3, 4, and 6.</span></p>`
+        }
+      ]
+    }    , e: {
+      title: 'Guided Practice', titleEn: 'Guided Practice', time: '00:30 - 00:45',
+      pages: [
+        { type:'explanation', pageTitle:'E1: Pohon Faktor', pageTitleEn:'Factor Tree',
+          body:`<p><strong>Pohon Faktor</strong> adalah cara visual untuk memfaktorkan bilangan menjadi perkalian bilangan prima. <span class="tr"><strong>Factor Tree</strong> is a visual way to factor numbers into the product of prime numbers.</span></p>
+          <div class="illustration"><svg width="200" height="120" viewBox="0 0 200 120"><text x="100" y="20" text-anchor="middle" font-size="16" fill="#1e40af">12</text><line x1="100" y1="25" x2="70" y2="45" stroke="#333"/><line x1="100" y1="25" x2="130" y2="45" stroke="#333"/><text x="60" y="55" text-anchor="middle" font-size="14" fill="#92400e">2</text><text x="140" y="55" text-anchor="middle" font-size="14" fill="#92400e">6</text><line x1="140" y1="60" x2="120" y2="80" stroke="#333"/><line x1="140" y1="60" x2="160" y2="80" stroke="#333"/><text x="110" y="90" text-anchor="middle" font-size="14" fill="#92400e">2</text><text x="170" y="90" text-anchor="middle" font-size="14" fill="#92400e">3</text></svg><div style="font-size:.82em;color:var(--muted);margin-top:6px">Pohon faktor dari 12 <span class="tr">Factor tree of 12</span></div></div>
+          <div class="math-block">$12 = 2 \\times 2 \\times 3 = 2^2 \\times 3$ <span class="tr">$12 = 2 \\times 2 \\times 3 = 2^2 \\times 3$</span></div>`
+        },
+        { type:'task', pageTitle:'T1: KPK dengan Pohon Faktor', pageTitleEn:'LCM with Factor Tree', taskType:'fill',
+          question:'Faktorisasi prima dari 18 adalah $2 \\times 3^2$. Jika 12 = $2^2 \\times 3$, maka KPK(12, 18) = $2^2 \\times \\dots^2 = 36$.', questionEn:'The prime factorization of 18 is $2 \\times 3^2$. If 12 = $2^2 \\times 3$, then LCM(12, 18) = $2^2 \\times \\dots^2 = 36$.',
+          correctAnswer:'3', acceptableAnswers:['3'],
+          explanation:`<p>KPK diambil dari pangkat tertinggi faktor primanya. $3^2$ lebih besar dari $3^1$. <span class="tr">LCM takes the highest exponent of the prime factors. $3^2$ is greater than $3^1$.</span></p>`
+        },
+        { type:'task', pageTitle:'T2: Faktor Prima', pageTitleEn:'Prime Factors', taskType:'radio',
+          question:'Manakah faktorisasi prima yang benar untuk 20?', questionEn:'Which is the correct prime factorization for 20?',
+          options:[{text:'$2 \\times 10$ <span class="tr">$2 \\times 10$</span>', correct:false},{text:'$2^2 \\times 5$ <span class="tr">$2^2 \\times 5$</span>', correct:true},{text:'$4 \\times 5$ <span class="tr">$4 \\times 5$</span>', correct:false},{text:'$2 \\times 5^2$ <span class="tr">$2 \\times 5^2$</span>', correct:false}],
+          explanation:`<p>10 dan 4 bukan bilangan prima. Faktor primanya adalah 2, 2, dan 5. <span class="tr">10 and 4 are not prime. The prime factors are 2, 2, and 5.</span></p>`
+        },
+        { type:'task', pageTitle:'T3: Pilih Kelipatan 24', pageTitleEn:'Select Multiples of 24', taskType:'checkbox',
+          question:'Pilih semua bilangan yang merupakan kelipatan 24.', questionEn:'Select all numbers that are multiples of 24.',
+          options:[{text:'$24$ <span class="tr">24</span>', correct:true},{text:'$48$ <span class="tr">48</span>', correct:true},{text:'$56$ <span class="tr">56</span>', correct:false},{text:'$72$ <span class="tr">72</span>', correct:true}],
+          explanation:`<p>$24 \\times 1 = 24$, $24 \\times 2 = 48$, $24 \\times 3 = 72$. <span class="tr">$24 \\times 1 = 24$, $24 \\times 2 = 48$, $24 \\times 3 = 72$.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E2: Pembagian Bersusun', pageTitleEn:'Repeated Division',
+          body:`<p>Untuk mencari KPK dari dua bilangan sekaligus, kita gunakan pembagian bersusun. <span class="tr">To find the LCM of two numbers simultaneously, we use repeated division.</span></p>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          KPK(15, 20) <span class="tr">LCM(15, 20)</span>
+          <ol><li>Bagi 15 dan 20 dengan 5: hasilnya 3 dan 4. <span class="tr">Divide 15 and 20 by 5: results are 3 and 4.</span></li><li>3 dan 4 tidak bisa dibagi bilangan prima yang sama. <span class="tr">3 and 4 cannot be divided by the same prime.</span></li><li>KPK = $5 \\times 3 \\times 4 = 60$. <span class="tr">LCM = $5 \\times 3 \\times 4 = 60$.</span></li></ol></div>`
+        },
+        { type:'task', pageTitle:'T4: Urutkan Pembagian', pageTitleEn:'Order Division', taskType:'sorting',
+          question:'Urutkan langkah mencari KPK dengan pembagian bersusun.', questionEn:'Order the steps to find LCM by repeated division.',
+          items:['Tulis bilangan berdampingan <span class="tr">Write numbers side by side</span>','Bagi dengan faktor prima yang sama <span class="tr">Divide by the same prime factor</span>','Ulangi hingga hasil bagi 1 <span class="tr">Repeat until quotient is 1</span>','Kalikan semua pembagi <span class="tr">Multiply all divisors</span>'], correctOrder:[0,1,2,3],
+          explanation:`<p>Ikuti urutan tersebut untuk mendapatkan KPK. <span class="tr">Follow this order to get the LCM.</span></p>`
+        },
+        { type:'task', pageTitle:'T5: Pasangkan Hasil KPK', pageTitleEn:'Match LCM Results', taskType:'pairing',
+          question:'Pasangkan pasangan bilangan dengan KPK-nya.', questionEn:'Match number pairs with their LCM.',
+          pairs:[{left:'4 dan 6', right:'12 <span class="tr">12</span>'},{left:'6 dan 9', right:'18 <span class="tr">18</span>'},{left:'8 dan 12', right:'24 <span class="tr">24</span>'},{left:'10 dan 15', right:'30 <span class="tr">30</span>'}],
+          explanation:`<p>Gunakan metode pembagian bersusun untuk membuktikannya. <span class="tr">Use the repeated division method to prove it.</span></p>`
+        },
+        { type:'task', pageTitle:'T6: Analisis KPK', pageTitleEn:'LCM Analysis', taskType:'truefalse',
+          question:'Benar atau salah: KPK dari 10 dan 15 adalah 150.', questionEn:'True or false: The LCM of 10 and 15 is 150.',
+          correctAnswer:'false',
+          explanation:`<p>KPK(10, 15) adalah 30, bukan 150. 150 adalah kelipatan persekutuan, tapi bukan yang terkecil. <span class="tr">LCM(10, 15) is 30, not 150. 150 is a common multiple, but not the smallest.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E3: Masalah Kontekstual KPK', pageTitleEn:'Contextual LCM Problems',
+          body:`<p>KPK sering digunakan untuk menyelesaikan masalah siklus perulangan, seperti jadwal bertemu atau belanja barang. <span class="tr">LCM is often used to solve recurring cycle problems, like meeting schedules or buying items.</span></p>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          Ibu membeli gula 8 hari sekali, dan tepung 12 hari sekali. Jika hari ini beli bersamaan, kapan mereka beli bersamaan lagi? <span class="tr">Mother buys sugar every 8 days, and flour every 12 days. If she buys them together today, when will she buy them together again?</span>
+          <p>KPK(8, 12) = 24. Mereka akan belanja bersama 24 hari lagi. <span class="tr">LCM(8, 12) = 24. They will shop together in 24 days.</span></p></div>`
+        },
+        { type:'task', pageTitle:'T7: Hitung Hari', pageTitleEn:'Calculate Days', taskType:'fill',
+          question:'Andi berlatih tiap 3 hari, Budi tiap 4 hari. Jika hari ini berlatih bersama, mereka berlatih bersama lagi $\\dots$ hari lagi.', questionEn:'Andi practices every 3 days, Budi every 4 days. If they practice together today, they will practice together again in $\\dots$ days.',
+          correctAnswer:'12', acceptableAnswers:['12'],
+          explanation:`<p>KPK(3, 4) = 12. <span class="tr">LCM(3, 4) = 12.</span></p>`
+        },
+        { type:'task', pageTitle:'T8: Waktu Bel', pageTitleEn:'Bell Time', taskType:'radio',
+          question:'Bel A berbunyi setiap 15 menit, Bel B setiap 20 menit. Kapan mereka berbunyi bersamaan?', questionEn:'Bell A rings every 15 mins, Bell B every 20 mins. When do they ring together?',
+          options:[{text:'$35$ menit <span class="tr">35 mins</span>', correct:false},{text:'$60$ menit <span class="tr">60 mins</span>', correct:true},{text:'$300$ menit <span class="tr">300 mins</span>', correct:false},{text:'$5$ menit <span class="tr">5 mins</span>', correct:false}],
+          explanation:`<p>KPK(15, 20) = 60. <span class="tr">LCM(15, 20) = 60.</span></p>`
+        },
+        { type:'task', pageTitle:'T9: Situasi KPK', pageTitleEn:'LCM Situations', taskType:'checkbox',
+          question:'Pilih situasi yang penyelesaiannya menggunakan KPK.', questionEn:'Select situations whose solution uses LCM.',
+          options:[{text:'Mencari kapan dua bus tiba bersamaan <span class="tr">Finding when two buses arrive together</span>', correct:true},{text:'Membagi 12 permen sama rata ke 4 anak <span class="tr">Dividing 12 candies equally to 4 children</span>', correct:false},{text:'Mengetahui kapan bel sekolah berbunyi bersama <span class="tr">Knowing when school bells ring together</span>', correct:true},{text:'Mencari panjang sisa kain dari 10 meter <span class="tr">Finding the length of remaining fabric from 10 meters</span>', correct:false}],
+          explanation:`<p>KPK digunakan untuk mencari titik temu siklus berulang. <span class="tr">LCM is used to find the intersection of repeating cycles.</span></p>`
+        },
+        { type:'task', pageTitle:'T10: KPK Tiga Bilangan', pageTitleEn:'LCM of Three Numbers', taskType:'fill',
+          question:'Hitung KPK dari 3, 4, dan 6. KPK = $\\dots$', questionEn:'Calculate the LCM of 3, 4, and 6. LCM = $\\dots$',
+          correctAnswer:'12', acceptableAnswers:['12'],
+          explanation:`<p>12 adalah kelipatan terkecil yang habis dibagi 3, 4, dan 6. <span class="tr">12 is the smallest multiple divisible by 3, 4, and 6.</span></p>`
+        }
+      ]
+    },
+    f: {
+      title: 'Independent Practice', titleEn: 'Independent Practice', time: '00:45 - 00:55',
+      pages: [
+        { type:'explanation', pageTitle:'E1: KPK untuk Mengatur Jadwal', pageTitleEn:'LCM for Scheduling',
+          body:`<p>Mengatur jadwal kegiatan yang berulang memerlukan KPK untuk menemukan irama yang sama. <span class="tr">Scheduling recurring activities requires LCM to find the same rhythm.</span></p>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          Rudi berenang 4 hari sekali, bersepeda 6 hari sekali. Kapan ia melakukan keduanya pada hari yang sama? <span class="tr">Rudi swims every 4 days, cycles every 6 days. When does he do both on the same day?</span>
+          <p>KPK(4, 6) = 12. Setiap 12 hari. <span class="tr">LCM(4, 6) = 12. Every 12 days.</span></p></div>`
+        },
+        { type:'task', pageTitle:'T1: Hitung KPK', pageTitleEn:'Calculate LCM', taskType:'fill',
+          question:'Tentukan KPK dari 4 dan 6. KPK = $\\dots$', questionEn:'Determine the LCM of 4 and 6. LCM = $\\dots$',
+          correctAnswer:'12', acceptableAnswers:['12'],
+          explanation:`<p>$4 = 2^2$, $6 = 2 \\times 3$. KPK = $2^2 \\times 3 = 12$. <span class="tr">$4 = 2^2$, $6 = 2 \\times 3$. LCM = $2^2 \\times 3 = 12$.</span></p>`
+        },
+        { type:'task', pageTitle:'T2: Hari yang Sama', pageTitleEn:'Same Day', taskType:'radio',
+          question:'Rudi berenang 4 hari sekali, bersepeda 6 hari sekali. Jika hari ini melakukannya bersamaan, ia akan melakukannya bersama lagi dalam?', questionEn:'Rudi swims every 4 days, cycles every 6 days. If he does both today, he will do both again in?',
+          options:[{text:'$10$ hari <span class="tr">10 days</span>', correct:false},{text:'$12$ hari <span class="tr">12 days</span>', correct:true},{text:'$24$ hari <span class="tr">24 days</span>', correct:false},{text:'$2$ hari <span class="tr">2 days</span>', correct:false}],
+          explanation:`<p>KPK(4, 6) = 12. <span class="tr">LCM(4, 6) = 12.</span></p>`
+        },
+        { type:'task', pageTitle:'T3: Cek KPK', pageTitleEn:'Check LCM', taskType:'truefalse',
+          question:'Benar atau salah: KPK dari 9 dan 12 adalah 36.', questionEn:'True or false: The LCM of 9 and 12 is 36.',
+          correctAnswer:'true',
+          explanation:`<p>36 habis dibagi 9 dan 12. <span class="tr">36 is divisible by 9 and 12.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E2: KPK Tiga Bilangan', pageTitleEn:'LCM of Three Numbers',
+          body:`<p>Untuk mencari KPK tiga bilangan, caranya sama. Cari kelipatan persekutuan dari ketiganya. <span class="tr">To find the LCM of three numbers, the method is the same. Find the common multiple of all three.</span></p>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          KPK(2, 3, 4) <span class="tr">LCM(2, 3, 4)</span>
+          <p>Kelipatan 4: 4, 8, <strong>12</strong>. <span class="tr">Multiples of 4: 4, 8, 12.</span></p>
+          <p>12 habis dibagi 2 dan 3. Jadi KPK = 12. <span class="tr">12 is divisible by 2 and 3. So LCM = 12.</span></p></div>`
+        },
+        { type:'task', pageTitle:'T4: Langkah KPK Tiga Bilangan', pageTitleEn:'Steps for 3 Numbers', taskType:'sorting',
+          question:'Urutkan langkah mencari KPK 3 bilangan.', questionEn:'Order the steps to find LCM of 3 numbers.',
+          items:['Pilih salah satu bilangan <span class="tr">Choose one number</span>','Tulis kelipatannya <span class="tr">List its multiples</span>','Cek kelipatan yang habis dibagi dua bilangan lain <span class="tr">Check which multiple is divisible by the other two</span>','Ambil yang terkecil <span class="tr">Take the smallest one</span>'], correctOrder:[0,1,2,3],
+          explanation:`<p>Metode ini sangat efektif untuk bilangan kecil. <span class="tr">This method is very effective for small numbers.</span></p>`
+        },
+        { type:'task', pageTitle:'T5: Pasangkan KPK Tiga Bilangan', pageTitleEn:'Match 3-Number LCM', taskType:'pairing',
+          question:'Pasangkan tiga bilangan dengan KPK-nya.', questionEn:'Match three numbers with their LCM.',
+          pairs:[{left:'2, 3, 4', right:'12 <span class="tr">12</span>'},{left:'2, 4, 5', right:'20 <span class="tr">20</span>'},{left:'3, 4, 6', right:'12 <span class="tr">12</span>'},{left:'4, 6, 8', right:'24 <span class="tr">24</span>'}],
+          explanation:`<p>Gunakan faktorisasi prima untuk membuktikannya. <span class="tr">Use prime factorization to prove it.</span></p>`
+        },
+        { type:'task', pageTitle:'T6: Analisis Faktor', pageTitleEn:'Factor Analysis', taskType:'checkbox',
+          question:'Pilih semua faktor prima dari 24.', questionEn:'Select all prime factors of 24.',
+          options:[{text:'$2$ <span class="tr">2</span>', correct:true},{text:'$3$ <span class="tr">3</span>', correct:true},{text:'$4$ <span class="tr">4</span>', correct:false},{text:'$5$ <span class="tr">5</span>', correct:false}],
+          explanation:`<p>$24 = 2^3 \\times 3$. Faktor primanya adalah 2 dan 3. <span class="tr">$24 = 2^3 \\times 3$. The prime factors are 2 and 3.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E3: Hubungan FPB dan KPK', pageTitleEn:'Relationship between GCD and LCM',
+          body:`<p>FPB (Faktor Persekutuan Terbesar) dan KPK memiliki hubungan: Hasil kali dua bilangan sama dengan hasil kali FPB dan KPK-nya. <span class="tr">GCD (Greatest Common Divisor) and LCM have a relationship: The product of two numbers equals the product of their GCD and LCM.</span></p>
+          <div class="math-block">$a \\times b = \\text{FPB}(a,b) \\times \\text{KPK}(a,b)$ <span class="tr">$a \\times b = \\text{GCD}(a,b) \\times \\text{LCM}(a,b)$</span></div>
+          <div class="example-box"><h4>Contoh <span class="tr">Example</span></h4>
+          a = 4, b = 6. $a \\times b = 24$. <span class="tr">$a \\times b = 24$.</span>
+          <p>FPB(4, 6) = 2. Maka KPK(4, 6) = $24 / 2 = 12$. <span class="tr">GCD(4, 6) = 2. So LCM(4, 6) = $24 / 2 = 12$.</span></p></div>`
+        },
+        { type:'task', pageTitle:'T7: Rumus Hubungan', pageTitleEn:'Relationship Formula', taskType:'fill',
+          question:'Jika $a \\times b = 30$ dan FPB = 3, maka KPK = $\\dots$', questionEn:'If $a \\times b = 30$ and GCD = 3, then LCM = $\\dots$',
+          correctAnswer:'10', acceptableAnswers:['10'],
+          explanation:`<p>$\\text{KPK} = (a \\times b) / \\text{FPB} = 30 / 3 = 10$. <span class="tr">$\\text{LCM} = (a \\times b) / \\text{GCD} = 30 / 3 = 10$.</span></p>`
+        },
+        { type:'task', pageTitle:'T8: Hitung KPK Cepat', pageTitleEn:'Fast LCM Calculation', taskType:'radio',
+          question:'Diketahui FPB(8, 12) = 4. Berapakah KPK(8, 12)?', questionEn:'Given GCD(8, 12) = 4. What is LCM(8, 12)?',
+          options:[{text:'$12$ <span class="tr">12</span>', correct:false},{text:'$24$ <span class="tr">24</span>', correct:true},{text:'$32$ <span class="tr">32</span>', correct:false},{text:'$48$ <span class="tr">48</span>', correct:false}],
+          explanation:`<p>$\\text{KPK} = (8 \\times 12) / 4 = 96 / 4 = 24$. <span class="tr">$\\text{LCM} = (8 \\times 12) / 4 = 96 / 4 = 24$.</span></p>`
+        },
+        { type:'task', pageTitle:'T9: Analisis KPK', pageTitleEn:'LCM Analysis', taskType:'truefalse',
+          question:'Benar atau salah: KPK selalu lebih besar dari FPB.', questionEn:'True or false: LCM is always greater than GCD.',
+          correctAnswer:'true',
+          explanation:`<p>KPK adalah kelipatan terkecil, sedangkan FPB adalah faktor terbesar. Kelipatan pasti lebih besar dari faktor. <span class="tr">LCM is the smallest multiple, while GCD is the largest factor. A multiple is always greater than a factor.</span></p>`
+        },
+        { type:'task', pageTitle:'T10: Terapkan Rumus', pageTitleEn:'Apply Formula', taskType:'fill',
+          question:'FPB(9, 12) = 3. Hasil kali $9 \\times 12 = 108$. Maka KPK(9, 12) = $\\dots$', questionEn:'GCD(9, 12) = 3. Product $9 \\times 12 = 108$. So LCM(9, 12) = $\\dots$',
+          correctAnswer:'36', acceptableAnswers:['36'],
+          explanation:`<p>$\\text{KPK} = 108 / 3 = 36$. <span class="tr">$\\text{LCM} = 108 / 3 = 36$.</span></p>`
+        }
+      ]
+    },
+    g: {
+      title: 'Consolidation & Reflection', titleEn: 'Consolidation & Reflection', time: '00:55 - 01:00',
+      pages: [
+        { type:'explanation', pageTitle:'E1: Poin Penting', pageTitleEn:'Key Takeaways',
+          body:`<p>Hari ini kita belajar tentang <strong>KPK (Kelipatan Persekutuan Terkecil)</strong>. <span class="tr">Today we learned about <strong>LCM (Least Common Multiple)</strong>.</span></p>
+          <div class="math-block"><ol><li><strong>Kelipatan:</strong> Hasil perkalian bilangan dengan 1, 2, 3, ... <span class="tr"><strong>Multiple:</strong> Result of multiplying a number by 1, 2, 3, ...</span></li><li><strong>KPK:</strong> Kelipatan persekutuan terkecil dari dua bilangan. <span class="tr"><strong>LCM:</strong> The smallest common multiple of two numbers.</span></li><li><strong>Rumus:</strong> $\\text{KPK}(a,b) = (a \\times b) / \\text{FPB}(a,b)$ <span class="tr"><strong>Formula:</strong> $\\text{LCM}(a,b) = (a \\times b) / \\text{GCD}(a,b)$</span></li></ol></div>`
+        },
+        { type:'task', pageTitle:'T1: Pertanyaan Refleksi', pageTitleEn:'Reflection Question', taskType:'truefalse',
+          question:'Benar atau salah: Saya mengerti bahwa KPK digunakan untuk mencari titik temu dari dua siklus perulangan.', questionEn:'True or false: I understand that LCM is used to find the intersection of two repeating cycles.',
+          correctAnswer:'true',
+          explanation:`<p>Ya, KPK sangat berguna untuk menyelesaikan masalah siklus. <span class="tr">Yes, LCM is very useful for solving cycle problems.</span></p>`
+        },
+        { type:'task', pageTitle:'T2: Exit Ticket', pageTitleEn:'Exit Ticket', taskType:'fill',
+          question:'Hitunglah KPK dari 6 dan 9. KPK = $\\dots$', questionEn:'Calculate the LCM of 6 and 9. LCM = $\\dots$',
+          correctAnswer:'18', acceptableAnswers:['18'],
+          explanation:`<p>Kelipatan 6: 6, 12, <strong>18</strong>. Kelipatan 9: 9, <strong>18</strong>. <span class="tr">Multiples of 6: 6, 12, 18. Multiples of 9: 9, 18.</span></p>`
+        },
+        { type:'explanation', pageTitle:'E2: Follow-up Practice', pageTitleEn:'Follow-up Practice',
+          body:`<p>Latihan tambahan tersedia di <strong>Bagian Tugas 1 sampai 5</strong>. <span class="tr">Additional practice is available in the Task 1 to 5 sections.</span></p>
+          <div class="math-block"><ul><li><strong>Tugas 1 & 2:</strong> Dasar-dasar KPK <span class="tr"><strong>Tasks 1 & 2:</strong> LCM Basics</span></li><li><strong>Tugas 3 & 4:</strong> Faktorisasi Prima & KPK <span class="tr"><strong>Tasks 3 & 4:</strong> Prime Factorization & LCM</span></li><li><strong>Tugas 5:</strong> Soal Cerita KPK <span class="tr"><strong>Task 5:</strong> LCM Word Problems</span></li></ul></div>`
+        }
+      ]
+    },
+    h: {
+      title: 'Tugas 1', titleEn: 'Task 1', time: 'Printable',
+      pages: [
+        { type:'task', pageTitle:'T1: KPK Dasar', pageTitleEn:'Basic LCM', taskType:'fill',
+          question:'Tentukan KPK dari 4 dan 5. KPK = $\\dots$', questionEn:'Determine the LCM of 4 and 5. LCM = $\\dots$',
+          correctAnswer:'20', acceptableAnswers:['20'],
+          explanation:`<p>$4 \\times 5 = 20$. <span class="tr">$4 \\times 5 = 20$.</span></p>`},
+        { type:'task', pageTitle:'T2: KPK 6 dan 9', pageTitleEn:'LCM of 6 and 9', taskType:'radio',
+          question:'Berapakah KPK dari 6 dan 9?', questionEn:'What is the LCM of 6 and 9?',
+          options:[{text:'$12$ <span class="tr">12</span>', correct:false},{text:'$15$ <span class="tr">15</span>', correct:false},{text:'$18$ <span class="tr">18</span>', correct:true},{text:'$36$ <span class="tr">36</span>', correct:false}],
+          explanation:`<p>Kelipatan 6: 6, 12, <strong>18</strong>. Kelipatan 9: 9, <strong>18</strong>. <span class="tr">Multiples of 6: 6, 12, 18. Multiples of 9: 9, 18.</span></p>`},
+        { type:'task', pageTitle:'T3: Cek Kelipatan', pageTitleEn:'Check Multiple', taskType:'truefalse',
+          question:'Benar atau salah: KPK dari 7 dan 14 adalah 14.', questionEn:'True or false: The LCM of 7 and 14 is 14.',
+          correctAnswer:'true',
+          explanation:`<p>14 habis dibagi 7 dan 14. <span class="tr">14 is divisible by 7 and 14.</span></p>`},
+        { type:'task', pageTitle:'T4: Urutkan Langkah', pageTitleEn:'Order Steps', taskType:'sorting',
+          question:'Urutkan langkah mencari KPK dengan daftar kelipatan.', questionEn:'Order the steps to find LCM by listing multiples.',
+          items:['Tulis kelipatan pertama <span class="tr">List the first number multiples</span>','Tulis kelipatan kedua <span class="tr">List the second number multiples</span>','Cari angka yang sama <span class="tr">Find the same number</span>','Ambil yang terkecil <span class="tr">Take the smallest one</span>'], correctOrder:[0,1,2,3],
+          explanation:`<p>Ini adalah cara paling dasar. <span class="tr">This is the most basic way.</span></p>`},
+        { type:'task', pageTitle:'T5: Pilih Kelipatan 24', pageTitleEn:'Select Multiples of 24', taskType:'checkbox',
+          question:'Pilih semua bilangan yang merupakan kelipatan 24.', questionEn:'Select all numbers that are multiples of 24.',
+          options:[{text:'$24$ <span class="tr">24</span>', correct:true},{text:'$48$ <span class="tr">48</span>', correct:true},{text:'$50$ <span class="tr">50</span>', correct:false},{text:'$72$ <span class="tr">72</span>', correct:true}],
+          explanation:`<p>24, 48, dan 72 habis dibagi 24. <span class="tr">24, 48, and 72 are divisible by 24.</span></p>`},
+        { type:'task', pageTitle:'T6: Pasangkan KPK', pageTitleEn:'Match LCM', taskType:'pairing',
+          question:'Pasangkan pasangan bilangan dengan KPK-nya.', questionEn:'Match number pairs with their LCM.',
+          pairs:[{left:'3 dan 4', right:'12 <span class="tr">12</span>'},{left:'4 dan 5', right:'20 <span class="tr">20</span>'},{left:'6 dan 8', right:'24 <span class="tr">24</span>'},{left:'5 dan 10', right:'10 <span class="tr">10</span>'}],
+          explanation:`<p>Gunakan metode daftar kelipatan. <span class="tr">Use the listing multiples method.</span></p>`},
+        { type:'task', pageTitle:'T7: KPK 3 dan 8', pageTitleEn:'LCM of 3 and 8', taskType:'fill',
+          question:'Hitung KPK dari 3 dan 8. KPK = $\\dots$', questionEn:'Calculate the LCM of 3 and 8. LCM = $\\dots$',
+          correctAnswer:'24', acceptableAnswers:['24'],
+          explanation:`<p>$3 \\times 8 = 24$. <span class="tr">$3 \\times 8 = 24$.</span></p>`},
+        { type:'task', pageTitle:'T8: KPK 12 dan 15', pageTitleEn:'LCM of 12 and 15', taskType:'radio',
+          question:'Berapakah KPK dari 12 dan 15?', questionEn:'What is the LCM of 12 and 15?',
+          options:[{text:'$30$ <span class="tr">30</span>', correct:false},{text:'$60$ <span class="tr">60</span>', correct:true},{text:'$45$ <span class="tr">45</span>', correct:false},{text:'$12$ <span class="tr">12</span>', correct:false}],
+          explanation:`<p>Kelipatan 12: 12, 24, 36, 48, <strong>60</strong>. Kelipatan 15: 15, 30, 45, <strong>60</strong>. <span class="tr">Multiples of 12: 12, 24, 36, 48, 60. Multiples of 15: 15, 30, 45, 60.</span></p>`},
+        { type:'task', pageTitle:'T9: Analisis KPK', pageTitleEn:'LCM Analysis', taskType:'truefalse',
+          question:'Benar atau salah: KPK dari 2, 3, dan 4 adalah 12.', questionEn:'True or false: The LCM of 2, 3, and 4 is 12.',
+          correctAnswer:'true',
+          explanation:`<p>12 habis dibagi 2, 3, dan 4. <span class="tr">12 is divisible by 2, 3, and 4.</span></p>`},
+        { type:'task', pageTitle:'T10: KPK 5 dan 10', pageTitleEn:'LCM of 5 and 10', taskType:'fill',
+          question:'Tentukan KPK dari 5 dan 10. KPK = $\\dots$', questionEn:'Determine the LCM of 5 and 10. LCM = $\\dots$',
+          correctAnswer:'10', acceptableAnswers:['10'],
+          explanation:`<p>10 adalah kelipatan persekutuan terkecil. <span class="tr">10 is the smallest common multiple.</span></p>`}
+      ]
+    },
+    i: {
+      title: 'Tugas 2', titleEn: 'Task 2', time: 'Printable',
+      pages: [
+        { type:'task', pageTitle:'T1: Pensil dan Buku', pageTitleEn:'Pencils and Books', taskType:'fill',
+          question:'Andi punya pensil 5 buah, Budi 10 buah. KPK(5, 10) = $\\dots$', questionEn:'Andi has 5 pencils, Budi 10. LCM(5, 10) = $\\dots$',
+          correctAnswer:'10', acceptableAnswers:['10'],
+          explanation:`<p>10 habis dibagi 5 dan 10. <span class="tr">10 is divisible by 5 and 10.</span></p>`},
+        { type:'task', pageTitle:'T2: Belanja Gula', pageTitleEn:'Buying Sugar', taskType:'radio',
+          question:'Ibu belanja gula 8 hari sekali, tepung 12 hari sekali. Kapan belanja bersama?', questionEn:'Mother buys sugar every 8 days, flour every 12 days. When does she shop together?',
+          options:[{text:'$20$ hari <span class="tr">20 days</span>', correct:false},{text:'$24$ hari <span class="tr">24 days</span>', correct:true},{text:'$48$ hari <span class="tr">48 days</span>', correct:false},{text:'$96$ hari <span class="tr">96 days</span>', correct:false}],
+          explanation:`<p>KPK(8, 12) = 24. <span class="tr">LCM(8, 12) = 24.</span></p>`},
+        { type:'task', pageTitle:'T3: Bus Sekolah', pageTitleEn:'School Buses', taskType:'truefalse',
+          question:'Benar atau salah: Bus A tiba 15 menit sekali, Bus B 20 menit sekali. Mereka tiba bersamaan setiap 60 menit.', questionEn:'True or false: Bus A arrives every 15 mins, Bus B every 20 mins. They arrive together every 60 mins.',
+          correctAnswer:'true',
+          explanation:`<p>KPK(15, 20) = 60. <span class="tr">LCM(15, 20) = 60.</span></p>`},
+        { type:'task', pageTitle:'T4: Pasangkan Kejadian', pageTitleEn:'Match Events', taskType:'pairing',
+          question:'Pasangkan siklus dengan waktu pertemuan.', questionEn:'Match cycles with meeting times.',
+          pairs:[{left:'4 dan 6', right:'12 <span class="tr">12</span>'},{left:'8 dan 12', right:'24 <span class="tr">24</span>'},{left:'10 dan 15', right:'30 <span class="tr">30</span>'},{left:'6 dan 9', right:'18 <span class="tr">18</span>'}],
+          explanation:`<p>Hitung KPK dari masing-masing pasangan. <span class="tr">Calculate the LCM of each pair.</span></p>`},
+        { type:'task', pageTitle:'T5: Identifikasi Masalah', pageTitleEn:'Identify Problems', taskType:'checkbox',
+          question:'Pilih masalah yang selesai menggunakan KPK.', questionEn:'Select problems solved using LCM.',
+          options:[{text:'Mencari kapan dua air mancur menyala bersama <span class="tr">Finding when two fountains turn on together</span>', correct:true},{text:'Mencari sisa pembagian <span class="tr">Finding division remainder</span>', correct:false},{text:'Jadwal kereta bersama <span class="tr">Joint train schedule</span>', correct:true},{text:'Mencari faktor terbesar <span class="tr">Finding greatest factor</span>', correct:false}],
+          explanation:`<p>KPK untuk masalah perulangan/siklus. <span class="tr">LCM is for repeating/cycle problems.</span></p>`},
+        { type:'task', pageTitle:'T6: Air Mancur', pageTitleEn:'Fountain', taskType:'fill',
+          question:'Air mancur A menyala 6 jam sekali, B 8 jam sekali. Bersamaan setiap $\\dots$ jam.', questionEn:'Fountain A turns on every 6 hours, B every 8 hours. Together every $\\dots$ hours.',
+          correctAnswer:'24', acceptableAnswers:['24'],
+          explanation:`<p>KPK(6, 8) = 24. <span class="tr">LCM(6, 8) = 24.</span></p>`},
+        { type:'task', pageTitle:'T7: Langkah Soal Cerita', pageTitleEn:'Word Problem Steps', taskType:'sorting',
+          question:'Urutkan langkah menyelesaikan soal cerita KPK.', questionEn:'Order the steps to solve an LCM word problem.',
+          items:['Baca dan pahami masalah <span class="tr">Read and understand the problem</span>','Tentukan bilangan yang akan dicari KPK-nya <span class="tr">Identify the numbers for LCM</span>','Hitung KPK dengan metode yang cocok <span class="tr">Calculate LCM with a suitable method</span>','Tulis kesimpulan jawaban <span class="tr">Write the conclusion</span>'], correctOrder:[0,1,2,3],
+          explanation:`<p>Ikuti langkah ini agar tidak salah hitung. <span class="tr">Follow these steps to avoid calculation errors.</span></p>`},
+        { type:'task', pageTitle:'T8: KPK Tiga Bilangan', pageTitleEn:'LCM of Three Numbers', taskType:'radio',
+          question:'Berapakah KPK dari 3, 4, dan 6?', questionEn:'What is the LCM of 3, 4, and 6?',
+          options:[{text:'$6$ <span class="tr">6</span>', correct:false},{text:'$12$ <span class="tr">12</span>', correct:true},{text:'$24$ <span class="tr">24</span>', correct:false},{text:'$36$ <span class="tr">36</span>', correct:false}],
+          explanation:`<p>12 habis dibagi 3, 4, dan 6. <span class="tr">12 is divisible by 3, 4, and 6.</span></p>`},
+        { type:'task', pageTitle:'T9: Bilangan Prima', pageTitleEn:'Prime Numbers', taskType:'truefalse',
+          question:'Benar atau salah: KPK dari 8 dan 9 adalah 72.', questionEn:'True or false: The LCM of 8 and 9 is 72.',
+          correctAnswer:'true',
+          explanation:`<p>8 dan 9 relatif prima, KPK = $8 \\times 9 = 72$. <span class="tr">8 and 9 are relatively prime, LCM = $8 \\times 9 = 72$.</span></p>`},
+        { type:'task', pageTitle:'T10: KPK 6 dan 14', pageTitleEn:'LCM of 6 and 14', taskType:'fill',
+          question:'Hitung KPK dari 6 dan 14. KPK = $\\dots$', questionEn:'Calculate the LCM of 6 and 14. LCM = $\\dots$',
+          correctAnswer:'42', acceptableAnswers:['42'],
+          explanation:`<p>$6 = 2 \\times 3$. $14 = 2 \\times 7$. KPK = $2 \\times 3 \\times 7 = 42$. <span class="tr">$6 = 2 \\times 3$. $14 = 2 \\times 7$. LCM = $2 \\times 3 \\times 7 = 42$.</span></p>`}
+      ]
+    }    , j: {
+      title: 'Tugas 3', titleEn: 'Task 3', time: 'Printable',
+      pages: [
+        { type:'task', pageTitle:'T1: Faktorisasi Prima 24', pageTitleEn:'Prime Factorization of 24', taskType:'fill',
+          question:'Faktorisasi prima dari 24 adalah $2^3 \\times \\dots$', questionEn:'The prime factorization of 24 is $2^3 \\times \\dots$',
+          correctAnswer:'3', acceptableAnswers:['3'],
+          explanation:`<p>$24 = 8 \\times 3 = 2^3 \\times 3$. <span class="tr">$24 = 8 \\times 3 = 2^3 \\times 3$.</span></p>`},
+        { type:'task', pageTitle:'T2: KPK 16 dan 24', pageTitleEn:'LCM of 16 and 24', taskType:'radio',
+          question:'Berapakah KPK dari 16 dan 24?', questionEn:'What is the LCM of 16 and 24?',
+          options:[{text:'$48$ <span class="tr">48</span>', correct:true},{text:'$24$ <span class="tr">24</span>', correct:false},{text:'$32$ <span class="tr">32</span>', correct:false},{text:'$96$ <span class="tr">96</span>', correct:false}],
+          explanation:`<p>$16 = 2^4$, $24 = 2^3 \\times 3$. KPK = $2^4 \\times 3 = 48$. <span class="tr">$16 = 2^4$, $24 = 2^3 \\times 3$. LCM = $2^4 \\times 3 = 48$.</span></p>`},
+        { type:'task', pageTitle:'T3: Faktor Prima', pageTitleEn:'Prime Factors', taskType:'truefalse',
+          question:'Benar atau salah: Faktor prima dari 18 adalah 2 dan 9.', questionEn:'True or false: The prime factors of 18 are 2 and 9.',
+          correctAnswer:'false',
+          explanation:`<p>9 bukan prima. Faktor primanya 2 dan 3. $18 = 2 \\times 3^2$. <span class="tr">9 is not prime. The prime factors are 2 and 3. $18 = 2 \\times 3^2$.</span></p>`},
+        { type:'task', pageTitle:'T4: Langkah Pohon Faktor', pageTitleEn:'Factor Tree Steps', taskType:'sorting',
+          question:'Urutkan langkah membuat pohon faktor.', questionEn:'Order the steps to make a factor tree.',
+          items:['Tulis bilangan di puncak <span class="tr">Write the number at the top</span>','Pecah menjadi dua faktor <span class="tr">Break into two factors</span>','Lanjutkan hingga semua bilangan prima <span class="tr">Continue until all are prime</span>','Tulis perkalian bilangan primanya <span class="tr">Write the multiplication of primes</span>'], correctOrder:[0,1,2,3],
+          explanation:`<p>Pohon faktor membantu visualisasi faktorisasi prima. <span class="tr">Factor tree helps visualize prime factorization.</span></p>`},
+        { type:'task', pageTitle:'T5: Pilih Bilangan Prima', pageTitleEn:'Select Prime Numbers', taskType:'checkbox',
+          question:'Pilih semua bilangan prima di bawah 20.', questionEn:'Select all prime numbers below 20.',
+          options:[{text:'$2$ <span class="tr">2</span>', correct:true},{text:'$9$ <span class="tr">9</span>', correct:false},{text:'$11$ <span class="tr">11</span>', correct:true},{text:'$15$ <span class="tr">15</span>', correct:false}],
+          explanation:`<p>2 dan 11 adalah prima. 9 ($3 \\times 3$) dan 15 ($3 \\times 5$) bukan. <span class="tr">2 and 11 are prime. 9 and 15 are not.</span></p>`},
+        { type:'task', pageTitle:'T6: Pasangkan Faktorisasi', pageTitleEn:'Match Factorizations', taskType:'pairing',
+          question:'Pasangkan bilangan dengan faktorisasi primanya.', questionEn:'Match numbers with their prime factorization.',
+          pairs:[{left:'12', right:'$2^2 \\times 3$ <span class="tr">$2^2 \\times 3$</span>'},{left:'14', right:'$2 \\times 7$ <span class="tr">$2 \\times 7$</span>'},{left:'15', right:'$3 \\times 5$ <span class="tr">$3 \\times 5$</span>'},{left:'18', right:'$2 \\times 3^2$ <span class="tr">$2 \\times 3^2$</span>'}],
+          explanation:`<p>Gunakan pohon faktor untuk menemukannya. <span class="tr">Use a factor tree to find them.</span></p>`},
+        { type:'task', pageTitle:'T7: KPK dengan Pangkat', pageTitleEn:'LCM with Exponents', taskType:'fill',
+          question:'KPK dari $2^3 \\times 3$ dan $2^2 \\times 3^2$ adalah $2^a \\times 3^b$. Nilai $a = \\dots$', questionEn:'The LCM of $2^3 \\times 3$ and $2^2 \\times 3^2$ is $2^a \\times 3^b$. The value of $a = \\dots$',
+          correctAnswer:'3', acceptableAnswers:['3'],
+          explanation:`<p>KPK mengambil pangkat tertinggi. $a = 3$ karena $3 > 2$. <span class="tr">LCM takes the highest exponent. $a = 3$ because $3 > 2$.</span></p>`},
+        { type:'task', pageTitle:'T8: KPK 20 dan 30', pageTitleEn:'LCM of 20 and 30', taskType:'radio',
+          question:'Hitung KPK dari 20 dan 30.', questionEn:'Calculate the LCM of 20 and 30.',
+          options:[{text:'$10$ <span class="tr">10</span>', correct:false},{text:'$50$ <span class="tr">50</span>', correct:false},{text:'$60$ <span class="tr">60</span>', correct:true},{text:'$120$ <span class="tr">120</span>', correct:false}],
+          explanation:`<p>$20 = 2^2 \\times 5$, $30 = 2 \\times 3 \\times 5$. KPK = $2^2 \\times 3 \\times 5 = 60$. <span class="tr">$20 = 2^2 \\times 5$, $30 = 2 \\times 3 \\times 5$. LCM = $2^2 \\times 3 \\times 5 = 60$.</span></p>`},
+        { type:'task', pageTitle:'T9: KPK Bilangan Prima', pageTitleEn:'LCM of Primes', taskType:'truefalse',
+          question:'Benar atau salah: KPK dari 5 dan 7 adalah 12.', questionEn:'True or false: The LCM of 5 and 7 is 12.',
+          correctAnswer:'false',
+          explanation:`<p>5 dan 7 prima, KPK = $5 \\times 7 = 35$. <span class="tr">5 and 7 are prime, LCM = $5 \\times 7 = 35$.</span></p>`},
+        { type:'task', pageTitle:'T10: Nilai b', pageTitleEn:'Value of b', taskType:'fill',
+          question:'Dari soal T7, nilai $b = \\dots$', questionEn:'From question T7, the value of $b = \\dots$',
+          correctAnswer:'2', acceptableAnswers:['2'],
+          explanation:`<p>$b = 2$ karena $3^2 > 3^1$. <span class="tr">$b = 2$ because $3^2 > 3^1$.</span></p>`}
+      ]
+    },
+    k: {
+      title: 'Tugas 4', titleEn: 'Task 4', time: 'Printable',
+      pages: [
+        { type:'task', pageTitle:'T1: Pohon Faktor 36', pageTitleEn:'Factor Tree of 36', taskType:'fill',
+          question:'Faktorisasi prima dari 36 adalah $2^2 \\times \\dots^2$', questionEn:'The prime factorization of 36 is $2^2 \\times \\dots^2$',
+          correctAnswer:'3', acceptableAnswers:['3'],
+          explanation:`<p>$36 = 4 \\times 9 = 2^2 \\times 3^2$. <span class="tr">$36 = 4 \\times 9 = 2^2 \\times 3^2$.</span></p>`},
+        { type:'task', pageTitle:'T2: KPK 36 dan 48', pageTitleEn:'LCM of 36 and 48', taskType:'radio',
+          question:'Berapakah KPK dari 36 dan 48?', questionEn:'What is the LCM of 36 and 48?',
+          options:[{text:'$12$ <span class="tr">12</span>', correct:false},{text:'$144$ <span class="tr">144</span>', correct:true},{text:'$72$ <span class="tr">72</span>', correct:false},{text:'$288$ <span class="tr">288</span>', correct:false}],
+          explanation:`<p>$36 = 2^2 \\times 3^2$, $48 = 2^4 \\times 3$. KPK = $2^4 \\times 3^2 = 16 \\times 9 = 144$. <span class="tr">$36 = 2^2 \\times 3^2$, $48 = 2^4 \\times 3$. LCM = $2^4 \\times 3^2 = 16 \\times 9 = 144$.</span></p>`},
+        { type:'task', pageTitle:'T3: Faktor Persekutuan', pageTitleEn:'Common Factors', taskType:'truefalse',
+          question:'Benar atau salah: Faktor persekutuan dari 24 dan 36 adalah 12.', questionEn:'True or false: The common factor of 24 and 36 is 12.',
+          correctAnswer:'true',
+          explanation:`<p>12 habis membagi 24 dan 36. <span class="tr">12 divides 24 and 36 evenly.</span></p>`},
+        { type:'task', pageTitle:'T4: Langkah Pembagian', pageTitleEn:'Division Steps', taskType:'sorting',
+          question:'Urutkan langkah pembagian bersusun untuk KPK.', questionEn:'Order the repeated division steps for LCM.',
+          items:['Tulis bilangan <span class="tr">Write numbers</span>','Bagi dengan prima <span class="tr">Divide by prime</span>','Tarik garis <span class="tr">Draw a line</span>','Ulangi hingga 1 <span class="tr">Repeat until 1</span>'], correctOrder:[0,2,1,3],
+          explanation:`<p>Ikuti prosedur pembagian bersusun. <span class="tr">Follow the repeated division procedure.</span></p>`},
+        { type:'task', pageTitle:'T5: Pilih KPK', pageTitleEn:'Select LCM', taskType:'checkbox',
+          question:'Pilih pasangan bilangan yang KPK-nya 30.', questionEn:'Select number pairs whose LCM is 30.',
+          options:[{text:'5 dan 6 <span class="tr">5 and 6</span>', correct:true},{text:'10 dan 15 <span class="tr">10 and 15</span>', correct:true},{text:'3 dan 10 <span class="tr">3 and 10</span>', correct:true},{text:'6 dan 10 <span class="tr">6 and 10</span>', correct:true}],
+          explanation:`<p>$5 \\times 6 = 30$. 10,15 -> 30. 3,10 -> 30. 6,10 -> 30. <span class="tr">$5 \\times 6 = 30$. 10,15 -> 30. 3,10 -> 30. 6,10 -> 30.</span></p>`},
+        { type:'task', pageTitle:'T6: Pasangkan KPK', pageTitleEn:'Match LCM', taskType:'pairing',
+          question:'Pasangkan bilangan dengan KPK-nya.', questionEn:'Match numbers with their LCM.',
+          pairs:[{left:'24 dan 36', right:'72 <span class="tr">72</span>'},{left:'16 dan 24', right:'48 <span class="tr">48</span>'},{left:'18 dan 27', right:'54 <span class="tr">54</span>'},{left:'20 dan 30', right:'60 <span class="tr">60</span>'}],
+          explanation:`<p>Gunakan faktorisasi prima. <span class="tr">Use prime factorization.</span></p>`},
+        { type:'task', pageTitle:'T7: Faktor Hilang', pageTitleEn:'Missing Factor', taskType:'fill',
+          question:'KPK(15, x) = 60. Jika x kelipatan 4, maka x = $\\dots$', questionEn:'LCM(15, x) = 60. If x is a multiple of 4, then x = $\\dots$',
+          correctAnswer:'12', acceptableAnswers:['12'],
+          explanation:`<p>$15 = 3 \\times 5$. $60 = 2^2 \\times 3 \\times 5$. x harus memiliki $2^2 = 4$. 12 = $4 \\times 3$. <span class="tr">$15 = 3 \\times 5$. $60 = 2^2 \\times 3 \\times 5$. x must have $2^2 = 4$. 12 = $4 \\times 3$.</span></p>`},
+        { type:'task', pageTitle:'T8: KPK Tiga Bilangan Besar', pageTitleEn:'LCM of 3 Large Numbers', taskType:'radio',
+          question:'Hitung KPK dari 4, 8, dan 12.', questionEn:'Calculate the LCM of 4, 8, and 12.',
+          options:[{text:'$8$ <span class="tr">8</span>', correct:false},{text:'$12$ <span class="tr">12</span>', correct:false},{text:'$24$ <span class="tr">24</span>', correct:true},{text:'$48$ <span class="tr">48</span>', correct:false}],
+          explanation:`<p>$4 = 2^2$, $8 = 2^3$, $12 = 2^2 \\times 3$. KPK = $2^3 \\times 3 = 24$. <span class="tr">$4 = 2^2$, $8 = 2^3$, $12 = 2^2 \\times 3$. LCM = $2^3 \\times 3 = 24$.</span></p>`},
+        { type:'task', pageTitle:'T9: Hubungan FPB dan KPK', pageTitleEn:'GCD and LCM Relationship', taskType:'truefalse',
+          question:'Benar atau salah: Jika FPB(a,b)=1, maka KPK(a,b) = a x b.', questionEn:'True or false: If GCD(a,b)=1, then LCM(a,b) = a x b.',
+          correctAnswer:'true',
+          explanation:`<p>Karena tidak ada faktor persekutuan, hasil kalinya adalah KPK. <span class="tr">Since there are no common factors, their product is the LCM.</span></p>`},
+        { type:'task', pageTitle:'T10: Hitung Akhir', pageTitleEn:'Final Calculation', taskType:'fill',
+          question:'Jika $a=12, b=18$, dan FPB=6, maka KPK = $\\dots$', questionEn:'If $a=12, b=18$, and GCD=6, then LCM = $\\dots$',
+          correctAnswer:'36', acceptableAnswers:['36'],
+          explanation:`<p>$\\text{KPK} = (12 \\times 18) / 6 = 216 / 6 = 36$. <span class="tr">$\\text{LCM} = (12 \\times 18) / 6 = 216 / 6 = 36$.</span></p>`}
+      ]
+    },
+    l: {
+      title: 'Tugas 5', titleEn: 'Task 5', time: 'Printable',
+      pages: [
+        { type:'task', pageTitle:'T1: Lampu Merah', pageTitleEn:'Red Light', taskType:'fill',
+          question:'Lampu A 12 menit, Lampu B 15 menit. Bersamaan setiap $\\dots$ menit.', questionEn:'Light A 12 mins, Light B 15 mins. Together every $\\dots$ mins.',
+          correctAnswer:'60', acceptableAnswers:['60'],
+          explanation:`<p>KPK(12, 15) = 60. <span class="tr">LCM(12, 15) = 60.</span></p>`},
+        { type:'task', pageTitle:'T2: Bus', pageTitleEn:'Bus', taskType:'radio',
+          question:'Bus A 20 menit, Bus B 30 menit. Kapan tiba bersama?', questionEn:'Bus A 20 mins, Bus B 30 mins. When arrive together?',
+          options:[{text:'$50$ menit <span class="tr">50 mins</span>', correct:false},{text:'$60$ menit <span class="tr">60 mins</span>', correct:true},{text:'$10$ menit <span class="tr">10 mins</span>', correct:false},{text:'$120$ menit <span class="tr">120 mins</span>', correct:false}],
+          explanation:`<p>KPK(20, 30) = 60. <span class="tr">LCM(20, 30) = 60.</span></p>`},
+        { type:'task', pageTitle:'T3: Air Mancur', pageTitleEn:'Fountain', taskType:'truefalse',
+          question:'Benar atau salah: Air mancur 9 jam dan 12 jam, bersamaan setiap 21 jam.', questionEn:'True or false: Fountains 9 hours and 12 hours, together every 21 hours.',
+          correctAnswer:'false',
+          explanation:`<p>Salah. KPK(9, 12) = 36 jam, bukan 21 jam (itu hasil jumlah). <span class="tr">False. LCM(9, 12) = 36 hours, not 21 hours (that's the sum).</span></p>`},
+        { type:'task', pageTitle:'T4: Langkah Soal Cerita', pageTitleEn:'Word Problem Steps', taskType:'sorting',
+          question:'Urutkan langkah penyelesaian soal cerita KPK.', questionEn:'Order the steps to solve LCM word problem.',
+          items:['Baca soal <span class="tr">Read problem</span>','Identifikasi siklus <span class="tr">Identify cycles</span>','Tulis bilangan <span class="tr">Write numbers</span>','Hitung KPK <span class="tr">Calculate LCM</span>'], correctOrder:[0,1,2,3],
+          explanation:`<p>Pahami masalah lalu hitung. <span class="tr">Understand the problem then calculate.</span></p>`},
+        { type:'task', pageTitle:'T5: Pilih Situasi KPK', pageTitleEn:'Select LCM Situations', taskType:'checkbox',
+          question:'Pilih situasi yang menggunakan KPK.', questionEn:'Select situations using LCM.',
+          options:[{text:'Jadwal piket bersama <span class="tr">Joint duty schedule</span>', correct:true},{text:'Mencari sisa kain <span class="tr">Finding fabric remainder</span>', correct:false},{text:'Kapan kereta berangkat bersama <span class="tr">When trains depart together</span>', correct:true},{text:'Membagi kue <span class="tr">Dividing cake</span>', correct:false}],
+          explanation:`<p>KPK untuk siklus berulang. <span class="tr">LCM for repeating cycles.</span></p>`},
+        { type:'task', pageTitle:'T6: Pasangkan Masalah', pageTitleEn:'Match Problems', taskType:'pairing',
+          question:'Pasangkan masalah dengan waktu temu.', questionEn:'Match problems with meeting times.',
+          pairs:[{left:'4 hari, 6 hari', right:'12 hari <span class="tr">12 days</span>'},{left:'8 jam, 12 jam', right:'24 jam <span class="tr">24 hours</span>'},{left:'10 mnt, 15 mnt', right:'30 mnt <span class="tr">30 mins</span>'},{left:'9 mnt, 6 mnt', right:'18 mnt <span class="tr">18 mins</span>'}],
+          explanation:`<p>Hitung KPK dari pasangan tersebut. <span class="tr">Calculate the LCM of each pair.</span></p>`},
+        { type:'task', pageTitle:'T7: Lari', pageTitleEn:'Running', taskType:'fill',
+          question:'Andi lari tiap 5 hari, Rudi tiap 7 hari. Bersama $\\dots$ hari lagi.', questionEn:'Andi runs every 5 days, Rudi every 7 days. Together in $\\dots$ days.',
+          correctAnswer:'35', acceptableAnswers:['35'],
+          explanation:`<p>KPK(5, 7) = 35. <span class="tr">LCM(5, 7) = 35.</span></p>`},
+        { type:'task', pageTitle:'T8: Bel Sekolah', pageTitleEn:'School Bell', taskType:'radio',
+          question:'Bel 1 setiap 30 mnt, Bel 2 setiap 45 mnt. Kapan berbunyi bersama?', questionEn:'Bell 1 every 30 mins, Bell 2 every 45 mins. When ring together?',
+          options:[{text:'$75$ mnt <span class="tr">75 mins</span>', correct:false},{text:'$90$ mnt <span class="tr">90 mins</span>', correct:true},{text:'$15$ mnt <span class="tr">15 mins</span>', correct:false},{text:'$1350$ mnt <span class="tr">1350 mins</span>', correct:false}],
+          explanation:`<p>KPK(30, 45) = 90. <span class="tr">LCM(30, 45) = 90.</span></p>`},
+        { type:'task', pageTitle:'T9: Tanaman', pageTitleEn:'Plants', taskType:'truefalse',
+          question:'Benar atau salah: Tanaman A berbunga 8 hari, B 10 hari. Bersamaan 40 hari.', questionEn:'True or false: Plant A flowers 8 days, B 10 days. Together 40 days.',
+          correctAnswer:'true',
+          explanation:`<p>KPK(8, 10) = 40. <span class="tr">LCM(8, 10) = 40.</span></p>`},
+        { type:'task', pageTitle:'T10: Exit Ticket Akhir', pageTitleEn:'Final Exit Ticket', taskType:'fill',
+          question:'Doni beli pulsa 18 hr, beli token 24 hr. Bersamaan $\\dots$ hr.', questionEn:'Doni buys credit 18 days, token 24 days. Together in $\\dots$ days.',
+          correctAnswer:'72', acceptableAnswers:['72'],
+          explanation:`<p>$18 = 2 \\times 3^2$. $24 = 2^3 \\times 3$. KPK = $2^3 \\times 3^2 = 72$. <span class="tr">$18 = 2 \\times 3^2$. $24 = 2^3 \\times 3$. LCM = $2^3 \\times 3^2 = 72$.</span></p>`}
+      ]
+    }
+  };
+
+  // ================= STATE =================
+  let currentSection = 'a';
+  let currentPage = 0;
+  let userAnswers = {};
+
+  // ================= UTILITIES =================
+  function shuffle(arr){
+    const a = arr.slice();
+    for(let i = a.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  function renderMath(el){
+    if(window.renderMathInElement){
+      renderMathInElement(el, {
+        delimiters: [
+          {left:'$$', right:'$$', display:true},
+          {left:'$', right:'$', display:false}
+        ],
+        throwOnError: false
+      });
+    }
+  }
+
+  // ================= SIDEBAR =================
+  function renderSidebar(){
+    const sidebar = document.getElementById('sidebar');
+    const sectionKeys = ['a','b','c','d','e','f','g','h','i','j','k','l'];
+    const meta = {
+      a:{t:'Spiral Review', e:'Spiral Review', time:'00:00-00:10'},
+      b:{t:'Pengantar & Dunia Nyata', e:'Intro & Real-World', time:'00:10-00:15'},
+      c:{t:'Pengetahuan Awal', e:'Prior Knowledge', time:'00:15-00:20'},
+      d:{t:'Pengantar Masalah', e:'Problem Intro', time:'00:20-00:30'},
+      e:{t:'Latihan Terbimbing', e:'Guided Practice', time:'00:30-00:45'},
+      f:{t:'Latihan Mandiri', e:'Independent Prac', time:'00:45-00:55'},
+      g:{t:'Konsolidasi', e:'Consolidation', time:'00:55-01:00'},
+      h:{t:'Tugas 1', e:'Task 1', time:'Printable'},
+      i:{t:'Tugas 2', e:'Task 2', time:'Printable'},
+      j:{t:'Tugas 3', e:'Task 3', time:'Printable'},
+      k:{t:'Tugas 4', e:'Task 4', time:'Printable'},
+      l:{t:'Tugas 5', e:'Task 5', time:'Printable'}
+    };
+    let html = '<h3>Bagian <span class="tr">Sections</span></h3>';
+    sectionKeys.forEach(key => {
+      const section = sectionsData[key];
+      const isActive = currentSection === key;
+      if(section){
+        html += `<div class="nav-link ${isActive?'active':''}" data-section="${key}">
+          <span class="nl-title">${key.toUpperCase()}. ${meta[key].t}</span>
+          <span class="tr">${meta[key].e}</span>
+          <span class="time">${meta[key].time}</span>
+        </div>`;
+      } else {
+        html += `<div class="nav-link disabled">${key.toUpperCase()}. ${meta[key].t}<br><span class="tr">${meta[key].e}</span><br><span class="time">${meta[key].time} (segera)</span></div>`;
+      }
+    });
+    sidebar.innerHTML = html;
+    sidebar.querySelectorAll('.nav-link[data-section]').forEach(el => {
+      el.addEventListener('click', () => {
+        currentSection = el.dataset.section;
+        currentPage = 0;
+        renderSidebar();
+        renderPage();
+      });
+    });
+  }
+
+  // ================= PAGE RENDER =================
+  function renderPage(){
+    const section = sectionsData[currentSection];
+    if(!section) return;
+    const page = section.pages[currentPage];
+    const contentEl = document.getElementById('pageContent');
+
+    let printBtnHtml = '';
+    if(['h','i','j','k','l'].includes(currentSection)){
+      printBtnHtml = '<button id="printBtnTop" style="background:var(--success);color:#fff;border:none;padding:7px 14px;border-radius:6px;cursor:pointer;font-size:.8em;font-weight:600;white-space:nowrap">🖨 Cetak ke PDF <span class="tr">Print to PDF</span></button>';
+    }
+
+    let html = '<div class="page-header"><h2>' + section.title + ' <span class="tr">' + section.titleEn + '</span></h2><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">' + printBtnHtml + '<span class="badge">' + page.pageTitle.split(':')[0] + '</span></div></div>';
+
+    if(page.type === 'explanation'){
+      html += '<div class="card explain"><h3>' + page.pageTitle + ' <span class="tr">' + page.pageTitleEn + '</span></h3>' + page.body + '</div>';
+    } else if(page.type === 'task'){
+      html += renderTask(page);
+    }
+    contentEl.innerHTML = html;
+    renderMath(contentEl);
+
+    const total = section.pages.length;
+    const pageNumsEl = document.getElementById('pageNums');
+    let pageNumHtml = '';
+    section.pages.forEach(function(p, i){
+      var raw = p.pageTitle.split(':')[0].trim();
+      var type = raw.charAt(0);
+      var num = parseInt(raw.substring(1));
+      var label = type + '-' + String(num).padStart(2, '0');
+      var typeClass = (type === 'E') ? 'page-num-e' : 'page-num-t';
+      var isActive = (i === currentPage);
+      pageNumHtml += '<button class="page-num ' + typeClass + ' ' + (isActive ? 'active' : '') + '" data-page="' + i + '"' + (isActive ? ' disabled' : '') + '>' + label + '</button>';
+    });
+    pageNumsEl.innerHTML = pageNumHtml;
+
+    pageNumsEl.querySelectorAll('.page-num').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        currentPage = parseInt(btn.dataset.page);
+        renderPage();
+      });
+    });
+
+    document.getElementById('prevBtn').disabled = (currentPage === 0);
+    document.getElementById('nextBtn').disabled = (currentPage === total - 1);
+
+    var printBtnTop = document.getElementById('printBtnTop');
+    if(printBtnTop){
+      printBtnTop.addEventListener('click', function(){ printTask(currentSection); });
+    }
+
+    if(page.type === 'task'){
+      attachTaskHandlers(page);
+    }
+  }
+
+  function renderTask(page){
+    let html = `<div class="card task"><h3>${page.pageTitle} <span class="tr">${page.pageTitleEn}</span></h3>`;
+    html += `<div class="q-text">${page.question} <span class="tr">${page.questionEn || ''}</span></div>`;
+
+    if(page.taskType === 'radio' || page.taskType === 'checkbox'){
+      const options = shuffle(page.options);
+      page._shuffledOptions = options;
+      html += '<div class="options">';
+      options.forEach((opt, i) => {
+        const cls = page.taskType === 'checkbox' ? 'option checkbox' : 'option radio';
+        html += `<div class="${cls}" data-idx="${i}">
+          <div class="marker"></div>
+          <div class="opt-text">${opt.text}</div>
+        </div>`;
+      });
+      html += '</div>';
+    } else if(page.taskType === 'fill'){
+      html += `<input type="text" class="fill-input" id="fillInput" placeholder="...">`;
+    } else if(page.taskType === 'truefalse'){
+      const opts = shuffle([
+        {text:'Benar <span class="tr">True</span>', val:'true'},
+        {text:'Salah <span class="tr">False</span>', val:'false'}
+      ]);
+      page._shuffledTF = opts;
+      html += '<div class="options">';
+      opts.forEach((o, i) => {
+        html += `<div class="option radio" data-val="${o.val}" data-idx="${i}"><div class="marker"></div><div class="opt-text">${o.text}</div></div>`;
+      });
+      html += '</div>';
+    } else if(page.taskType === 'sorting'){
+      const shuffled = shuffle(page.items.map((item, idx) => ({text:item, originalIdx:idx})));
+      page._shuffledItems = shuffled;
+      html += '<div class="sort-list">';
+      shuffled.forEach((it, i) => {
+        html += `<div class="sort-item" data-pos="${i}" data-orig="${it.originalIdx}">
+          <span class="pos">${i+1}</span>
+          <span class="sort-text">${it.text}</span>
+        </div>`;
+      });
+      html += '</div>';
+      html += '<p style="font-size:.82em;color:var(--muted);margin-top:6px">Klik dua item untuk menukar. <span class="tr">Click two items to swap.</span></p>';
+    } else if(page.taskType === 'pairing'){
+      const lefts = shuffle(page.pairs.map((p, idx) => ({text:p.left, originalIdx:idx})));
+      const rights = shuffle(page.pairs.map((p, idx) => ({text:p.right, originalIdx:idx})));
+      page._shuffledPairs = {lefts, rights};
+      html += '<div class="pair-grid">';
+      html += '<div class="pair-col"><h4>Kiri <span class="tr">Left</span></h4>';
+      lefts.forEach((l, i) => {
+        html += `<div class="pair-item" data-side="left" data-idx="${i}">${l.text}</div>`;
+      });
+      html += '</div>';
+      html += '<div class="pair-col"><h4>Kanan <span class="tr">Right</span></h4>';
+      rights.forEach((r, i) => {
+        html += `<div class="pair-item" data-side="right" data-idx="${i}">${r.text}</div>`;
+      });
+      html += '</div></div>';
+      html += '<div class="pairs-list" id="pairsList"></div>';
+      html += '<p style="font-size:.82em;color:var(--muted);margin-top:6px">Klik kiri lalu kanan untuk memasangkan. <span class="tr">Click left then right to pair.</span></p>';
+    }
+    html += `<button class="btn-submit" id="submitBtn">Periksa Jawaban <span class="tr">Check Answer</span></button>`;
+    html += `<div class="feedback" id="feedback"></div></div>`;
+    return html;
+  }
+
+  function attachTaskHandlers(page){
+    const taskType = page.taskType;
+
+    if(taskType === 'radio' || taskType === 'truefalse'){
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+        });
+      });
+    } else if(taskType === 'checkbox'){
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.addEventListener('click', () => opt.classList.toggle('selected'));
+      });
+    } else if(taskType === 'sorting'){
+      let firstClick = null;
+      document.querySelectorAll('.sort-item').forEach(item => {
+        item.addEventListener('click', () => {
+          if(firstClick === null){
+            firstClick = item;
+            item.classList.add('selected');
+          } else if(firstClick === item){
+            item.classList.remove('selected');
+            firstClick = null;
+          } else {
+            const fText = firstClick.querySelector('.sort-text').innerHTML;
+            const sText = item.querySelector('.sort-text').innerHTML;
+            firstClick.querySelector('.sort-text').innerHTML = sText;
+            item.querySelector('.sort-text').innerHTML = fText;
+            const fOrig = firstClick.dataset.orig;
+            firstClick.dataset.orig = item.dataset.orig;
+            item.dataset.orig = fOrig;
+            firstClick.classList.remove('selected');
+            firstClick = null;
+          }
+        });
+      });
+    } else if(taskType === 'pairing'){
+      let selectedLeft = null;
+      document.querySelectorAll('.pair-item[data-side="left"]').forEach(item => {
+        item.addEventListener('click', () => {
+          if(item.classList.contains('paired')) return;
+          document.querySelectorAll('.pair-item[data-side="left"]').forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          selectedLeft = item;
+        });
+      });
+      document.querySelectorAll('.pair-item[data-side="right"]').forEach(item => {
+        item.addEventListener('click', () => {
+          if(item.classList.contains('paired') || !selectedLeft) return;
+          const leftIdx = selectedLeft.dataset.idx;
+          const rightIdx = item.dataset.idx;
+          const pairList = document.getElementById('pairsList');
+          const pairRow = document.createElement('div');
+          pairRow.className = 'pair-row';
+          pairRow.dataset.leftIdx = leftIdx;
+          pairRow.dataset.rightIdx = rightIdx;
+          pairRow.innerHTML = `<span>${selectedLeft.innerHTML}</span> <span>↔</span> <span>${item.innerHTML}</span> <span class="remove" title="Remove">×</span>`;
+          pairRow.querySelector('.remove').addEventListener('click', function() {
+            const lIdx = pairRow.dataset.leftIdx;
+            const rIdx = pairRow.dataset.rightIdx;
+            const lItem = document.querySelector(`.pair-item[data-side="left"][data-idx="${lIdx}"]`);
+            const rItem = document.querySelector(`.pair-item[data-side="right"][data-idx="${rIdx}"]`);
+            if(lItem) lItem.classList.remove('paired');
+            if(rItem) rItem.classList.remove('paired');
+            pairRow.remove();
+          });
+          pairList.appendChild(pairRow);
+          selectedLeft.classList.remove('selected');
+          selectedLeft.classList.add('paired');
+          item.classList.add('paired');
+          selectedLeft = null;
+        });
+      });
+    }
+
+    document.getElementById('submitBtn').addEventListener('click', () => checkAnswer(page));
+  }
+
+  function checkAnswer(page){
+    const taskType = page.taskType;
+    let isCorrect = false;
+    let userAnswerStr = '';
+
+    if(taskType === 'radio'){
+      let selected = null, selectedIdx = -1;
+      document.querySelectorAll('.option').forEach((opt, i) => {
+        if(opt.classList.contains('selected')){
+          selected = page._shuffledOptions[i];
+          selectedIdx = i;
+        }
+      });
+      if(!selected){
+        showFeedback(false, 'Silakan pilih jawaban. <span class="tr">Please select an answer.</span>', false);
+        return;
+      }
+      isCorrect = selected.correct;
+      userAnswerStr = selected.text;
+      document.querySelectorAll('.option').forEach((opt, i) => {
+        opt.classList.remove('selected');
+        if(page._shuffledOptions[i].correct) opt.classList.add('correct');
+        else if(i === selectedIdx && !selected.correct) opt.classList.add('incorrect');
+      });
+    } else if(taskType === 'checkbox'){
+      const selectedIdxs = [];
+      document.querySelectorAll('.option').forEach((opt, i) => {
+        if(opt.classList.contains('selected')) selectedIdxs.push(i);
+      });
+      if(selectedIdxs.length === 0){
+        showFeedback(false, 'Silakan pilih jawaban. <span class="tr">Please select an answer.</span>', false);
+        return;
+      }
+      const correctSet = new Set();
+      page._shuffledOptions.forEach((opt, i) => { if(opt.correct) correctSet.add(i); });
+      const selectedSet = new Set(selectedIdxs);
+      isCorrect = correctSet.size === selectedSet.size && [...correctSet].every(i => selectedSet.has(i));
+      userAnswerStr = selectedIdxs.map(i => page._shuffledOptions[i].text).join(', ');
+      document.querySelectorAll('.option').forEach((opt, i) => {
+        opt.classList.remove('selected');
+        if(page._shuffledOptions[i].correct) opt.classList.add('correct');
+        else if(selectedSet.has(i)) opt.classList.add('incorrect');
+      });
+    } else if(taskType === 'fill'){
+      const val = document.getElementById('fillInput').value.trim();
+      const acceptable = page.acceptableAnswers || [page.correctAnswer];
+      const norm = s => s.toLowerCase().replace(/\s+/g, '').trim();
+      isCorrect = acceptable.some(a => norm(a) === norm(val));
+      userAnswerStr = val;
+    } else if(taskType === 'truefalse'){
+      let selectedVal = null, selectedIdx = -1;
+      document.querySelectorAll('.option').forEach((opt, i) => {
+        if(opt.classList.contains('selected')){
+          selectedVal = opt.dataset.val;
+          selectedIdx = i;
+        }
+      });
+      if(!selectedVal){
+        showFeedback(false, 'Silakan pilih jawaban. <span class="tr">Please select an answer.</span>', false);
+        return;
+      }
+      isCorrect = selectedVal === page.correctAnswer;
+      userAnswerStr = selectedVal === 'true' ? 'Benar' : 'Salah';
+      document.querySelectorAll('.option').forEach((opt, i) => {
+        opt.classList.remove('selected');
+        if(opt.dataset.val === page.correctAnswer) opt.classList.add('correct');
+        else if(i === selectedIdx) opt.classList.add('incorrect');
+      });
+    } else if(taskType === 'sorting'){
+      const currentOrder = [];
+      document.querySelectorAll('.sort-item').forEach(item => {
+        currentOrder.push(parseInt(item.dataset.orig));
+      });
+      isCorrect = currentOrder.every((idx, i) => idx === page.correctOrder[i]);
+      userAnswerStr = currentOrder.map((idx, i) => `${i+1}. ${page.items[idx] || '?'}`).join('  |  ');
+      document.querySelectorAll('.sort-item').forEach((item, i) => {
+        if(currentOrder[i] === page.correctOrder[i]) item.style.borderColor = 'var(--success)';
+        else item.style.borderColor = 'var(--danger)';
+      });
+    } else if(taskType === 'pairing'){
+      const pairRows = document.querySelectorAll('.pair-row');
+      if(pairRows.length === 0){
+        showFeedback(false, 'Silakan buat pasangan. <span class="tr">Please make pairs.</span>', false);
+        return;
+      }
+      const userPairs = [];
+      pairRows.forEach(row => {
+        const lIdx = parseInt(row.dataset.leftIdx);
+        const rIdx = parseInt(row.dataset.rightIdx);
+        userPairs.push({
+          leftText: page._shuffledPairs.lefts[lIdx].text,
+          rightText: page._shuffledPairs.rights[rIdx].text
+        });
+      });
+      const correctPairs = page.pairs.map(p => ({left:p.left, right:p.right}));
+      const correctCount = userPairs.filter(up =>
+        correctPairs.some(cp => cp.left === up.leftText && cp.right === up.rightText)
+      ).length;
+      isCorrect = correctCount === correctPairs.length && userPairs.length === correctPairs.length;
+      userAnswerStr = userPairs.map(p => `${p.leftText}↔${p.rightText}`).join('  |  ');
+      pairRows.forEach(row => {
+        const lIdx = parseInt(row.dataset.leftIdx);
+        const rIdx = parseInt(row.dataset.rightIdx);
+        const lText = page._shuffledPairs.lefts[lIdx].text;
+        const rText = page._shuffledPairs.rights[rIdx].text;
+        const ok = correctPairs.some(cp => cp.left === lText && cp.right === rText);
+        row.style.background = ok ? '#d1fae5' : '#fee2e2';
+      });
+    }
+
+    const pageKey = `${currentSection}-${currentPage}`;
+    userAnswers[pageKey] = {userAnswer:userAnswerStr, correct:isCorrect, pageTitle:page.pageTitle};
+    showFeedback(isCorrect, page.explanation, true);
+  }
+
+  function showFeedback(isCorrect, explanation, showAnswer){
+    const feedback = document.getElementById('feedback');
+    feedback.className = `feedback show ${isCorrect?'correct':'incorrect'}`;
+    if(showAnswer){
+      feedback.innerHTML = `<h4>${isCorrect?'✓ Benar!':'✗ Salah'} <span class="tr">${isCorrect?'Correct!':'Incorrect'}</span></h4>${explanation}`;
+    } else {
+      feedback.innerHTML = `<h4>${isCorrect?'✓ Benar!':'✗ Salah'}</h4>`;
+    }
+    renderMath(feedback);
+  }
+
+  // ================= EVENT LISTENERS =================
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    if(currentPage > 0){ currentPage--; renderPage(); }
+  });
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    const total = sectionsData[currentSection].pages.length;
+    if(currentPage < total - 1){ currentPage++; renderPage(); }
+  });
+
+  const modal = document.getElementById('classRulesModal');
+  document.getElementById('classRulesBtn').addEventListener('click', () => modal.classList.add('active'));
+  document.querySelector('.modal-close').addEventListener('click', () => modal.classList.remove('active'));
+  modal.addEventListener('click', (e) => { if(e.target === modal) modal.classList.remove('active'); });
+
+  // ================= PRINT TO PDF =================
+  function getCorrectAnswer(task){
+    if(task.taskType === 'radio'){
+      const c = task.options.find(o => o.correct);
+      return c ? c.text : '';
+    }
+    if(task.taskType === 'checkbox'){
+      return task.options.filter(o => o.correct).map(o => o.text).join(', ');
+    }
+    if(task.taskType === 'fill'){
+      return task.correctAnswer || '';
+    }
+    if(task.taskType === 'truefalse'){
+      return task.correctAnswer === 'true' ? 'Benar' : 'Salah';
+    }
+    if(task.taskType === 'sorting'){
+      return task.correctOrder.map(i => task.items[i]).join(' → ');
+    }
+    if(task.taskType === 'pairing'){
+      return task.pairs.map(p => p.left + ' ↔ ' + p.right).join('; ');
+    }
+    return '';
+  }
+
+  function printTask(sectionKey){
+    const section = sectionsData[sectionKey];
+    if(!section) return;
+    const tasks = section.pages;
+    let correctCount = 0;
+
+    const rows = tasks.map((task, idx) => {
+      const pageKey = sectionKey + '-' + idx;
+      const ua = userAnswers[pageKey];
+      const isCorrect = ua ? ua.correct : false;
+      const userAns = ua ? ua.userAnswer : '(tidak dijawab)';
+      const correctAns = getCorrectAnswer(task);
+      if(ua && ua.correct) correctCount++;
+      return '<tr><td>' + (idx+1) + '</td><td>' + task.question + '<br><span class="tr">' + (task.questionEn || '') + '</span></td><td>' + userAns + '</td><td>' + correctAns + '</td><td style="text-align:center;font-size:1.1em">' + (isCorrect ? '✓' : '✗') + '</td></tr>';
+    }).join('');
+
+    const score = correctCount + ' / ' + tasks.length;
+    const today = new Date().toLocaleDateString('id-ID', {day:'numeric',month:'long',year:'numeric'});
+
+    const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Cetak - ' + section.title + '</title>' +
+      '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">' +
+      '<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"><\/script>' +
+      '<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"><\/script>' +
+      '<style>' +
+      'body{font-family:Segoe UI,sans-serif;padding:30px;color:#1e293b;line-height:1.5}' +
+      'h1{font-size:1.2em;margin-bottom:5px}' +
+      '.info{margin-bottom:15px;font-size:.88em}' +
+      '.info div{margin:3px 0}' +
+      'table{width:100%;border-collapse:collapse;margin:15px 0;font-size:.82em}' +
+      'th,td{border:1px solid #cbd5e1;padding:6px 8px;text-align:left;vertical-align:top}' +
+      'th{background:#f1f5f9;font-weight:600}' +
+      '.checked-by{margin-top:30px;text-align:right;font-style:italic}' +
+      '.tr{font-style:italic;font-size:.85em;color:#64748b}' +
+      '@media print{body{padding:15px}}' +
+      '</style></head><body>' +
+      '<h1>Math Tutoring by Deni</h1>' +
+      '<div class="info">' +
+      '<div>Nama: ____________________________ <span class="tr">Name</span></div>' +
+      '<div>Tanggal: ' + today + ' <span class="tr">Date</span></div>' +
+      '<div>Topik: KPK dan FPB: Kelipatan <span class="tr">Topic: LCM and GCD: Multiples</span></div>' +
+      '<div>Grup Task: ' + section.title + ' <span class="tr">Task Group</span></div>' +
+      '<div>Skor: <strong>' + score + '</strong> <span class="tr">Score</span></div>' +
+      '</div>' +
+      '<table><thead><tr>' +
+      '<th style="width:30px">No.</th>' +
+      '<th>Pertanyaan <span class="tr">Question</span></th>' +
+      '<th>Jawaban Siswa <span class="tr">Student Answer</span></th>' +
+      '<th>Jawaban Benar <span class="tr">Correct Answer</span></th>' +
+      '<th style="width:50px">Ket. <span class="tr">Note</span></th>' +
+      '</tr></thead><tbody>' + rows + '</tbody></table>' +
+      '<div class="checked-by">Diperiksa oleh, <span class="tr">Checked by,</span><br>Deni</div>' +
+      '<script>document.addEventListener("DOMContentLoaded",function(){' +
+      'if(window.renderMathInElement){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false});}' +
+      'setTimeout(function(){window.print();},500);});<\/script>' +
+      '</body></html>';
+
+    const w = window.open('', '_blank');
+    if(w){
+      w.document.write(html);
+      w.document.close();
+    } else {
+      alert('Mohon izinkan pop-up untuk mencetak. <span class="tr">Please allow pop-ups to print.</span>');
+    }
+  }
+
+  // ================= INIT =================
+  renderSidebar();
+  renderPage();
+});
+</script>
+</body>
+</html>
