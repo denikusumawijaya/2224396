@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keliling Bangun Datar · Perimeter of Plane Shapes — Math Tutoring by Deni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+:root{--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--bg:#f6f8fc;--card:#fff;--pri:#2563eb;--pri2:#1e40af;--acc:#f59e0b;--ok:#16a34a;--bad:#dc2626;--soft:#eff6ff}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Nunito",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;font-size:16px}
+h1,h2,h3,h4{font-family:"Baloo 2","Nunito",sans-serif;line-height:1.2;margin:.2em 0}
+i,.en,.enl{color:#475569}
+.en{font-style:italic;font-size:.9em;margin-top:1px}
+.enl{display:block;font-style:italic;font-size:.86em}
+.idl{display:block}
+.bi{margin:.15em 0}
+/* header */
+header{position:sticky;top:0;z-index:30;background:linear-gradient(100deg,#1e3a8a,#2563eb 60%,#0ea5e9);color:#fff;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 4px 18px rgba(30,58,138,.25)}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:48px;height:48px;border-radius:14px;background:#fff;display:grid;place-items:center;flex:none}
+.brand h1{font-size:1.35rem;margin:0;color:#fff}
+.brand .tp{font-size:.95rem;font-weight:700;color:#fff}
+.brand .tp i{color:#dbeafe;font-weight:600}
+.rulesbtn{background:#fbbf24;color:#422006;border:0;border-radius:999px;padding:10px 18px;font-weight:800;font-family:inherit;font-size:.95rem;cursor:pointer;box-shadow:0 3px 0 #b45309;white-space:nowrap}
+.rulesbtn:hover{transform:translateY(-1px)}
+.rulesbtn i{color:#78350f}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
+.modal.open{display:flex}
+.mbox{background:#fff;border-radius:20px;max-width:520px;width:100%;padding:24px 26px;box-shadow:0 20px 50px rgba(0,0,0,.3);position:relative;animation:pop .2s ease}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:none;opacity:1}}
+.mbox .close{position:absolute;right:14px;top:10px;border:0;background:#f1f5f9;border-radius:50%;width:34px;height:34px;font-size:18px;cursor:pointer}
+.rule{display:flex;gap:14px;align-items:flex-start;padding:12px;border-radius:14px;background:#f8fafc;margin:10px 0;border:1px solid var(--line)}
+.rule .ic{font-size:28px;line-height:1}
+/* layout */
+.wrap{display:grid;grid-template-columns:1fr 3fr;gap:20px;max-width:1400px;margin:0 auto;padding:20px}
+.nav{position:sticky;top:96px;align-self:start;background:#fff;border-radius:18px;padding:12px;border:1px solid var(--line);max-height:calc(100vh - 116px);overflow:auto}
+.nav h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:10px 8px 6px}
+.nav a{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border-radius:12px;text-decoration:none;color:var(--ink);margin:2px 0;border:1px solid transparent}
+.nav a:hover{background:var(--soft)}
+.nav a.active{background:#dbeafe;border-color:#93c5fd}
+.nav .ni{font-size:20px;line-height:1.2;flex:none;width:26px;text-align:center}
+.nav .nt{font-weight:800;font-size:.92rem;display:block}
+.nav .ns{font-size:.8rem;color:var(--muted);display:block;font-style:italic}
+.nav .tm{font-size:.72rem;font-weight:800;color:#1d4ed8;background:#eff6ff;border-radius:6px;padding:0 6px;display:inline-block;margin-top:2px}
+.main{min-width:0}
+.section{display:none;animation:fade .25s ease}
+.section.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.hero{border-radius:22px;padding:22px 24px;color:#fff;position:relative;overflow:hidden;margin-bottom:18px}
+.hero h2{font-size:1.75rem;color:#fff;margin:4px 0 0}
+.hero .en{color:#e0e7ff;font-size:1rem}
+.hero .badge{display:inline-block;background:rgba(255,255,255,.22);padding:3px 12px;border-radius:999px;font-weight:800;font-size:.85rem}
+.hero .deco{position:absolute;right:16px;top:50%;transform:translateY(-50%);opacity:.9}
+.g1{background:linear-gradient(120deg,#7c3aed,#a855f7)}.g2{background:linear-gradient(120deg,#0891b2,#06b6d4)}.g3{background:linear-gradient(120deg,#059669,#10b981)}
+.g4{background:linear-gradient(120deg,#ea580c,#f97316)}.g5{background:linear-gradient(120deg,#2563eb,#3b82f6)}.g6{background:linear-gradient(120deg,#db2777,#ec4899)}
+.g7{background:linear-gradient(120deg,#0f766e,#14b8a6)}.g8{background:linear-gradient(120deg,#4338ca,#6366f1)}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.card h3{font-size:1.25rem;color:var(--pri2)}
+.card h3 .en{display:block;font-size:.85rem;font-family:"Nunito";font-weight:600}
+.goal{background:#fffbeb;border:1px dashed #f59e0b}
+.formula{background:linear-gradient(135deg,#eff6ff,#f0f9ff);border:2px solid #bfdbfe;border-radius:16px;padding:12px 16px;margin:10px 0;text-align:center;font-size:1.15rem}
+.formula .lbl{font-size:.85rem;font-weight:800;color:#1d4ed8;display:block;margin-bottom:2px}
+.ex{border-left:5px solid var(--acc);background:#fffdf5;border-radius:12px;padding:12px 16px;margin:12px 0}
+.ex .exh{font-weight:800;color:#b45309}
+.ex .exh i{font-weight:600}
+.steps{counter-reset:s;margin:6px 0 0;padding:0;list-style:none}
+.steps li{counter-increment:s;position:relative;padding:6px 0 6px 38px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:6px;width:26px;height:26px;border-radius:50%;background:#fde68a;color:#92400e;font-weight:800;display:grid;place-items:center;font-size:.85rem}
+.tip{background:#ecfdf5;border:1px solid #a7f3d0;border-radius:14px;padding:10px 14px;margin:10px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-radius:14px;padding:10px 14px;margin:10px 0}
+.flex{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.flex>*{flex:1 1 240px}
+.fig{display:flex;flex-direction:column;align-items:center;margin:8px 0}
+.fig svg{max-width:100%;height:auto}
+.figcap{font-size:.75rem;color:var(--muted);text-align:center}
+.shapes{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.shape-card{border:1px solid var(--line);border-radius:16px;padding:10px 12px;background:#fcfdff;text-align:center}
+.shape-card h4{font-size:1.05rem;margin:0}
+.shape-card h4 i{font-family:"Nunito";font-size:.82rem;font-weight:600;display:block}
+.shape-card .k{margin-top:6px;font-size:1.02rem}
+.shape-card p{margin:4px 0;font-size:.9rem}
+table.tbl{border-collapse:collapse;width:100%;margin:8px 0;font-size:.95rem}
+.tbl th,.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.tbl th{background:#eff6ff}
+.subhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:24px 0 6px}
+.subhead h3{font-size:1.35rem;margin:0}
+.score{background:#fff;border:2px solid #bfdbfe;border-radius:999px;padding:5px 14px;font-weight:700;font-size:.9rem}
+.score.full{background:#dcfce7;border-color:#86efac}
+details.explain{background:#fff;border:2px solid #c7d2fe;border-radius:18px;margin:14px 0;overflow:hidden}
+details.explain>summary{cursor:pointer;padding:14px 18px;font-weight:800;background:#eef2ff;color:#3730a3;list-style:none}
+details.explain>summary::-webkit-details-marker{display:none}
+details.explain>summary::before{content:"▶ ";display:inline-block;transition:transform .2s}
+details.explain[open]>summary::before{transform:rotate(90deg)}
+details.explain .in{padding:6px 18px 14px}
+/* question cards */
+.qcard{background:#fff;border:2px solid var(--line);border-radius:18px;padding:16px 18px;margin:14px 0;transition:border-color .2s}
+.qcard.ok{border-color:#86efac;background:#fbfffc}
+.qcard.bad{border-color:#fca5a5}
+.qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.qnum{width:32px;height:32px;border-radius:10px;background:var(--pri);color:#fff;display:grid;place-items:center;font-weight:800;flex:none}
+.qtitle{font-weight:800}
+.qtype{margin-left:auto;font-size:.78rem;font-weight:700;background:#f1f5f9;padding:3px 10px;border-radius:999px;color:#334155}
+.qtext .id{font-weight:700;font-size:1.04rem}
+.instr{font-size:.84rem;color:#1e40af;background:#eff6ff;border-radius:10px;padding:6px 10px;margin:8px 0}
+.instr i{color:#3b82f6}
+.opts{display:grid;gap:8px;margin:8px 0}
+.opt{display:flex;align-items:center;gap:12px;border:2px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;transition:.15s;background:#fff}
+.opt:hover{border-color:#93c5fd;background:#f8fbff}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.letter{width:30px;height:30px;border-radius:50%;border:2px solid #94a3b8;display:grid;place-items:center;font-weight:800;flex:none;color:#475569}
+.letter.sq{border-radius:8px}
+.opt:has(input:checked){border-color:var(--pri);background:#eff6ff}
+.opt:has(input:checked) .letter{background:var(--pri);border-color:var(--pri);color:#fff}
+.opt.right{border-color:var(--ok)!important;background:#f0fdf4!important}
+.opt.wrong{border-color:var(--bad)!important;background:#fef2f2!important}
+.blanks{display:flex;flex-direction:column;gap:10px;margin:8px 0}
+.blank{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-weight:700}
+.blank input{width:120px;padding:8px 10px;border:2px solid #cbd5e1;border-radius:12px;font-size:1.05rem;font-family:inherit;font-weight:800;text-align:center}
+.blank input:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px #bfdbfe}
+.blank input.right{border-color:var(--ok);background:#f0fdf4}
+.blank input.wrong{border-color:var(--bad);background:#fef2f2}
+.tfrow{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:2px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0}
+.tfrow.right{border-color:var(--ok);background:#f0fdf4}.tfrow.wrong{border-color:var(--bad);background:#fef2f2}
+.tfs{flex:1 1 300px}
+.tfbtns{display:flex;gap:8px}
+.tfbtn{border:2px solid var(--line);border-radius:12px;padding:6px 12px;cursor:pointer;font-weight:800;background:#fff;font-size:.9rem}
+.tfbtn input{display:none}
+.tfbtn i{font-weight:600;font-size:.8rem}
+.tfbtn.t:has(input:checked){background:#dcfce7;border-color:#22c55e}
+.tfbtn.f:has(input:checked){background:#fee2e2;border-color:#ef4444}
+.sortlist{list-style:none;padding:0;margin:8px 0;counter-reset:o}
+.sortitem{counter-increment:o;display:flex;align-items:center;gap:10px;border:2px solid var(--line);border-radius:14px;padding:8px 10px;margin:6px 0;background:#fff;cursor:grab}
+.sortitem::before{content:counter(o);width:26px;height:26px;border-radius:8px;background:#e0e7ff;color:#3730a3;font-weight:800;display:grid;place-items:center;flex:none}
+.sortitem.dragging{opacity:.5;border-style:dashed}
+.sortitem.right{border-color:var(--ok);background:#f0fdf4}.sortitem.wrong{border-color:var(--bad);background:#fef2f2}
+.grip{color:#94a3b8;font-weight:800}
+.stext{flex:1}
+.arrows button{border:1px solid #cbd5e1;background:#f8fafc;border-radius:8px;width:30px;height:28px;cursor:pointer;margin-left:3px}
+.pairwrap{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0}
+.pcol{display:flex;flex-direction:column;gap:8px}
+.pitem{border:2px solid var(--line);border-radius:14px;padding:9px 12px 9px 40px;cursor:pointer;position:relative;background:#fff;min-height:46px;display:flex;flex-direction:column;justify-content:center}
+.pitem:hover{background:#f8fbff}
+.pitem.sel{border-color:var(--pri);box-shadow:0 0 0 3px #bfdbfe}
+.pbadge{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:#e2e8f0;color:#fff;font-weight:800;font-size:.8rem;display:grid;place-items:center}
+.pitem.right{background:#f0fdf4}.pitem.wrong{background:#fef2f2;border-color:var(--bad)!important}
+.dz{border:2px dashed #cbd5e1;border-radius:14px;padding:8px;background:#f8fafc;min-height:70px}
+.dz.hover{border-color:var(--pri);background:#eff6ff}
+.dzlabel{font-weight:800;font-size:.9rem;margin-bottom:6px;color:#334155}
+.dzin{display:flex;flex-wrap:wrap;gap:8px;min-height:40px}
+.zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:10px}
+.zone{background:#fff}
+.chip{border:2px solid #a5b4fc;background:#eef2ff;border-radius:12px;padding:6px 12px;cursor:grab;font-weight:700;user-select:none}
+.chip.picked{box-shadow:0 0 0 3px #f59e0b;border-color:#f59e0b}
+.chip.dragging{opacity:.5}
+.chip.right{border-color:var(--ok);background:#dcfce7}.chip.wrong{border-color:var(--bad);background:#fee2e2}
+.qactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.btn{border:0;border-radius:12px;padding:9px 16px;font-weight:800;cursor:pointer;font-family:inherit;font-size:.92rem;background:var(--pri);color:#fff;box-shadow:0 3px 0 var(--pri2)}
+.btn i{color:#dbeafe;font-weight:600}
+.btn.ghost{background:#f1f5f9;color:#334155;box-shadow:0 3px 0 #cbd5e1}
+.btn.ghost i{color:#64748b}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.feedback{margin-top:8px;font-size:.95rem}
+details.sol{margin-top:10px;border:1px solid #fde68a;border-radius:14px;background:#fffbeb}
+details.sol>summary{cursor:pointer;padding:9px 14px;font-weight:800;color:#92400e}
+.solbody{padding:4px 14px 12px}
+.step{display:flex;gap:10px;align-items:flex-start;padding:5px 0;border-bottom:1px dashed #fde68a}
+.step:last-child{border-bottom:0}
+.stepn{width:22px;height:22px;border-radius:50%;background:#f59e0b;color:#fff;font-size:.75rem;font-weight:800;display:grid;place-items:center;flex:none;margin-top:3px}
+.nextbar{display:flex;justify-content:space-between;gap:10px;margin:22px 0 8px;flex-wrap:wrap}
+textarea.refl{width:100%;min-height:60px;border:2px solid var(--line);border-radius:12px;padding:8px;font-family:inherit;font-size:.95rem;margin-top:6px}
+.keypts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.kp{border-radius:14px;padding:12px;background:#f0f9ff;border:1px solid #bae6fd}
+.kp .ic{font-size:24px}
+.katex{font-size:1.06em}
+.formula .katex{font-size:1.2em}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.nav{position:relative;top:0;max-height:none}header{flex-wrap:wrap}.hero .deco{display:none}.pairwrap{grid-template-columns:1fr}}
+@media print{header,.nav,.qactions{display:none}.section{display:block!important}.wrap{display:block}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="logo" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 36 36"><rect x="4" y="8" width="20" height="20" rx="2" fill="none" stroke="#2563eb" stroke-width="3.5"/><polygon points="18,4 32,28 14,28" fill="none" stroke="#f59e0b" stroke-width="3.5" stroke-linejoin="round"/><circle cx="4" cy="8" r="3" fill="#dc2626"/></svg>
+    </div>
+    <div>
+      <h1>Math Tutoring by Deni</h1>
+      <div class="tp">Topik: Keliling Bangun Datar: Apakah Keliling Bangun Datar Itu?</div>
+      <div class="tp"><i>Topic: Perimeter of Plane Shapes: What Is the Perimeter of a Plane Shape?</i></div>
+    </div>
+  </div>
+  <button class="rulesbtn" id="rulesBtn">📋 Class rules · <i>Aturan Kelas</i></button>
+</header>
+
+<div class="modal" id="rulesModal" role="dialog" aria-modal="true">
+  <div class="mbox">
+    <button class="close" aria-label="Tutup / Close">✕</button>
+    <h2>📋 Aturan Kelas</h2>
+    <div class="en" style="margin-top:-4px">Class Rules</div>
+    <div class="rule"><div class="ic">🗣️</div><div><b>Berbicara secara bergantian.</b><div class="en">Take turns when speaking.</div></div></div>
+    <div class="rule"><div class="ic">🙋</div><div><b>Meminta izin jika ingin meninggalkan kelas.</b><div class="en">Ask for permission if you want to leave the class.</div></div></div>
+    <div class="rule"><div class="ic">🎥</div><div><b>Menyalakan microphone dan camera jika diperlukan.</b><div class="en">Turn on your microphone and camera when needed.</div></div></div>
+  </div>
+</div>
+
+<div class="wrap">
+<nav class="nav">
+  <h4>Alur Pelajaran · <i>Lesson Flow</i></h4>
+  <a href="#" data-target="s-warmup"><span class="ni">🔁</span><span><span class="nt">Spiral Review Warm-up</span><span class="ns">Pemanasan: Ulasan Berulang</span><span class="tm">00:00–00:10</span></span></a>
+  <a href="#" data-target="s-intro"><span class="ni">🌍</span><span><span class="nt">Introduction &amp; Real-World Connection</span><span class="ns">Pengenalan &amp; Kaitan dengan Kehidupan Nyata</span><span class="tm">00:10–00:15</span></span></a>
+  <a href="#" data-target="s-prior"><span class="ni">🧠</span><span><span class="nt">Review of Prior Knowledge</span><span class="ns">Mengulang Pengetahuan Sebelumnya</span><span class="tm">00:15–00:20</span></span></a>
+  <a href="#" data-target="s-problem"><span class="ni">🧩</span><span><span class="nt">Problem Introduction</span><span class="ns">Pengenalan Masalah</span><span class="tm">00:20–00:25</span></span></a>
+  <a href="#" data-target="s-guided"><span class="ni">🤝</span><span><span class="nt">Guided Practice</span><span class="ns">Latihan Terbimbing</span><span class="tm">00:25–00:40</span></span></a>
+  <a href="#" data-target="s-indep"><span class="ni">🚀</span><span><span class="nt">Independent Practice</span><span class="ns">Latihan Mandiri</span><span class="tm">00:40–00:55</span></span></a>
+  <a href="#" data-target="s-consol"><span class="ni">🏁</span><span><span class="nt">Consolidation &amp; Reflection</span><span class="ns">Penguatan &amp; Refleksi</span><span class="tm">00:55–01:00</span></span></a>
+  <h4>Tugas · <i>Tasks</i></h4>
+  <a href="#" data-target="s-t1"><span class="ni">📘</span><span><span class="nt">Task 1</span><span class="ns">Tugas 1 · Konsep Keliling</span></span></a>
+  <a href="#" data-target="s-t2"><span class="ni">📗</span><span><span class="nt">Task 2</span><span class="ns">Tugas 2 · Persegi &amp; Persegi Panjang</span></span></a>
+  <a href="#" data-target="s-t3"><span class="ni">📙</span><span><span class="nt">Task 3</span><span class="ns">Tugas 3 · Segitiga &amp; Segi Empat Lain</span></span></a>
+  <a href="#" data-target="s-t4"><span class="ni">📕</span><span><span class="nt">Task 4</span><span class="ns">Tugas 4 · Sisi yang Hilang &amp; Bangun Gabungan</span></span></a>
+  <a href="#" data-target="s-t5"><span class="ni">📓</span><span><span class="nt">Task 5</span><span class="ns">Tugas 5 · Soal Cerita</span></span></a>
+</nav>
+
+<main class="main">
+
+<!-- ================= SPIRAL REVIEW WARM-UP ================= -->
+<section class="section" id="s-warmup">
+  <div class="hero g1"><span class="badge">⏱ 00:00–00:10</span>
+    <h2>🔁 Spiral Review Warm-up</h2><div class="en">Pemanasan: Ulasan Berulang — menyiapkan keterampilan berhitung yang akan kita pakai hari ini · <i>getting ready the number skills we will use today</i></div>
+    <svg class="deco" width="110" height="90" viewBox="0 0 110 90"><text x="5" y="40" font-size="34" fill="#fff" font-weight="800">+ ×</text><text x="20" y="80" font-size="30" fill="#fde68a" font-weight="800">cm m</text></svg>
+  </div>
+
+  <div class="card goal"><b>🎯 Tujuan · <i>Goal</i></b>
+    <div class="bi"><div class="id">Mengingat kembali cara menjumlahkan beberapa bilangan, mengalikan, memakai tanda kurung, dan mengubah satuan panjang. Semua ini adalah “alat” untuk menghitung keliling.</div><div class="en">Recall how to add several numbers, multiply, use brackets, and convert units of length. All of these are “tools” for calculating perimeter.</div></div>
+  </div>
+
+  <div class="card">
+    <h3>1️⃣ Menjumlahkan Beberapa Bilangan <span class="en">Adding Several Numbers</span></h3>
+    <div class="bi"><div class="id">Saat menjumlahkan banyak bilangan, kelompokkan bilangan yang mudah dijumlahkan, misalnya yang hasilnya puluhan bulat.</div><div class="en">When adding many numbers, group the ones that are easy to add, for example those that make a whole ten.</div></div>
+    <div class="ex"><div class="exh">Contoh 1 · <i>Example 1</i>: $12 + 8 + 12 + 8 = \;?$</div>
+      <ol class="steps">
+        <li><div class="bi"><div class="id">Pasangkan: $12 + 8 = 20$.</div><div class="en">Pair them: $12 + 8 = 20$.</div></div></li>
+        <li><div class="bi"><div class="id">Ada dua pasangan yang sama: $20 \times 2 = 40$.</div><div class="en">There are two identical pairs: $20 \times 2 = 40$.</div></div></li>
+        <li><div class="bi"><div class="id">Jadi, $12 + 8 + 12 + 8 = 40$.</div><div class="en">So, $12 + 8 + 12 + 8 = 40$.</div></div></li>
+      </ol></div>
+  </div>
+
+  <div class="card">
+    <h3>2️⃣ Perkalian dengan Memecah Bilangan <span class="en">Multiplying by Breaking Numbers Apart</span></h3>
+    <div class="bi"><div class="id">Bilangan dua angka bisa dipecah menjadi puluhan dan satuan, lalu dikalikan satu per satu.</div><div class="en">A two-digit number can be split into tens and ones, then multiplied part by part.</div></div>
+    <div class="ex"><div class="exh">Contoh 2 · <i>Example 2</i>: $4 \times 15 = \;?$</div>
+      <ol class="steps">
+        <li><div class="bi"><div class="id">Pecah $15 = 10 + 5$.</div><div class="en">Split $15 = 10 + 5$.</div></div></li>
+        <li>$4 \times 15 = 4 \times 10 + 4 \times 5 = 40 + 20 = 60$</li>
+      </ol></div>
+  </div>
+
+  <div class="card">
+    <h3>3️⃣ Tanda Kurung Dikerjakan Lebih Dulu <span class="en">Brackets Come First</span></h3>
+    <div class="bi"><div class="id">Jika ada tanda kurung, hitung isi kurung terlebih dahulu. Jika tidak ada kurung, perkalian dikerjakan sebelum penjumlahan.</div><div class="en">If there are brackets, work out the inside of the brackets first. If there are no brackets, multiplication is done before addition.</div></div>
+    <div class="ex"><div class="exh">Contoh 3 · <i>Example 3</i></div>
+      <div class="formula" style="font-size:1rem">$2 \times (7 + 5) = 2 \times 12 = 24$<br>$2 \times 7 + 5 = 14 + 5 = 19$<br>$2 \times 7 + 2 \times 5 = 14 + 10 = 24$</div>
+      <div class="bi"><div class="id">Perhatikan: $2 \times (7 + 5)$ sama dengan $2 \times 7 + 2 \times 5$, tetapi <b>berbeda</b> dengan $2 \times 7 + 5$.</div><div class="en">Notice: $2 \times (7 + 5)$ equals $2 \times 7 + 2 \times 5$, but is <b>different</b> from $2 \times 7 + 5$.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>4️⃣ Satuan Panjang <span class="en">Units of Length</span></h3>
+    <div class="flex">
+      <div>
+        <table class="tbl"><tr><th>Satuan · <i>Unit</i></th><th>Nilai · <i>Value</i></th></tr>
+          <tr><td>$1$ km</td><td>$1.000$ m</td></tr><tr><td>$1$ m</td><td>$100$ cm</td></tr><tr><td>$1$ cm</td><td>$10$ mm</td></tr></table>
+      </div>
+      <div>
+        <svg viewBox="0 0 260 150" width="260"><g font-family="Nunito" font-weight="800" font-size="14">
+          <rect x="10" y="10" width="70" height="30" rx="8" fill="#ddd6fe"/><text x="45" y="30" text-anchor="middle">km</text>
+          <rect x="70" y="50" width="70" height="30" rx="8" fill="#c7d2fe"/><text x="105" y="70" text-anchor="middle">m</text>
+          <rect x="130" y="90" width="70" height="30" rx="8" fill="#bfdbfe"/><text x="165" y="110" text-anchor="middle">cm</text>
+          <rect x="190" y="118" width="60" height="28" rx="8" fill="#bae6fd"/><text x="220" y="137" text-anchor="middle">mm</text>
+          <text x="96" y="44" font-size="11" fill="#6d28d9">× 1.000</text><text x="150" y="86" font-size="11" fill="#4338ca">× 100</text><text x="205" y="112" font-size="11" fill="#1d4ed8">× 10</text></g></svg>
+        <div class="figcap">Turun tangga = dikali · naik tangga = dibagi<br><i>Going down = multiply · going up = divide</i></div>
+      </div>
+    </div>
+    <div class="ex"><div class="exh">Contoh 4 · <i>Example 4</i></div>
+      <ol class="steps">
+        <li>$2 \text{ m} = 2 \times 100 = 200 \text{ cm}$</li>
+        <li>$350 \text{ cm} = 350 : 100 = 3{,}5 \text{ m}$</li>
+        <li>$400 \text{ mm} = 400 : 10 = 40 \text{ cm}$</li>
+      </ol>
+      <div class="bi"><div class="id">Untuk membandingkan panjang, ubah dulu ke <b>satuan yang sama</b>.</div><div class="en">To compare lengths, first convert them to <b>the same unit</b>.</div></div>
+    </div>
+  </div>
+
+  <div class="subhead"><h3>✍️ Latihan · <i>Exercises</i></h3><span class="score" id="score-warmup"></span></div>
+  <div id="q-warmup"></div>
+  <div class="nextbar"><span></span><button class="btn" data-go="s-intro">Lanjut · <i>Next</i> ➜</button></div>
+</section>
+
+<!-- ================= INTRODUCTION ================= -->
+<section class="section" id="s-intro">
+  <div class="hero g2"><span class="badge">⏱ 00:10–00:15</span>
+    <h2>🌍 Introduction &amp; Real-World Connection</h2><div class="en">Pengenalan &amp; Kaitan dengan Kehidupan Nyata · <i>What is perimeter and where do we meet it?</i></div>
+    <svg class="deco" width="120" height="90" viewBox="0 0 120 90"><rect x="10" y="10" width="100" height="70" rx="4" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="10 6"/><text x="60" y="54" text-anchor="middle" font-size="30">🐜</text></svg>
+  </div>
+
+  <div class="card goal"><b>🎯 Tujuan · <i>Goal</i></b>
+    <div class="bi"><div class="id">Memahami arti keliling bangun datar dan menemukan contohnya dalam kehidupan sehari-hari.</div><div class="en">Understand what the perimeter of a plane shape means and find examples of it in daily life.</div></div>
+  </div>
+
+  <div class="card">
+    <h3>📏 Apakah Keliling Itu? <span class="en">What Is Perimeter?</span></h3>
+    <div class="formula"><span class="lbl">DEFINISI · <i>DEFINITION</i></span>
+      <div class="bi"><div class="id"><b>Keliling</b> adalah panjang seluruh garis tepi (batas) yang mengelilingi sebuah bangun datar.</div><div class="en"><b>Perimeter</b> is the total length of the boundary (edge) that goes all the way around a plane shape.</div></div>
+    </div>
+    <div class="bi"><div class="id">Bayangkan seekor semut berjalan di tepi bangun, mulai dari satu titik dan kembali ke titik yang sama. Jarak yang ia tempuh adalah <b>keliling</b>.</div><div class="en">Imagine an ant walking along the edge of a shape, starting at one point and returning to the same point. The distance it walks is the <b>perimeter</b>.</div></div>
+    <div class="bi"><div class="id">Keliling biasanya ditulis dengan huruf $K$. Karena keliling adalah <b>panjang</b>, satuannya adalah satuan panjang: mm, cm, m, km.</div><div class="en">Perimeter is usually written with the letter $K$ (from <i>keliling</i>). Since perimeter is a <b>length</b>, its units are units of length: mm, cm, m, km.</div></div>
+    <div class="flex">
+      <div class="fig" data-fig="antBook"></div>
+      <div>
+        <div class="ex"><div class="exh">Contoh 1 · <i>Example 1</i></div>
+          <div class="bi"><div class="id">Semut berjalan satu kali mengelilingi buku berukuran $20$ cm × $15$ cm. Berapa jarak yang ditempuhnya?</div><div class="en">An ant walks once around a $20$ cm × $15$ cm book. How far does it walk?</div></div>
+          <ol class="steps">
+            <li><div class="bi"><div class="id">Tulis semua sisi: $20, 15, 20, 15$.</div><div class="en">Write all the sides: $20, 15, 20, 15$.</div></div></li>
+            <li>$K = 20 + 15 + 20 + 15 = 35 + 35 = 70$</li>
+            <li><div class="bi"><div class="id">Jadi, semut berjalan $70$ cm.</div><div class="en">So, the ant walks $70$ cm.</div></div></li>
+          </ol></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🏡 Keliling dalam Kehidupan Sehari-hari <span class="en">Perimeter in Everyday Life</span></h3>
+    <div class="shapes">
+      <div class="shape-card"><div style="font-size:38px">🚧</div><h4>Pagar kebun<i>Garden fence</i></h4><p>Mengelilingi tepi kebun.</p><p class="en">Goes around the edge of a garden.</p></div>
+      <div class="shape-card"><div style="font-size:38px">🖼️</div><h4>Bingkai foto<i>Photo frame</i></h4><p>Menutupi tepi foto.</p><p class="en">Covers the edge of a photo.</p></div>
+      <div class="shape-card"><div style="font-size:38px">🏃</div><h4>Lari satu putaran<i>Running one lap</i></h4><p>Mengikuti tepi lapangan.</p><p class="en">Follows the edge of a field.</p></div>
+      <div class="shape-card"><div style="font-size:38px">🎀</div><h4>Renda / pita<i>Lace / ribbon</i></h4><p>Dijahit di tepi taplak atau kado.</p><p class="en">Sewn along the edge of a tablecloth or gift.</p></div>
+    </div>
+    <div class="ex"><div class="exh">Contoh 2 · <i>Example 2</i></div>
+      <div class="flex"><div class="fig" data-fig="cloth"></div>
+      <div><div class="bi"><div class="id">Ibu memasang renda di tepi taplak berbentuk persegi bersisi $1$ m. Berapa meter renda yang dibutuhkan?</div><div class="en">Mother sews lace around a square tablecloth with $1$ m sides. How many metres of lace are needed?</div></div>
+      <ol class="steps"><li>$K = 1 + 1 + 1 + 1 = 4$</li><li><div class="bi"><div class="id">Renda yang dibutuhkan $4$ m.</div><div class="en">$4$ m of lace is needed.</div></div></li></ol></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⚠️ Keliling ≠ Luas <span class="en">Perimeter ≠ Area</span></h3>
+    <div class="flex">
+      <svg viewBox="0 0 300 120" width="300"><rect x="20" y="20" width="110" height="80" fill="#fff" stroke="#dc2626" stroke-width="6"/><text x="75" y="66" text-anchor="middle" font-size="13" font-weight="800" fill="#dc2626">KELILING</text><text x="75" y="82" text-anchor="middle" font-size="11" font-style="italic" fill="#dc2626">perimeter</text>
+      <rect x="170" y="20" width="110" height="80" fill="#93c5fd" stroke="#1d4ed8" stroke-width="2"/><text x="225" y="62" text-anchor="middle" font-size="13" font-weight="800" fill="#1e3a8a">LUAS</text><text x="225" y="78" text-anchor="middle" font-size="11" font-style="italic" fill="#1e3a8a">area</text></svg>
+      <div><div class="bi"><div class="id"><b>Keliling</b> = garis tepi (merah). Satuannya cm, m.</div><div class="en"><b>Perimeter</b> = the edge (red). Units: cm, m.</div></div>
+      <div class="bi"><div class="id"><b>Luas</b> = daerah di dalam (biru). Satuannya cm², m². Luas akan dipelajari di pertemuan lain.</div><div class="en"><b>Area</b> = the region inside (blue). Units: cm², m². Area is studied in another lesson.</div></div></div>
+    </div>
+    <div class="tip"><div class="bi"><div class="id">💡 Cara cepat membedakan: “Apakah benda itu <b>mengikuti tepi</b>? → keliling. Apakah benda itu <b>menutupi permukaan</b>? → luas.”</div><div class="en">💡 Quick check: “Does it <b>follow the edge</b>? → perimeter. Does it <b>cover the surface</b>? → area.”</div></div></div>
+  </div>
+
+  <div class="subhead"><h3>✍️ Latihan · <i>Exercises</i></h3><span class="score" id="score-intro"></span></div>
+  <div id="q-intro"></div>
+  <div class="nextbar"><button class="btn ghost" data-go="s-warmup">⬅ Kembali · <i>Back</i></button><button class="btn" data-go="s-prior">Lanjut · <i>Next</i> ➜</button></div>
+</section>
+
+<!-- ================= PRIOR KNOWLEDGE ================= -->
+<section class="section" id="s-prior">
+  <div class="hero g3"><span class="badge">⏱ 00:15–00:20</span>
+    <h2>🧠 Review of Prior Knowledge</h2><div class="en">Mengulang Pengetahuan Sebelumnya · <i>Shapes and the properties of their sides</i></div>
+    <svg class="deco" width="120" height="90" viewBox="0 0 120 90"><polygon points="10,80 50,80 30,40" fill="#fff" opacity=".85"/><rect x="60" y="40" width="40" height="40" fill="#fde68a"/><circle cx="90" cy="20" r="12" fill="#fff" opacity=".6"/></svg>
+  </div>
+  <div class="card goal"><b>🎯 Tujuan · <i>Goal</i></b>
+    <div class="bi"><div class="id">Mengingat nama-nama bangun datar dan sifat sisinya, terutama sisi mana yang <b>sama panjang</b>. Ini membantu kita menghitung keliling dengan cepat.</div><div class="en">Recall the names of plane shapes and the properties of their sides, especially which sides are <b>equal</b>. This helps us calculate perimeter quickly.</div></div>
+  </div>
+  <div class="card">
+    <h3>🔷 Bangun Datar dan Sifat Sisinya <span class="en">Plane Shapes and Their Side Properties</span></h3>
+    <div class="tip"><div class="bi"><div class="id">Garis kecil (|, ||) pada gambar menandai sisi-sisi yang <b>sama panjang</b>.</div><div class="en">Small tick marks (|, ||) in a figure mark sides that are <b>equal in length</b>.</div></div></div>
+    <div class="shapes">
+      <div class="shape-card"><div class="fig" data-fig="sq"></div><h4>Persegi<i>Square</i></h4><p>4 sisi sama panjang, 4 sudut siku-siku.</p><p class="en">4 equal sides, 4 right angles.</p></div>
+      <div class="shape-card"><div class="fig" data-fig="rect"></div><h4>Persegi panjang<i>Rectangle</i></h4><p>2 sisi panjang ($p$) sama, 2 sisi lebar ($l$) sama.</p><p class="en">2 equal lengths ($p$), 2 equal widths ($l$).</p></div>
+      <div class="shape-card"><div class="fig" data-fig="tri"></div><h4>Segitiga<i>Triangle</i></h4><p>3 sisi, panjangnya bisa berbeda.</p><p class="en">3 sides, which may be different lengths.</p></div>
+      <div class="shape-card"><div class="fig" data-fig="triEq"></div><h4>Segitiga sama sisi<i>Equilateral triangle</i></h4><p>3 sisi sama panjang.</p><p class="en">3 equal sides.</p></div>
+      <div class="shape-card"><div class="fig" data-fig="triIso"></div><h4>Segitiga sama kaki<i>Isosceles triangle</i></h4><p>2 sisi (kaki) sama panjang.</p><p class="en">2 equal sides (legs).</p></div>
+      <div class="shape-card"><div class="fig" data-fig="para"></div><h4>Jajar genjang<i>Parallelogram</i></h4><p>Sisi yang berhadapan sama panjang.</p><p class="en">Opposite sides are equal.</p></div>
+      <div class="shape-card"><div class="fig" data-fig="rhombus"></div><h4>Belah ketupat<i>Rhombus</i></h4><p>4 sisi sama panjang.</p><p class="en">4 equal sides.</p></div>
+      <div class="shape-card"><div class="fig" data-fig="kite"></div><h4>Layang-layang<i>Kite</i></h4><p>2 pasang sisi berdekatan sama panjang.</p><p class="en">2 pairs of equal adjacent sides.</p></div>
+      <div class="shape-card"><div class="fig" data-fig="trap"></div><h4>Trapesium<i>Trapezium</i></h4><p>4 sisi, sepasang sisi sejajar; panjang sisi bisa berbeda-beda.</p><p class="en">4 sides, one pair of parallel sides; side lengths may all differ.</p></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🔍 Menemukan Sisi yang Tidak Ditulis <span class="en">Finding Sides That Are Not Labelled</span></h3>
+    <div class="flex"><div class="fig" data-fig="exRect"></div>
+    <div class="ex"><div class="exh">Contoh 1 · <i>Example 1</i></div>
+      <div class="bi"><div class="id">Persegi panjang di samping hanya diberi label $12$ cm dan $5$ cm. Berapa panjang keempat sisinya?</div><div class="en">The rectangle shown only has labels $12$ cm and $5$ cm. What are the lengths of all four sides?</div></div>
+      <ol class="steps">
+        <li><div class="bi"><div class="id">Sisi berhadapan sama panjang. Sisi atas berhadapan dengan sisi bawah ($12$ cm).</div><div class="en">Opposite sides are equal. The top side is opposite the bottom side ($12$ cm).</div></div></li>
+        <li><div class="bi"><div class="id">Sisi kiri berhadapan dengan sisi kanan ($5$ cm).</div><div class="en">The left side is opposite the right side ($5$ cm).</div></div></li>
+        <li><div class="bi"><div class="id">Keempat sisi: $12, 5, 12, 5$ (dalam cm).</div><div class="en">All four sides: $12, 5, 12, 5$ (in cm).</div></div></li>
+      </ol></div></div>
+    <div class="ex"><div class="exh">Contoh 2 · <i>Example 2</i></div>
+      <div class="flex"><div class="fig" data-fig="exSq"></div>
+      <div><div class="bi"><div class="id">Persegi dengan satu sisi $7$ cm → semua sisinya $7$ cm, karena persegi punya 4 sisi sama panjang (lihat tanda |).</div><div class="en">A square with one side of $7$ cm → all its sides are $7$ cm, because a square has 4 equal sides (see the | marks).</div></div>
+      <div class="bi"><div class="id">Segitiga sama sisi dengan satu sisi $7$ cm → ketiga sisinya $7$ cm.</div><div class="en">An equilateral triangle with one side of $7$ cm → all three sides are $7$ cm.</div></div></div></div>
+    </div>
+  </div>
+  <div class="subhead"><h3>✍️ Latihan · <i>Exercises</i></h3><span class="score" id="score-prior"></span></div>
+  <div id="q-prior"></div>
+  <div class="nextbar"><button class="btn ghost" data-go="s-intro">⬅ Kembali · <i>Back</i></button><button class="btn" data-go="s-problem">Lanjut · <i>Next</i> ➜</button></div>
+</section>
+
+<!-- ================= PROBLEM INTRODUCTION ================= -->
+<section class="section" id="s-problem">
+  <div class="hero g4"><span class="badge">⏱ 00:20–00:25</span>
+    <h2>🧩 Problem Introduction</h2><div class="en">Pengenalan Masalah · <i>How much fence does Mr. Arif need?</i></div>
+    <svg class="deco" width="120" height="90" viewBox="0 0 120 90"><g stroke="#fff" stroke-width="4"><line x1="10" y1="70" x2="110" y2="70"/><line x1="10" y1="45" x2="110" y2="45"/></g><g fill="#fde68a"><rect x="14" y="30" width="10" height="50"/><rect x="44" y="30" width="10" height="50"/><rect x="74" y="30" width="10" height="50"/><rect x="100" y="30" width="10" height="50"/></g></svg>
+  </div>
+  <div class="card goal"><b>🎯 Tujuan · <i>Goal</i></b>
+    <div class="bi"><div class="id">Menyelesaikan masalah nyata dengan cara <b>menjumlahkan semua panjang sisi</b>, memakai langkah-langkah pemecahan masalah.</div><div class="en">Solve a real problem by <b>adding all the side lengths</b>, using problem-solving steps.</div></div>
+  </div>
+  <div class="card">
+    <h3>🚧 Masalah: Pagar Kebun Pak Arif <span class="en">Problem: Mr. Arif's Garden Fence</span></h3>
+    <div class="flex"><div class="fig" data-fig="garden"></div>
+    <div><div class="bi"><div class="id">Pak Arif memiliki kebun sayur berbentuk persegi panjang dengan panjang $15$ m dan lebar $8$ m. Ia ingin memasang pagar kawat mengelilingi kebunnya. Berapa meter kawat yang ia butuhkan?</div><div class="en">Mr. Arif has a rectangular vegetable garden that is $15$ m long and $8$ m wide. He wants to put a wire fence all around it. How many metres of wire does he need?</div></div></div></div>
+    <table class="tbl">
+      <tr><th style="width:28%">Langkah · <i>Step</i></th><th>Penyelesaian · <i>Solution</i></th></tr>
+      <tr><td>1. Pahami<br><i>Understand</i></td><td><div class="bi"><div class="id"><b>Diketahui:</b> panjang $15$ m, lebar $8$ m. <b>Ditanya:</b> panjang kawat = keliling kebun.</div><div class="en"><b>Known:</b> length $15$ m, width $8$ m. <b>Asked:</b> length of wire = perimeter of the garden.</div></div></td></tr>
+      <tr><td>2. Rencanakan<br><i>Plan</i></td><td><div class="bi"><div class="id">Pagar mengikuti semua tepi, jadi jumlahkan keempat sisi: $15, 8, 15, 8$.</div><div class="en">The fence follows every edge, so add all four sides: $15, 8, 15, 8$.</div></div></td></tr>
+      <tr><td>3. Hitung<br><i>Calculate</i></td><td>$K = 15 + 8 + 15 + 8 = 23 + 23 = 46$</td></tr>
+      <tr><td>4. Jawab &amp; periksa<br><i>Answer &amp; check</i></td><td><div class="bi"><div class="id">Kawat yang dibutuhkan $46$ m. Cek: $2 \times 23 = 46$ ✓.</div><div class="en">The wire needed is $46$ m. Check: $2 \times 23 = 46$ ✓.</div></div></td></tr>
+    </table>
+    <div class="ex"><div class="exh">Lanjutan: biaya · <i>Extension: cost</i></div>
+      <div class="bi"><div class="id">Jika harga kawat Rp10.000 per meter, berapa biayanya? Kalikan panjang kawat dengan harga per meter.</div><div class="en">If the wire costs Rp10.000 per metre, what is the cost? Multiply the wire length by the price per metre.</div></div>
+      <div class="formula" style="font-size:1rem">$46 \times 10.000 = 460.000$</div>
+      <div class="bi"><div class="id">Jadi, biayanya Rp460.000.</div><div class="en">So, the cost is Rp460.000 (Rp460,000).</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🧮 Gagasan Utama <span class="en">Key Idea</span></h3>
+    <div class="formula"><span class="lbl">KELILING SEMUA BANGUN · <i>PERIMETER OF ANY SHAPE</i></span>$K = \text{sisi}_1 + \text{sisi}_2 + \text{sisi}_3 + \ldots$
+      <div class="en" style="font-size:.85rem">$K$ = side 1 + side 2 + side 3 + … (add every side once)</div></div>
+    <div class="flex"><div class="fig" data-fig="penta"></div>
+    <div class="ex"><div class="exh">Contoh 2 · <i>Example 2</i> — Segi lima · <i>Pentagon</i></div>
+      <ol class="steps">
+        <li><div class="bi"><div class="id">Hitung banyak sisi: ada $5$ sisi. Tandai setiap sisi setelah dijumlahkan agar tidak ada yang terlewat.</div><div class="en">Count the sides: there are $5$. Tick each side after adding it so none is missed.</div></div></li>
+        <li>$K = 7 + 5 + 6 + 7 + 5 = 30$</li>
+        <li><div class="bi"><div class="id">Kelilingnya $30$ cm.</div><div class="en">The perimeter is $30$ cm.</div></div></li>
+      </ol></div></div>
+    <div class="flex"><div class="fig" data-fig="grid3x2"></div>
+    <div class="ex"><div class="exh">Contoh 3 · <i>Example 3</i> — Petak · <i>Grid</i></div>
+      <ol class="steps">
+        <li><div class="bi"><div class="id">Setiap sisi petak $1$ cm. Hitung ruas garis tepi (cokelat), jangan hitung garis di dalam.</div><div class="en">Each grid side is $1$ cm. Count the brown edge segments; do not count lines inside.</div></div></li>
+        <li><div class="bi"><div class="id">Atas $3$, kanan $2$, bawah $3$, kiri $2$.</div><div class="en">Top $3$, right $2$, bottom $3$, left $2$.</div></div></li>
+        <li>$K = 3 + 2 + 3 + 2 = 10 \text{ cm}$</li>
+      </ol></div></div>
+  </div>
+  <div class="subhead"><h3>✍️ Latihan · <i>Exercises</i></h3><span class="score" id="score-problem"></span></div>
+  <div id="q-problem"></div>
+  <div class="nextbar"><button class="btn ghost" data-go="s-prior">⬅ Kembali · <i>Back</i></button><button class="btn" data-go="s-guided">Lanjut · <i>Next</i> ➜</button></div>
+</section>
+
+<!-- ================= GUIDED PRACTICE ================= -->
+<section class="section" id="s-guided">
+  <div class="hero g5"><span class="badge">⏱ 00:25–00:40</span>
+    <h2>🤝 Guided Practice</h2><div class="en">Latihan Terbimbing · <i>Perimeter formulas for each shape</i></div>
+    <svg class="deco" width="120" height="90" viewBox="0 0 120 90"><text x="6" y="52" font-size="30" font-weight="800" fill="#fff">K = 4s</text></svg>
+  </div>
+  <div class="card goal"><b>🎯 Tujuan · <i>Goal</i></b>
+    <div class="bi"><div class="id">Menggunakan rumus singkat keliling untuk persegi, persegi panjang, segitiga, jajar genjang, belah ketupat, layang-layang, dan trapesium.</div><div class="en">Use short perimeter formulas for squares, rectangles, triangles, parallelograms, rhombuses, kites and trapeziums.</div></div>
+  </div>
+  <div class="card">
+    <h3>💡 Dari Penjumlahan ke Rumus <span class="en">From Adding to a Formula</span></h3>
+    <div class="bi"><div class="id">Rumus hanyalah cara singkat menjumlahkan sisi. Jika ada sisi yang sama panjang, penjumlahan berulang bisa diganti dengan perkalian.</div><div class="en">A formula is just a short way to add the sides. When sides are equal, repeated addition can be replaced by multiplication.</div></div>
+    <div class="formula" style="font-size:1rem">$s + s + s + s = 4 \times s \qquad p + l + p + l = 2 \times (p + l)$</div>
+  </div>
+  <div class="card">
+    <h3>📐 Rumus Keliling <span class="en">Perimeter Formulas</span></h3>
+    <div class="shapes">
+      <div class="shape-card"><div class="fig" data-fig="sq"></div><h4>Persegi<i>Square</i></h4><div class="k">$K = 4 \times s$</div></div>
+      <div class="shape-card"><div class="fig" data-fig="rect"></div><h4>Persegi panjang<i>Rectangle</i></h4><div class="k">$K = 2 \times (p + l)$</div><p>atau · <i>or</i> $K = 2 \times p + 2 \times l$</p></div>
+      <div class="shape-card"><div class="fig" data-fig="tri"></div><h4>Segitiga<i>Triangle</i></h4><div class="k">$K = a + b + c$</div></div>
+      <div class="shape-card"><div class="fig" data-fig="triEq"></div><h4>Segitiga sama sisi<i>Equilateral triangle</i></h4><div class="k">$K = 3 \times s$</div></div>
+      <div class="shape-card"><div class="fig" data-fig="triIso"></div><h4>Segitiga sama kaki<i>Isosceles triangle</i></h4><div class="k">$K = 2 \times a + b$</div><p>$a$ = kaki · <i>leg</i>, $b$ = alas · <i>base</i></p></div>
+      <div class="shape-card"><div class="fig" data-fig="para"></div><h4>Jajar genjang<i>Parallelogram</i></h4><div class="k">$K = 2 \times (a + b)$</div></div>
+      <div class="shape-card"><div class="fig" data-fig="rhombus"></div><h4>Belah ketupat<i>Rhombus</i></h4><div class="k">$K = 4 \times s$</div></div>
+      <div class="shape-card"><div class="fig" data-fig="kite"></div><h4>Layang-layang<i>Kite</i></h4><div class="k">$K = 2 \times (a + b)$</div></div>
+      <div class="shape-card"><div class="fig" data-fig="trap"></div><h4>Trapesium<i>Trapezium</i></h4><div class="k">$K = a + b + c + d$</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🧑‍🏫 Contoh Soal &amp; Langkah Penyelesaian <span class="en">Worked Examples &amp; Solution Steps</span></h3>
+    <div class="tip"><div class="bi"><div class="id">Langkah tetap: <b>(1)</b> tulis rumus, <b>(2)</b> ganti huruf dengan angka (substitusi), <b>(3)</b> hitung (kurung dulu), <b>(4)</b> tulis satuan.</div><div class="en">Fixed steps: <b>(1)</b> write the formula, <b>(2)</b> replace letters with numbers (substitute), <b>(3)</b> calculate (brackets first), <b>(4)</b> write the unit.</div></div></div>
+    <div class="ex"><div class="exh">Contoh 1 · <i>Example 1</i> — Persegi $s = 7$ cm · <i>Square $s = 7$ cm</i></div>
+      <ol class="steps"><li>$K = 4 \times s$</li><li>$K = 4 \times 7$</li><li>$K = 28$</li><li><div class="bi"><div class="id">Keliling $= 28$ cm.</div><div class="en">Perimeter $= 28$ cm.</div></div></li></ol></div>
+    <div class="ex"><div class="exh">Contoh 2 · <i>Example 2</i> — Persegi panjang $p = 12$ cm, $l = 5$ cm · <i>Rectangle</i></div>
+      <ol class="steps"><li>$K = 2 \times (p + l)$</li><li>$K = 2 \times (12 + 5)$</li><li>$K = 2 \times 17 = 34$</li><li><div class="bi"><div class="id">Keliling $= 34$ cm.</div><div class="en">Perimeter $= 34$ cm.</div></div></li></ol>
+      <div class="warn"><div class="bi"><div class="id">❗ Kesalahan umum: $2 \times 12 + 5 = 29$ (lupa kurung) atau $12 \times 5 = 60$ (itu luas).</div><div class="en">❗ Common mistakes: $2 \times 12 + 5 = 29$ (forgetting the brackets) or $12 \times 5 = 60$ (that is area).</div></div></div></div>
+    <div class="ex"><div class="exh">Contoh 3 · <i>Example 3</i> — Segitiga · <i>Triangles</i></div>
+      <ol class="steps">
+        <li><div class="bi"><div class="id">Segitiga dengan sisi $6, 8, 10$ cm: $K = 6 + 8 + 10 = 24$ cm.</div><div class="en">A triangle with sides $6, 8, 10$ cm: $K = 6 + 8 + 10 = 24$ cm.</div></div></li>
+        <li><div class="bi"><div class="id">Segitiga sama sisi $s = 9$ cm: $K = 3 \times 9 = 27$ cm.</div><div class="en">An equilateral triangle $s = 9$ cm: $K = 3 \times 9 = 27$ cm.</div></div></li>
+        <li><div class="bi"><div class="id">Segitiga sama kaki, kaki $13$ cm, alas $10$ cm: $K = 2 \times 13 + 10 = 26 + 10 = 36$ cm.</div><div class="en">An isosceles triangle, legs $13$ cm, base $10$ cm: $K = 2 \times 13 + 10 = 26 + 10 = 36$ cm.</div></div></li>
+      </ol></div>
+    <div class="ex"><div class="exh">Contoh 4 · <i>Example 4</i> — Segi empat lain · <i>Other quadrilaterals</i></div>
+      <ol class="steps">
+        <li><div class="bi"><div class="id">Jajar genjang, sisi $10$ cm dan $6$ cm: $K = 2 \times (10 + 6) = 2 \times 16 = 32$ cm.</div><div class="en">Parallelogram, sides $10$ cm and $6$ cm: $K = 2 \times (10 + 6) = 2 \times 16 = 32$ cm.</div></div></li>
+        <li><div class="bi"><div class="id">Belah ketupat $s = 8$ cm: $K = 4 \times 8 = 32$ cm.</div><div class="en">Rhombus $s = 8$ cm: $K = 4 \times 8 = 32$ cm.</div></div></li>
+        <li><div class="bi"><div class="id">Layang-layang, sisi $5$ cm dan $9$ cm: $K = 2 \times (5 + 9) = 2 \times 14 = 28$ cm.</div><div class="en">Kite, sides $5$ cm and $9$ cm: $K = 2 \times (5 + 9) = 2 \times 14 = 28$ cm.</div></div></li>
+        <li><div class="bi"><div class="id">Trapesium, sisi $12, 7, 5, 6$ cm: $K = 12 + 7 + 5 + 6 = 30$ cm.</div><div class="en">Trapezium, sides $12, 7, 5, 6$ cm: $K = 12 + 7 + 5 + 6 = 30$ cm.</div></div></li>
+      </ol></div>
+  </div>
+  <div class="subhead"><h3>✍️ Latihan · <i>Exercises</i></h3><span class="score" id="score-guided"></span></div>
+  <div id="q-guided"></div>
+  <div class="nextbar"><button class="btn ghost" data-go="s-problem">⬅ Kembali · <i>Back</i></button><button class="btn" data-go="s-indep">Lanjut · <i>Next</i> ➜</button></div>
+</section>
+
+<!-- ================= INDEPENDENT PRACTICE ================= -->
+<section class="section" id="s-indep">
+  <div class="hero g6"><span class="badge">⏱ 00:40–00:55</span>
+    <h2>🚀 Independent Practice</h2><div class="en">Latihan Mandiri · <i>Missing sides, composite shapes and word problems</i></div>
+    <svg class="deco" width="120" height="90" viewBox="0 0 120 90"><polygon points="10,80 100,80 100,50 60,50 60,15 10,15" fill="none" stroke="#fff" stroke-width="4"/><text x="72" y="44" font-size="20" fill="#fde68a" font-weight="800">?</text></svg>
+  </div>
+  <div class="card goal"><b>🎯 Tujuan · <i>Goal</i></b>
+    <div class="bi"><div class="id">Mencari sisi yang belum diketahui jika keliling diketahui, menghitung keliling bangun gabungan, dan menyelesaikan soal cerita.</div><div class="en">Find an unknown side when the perimeter is given, calculate the perimeter of composite shapes, and solve word problems.</div></div>
+  </div>
+  <div class="card">
+    <h3>🔄 A. Mencari Sisi dari Keliling <span class="en">A. Finding a Side from the Perimeter</span></h3>
+    <div class="bi"><div class="id">Kita “membalik” rumus: perkalian dibalik menjadi pembagian, penjumlahan dibalik menjadi pengurangan.</div><div class="en">We “reverse” the formula: multiplication becomes division, addition becomes subtraction.</div></div>
+    <div class="formula" style="font-size:1rem"><span class="lbl">RUMUS BALIK · <i>REVERSED FORMULAS</i></span>
+      $s_{\text{persegi}} = K : 4 \qquad s_{\text{segitiga sama sisi}} = K : 3$<br>$l = K : 2 - p \qquad \text{kaki} = (K - \text{alas}) : 2$
+      <div class="en" style="font-size:.82rem">square side $= K : 4$ · equilateral triangle side $= K : 3$ · width $= K : 2 - p$ · leg $= (K - \text{base}) : 2$</div></div>
+    <div class="ex"><div class="exh">Contoh 1 · <i>Example 1</i> — Persegi $K = 48$ cm · <i>Square</i></div>
+      <ol class="steps"><li>$s = K : 4 = 48 : 4 = 12$</li><li><div class="bi"><div class="id">Cek: $4 \times 12 = 48$ ✓. Sisi $= 12$ cm.</div><div class="en">Check: $4 \times 12 = 48$ ✓. Side $= 12$ cm.</div></div></li></ol></div>
+    <div class="ex"><div class="exh">Contoh 2 · <i>Example 2</i> — Persegi panjang $K = 50$ cm, $p = 15$ cm · <i>Rectangle</i></div>
+      <ol class="steps">
+        <li><div class="bi"><div class="id">Keliling adalah $2$ kali $(p + l)$, jadi bagi $2$: $p + l = 50 : 2 = 25$.</div><div class="en">The perimeter is $2$ times $(p + l)$, so divide by $2$: $p + l = 50 : 2 = 25$.</div></div></li>
+        <li>$l = 25 - 15 = 10$</li>
+        <li><div class="bi"><div class="id">Cek: $2 \times (15 + 10) = 50$ ✓. Lebar $= 10$ cm.</div><div class="en">Check: $2 \times (15 + 10) = 50$ ✓. Width $= 10$ cm.</div></div></li>
+      </ol></div>
+    <div class="ex"><div class="exh">Contoh 3 · <i>Example 3</i> — Segitiga · <i>Triangles</i></div>
+      <div class="flex"><div class="fig" data-fig="exTriIso"></div>
+      <ol class="steps">
+        <li><div class="bi"><div class="id">Segitiga sama kaki $K = 40$ cm, alas $10$ cm. Kurangi alas: $40 - 10 = 30$.</div><div class="en">Isosceles triangle $K = 40$ cm, base $10$ cm. Subtract the base: $40 - 10 = 30$.</div></div></li>
+        <li><div class="bi"><div class="id">Sisa untuk $2$ kaki: $30 : 2 = 15$. Setiap kaki $15$ cm.</div><div class="en">The rest is for $2$ legs: $30 : 2 = 15$. Each leg is $15$ cm.</div></div></li>
+        <li><div class="bi"><div class="id">Segitiga sembarang $K = 30$ cm, dua sisi $8$ cm dan $12$ cm: sisi ketiga $= 30 - 8 - 12 = 10$ cm.</div><div class="en">Any triangle $K = 30$ cm, two sides $8$ cm and $12$ cm: third side $= 30 - 8 - 12 = 10$ cm.</div></div></li>
+      </ol></div></div>
+  </div>
+  <div class="card">
+    <h3>🧱 B. Keliling Bangun Gabungan <span class="en">B. Perimeter of Composite Shapes</span></h3>
+    <div class="bi"><div class="id">Bangun gabungan dibentuk dari beberapa bangun. Kelilingnya hanya garis <b>tepi luar</b>. Sisi yang menempel di dalam <b>tidak</b> dihitung.</div><div class="en">A composite shape is made of several shapes. Its perimeter is only the <b>outer edge</b>. Sides joined on the inside are <b>not</b> counted.</div></div>
+    <div class="flex"><div class="fig" data-fig="exL"></div>
+    <div class="ex"><div class="exh">Contoh 4 · <i>Example 4</i> — Bangun L · <i>L-shape</i></div>
+      <ol class="steps">
+        <li><div class="bi"><div class="id">Sisi mendatar: bawah $= $ atas $+ \; a$, jadi $a = 10 - 6 = 4$ cm.</div><div class="en">Horizontal sides: bottom $=$ top $+ \; a$, so $a = 10 - 6 = 4$ cm.</div></div></li>
+        <li><div class="bi"><div class="id">Sisi tegak: kiri $=$ kanan $+ \; b$, jadi $b = 8 - 5 = 3$ cm.</div><div class="en">Vertical sides: left $=$ right $+ \; b$, so $b = 8 - 5 = 3$ cm.</div></div></li>
+        <li><div class="bi"><div class="id">Jumlahkan keenam sisi:</div><div class="en">Add all six sides:</div></div>$K = 10 + 5 + 4 + 3 + 6 + 8 = 36$</li>
+        <li><div class="bi"><div class="id">Keliling $= 36$ cm.</div><div class="en">Perimeter $= 36$ cm.</div></div></li>
+      </ol></div></div>
+    <div class="tip"><div class="bi"><div class="id">💡 Untuk bangun yang semua sudutnya siku-siku (seperti huruf L), jumlah sisi mendatar atas = jumlah sisi mendatar bawah, dan jumlah sisi tegak kiri = jumlah sisi tegak kanan.</div><div class="en">💡 For shapes where every corner is a right angle (like an L), the top horizontal sides add up to the bottom horizontal side, and the left vertical sides add up to the right vertical sides.</div></div></div>
+    <div class="ex"><div class="exh">Contoh 5 · <i>Example 5</i> — Dua persegi ditempel · <i>Two squares joined</i></div>
+      <div class="bi"><div class="id">Dua persegi bersisi $4$ cm ditempel berdampingan menjadi persegi panjang $8$ cm × $4$ cm. Sisi tempelan ada di dalam, jadi $K = 2 \times (8 + 4) = 24$ cm (bukan $16 + 16 = 32$ cm).</div><div class="en">Two squares with $4$ cm sides joined side by side make an $8$ cm × $4$ cm rectangle. The joined side is inside, so $K = 2 \times (8 + 4) = 24$ cm (not $16 + 16 = 32$ cm).</div></div></div>
+  </div>
+  <div class="card">
+    <h3>📖 C. Soal Cerita <span class="en">C. Word Problems</span></h3>
+    <div class="flex"><div class="fig" data-fig="field"></div>
+    <div class="ex"><div class="exh">Contoh 6 · <i>Example 6</i> — Berlari beberapa putaran · <i>Running several laps</i></div>
+      <div class="bi"><div class="id">Lapangan $100$ m × $60$ m. Andi berlari $3$ putaran. Berapa jarak yang ditempuh?</div><div class="en">A field is $100$ m × $60$ m. Andi runs $3$ laps. How far does he run?</div></div>
+      <ol class="steps">
+        <li><div class="bi"><div class="id">$1$ putaran = keliling: $K = 2 \times (100 + 60) = 2 \times 160 = 320$ m.</div><div class="en">$1$ lap = the perimeter: $K = 2 \times (100 + 60) = 2 \times 160 = 320$ m.</div></div></li>
+        <li><div class="bi"><div class="id">$3$ putaran: $3 \times 320 = 960$ m.</div><div class="en">$3$ laps: $3 \times 320 = 960$ m.</div></div></li>
+      </ol></div></div>
+    <div class="ex"><div class="exh">Contoh 7 · <i>Example 7</i> — Membandingkan keliling · <i>Comparing perimeters</i></div>
+      <div class="bi"><div class="id">Mana yang kelilingnya $20$ cm: persegi $s = 5$, persegi panjang $7 \times 3$, atau segitiga $5, 6, 8$? Hitung satu per satu:</div><div class="en">Which has a perimeter of $20$ cm: a square $s = 5$, a $7 \times 3$ rectangle, or a $5, 6, 8$ triangle? Work out each one:</div></div>
+      <div class="formula" style="font-size:1rem">$4 \times 5 = 20 \; ✓ \qquad 2 \times (7 + 3) = 20 \; ✓ \qquad 5 + 6 + 8 = 19 \; \color{#dc2626}{\textbf{X}}$</div></div>
+  </div>
+  <div class="subhead"><h3>✍️ Latihan · <i>Exercises</i></h3><span class="score" id="score-indep"></span></div>
+  <div id="q-indep"></div>
+  <div class="nextbar"><button class="btn ghost" data-go="s-guided">⬅ Kembali · <i>Back</i></button><button class="btn" data-go="s-consol">Lanjut · <i>Next</i> ➜</button></div>
+</section>
+
+<!-- ================= CONSOLIDATION ================= -->
+<section class="section" id="s-consol">
+  <div class="hero g7"><span class="badge">⏱ 00:55–01:00</span>
+    <h2>🏁 Consolidation &amp; Reflection</h2><div class="en">Penguatan &amp; Refleksi · <i>What did we learn today?</i></div>
+    <svg class="deco" width="100" height="90" viewBox="0 0 100 90"><text x="10" y="64" font-size="54">🏆</text></svg>
+  </div>
+  <div class="card">
+    <h3>📌 Poin Penting <span class="en">Key Points</span></h3>
+    <div class="keypts">
+      <div class="kp"><div class="ic">📏</div><div class="bi"><div class="id"><b>Keliling</b> adalah panjang seluruh garis tepi bangun datar.</div><div class="en"><b>Perimeter</b> is the total length of the edge of a plane shape.</div></div></div>
+      <div class="kp"><div class="ic">➕</div><div class="bi"><div class="id">Cara umum: jumlahkan semua sisi. $K = \text{sisi}_1 + \text{sisi}_2 + \ldots$</div><div class="en">General method: add all the sides. $K = \text{side}_1 + \text{side}_2 + \ldots$</div></div></div>
+      <div class="kp"><div class="ic">🟦</div><div class="bi"><div class="id">Persegi &amp; belah ketupat: $K = 4 \times s$. Persegi panjang: $K = 2 \times (p + l)$.</div><div class="en">Square &amp; rhombus: $K = 4 \times s$. Rectangle: $K = 2 \times (p + l)$.</div></div></div>
+      <div class="kp"><div class="ic">🔺</div><div class="bi"><div class="id">Segitiga: $K = a + b + c$; sama sisi $K = 3 \times s$; sama kaki $K = 2 \times a + b$.</div><div class="en">Triangle: $K = a + b + c$; equilateral $K = 3 \times s$; isosceles $K = 2 \times a + b$.</div></div></div>
+      <div class="kp"><div class="ic">🪁</div><div class="bi"><div class="id">Jajar genjang &amp; layang-layang: $K = 2 \times (a + b)$. Trapesium: $K = a + b + c + d$.</div><div class="en">Parallelogram &amp; kite: $K = 2 \times (a + b)$. Trapezium: $K = a + b + c + d$.</div></div></div>
+      <div class="kp"><div class="ic">🔄</div><div class="bi"><div class="id">Mencari sisi: balik rumusnya, misalnya $s = K : 4$ dan $l = K : 2 - p$.</div><div class="en">Finding a side: reverse the formula, e.g. $s = K : 4$ and $l = K : 2 - p$.</div></div></div>
+      <div class="kp"><div class="ic">🧱</div><div class="bi"><div class="id">Bangun gabungan: hanya tepi luar yang dihitung.</div><div class="en">Composite shapes: only the outer edge is counted.</div></div></div>
+      <div class="kp"><div class="ic">📐</div><div class="bi"><div class="id">Satuan keliling = satuan panjang (cm, m). Samakan satuan sebelum menghitung.</div><div class="en">Perimeter units = length units (cm, m). Use the same unit before calculating.</div></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🤔 Pertanyaan Refleksi <span class="en">Reflection Questions</span></h3>
+    <ol>
+      <li><div class="bi"><div class="id">Dengan kata-katamu sendiri, apakah keliling itu? Berikan satu contoh di rumahmu.</div><div class="en">In your own words, what is perimeter? Give one example from your home.</div></div><textarea class="refl" placeholder="Tulis jawabanmu… / Write your answer…"></textarea></li>
+      <li><div class="bi"><div class="id">Mengapa keliling persegi panjang dihitung dengan $2 \times (p + l)$, bukan $p \times l$?</div><div class="en">Why is the perimeter of a rectangle $2 \times (p + l)$ and not $p \times l$?</div></div><textarea class="refl" placeholder="Tulis jawabanmu… / Write your answer…"></textarea></li>
+      <li><div class="bi"><div class="id">Bagian mana yang paling mudah dan paling sulit hari ini? Apa yang akan kamu lakukan agar lebih paham?</div><div class="en">Which part was easiest and which was hardest today? What will you do to understand it better?</div></div><textarea class="refl" placeholder="Tulis jawabanmu… / Write your answer…"></textarea></li>
+    </ol>
+  </div>
+  <div class="card">
+    <h3>🎟️ Exit Ticket <span class="en">Tiket Keluar · <i>answer before you leave the class</i></span></h3>
+    <span class="score" id="score-exit"></span>
+    <div id="q-exit"></div>
+  </div>
+  <div class="card">
+    <h3>📚 Follow Up Practice <span class="en">Latihan Lanjutan di Rumah · <i>Practice at home</i></span></h3>
+    <ol>
+      <li><div class="bi"><div class="id">Ukur panjang dan lebar meja belajarmu, lalu hitung kelilingnya.</div><div class="en">Measure the length and width of your study desk, then calculate its perimeter.</div></div></li>
+      <li><div class="bi"><div class="id">Bingkai foto berukuran $30$ cm × $20$ cm. Berapa keliling bingkai?</div><div class="en">A photo frame is $30$ cm × $20$ cm. What is the perimeter of the frame?</div></div>
+        <details class="sol"><summary>💡 Jawaban · <i>Answer</i></summary><div class="solbody">$K = 2 \times (30 + 20) = 2 \times 50 = 100 \text{ cm}$</div></details></li>
+      <li><div class="bi"><div class="id">Sebuah taman berbentuk persegi kelilingnya $36$ m. Berapa panjang sisinya?</div><div class="en">A square park has a perimeter of $36$ m. How long is each side?</div></div>
+        <details class="sol"><summary>💡 Jawaban · <i>Answer</i></summary><div class="solbody">$s = 36 : 4 = 9 \text{ m}$</div></details></li>
+      <li><div class="bi"><div class="id">Trapesium memiliki sisi $10$ cm, $6$ cm, $7$ cm, dan $5$ cm. Hitung kelilingnya.</div><div class="en">A trapezium has sides of $10$ cm, $6$ cm, $7$ cm and $5$ cm. Calculate its perimeter.</div></div>
+        <details class="sol"><summary>💡 Jawaban · <i>Answer</i></summary><div class="solbody">$K = 10 + 6 + 7 + 5 = 28 \text{ cm}$</div></details></li>
+      <li><div class="bi"><div class="id">Kartu ucapan berbentuk persegi bersisi $12$ cm akan dihias pita di tepinya. Apakah pita $50$ cm cukup? Berapa sisanya?</div><div class="en">A square greeting card with $12$ cm sides will have ribbon around its edge. Is $50$ cm of ribbon enough? How much is left?</div></div>
+        <details class="sol"><summary>💡 Jawaban · <i>Answer</i></summary><div class="solbody">$K = 4 \times 12 = 48 \text{ cm}$<div class="bi"><div class="id">$48 < 50$, jadi pita cukup. Sisa $= 50 - 48 = 2$ cm.</div><div class="en">$48 < 50$, so the ribbon is enough. Left over $= 50 - 48 = 2$ cm.</div></div></div></details></li>
+    </ol>
+  </div>
+  <div class="nextbar"><button class="btn ghost" data-go="s-indep">⬅ Kembali · <i>Back</i></button><button class="btn" data-go="s-t1">Ke Task 1 · <i>Go to Task 1</i> ➜</button></div>
+</section>
+
+<!-- ================= TASKS ================= -->
+<section class="section" id="s-t1">
+  <div class="hero g8"><span class="badge">📘 10 soal · <i>10 questions</i></span><h2>Task 1 · Tugas 1</h2><div class="en">Konsep Keliling &amp; Menjumlahkan Sisi · <i>The idea of perimeter &amp; adding sides</i></div></div>
+  <details class="explain"><summary>📖 Penjelasan Materi · <i>Explanation</i> (klik untuk membuka · <i>click to open</i>)</summary><div class="in">
+    <div class="bi"><div class="id"><b>Keliling</b> = panjang seluruh garis tepi bangun. Satuannya satuan panjang (mm, cm, m, km), <b>bukan</b> cm² (itu luas).</div><div class="en"><b>Perimeter</b> = the total length of a shape's edge. Its units are units of length (mm, cm, m, km), <b>not</b> cm² (that is area).</div></div>
+    <div class="formula">$K = \text{sisi}_1 + \text{sisi}_2 + \text{sisi}_3 + \ldots$</div>
+    <ol class="steps">
+      <li><div class="bi"><div class="id">Hitung dulu banyak sisi bangun (segitiga $3$, segi empat $4$, segi lima $5$, segi enam $6$).</div><div class="en">First count the number of sides (triangle $3$, quadrilateral $4$, pentagon $5$, hexagon $6$).</div></div></li>
+      <li><div class="bi"><div class="id">Jumlahkan semua panjang sisi satu per satu. Contoh: sisi $3, 5, 4, 6, 2, 4$ → $3 + 5 + 4 + 6 + 2 + 4 = 24$.</div><div class="en">Add every side one by one. Example: sides $3, 5, 4, 6, 2, 4$ → $3 + 5 + 4 + 6 + 2 + 4 = 24$.</div></div></li>
+      <li><div class="bi"><div class="id">Pada petak, hitung ruas garis tepi saja (setiap ruas $1$ cm).</div><div class="en">On a grid, count only the edge segments (each segment is $1$ cm).</div></div></li>
+      <li><div class="bi"><div class="id">Berjalan $n$ putaran: jarak $= n \times K$.</div><div class="en">Walking $n$ laps: distance $= n \times K$.</div></div></li>
+    </ol></div></details>
+  <div class="subhead"><h3>✍️ Soal · <i>Questions</i></h3><span class="score" id="score-t1"></span></div>
+  <div id="q-t1"></div>
+  <div class="nextbar"><button class="btn ghost" data-go="s-consol">⬅ Kembali · <i>Back</i></button><button class="btn" data-go="s-t2">Task 2 ➜</button></div>
+</section>
+
+<section class="section" id="s-t2">
+  <div class="hero g5"><span class="badge">📗 10 soal · <i>10 questions</i></span><h2>Task 2 · Tugas 2</h2><div class="en">Keliling Persegi &amp; Persegi Panjang · <i>Perimeter of squares &amp; rectangles</i></div></div>
+  <details class="explain"><summary>📖 Penjelasan Materi · <i>Explanation</i> (klik untuk membuka · <i>click to open</i>)</summary><div class="in">
+    <div class="shapes">
+      <div class="shape-card"><div class="fig" data-fig="sq"></div><h4>Persegi<i>Square</i></h4><div class="k">$K = 4 \times s$</div><p>$s = K : 4$</p></div>
+      <div class="shape-card"><div class="fig" data-fig="rect"></div><h4>Persegi panjang<i>Rectangle</i></h4><div class="k">$K = 2 \times (p + l)$</div><p>$p + l = K : 2$</p></div>
+    </div>
+    <ol class="steps">
+      <li><div class="bi"><div class="id">Contoh persegi $s = 13$: $K = 4 \times 13 = 4 \times 10 + 4 \times 3 = 52$ cm.</div><div class="en">Square example $s = 13$: $K = 4 \times 13 = 4 \times 10 + 4 \times 3 = 52$ cm.</div></div></li>
+      <li><div class="bi"><div class="id">Contoh persegi panjang $9 \times 6$: tulis rumus → $2 \times (9 + 6)$ → $2 \times 15$ → $30$ cm.</div><div class="en">Rectangle example $9 \times 6$: write the formula → $2 \times (9 + 6)$ → $2 \times 15$ → $30$ cm.</div></div></li>
+      <li><div class="bi"><div class="id">Satuan berbeda? Samakan dulu: $2$ m $= 200$ cm.</div><div class="en">Different units? Make them the same first: $2$ m $= 200$ cm.</div></div></li>
+      <li><div class="bi"><div class="id">Trik mencari persegi panjang dengan keliling tertentu: $p + l$ harus sama dengan $K : 2$. Contoh $K = 30$ → $p + l = 15$.</div><div class="en">Trick for finding rectangles with a given perimeter: $p + l$ must equal $K : 2$. Example $K = 30$ → $p + l = 15$.</div></div></li>
+      <li><div class="bi"><div class="id">Keliling sama antara persegi dan persegi panjang: hitung keliling persegi panjang, lalu $s = K : 4$.</div><div class="en">Square and rectangle with equal perimeters: find the rectangle's perimeter, then $s = K : 4$.</div></div></li>
+    </ol>
+    <div class="warn"><div class="bi"><div class="id">❗ Jangan tertukar: $p \times l$ = luas, $p + l$ = setengah keliling.</div><div class="en">❗ Don't mix them up: $p \times l$ = area, $p + l$ = half the perimeter.</div></div></div></div></details>
+  <div class="subhead"><h3>✍️ Soal · <i>Questions</i></h3><span class="score" id="score-t2"></span></div>
+  <div id="q-t2"></div>
+  <div class="nextbar"><button class="btn ghost" data-go="s-t1">⬅ Task 1</button><button class="btn" data-go="s-t3">Task 3 ➜</button></div>
+</section>
+
+<section class="section" id="s-t3">
+  <div class="hero g4"><span class="badge">📙 10 soal · <i>10 questions</i></span><h2>Task 3 · Tugas 3</h2><div class="en">Segitiga, Jajar Genjang, Belah Ketupat, Layang-layang, Trapesium · <i>Triangles, parallelograms, rhombuses, kites, trapeziums</i></div></div>
+  <details class="explain"><summary>📖 Penjelasan Materi · <i>Explanation</i> (klik untuk membuka · <i>click to open</i>)</summary><div class="in">
+    <table class="tbl">
+      <tr><th>Bangun · <i>Shape</i></th><th>Rumus · <i>Formula</i></th><th>Contoh · <i>Example</i></th></tr>
+      <tr><td>Segitiga · <i>Triangle</i></td><td>$K = a + b + c$</td><td>$7 + 9 + 11 = 27$</td></tr>
+      <tr><td>Segitiga sama sisi · <i>Equilateral</i></td><td>$K = 3 \times s$</td><td>$3 \times 14 = 42$</td></tr>
+      <tr><td>Segitiga sama kaki · <i>Isosceles</i></td><td>$K = 2 \times \text{kaki} + \text{alas}$</td><td>$2 \times 10 + 6 = 26$</td></tr>
+      <tr><td>Jajar genjang · <i>Parallelogram</i></td><td>$K = 2 \times (a + b)$</td><td>$2 \times (12 + 8) = 40$</td></tr>
+      <tr><td>Belah ketupat · <i>Rhombus</i></td><td>$K = 4 \times s$</td><td>$4 \times 9 = 36$</td></tr>
+      <tr><td>Layang-layang · <i>Kite</i></td><td>$K = 2 \times (a + b)$</td><td>$2 \times (6 + 11) = 34$</td></tr>
+      <tr><td>Trapesium · <i>Trapezium</i></td><td>$K = a + b + c + d$</td><td>$14 + 10 + 8 + 9 = 41$</td></tr>
+    </table>
+    <div class="tip"><div class="bi"><div class="id">💡 Lihat tanda | atau || di gambar untuk mengetahui sisi yang sama panjang. Pada segitiga sama kaki, yang dikali $2$ adalah <b>kaki</b> (sisi yang sama), bukan alas.</div><div class="en">💡 Look for | or || marks to see equal sides. In an isosceles triangle, it is the <b>legs</b> (equal sides) that are multiplied by $2$, not the base.</div></div></div></div></details>
+  <div class="subhead"><h3>✍️ Soal · <i>Questions</i></h3><span class="score" id="score-t3"></span></div>
+  <div id="q-t3"></div>
+  <div class="nextbar"><button class="btn ghost" data-go="s-t2">⬅ Task 2</button><button class="btn" data-go="s-t4">Task 4 ➜</button></div>
+</section>
+
+<section class="section" id="s-t4">
+  <div class="hero g6"><span class="badge">📕 10 soal · <i>10 questions</i></span><h2>Task 4 · Tugas 4</h2><div class="en">Mencari Sisi yang Hilang &amp; Bangun Gabungan · <i>Missing sides &amp; composite shapes</i></div></div>
+  <details class="explain"><summary>📖 Penjelasan Materi · <i>Explanation</i> (klik untuk membuka · <i>click to open</i>)</summary><div class="in">
+    <ol class="steps">
+      <li><div class="bi"><div class="id">Persegi: $s = K : 4$. Contoh $K = 64$ → $s = 16$.</div><div class="en">Square: $s = K : 4$. Example $K = 64$ → $s = 16$.</div></div></li>
+      <li><div class="bi"><div class="id">Segitiga sama sisi: $s = K : 3$. Contoh $K = 45$ → $s = 15$.</div><div class="en">Equilateral triangle: $s = K : 3$. Example $K = 45$ → $s = 15$.</div></div></li>
+      <li><div class="bi"><div class="id">Persegi panjang: $p + l = K : 2$, lalu $l = (K : 2) - p$. Contoh $K = 54$, $p = 17$ → $27 - 17 = 10$.</div><div class="en">Rectangle: $p + l = K : 2$, then $l = (K : 2) - p$. Example $K = 54$, $p = 17$ → $27 - 17 = 10$.</div></div></li>
+      <li><div class="bi"><div class="id">Sisi ketiga segitiga: $K$ dikurangi dua sisi lain. Segitiga sama kaki: kaki $= (K - \text{alas}) : 2$.</div><div class="en">Third side of a triangle: $K$ minus the other two sides. Isosceles: leg $= (K - \text{base}) : 2$.</div></div></li>
+      <li><div class="bi"><div class="id">Bangun L/U: cari sisi yang hilang dengan pengurangan (sisi panjang − sisi pendek), lalu jumlahkan <b>semua</b> sisi tepi luar, termasuk dinding lekukan.</div><div class="en">L/U shapes: find missing sides by subtraction (long side − short side), then add <b>all</b> outer edges, including the notch walls.</div></div></li>
+      <li><div class="bi"><div class="id">Bangun yang ditempel: sisi tempelan berada di dalam, jadi tidak dihitung.</div><div class="en">Joined shapes: the joined side is inside, so it is not counted.</div></div></li>
+    </ol>
+    <div class="tip"><div class="bi"><div class="id">✅ Selalu cek jawaban dengan memasukkannya kembali ke rumus.</div><div class="en">✅ Always check your answer by putting it back into the formula.</div></div></div></div></details>
+  <div class="subhead"><h3>✍️ Soal · <i>Questions</i></h3><span class="score" id="score-t4"></span></div>
+  <div id="q-t4"></div>
+  <div class="nextbar"><button class="btn ghost" data-go="s-t3">⬅ Task 3</button><button class="btn" data-go="s-t5">Task 5 ➜</button></div>
+</section>
+
+<section class="section" id="s-t5">
+  <div class="hero g3"><span class="badge">📓 10 soal · <i>10 questions</i></span><h2>Task 5 · Tugas 5</h2><div class="en">Soal Cerita Keliling · <i>Perimeter word problems</i></div></div>
+  <details class="explain"><summary>📖 Penjelasan Materi · <i>Explanation</i> (klik untuk membuka · <i>click to open</i>)</summary><div class="in">
+    <table class="tbl">
+      <tr><th>Kata kunci · <i>Key words</i></th><th>Artinya · <i>Meaning</i></th><th>Cara hitung · <i>How to calculate</i></th></tr>
+      <tr><td>pagar, lis, renda, pita, bingkai<br><i>fence, border, lace, ribbon, frame</i></td><td>keliling · <i>perimeter</i></td><td>$K$</td></tr>
+      <tr><td>$n$ putaran · <i>$n$ laps</i></td><td>keliling dikali $n$ · <i>perimeter times $n$</i></td><td>$n \times K$</td></tr>
+      <tr><td>harga per meter · <i>price per metre</i></td><td>biaya · <i>cost</i></td><td>$K \times \text{harga}$</td></tr>
+      <tr><td>kawat dibentuk persegi · <i>wire bent into a square</i></td><td>panjang kawat $= K$</td><td>$s = K : 4$</td></tr>
+      <tr><td>pohon setiap … m di sekeliling · <i>a tree every … m around</i></td><td>jalur tertutup · <i>closed path</i></td><td>$K : \text{jarak}$</td></tr>
+      <tr><td>sisa kawat/pita · <i>wire/ribbon left</i></td><td>pengurangan · <i>subtraction</i></td><td>$\text{panjang} - K$</td></tr>
+    </table>
+    <div class="ex"><div class="exh">Contoh · <i>Example</i></div>
+      <div class="bi"><div class="id">Kebun $12$ m × $8$ m dipagari. Kawat $50$ m. Sisa? → $K = 2 \times (12 + 8) = 40$ m; sisa $= 50 - 40 = 10$ m.</div><div class="en">A $12$ m × $8$ m garden is fenced with $50$ m of wire. Left over? → $K = 2 \times (12 + 8) = 40$ m; left $= 50 - 40 = 10$ m.</div></div></div>
+    <div class="tip"><div class="bi"><div class="id">💡 Langkah: baca → tulis diketahui &amp; ditanya → hitung keliling → lakukan langkah tambahan (kali, bagi, kurang) → tulis jawaban + satuan.</div><div class="en">💡 Steps: read → write what is known &amp; asked → find the perimeter → do any extra step (multiply, divide, subtract) → write the answer + unit.</div></div></div></div></details>
+  <div class="subhead"><h3>✍️ Soal · <i>Questions</i></h3><span class="score" id="score-t5"></span></div>
+  <div id="q-t5"></div>
+  <div class="nextbar"><button class="btn ghost" data-go="s-t4">⬅ Task 4</button><span class="score">🎉 Selesai! · <i>All done!</i></span></div>
+</section>
+
+</main>
+</div>
+
+<script>
+/* ================= FIGURE HELPERS (pure string generators) ================= */
+function poly(pts, labels, o) {
+  o = o || {};
+  var W = o.w || 300, pad = o.pad || 40, padX = pad + 22, maxH = o.maxH || 190;
+  var xs = pts.map(function (p) { return p[0]; }), ys = pts.map(function (p) { return p[1]; });
+  var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+  var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+  var s = (W - 2 * padX) / ((maxX - minX) || 1);
+  if ((maxY - minY) * s > maxH) s = maxH / (maxY - minY);
+  var tw = (maxX - minX) * s + 2 * padX, th = (maxY - minY) * s + 2 * pad;
+  function T(p) { return [padX + (p[0] - minX) * s, pad + (maxY - p[1]) * s]; }
+  var P = pts.map(T), n = P.length, area = 0, i;
+  for (i = 0; i < n; i++) { var a = P[i], b = P[(i + 1) % n]; area += a[0] * b[1] - b[0] * a[1]; }
+  var fill = o.fill || "#dbeafe", stroke = o.stroke || "#1d4ed8";
+  var svg = '<svg class="shape" viewBox="0 0 ' + tw.toFixed(0) + ' ' + th.toFixed(0) + '" width="' + tw.toFixed(0) + '" role="img">';
+  svg += '<polygon points="' + P.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ') + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="3" stroke-linejoin="round"/>';
+  (o.dash || []).forEach(function (d) {
+    var A = T(d[0]), B = T(d[1]);
+    svg += '<line x1="' + A[0] + '" y1="' + A[1] + '" x2="' + B[0] + '" y2="' + B[1] + '" stroke="' + stroke + '" stroke-width="2" stroke-dasharray="6 5"/>';
+  });
+  for (i = 0; i < n; i++) {
+    var A = P[i], B = P[(i + 1) % n], dx = B[0] - A[0], dy = B[1] - A[1], L = Math.sqrt(dx * dx + dy * dy);
+    var nx = area > 0 ? dy / L : -dy / L, ny = area > 0 ? -dx / L : dx / L;
+    var mx = (A[0] + B[0]) / 2, my = (A[1] + B[1]) / 2;
+    var tk = o.ticks ? o.ticks[i] : 0;
+    for (var k = 0; k < (tk || 0); k++) {
+      var off = (k - (tk - 1) / 2) * 6, tx = mx + dx / L * off, ty = my + dy / L * off;
+      svg += '<line x1="' + (tx - nx * 6) + '" y1="' + (ty - ny * 6) + '" x2="' + (tx + nx * 6) + '" y2="' + (ty + ny * 6) + '" stroke="#b91c1c" stroke-width="2"/>';
+    }
+    var lab = labels ? labels[i] : null;
+    if (lab) {
+      var d0 = 12 + Math.abs(nx) * (lab.length * 4 + 4);
+      var col = lab.indexOf("?") >= 0 || /^[a-z]$/.test(lab) ? "#b91c1c" : "#0f172a";
+      svg += '<text x="' + (mx + nx * d0).toFixed(1) + '" y="' + (my + ny * d0).toFixed(1) + '" text-anchor="middle" dominant-baseline="middle" font-size="14" font-weight="700" fill="' + col + '">' + lab + '</text>';
+    }
+  }
+  svg += '</svg>';
+  if (o.note !== false) svg += '<div class="figcap">Gambar tidak sesuai skala · <i>Figure not drawn to scale</i></div>';
+  return svg;
+}
+function rectFig(p, l, lab, o) { // lab: [bottom,right,top,left]
+  return poly([[0, 0], [p, 0], [p, l], [0, l]], lab, o);
+}
+function gridFig(cells, o) {
+  o = o || {};
+  var u = o.u || 30, pad = 14, set = {}, maxX = 0, maxY = 0;
+  cells.forEach(function (c) { set[c[0] + ',' + c[1]] = 1; maxX = Math.max(maxX, c[0] + 1); maxY = Math.max(maxY, c[1] + 1); });
+  var gx = maxX + 1, gy = maxY + 1, W = gx * u + 2 * pad, H = gy * u + 2 * pad;
+  var svg = '<svg class="shape" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '">';
+  function X(x) { return pad + x * u; } function Y(y) { return pad + (gy - y) * u; }
+  for (var x = 0; x <= gx; x++) svg += '<line x1="' + X(x) + '" y1="' + Y(0) + '" x2="' + X(x) + '" y2="' + Y(gy) + '" stroke="#cbd5e1"/>';
+  for (var y = 0; y <= gy; y++) svg += '<line x1="' + X(0) + '" y1="' + Y(y) + '" x2="' + X(gx) + '" y2="' + Y(y) + '" stroke="#cbd5e1"/>';
+  cells.forEach(function (c) { svg += '<rect x="' + X(c[0]) + '" y="' + Y(c[1] + 1) + '" width="' + u + '" height="' + u + '" fill="#fde68a"/>'; });
+  cells.forEach(function (c) {
+    var x = c[0], y = c[1], e = [];
+    if (!set[x + ',' + (y - 1)]) e.push([x, y, x + 1, y]);
+    if (!set[x + ',' + (y + 1)]) e.push([x, y + 1, x + 1, y + 1]);
+    if (!set[(x - 1) + ',' + y]) e.push([x, y, x, y + 1]);
+    if (!set[(x + 1) + ',' + y]) e.push([x + 1, y, x + 1, y + 1]);
+    e.forEach(function (s) { svg += '<line x1="' + X(s[0]) + '" y1="' + Y(s[1]) + '" x2="' + X(s[2]) + '" y2="' + Y(s[3]) + '" stroke="#b45309" stroke-width="4" stroke-linecap="round"/>'; });
+  });
+  svg += '</svg><div class="figcap">1 sisi petak = 1 cm · <i>1 grid side = 1 cm</i></div>';
+  return svg;
+}
+function gridPerimeter(cells) {
+  var set = {}, p = 0;
+  cells.forEach(function (c) { set[c[0] + ',' + c[1]] = 1; });
+  cells.forEach(function (c) {
+    [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (d) { if (!set[(c[0] + d[0]) + ',' + (c[1] + d[1])]) p++; });
+  });
+  return p;
+}
+
+/* Shapes used repeatedly */
+var L_EX = [[0, 0], [10, 0], [10, 5], [6, 5], [6, 8], [0, 8]];
+var L_IND = [[0, 0], [12, 0], [12, 6], [7, 6], [7, 9], [0, 9]];
+var L_T4 = [[0, 0], [14, 0], [14, 6], [8, 6], [8, 10], [0, 10]];
+var U_T4 = [[0, 0], [12, 0], [12, 8], [8, 8], [8, 5], [4, 5], [4, 8], [0, 8]];
+var CELLS_5x3 = [], CELLS_3x2 = [], CELLS_L = [];
+(function () {
+  var x, y;
+  for (x = 0; x < 5; x++) for (y = 0; y < 3; y++) CELLS_5x3.push([x, y]);
+  for (x = 0; x < 3; x++) for (y = 0; y < 2; y++) CELLS_3x2.push([x, y]);
+  for (x = 0; x < 4; x++) for (y = 0; y < 2; y++) CELLS_L.push([x, y]);
+  CELLS_L.push([0, 2]); CELLS_L.push([1, 2]);
+})();
+
+/* ================= STATIC FIGURES (used in explanations) ================= */
+var FIGS = {
+  antBook: rectFig(20, 15, ["20 cm", "15 cm", "20 cm", "15 cm"], { fill: "#fef3c7", stroke: "#b45309" }),
+  cloth: rectFig(10, 10, ["1 m", "1 m", "1 m", "1 m"], { ticks: [1, 1, 1, 1], fill: "#fce7f3", stroke: "#be185d", maxH: 130, w: 220 }),
+  sq: rectFig(10, 10, ["s", "s", "s", "s"], { ticks: [1, 1, 1, 1], w: 200, maxH: 120, note: false }),
+  rect: rectFig(16, 9, ["p", "l", "p", "l"], { ticks: [2, 1, 2, 1], w: 240, maxH: 120, note: false }),
+  tri: poly([[0, 0], [12, 0], [4, 8]], ["a", "b", "c"], { w: 220, maxH: 130, note: false, fill: "#dcfce7", stroke: "#15803d" }),
+  triEq: poly([[0, 0], [10, 0], [5, 8.66]], ["s", "s", "s"], { ticks: [1, 1, 1], w: 200, maxH: 130, note: false, fill: "#dcfce7", stroke: "#15803d" }),
+  triIso: poly([[0, 0], [8, 0], [4, 10]], ["b", "a", "a"], { ticks: [0, 1, 1], w: 180, maxH: 140, note: false, fill: "#dcfce7", stroke: "#15803d" }),
+  para: poly([[0, 0], [12, 0], [15, 6], [3, 6]], ["a", "b", "a", "b"], { ticks: [2, 1, 2, 1], w: 240, maxH: 110, note: false, fill: "#ede9fe", stroke: "#6d28d9" }),
+  rhombus: poly([[0, 5], [6, 0], [12, 5], [6, 10]], ["s", "s", "s", "s"], { ticks: [1, 1, 1, 1], w: 200, maxH: 140, note: false, fill: "#ede9fe", stroke: "#6d28d9" }),
+  kite: poly([[0, 7], [5, 10], [10, 7], [5, 0]], ["a", "a", "b", "b"], { ticks: [1, 1, 2, 2], w: 180, maxH: 150, note: false, fill: "#ffedd5", stroke: "#c2410c" }),
+  trap: poly([[0, 0], [14, 0], [10, 6], [3, 6]], ["a", "b", "c", "d"], { w: 240, maxH: 110, note: false, fill: "#ffedd5", stroke: "#c2410c" }),
+  garden: rectFig(15, 8, ["15 m", "8 m", "15 m", "8 m"], { fill: "#dcfce7", stroke: "#15803d" }),
+  penta: poly([[0, 0], [7, 0], [9, 5], [4, 9], [-2, 5]], ["7 cm", "5 cm", "6 cm", "7 cm", "5 cm"], { w: 240 }),
+  grid3x2: gridFig(CELLS_3x2),
+  exSq: rectFig(10, 10, ["7 cm", null, null, null], { ticks: [1, 1, 1, 1], w: 200, maxH: 120 }),
+  exRect: rectFig(12, 5, ["12 cm", "5 cm", null, null], { w: 240, maxH: 110 }),
+  exL: poly(L_EX, ["10 cm", "5 cm", "a", "b", "6 cm", "8 cm"], { w: 360, maxH: 230 }),
+  exTriIso: poly([[0, 0], [10, 0], [5, 12]], ["10 cm", "?", "?"], { ticks: [0, 1, 1], w: 200, maxH: 150, fill: "#dcfce7", stroke: "#15803d" }),
+  field: rectFig(100, 60, ["100 m", "60 m", null, null], { fill: "#bbf7d0", stroke: "#166534", w: 260, maxH: 150 })
+};
+
+/* ================= QUESTIONS =================
+ types: mc, multi, fill, tf, sort, pair, drag
+ text: [id, en] bilingual or "string" (math/number, same in both)
+ sol: array of steps: [id,en] or "math string"
+*/
+var Q = {};
+
+/* ---------- SPIRAL REVIEW WARM-UP ---------- */
+Q.warmup = [
+  { t: "mc", q: ["Berapakah hasil dari $9 + 14 + 9 + 14$?", "What is the result of $9 + 14 + 9 + 14$?"],
+    opts: ["$46$", "$44$", "$36$", "$48$"], ans: 0,
+    sol: [["Pasangkan bilangan supaya mudah: $9$ dengan $14$.", "Pair the numbers to make it easy: $9$ with $14$."],
+      "$9 + 14 = 23$",
+      ["Ada dua pasangan yang sama, jadi kalikan dengan $2$.", "There are two identical pairs, so multiply by $2$."],
+      "$23 \\times 2 = 46$",
+      ["Jadi, $9 + 14 + 9 + 14 = 46$.", "So, $9 + 14 + 9 + 14 = 46$."]] },
+  { t: "fill", q: ["Hitunglah hasil perkalian berikut.", "Calculate the following multiplication."],
+    blanks: [{ pre: "$4 \\times 18 =$", ans: 72 }],
+    sol: [["Pecah $18$ menjadi $10 + 8$.", "Break $18$ into $10 + 8$."],
+      "$4 \\times 18 = 4 \\times 10 + 4 \\times 8$",
+      "$= 40 + 32 = 72$",
+      ["Jadi, $4 \\times 18 = 72$.", "So, $4 \\times 18 = 72$."]] },
+  { t: "pair", q: ["Jodohkan satuan panjang di kiri dengan nilai yang sama di kanan.", "Match each length on the left with the equal length on the right."],
+    pairs: [["$1$ m", "$100$ cm"], ["$1$ cm", "$10$ mm"], ["$1$ km", "$1.000$ m"], ["$3$ m", "$300$ cm"]],
+    sol: [["Ingat tangga satuan: $1$ km $= 1.000$ m, $1$ m $= 100$ cm, $1$ cm $= 10$ mm.", "Remember the unit ladder: $1$ km $= 1{,}000$ m, $1$ m $= 100$ cm, $1$ cm $= 10$ mm."],
+      ["$3$ m berarti $3 \\times 100$ cm $= 300$ cm.", "$3$ m means $3 \\times 100$ cm $= 300$ cm."]] },
+  { t: "tf", q: ["Tentukan Benar atau Salah untuk setiap pernyataan.", "Decide True or False for each statement."],
+    items: [{ s: "$2 \\times (6 + 4) = 20$", a: true }, { s: "$2 \\times 6 + 4 = 20$", a: false }, { s: "$2 \\times 6 + 2 \\times 4 = 20$", a: true }],
+    sol: [["Kerjakan yang di dalam kurung lebih dulu: $2 \\times (6 + 4) = 2 \\times 10 = 20$ → Benar.", "Work inside the brackets first: $2 \\times (6 + 4) = 2 \\times 10 = 20$ → True."],
+      ["Tanpa kurung, kalikan dulu: $2 \\times 6 + 4 = 12 + 4 = 16$, bukan $20$ → Salah.", "Without brackets, multiply first: $2 \\times 6 + 4 = 12 + 4 = 16$, not $20$ → False."],
+      ["$2 \\times 6 + 2 \\times 4 = 12 + 8 = 20$ → Benar.", "$2 \\times 6 + 2 \\times 4 = 12 + 8 = 20$ → True."]] },
+  { t: "sort", q: ["Urutkan panjang berikut dari yang <b>terpendek</b> ke yang <b>terpanjang</b>.", "Arrange these lengths from the <b>shortest</b> to the <b>longest</b>."],
+    items: ["$300$ mm", "$45$ cm", "$1$ m", "$120$ cm", "$2$ m"],
+    sol: [["Ubah semua ke satuan cm agar mudah dibandingkan.", "Convert everything to cm so they are easy to compare."],
+      "$300 \\text{ mm} = 300 : 10 = 30 \\text{ cm}$",
+      "$1 \\text{ m} = 100 \\text{ cm}, \\quad 2 \\text{ m} = 200 \\text{ cm}$",
+      ["Urutan: $30$ cm, $45$ cm, $100$ cm, $120$ cm, $200$ cm.", "Order: $30$ cm, $45$ cm, $100$ cm, $120$ cm, $200$ cm."],
+      ["Jadi: $300$ mm → $45$ cm → $1$ m → $120$ cm → $2$ m.", "So: $300$ mm → $45$ cm → $1$ m → $120$ cm → $2$ m."]] }
+];
+
+/* ---------- INTRODUCTION & REAL-WORLD CONNECTION ---------- */
+Q.intro = [
+  { t: "multi", q: ["Kegiatan mana saja yang berhubungan dengan <b>keliling</b>?", "Which activities are related to <b>perimeter</b>?"],
+    opts: [["Memasang pagar di sekeliling kebun", "Putting up a fence around a garden"], ["Mengecat seluruh permukaan dinding", "Painting the whole surface of a wall"],
+      ["Memasang bingkai di tepi foto", "Putting a frame around the edge of a photo"], ["Berlari satu putaran mengelilingi lapangan", "Running one lap around a field"],
+      ["Menutup seluruh lantai dengan karpet", "Covering the whole floor with a carpet"]], ans: [0, 2, 3],
+    sol: [["Keliling = panjang garis <b>tepi</b> yang mengelilingi bangun.", "Perimeter = the length of the <b>edge</b> that goes around a shape."],
+      ["Pagar, bingkai, dan berlari satu putaran semuanya mengikuti <b>tepi</b> → keliling.", "A fence, a frame, and running one lap all follow the <b>edge</b> → perimeter."],
+      ["Mengecat dinding dan menutup lantai dengan karpet menutupi <b>seluruh permukaan</b> → itu luas, bukan keliling.", "Painting a wall and carpeting a floor cover the <b>whole surface</b> → that is area, not perimeter."]] },
+  { t: "mc", q: ["Keliling diukur dengan satuan …", "Perimeter is measured in the unit …"],
+    opts: [["cm (satuan panjang)", "cm (unit of length)"], ["cm² (satuan luas)", "cm² (unit of area)"], ["kg (satuan berat)", "kg (unit of mass)"], ["liter (satuan volume)", "litre (unit of volume)"]], ans: 0,
+    sol: [["Keliling adalah sebuah <b>panjang</b> (panjang garis tepi).", "Perimeter is a <b>length</b> (the length of the edge)."],
+      ["Maka satuannya adalah satuan panjang: mm, cm, m, atau km.", "So its unit is a unit of length: mm, cm, m, or km."],
+      ["cm² adalah satuan luas, kg satuan berat, liter satuan volume.", "cm² is a unit of area, kg of mass, litre of volume."]] },
+  { t: "drag", q: ["Seret setiap kegiatan ke kelompok yang tepat: <b>Keliling</b> atau <b>Luas</b>.", "Drag each activity into the correct group: <b>Perimeter</b> or <b>Area</b>."],
+    zones: [{ label: ["Keliling (tepi)", "Perimeter (edge)"] }, { label: ["Luas (permukaan)", "Area (surface)"] }],
+    chips: [{ c: ["Renda di tepi taplak", "Lace on the edge of a tablecloth"], z: 0 }, { c: ["Keramik untuk lantai", "Tiles for a floor"], z: 1 },
+      { c: ["Pagar kebun", "Garden fence"], z: 0 }, { c: ["Rumput menutupi taman", "Grass covering a park"], z: 1 },
+      { c: ["Lis bingkai foto", "Photo frame border"], z: 0 }, { c: ["Cat untuk tembok", "Paint for a wall"], z: 1 }],
+    sol: [["Tanyakan: apakah benda itu mengikuti <b>tepi</b> (keliling) atau menutupi <b>bagian dalam</b> (luas)?", "Ask: does it follow the <b>edge</b> (perimeter) or cover the <b>inside</b> (area)?"],
+      ["Keliling: renda, pagar, lis bingkai.", "Perimeter: lace, fence, frame border."],
+      ["Luas: keramik, rumput, cat tembok.", "Area: tiles, grass, wall paint."]] },
+  { t: "fill", q: ["Seekor semut berjalan tepat satu kali mengelilingi tepi sebuah buku seperti gambar. Berapa jarak yang ditempuh semut?", "An ant walks exactly once around the edge of a book as shown. How far does the ant walk?"],
+    fig: rectFig(25, 18, ["25 cm", "18 cm", "25 cm", "18 cm"], { fill: "#fef3c7", stroke: "#b45309" }),
+    blanks: [{ pre: ["Jarak", "Distance"], post: "cm", ans: 86 }],
+    sol: [["Jarak satu putaran mengelilingi tepi = keliling buku = jumlah semua sisi.", "Distance of one trip around the edge = the perimeter of the book = the sum of all sides."],
+      "$K = 25 + 18 + 25 + 18$",
+      "$= 43 + 43 = 86$",
+      ["Jadi, semut berjalan sejauh $86$ cm.", "So, the ant walks $86$ cm."]] },
+  { t: "tf", q: ["Tentukan Benar atau Salah.", "Decide True or False."],
+    items: [{ s: ["Keliling adalah daerah di bagian dalam bangun datar.", "Perimeter is the region inside a plane shape."], a: false },
+      { s: ["Berjalan tepat satu putaran di tepi lapangan sama dengan menempuh keliling lapangan.", "Walking exactly one lap along the edge of a field is the same as covering the field's perimeter."], a: true },
+      { s: ["Keliling bisa dinyatakan dalam meter (m).", "Perimeter can be stated in metres (m)."], a: true }],
+    sol: [["Daerah di bagian dalam adalah <b>luas</b>, bukan keliling → Salah.", "The region inside is the <b>area</b>, not the perimeter → False."],
+      ["Satu putaran mengikuti seluruh tepi → keliling → Benar.", "One lap follows the whole edge → perimeter → True."],
+      ["Meter adalah satuan panjang, jadi bisa dipakai untuk keliling → Benar.", "A metre is a unit of length, so it can be used for perimeter → True."]] }
+];
+
+/* ---------- REVIEW OF PRIOR KNOWLEDGE ---------- */
+Q.prior = [
+  { t: "pair", q: ["Jodohkan nama bangun dengan sifat sisinya.", "Match each shape with the property of its sides."],
+    pairs: [[["Persegi", "Square"], ["4 sisi sama panjang dan 4 sudut siku-siku", "4 equal sides and 4 right angles"]],
+      [["Persegi panjang", "Rectangle"], ["Sisi yang berhadapan sama panjang, 4 sudut siku-siku", "Opposite sides equal, 4 right angles"]],
+      [["Segitiga sama sisi", "Equilateral triangle"], ["3 sisi sama panjang", "3 equal sides"]],
+      [["Layang-layang", "Kite"], ["2 pasang sisi yang berdekatan sama panjang", "2 pairs of equal adjacent sides"]]],
+    sol: [["Persegi: semua sisi sama + siku-siku.", "Square: all sides equal + right angles."],
+      ["Persegi panjang: panjang = panjang, lebar = lebar (berhadapan).", "Rectangle: length = length, width = width (opposite sides)."],
+      ["Segitiga sama sisi: ketiga sisinya sama.", "Equilateral triangle: all three sides are equal."],
+      ["Layang-layang: dua sisi pendek bersebelahan sama, dua sisi panjang bersebelahan sama.", "Kite: the two short adjacent sides are equal, and the two long adjacent sides are equal."]] },
+  { t: "mc", q: ["Perhatikan persegi panjang berikut. Berapa panjang sisi yang ditandai “?”", "Look at the rectangle. What is the length of the side marked “?”"],
+    fig: rectFig(12, 5, ["?", null, "12 cm", "5 cm"], { w: 260, maxH: 110 }),
+    opts: ["$12$ cm", "$5$ cm", "$17$ cm", "$7$ cm"], ans: 0,
+    sol: [["Pada persegi panjang, sisi yang <b>berhadapan</b> sama panjang.", "In a rectangle, <b>opposite</b> sides are equal."],
+      ["Sisi “?” (bawah) berhadapan dengan sisi atas yang panjangnya $12$ cm.", "Side “?” (bottom) is opposite the top side, which is $12$ cm."],
+      ["Jadi, “?” $= 12$ cm.", "So, “?” $= 12$ cm."]] },
+  { t: "multi", q: ["Bangun mana saja yang <b>keempat sisinya sama panjang</b>?", "Which shapes have <b>all four sides equal</b>?"],
+    opts: [["Persegi", "Square"], ["Belah ketupat", "Rhombus"], ["Persegi panjang", "Rectangle"], ["Trapesium", "Trapezium"], ["Layang-layang", "Kite"]], ans: [0, 1],
+    sol: [["Persegi dan belah ketupat sama-sama punya 4 sisi sama panjang.", "A square and a rhombus both have 4 equal sides."],
+      ["Persegi panjang: hanya sisi berhadapan yang sama. Layang-layang: hanya sisi berdekatan berpasangan. Trapesium: umumnya berbeda-beda.", "Rectangle: only opposite sides are equal. Kite: only adjacent sides in pairs. Trapezium: usually all different."]] },
+  { t: "fill", q: ["Lengkapi pernyataan tentang segitiga sama sisi yang salah satu sisinya $7$ cm.", "Complete the statements about an equilateral triangle with one side of $7$ cm."],
+    fig: poly([[0, 0], [10, 0], [5, 8.66]], ["7 cm", null, null], { ticks: [1, 1, 1], w: 200, maxH: 140, fill: "#dcfce7", stroke: "#15803d" }),
+    blanks: [{ pre: ["Banyak sisi", "Number of sides"], ans: 3 }, { pre: ["Panjang setiap sisi lainnya", "Length of each other side"], post: "cm", ans: 7 }],
+    sol: [["Segitiga selalu punya $3$ sisi.", "A triangle always has $3$ sides."],
+      ["“Sama sisi” berarti semua sisinya sama panjang, jadi sisi lainnya juga $7$ cm.", "“Equilateral” means all sides are equal, so the other sides are also $7$ cm."],
+      ["Tanda garis kecil (|) pada gambar menunjukkan sisi-sisi yang sama panjang.", "The small tick marks (|) in the figure show sides that are equal."]] },
+  { t: "drag", q: ["Kelompokkan bangun berikut berdasarkan banyak sisinya.", "Group these shapes by their number of sides."],
+    zones: [{ label: ["3 sisi", "3 sides"] }, { label: ["4 sisi", "4 sides"] }],
+    chips: [{ c: ["Segitiga siku-siku", "Right triangle"], z: 0 }, { c: ["Persegi", "Square"], z: 1 }, { c: ["Trapesium", "Trapezium"], z: 1 },
+      { c: ["Segitiga sama kaki", "Isosceles triangle"], z: 0 }, { c: ["Layang-layang", "Kite"], z: 1 }, { c: ["Jajar genjang", "Parallelogram"], z: 1 }],
+    sol: [["Semua jenis segitiga punya $3$ sisi.", "Every kind of triangle has $3$ sides."],
+      ["Persegi, trapesium, layang-layang, dan jajar genjang adalah segi empat ($4$ sisi).", "Square, trapezium, kite and parallelogram are quadrilaterals ($4$ sides)."]] }
+];
+
+/* ---------- PROBLEM INTRODUCTION ---------- */
+Q.problem = [
+  { t: "fill", q: ["Hitunglah keliling segi lima berikut.", "Calculate the perimeter of this pentagon."],
+    fig: poly([[0, 0], [8, 0], [10, 5], [5, 9], [-1, 5]], ["8 cm", "5 cm", "7 cm", "4 cm", "6 cm"], { w: 250 }),
+    blanks: [{ pre: "$K =$", post: "cm", ans: 30 }],
+    sol: [["Keliling = jumlah semua panjang sisi. Segi lima punya $5$ sisi.", "Perimeter = the sum of all side lengths. A pentagon has $5$ sides."],
+      "$K = 8 + 5 + 7 + 4 + 6$",
+      "$= 13 + 7 + 4 + 6 = 20 + 4 + 6 = 30$",
+      ["Jadi, keliling segi lima $= 30$ cm.", "So, the perimeter of the pentagon $= 30$ cm."]] },
+  { t: "mc", q: ["Kebun Pak Arif berbentuk persegi panjang dengan panjang $20$ m dan lebar $12$ m. Berapa meter pagar yang dibutuhkan untuk mengelilingi kebun?", "Mr. Arif's garden is a rectangle $20$ m long and $12$ m wide. How many metres of fence are needed to go around the garden?"],
+    opts: ["$64$ m", "$32$ m", "$240$ m", "$52$ m"], ans: 0,
+    sol: [["Diketahui: sisi-sisinya $20$ m, $12$ m, $20$ m, $12$ m.", "Given: the sides are $20$ m, $12$ m, $20$ m, $12$ m."],
+      "$K = 20 + 12 + 20 + 12 = 64$",
+      ["Jadi, pagar yang dibutuhkan $64$ m.", "So, $64$ m of fence is needed."],
+      ["Hati-hati: $32$ m hanya dua sisi, $240$ adalah $20 \\times 12$ (itu luas).", "Careful: $32$ m is only two sides, $240$ is $20 \\times 12$ (that is area)."]] },
+  { t: "sort", q: ["Urutkan langkah-langkah menyelesaikan soal keliling.", "Put the steps for solving a perimeter problem in order."],
+    items: [["Baca soal dan tulis yang <b>diketahui</b>", "Read the problem and write what is <b>known</b>"], ["Tentukan apa yang <b>ditanya</b>", "Decide what is <b>asked</b>"],
+      ["Jumlahkan semua panjang sisi", "Add all the side lengths"], ["Tulis jawaban beserta satuannya", "Write the answer with its unit"], ["Periksa kembali jawaban", "Check the answer again"]],
+    sol: [["Langkah 1: Diketahui → Langkah 2: Ditanya → Langkah 3: Hitung (jumlahkan sisi) → Langkah 4: Jawaban + satuan → Langkah 5: Periksa.", "Step 1: Known → Step 2: Asked → Step 3: Calculate (add the sides) → Step 4: Answer + unit → Step 5: Check."]] },
+  { t: "fill", q: ["Setiap sisi petak panjangnya $1$ cm. Hitung keliling bangun berwarna kuning dengan menghitung garis tepinya.", "Each grid side is $1$ cm long. Find the perimeter of the yellow shape by counting its edges."],
+    fig: gridFig(CELLS_5x3), blanks: [{ pre: "$K =$", post: "cm", ans: gridPerimeter(CELLS_5x3) }],
+    sol: [["Hitung ruas garis cokelat di setiap sisi.", "Count the brown segments on each side."],
+      ["Atas $5$, kanan $3$, bawah $5$, kiri $3$.", "Top $5$, right $3$, bottom $5$, left $3$."],
+      "$K = 5 + 3 + 5 + 3 = 16$",
+      ["Jadi, kelilingnya $16$ cm.", "So, the perimeter is $16$ cm."]] },
+  { t: "mc", q: ["Kebun berukuran $10$ m × $6$ m akan dipagari. Harga pagar Rp5.000 per meter. Berapa biaya seluruhnya?", "A $10$ m × $6$ m garden will be fenced. The fence costs Rp5.000 per metre. What is the total cost?"],
+    opts: ["Rp160.000", "Rp80.000", "Rp300.000", "Rp150.000"], ans: 0,
+    sol: [["Langkah 1: Cari panjang pagar = keliling kebun.", "Step 1: Find the fence length = the perimeter of the garden."],
+      "$K = 10 + 6 + 10 + 6 = 32 \\text{ m}$",
+      ["Langkah 2: Kalikan dengan harga per meter.", "Step 2: Multiply by the price per metre."],
+      "$32 \\times 5.000 = 160.000$",
+      ["Jadi, biayanya Rp160.000. (Rp80.000 hanya dua sisi; Rp300.000 memakai luas $60$.)", "So, the cost is Rp160.000. (Rp80.000 uses only two sides; Rp300.000 uses the area $60$.)"]] }
+];
+
+/* ---------- GUIDED PRACTICE ---------- */
+Q.guided = [
+  { t: "fill", q: ["Sebuah persegi memiliki sisi $9$ cm. Hitung kelilingnya.", "A square has sides of $9$ cm. Calculate its perimeter."],
+    fig: rectFig(10, 10, ["9 cm", null, null, null], { ticks: [1, 1, 1, 1], w: 200, maxH: 120 }),
+    blanks: [{ pre: "$K =$", post: "cm", ans: 36 }],
+    sol: [["Rumus keliling persegi:", "Formula for the perimeter of a square:"], "$K = 4 \\times s$",
+      ["Substitusi $s = 9$:", "Substitute $s = 9$:"], "$K = 4 \\times 9 = 36$",
+      ["Jadi, keliling persegi $= 36$ cm.", "So, the perimeter of the square $= 36$ cm."]] },
+  { t: "mc", q: ["Persegi panjang memiliki panjang $14$ cm dan lebar $6$ cm. Berapa kelilingnya?", "A rectangle is $14$ cm long and $6$ cm wide. What is its perimeter?"],
+    fig: rectFig(14, 6, ["14 cm", "6 cm", null, null], { w: 260, maxH: 110 }),
+    opts: ["$40$ cm", "$20$ cm", "$84$ cm", "$34$ cm"], ans: 0,
+    sol: [["Rumus keliling persegi panjang:", "Formula for the perimeter of a rectangle:"], "$K = 2 \\times (p + l)$",
+      "$K = 2 \\times (14 + 6)$", "$K = 2 \\times 20 = 40$",
+      ["Jadi, kelilingnya $40$ cm.", "So, the perimeter is $40$ cm."],
+      ["Kesalahan umum: $20$ (lupa dikali $2$), $84$ ($p \\times l$ = luas), $34$ ($2 \\times 14 + 6$, lupa kurung).", "Common mistakes: $20$ (forgot to multiply by $2$), $84$ ($p \\times l$ = area), $34$ ($2 \\times 14 + 6$, forgot the brackets)."]] },
+  { t: "fill", q: ["Hitung keliling segitiga berikut.", "Calculate the perimeter of this triangle."],
+    fig: poly([[0, 0], [12, 0], [3, 7]], ["12 cm", "10 cm", "8 cm"], { w: 250, maxH: 140, fill: "#dcfce7", stroke: "#15803d" }),
+    blanks: [{ pre: "$K =$", post: "cm", ans: 30 }],
+    sol: [["Rumus keliling segitiga:", "Formula for the perimeter of a triangle:"], "$K = a + b + c$",
+      "$K = 12 + 10 + 8 = 30$", ["Jadi, kelilingnya $30$ cm.", "So, the perimeter is $30$ cm."]] },
+  { t: "pair", q: ["Jodohkan setiap bangun dengan kelilingnya.", "Match each shape with its perimeter."],
+    pairs: [[["Persegi, $s = 6$ cm", "Square, $s = 6$ cm"], "$24$ cm"], [["Persegi panjang, $p = 8$ cm, $l = 5$ cm", "Rectangle, $p = 8$ cm, $l = 5$ cm"], "$26$ cm"],
+      [["Segitiga sama sisi, $s = 10$ cm", "Equilateral triangle, $s = 10$ cm"], "$30$ cm"], [["Jajar genjang, sisi $9$ cm dan $7$ cm", "Parallelogram, sides $9$ cm and $7$ cm"], "$32$ cm"]],
+    sol: [["Persegi: $K = 4 \\times 6 = 24$ cm", "Square: $K = 4 \\times 6 = 24$ cm"], ["Persegi panjang: $K = 2 \\times (8 + 5) = 2 \\times 13 = 26$ cm", "Rectangle: $K = 2 \\times (8 + 5) = 2 \\times 13 = 26$ cm"],
+      ["Segitiga sama sisi: $K = 3 \\times 10 = 30$ cm", "Equilateral triangle: $K = 3 \\times 10 = 30$ cm"], ["Jajar genjang: $K = 2 \\times (9 + 7) = 2 \\times 16 = 32$ cm", "Parallelogram: $K = 2 \\times (9 + 7) = 2 \\times 16 = 32$ cm"]] },
+  { t: "tf", q: ["Tentukan Benar atau Salah.", "Decide True or False."],
+    items: [{ s: ["Keliling persegi panjang $p = 10$ cm, $l = 4$ cm adalah $2 \\times 10 + 4 = 24$ cm.", "The perimeter of a rectangle with $p = 10$ cm, $l = 4$ cm is $2 \\times 10 + 4 = 24$ cm."], a: false },
+      { s: ["Keliling belah ketupat dengan sisi $6$ cm adalah $24$ cm.", "The perimeter of a rhombus with side $6$ cm is $24$ cm."], a: true },
+      { s: ["Keliling layang-layang dengan sisi $5$ cm dan $8$ cm adalah $26$ cm.", "The perimeter of a kite with sides $5$ cm and $8$ cm is $26$ cm."], a: true }],
+    sol: [["Persegi panjang: $K = 2 \\times (10 + 4) = 2 \\times 14 = 28$ cm, bukan $24$ → Salah.", "Rectangle: $K = 2 \\times (10 + 4) = 2 \\times 14 = 28$ cm, not $24$ → False."],
+      ["Belah ketupat: $K = 4 \\times 6 = 24$ cm → Benar.", "Rhombus: $K = 4 \\times 6 = 24$ cm → True."],
+      ["Layang-layang: $K = 2 \\times (5 + 8) = 2 \\times 13 = 26$ cm → Benar.", "Kite: $K = 2 \\times (5 + 8) = 2 \\times 13 = 26$ cm → True."]] }
+];
+
+/* ---------- INDEPENDENT PRACTICE ---------- */
+Q.indep = [
+  { t: "fill", q: ["Keliling sebuah persegi adalah $60$ cm. Berapa panjang sisinya?", "The perimeter of a square is $60$ cm. How long is each side?"],
+    blanks: [{ pre: "$s =$", post: "cm", ans: 15 }],
+    sol: [["Dari $K = 4 \\times s$, maka sisi dicari dengan membagi:", "From $K = 4 \\times s$, find the side by dividing:"], "$s = K : 4$",
+      "$s = 60 : 4 = 15$", ["Cek: $4 \\times 15 = 60$ ✓. Jadi, $s = 15$ cm.", "Check: $4 \\times 15 = 60$ ✓. So, $s = 15$ cm."]] },
+  { t: "mc", q: ["Keliling persegi panjang $46$ cm dan panjangnya $15$ cm. Berapa lebarnya?", "A rectangle has a perimeter of $46$ cm and a length of $15$ cm. What is its width?"],
+    opts: ["$8$ cm", "$16$ cm", "$31$ cm", "$23$ cm"], ans: 0,
+    sol: [["Langkah 1: Bagi keliling dengan $2$ untuk mendapat $p + l$.", "Step 1: Divide the perimeter by $2$ to get $p + l$."], "$p + l = 46 : 2 = 23$",
+      ["Langkah 2: Kurangi dengan panjang.", "Step 2: Subtract the length."], "$l = 23 - 15 = 8$",
+      ["Cek: $2 \\times (15 + 8) = 2 \\times 23 = 46$ ✓. Jadi, lebarnya $8$ cm.", "Check: $2 \\times (15 + 8) = 2 \\times 23 = 46$ ✓. So, the width is $8$ cm."]] },
+  { t: "fill", q: ["Bangun gabungan berbentuk huruf L. Cari panjang sisi $a$ dan $b$, lalu hitung kelilingnya.", "This composite shape is L-shaped. Find sides $a$ and $b$, then calculate the perimeter."],
+    fig: poly(L_IND, ["12 cm", "6 cm", "a", "b", "7 cm", "9 cm"], { w: 360, maxH: 230 }),
+    blanks: [{ pre: "$a =$", post: "cm", ans: 5 }, { pre: "$b =$", post: "cm", ans: 3 }, { pre: "$K =$", post: "cm", ans: 42 }],
+    sol: [["Sisi mendatar: bawah $12$ = atas $7$ + $a$, jadi", "Horizontal sides: bottom $12$ = top $7$ + $a$, so"], "$a = 12 - 7 = 5$",
+      ["Sisi tegak: kiri $9$ = kanan $6$ + $b$, jadi", "Vertical sides: left $9$ = right $6$ + $b$, so"], "$b = 9 - 6 = 3$",
+      ["Jumlahkan semua $6$ sisi:", "Add all $6$ sides:"], "$K = 12 + 6 + 5 + 3 + 7 + 9 = 42$",
+      ["Jadi, $a = 5$ cm, $b = 3$ cm, dan $K = 42$ cm.", "So, $a = 5$ cm, $b = 3$ cm, and $K = 42$ cm."]] },
+  { t: "multi", q: ["Bangun mana saja yang kelilingnya tepat $24$ cm?", "Which shapes have a perimeter of exactly $24$ cm?"],
+    opts: [["Persegi, $s = 6$ cm", "Square, $s = 6$ cm"], ["Persegi panjang, $8$ cm × $4$ cm", "Rectangle, $8$ cm × $4$ cm"], ["Segitiga sama sisi, $s = 8$ cm", "Equilateral triangle, $s = 8$ cm"],
+      ["Persegi panjang, $10$ cm × $3$ cm", "Rectangle, $10$ cm × $3$ cm"], ["Segitiga, sisi $5$, $7$, $10$ cm", "Triangle, sides $5$, $7$, $10$ cm"]], ans: [0, 1, 2],
+    sol: ["$4 \\times 6 = 24 \\; ✓$", "$2 \\times (8 + 4) = 2 \\times 12 = 24 \\; ✓$", "$3 \\times 8 = 24 \\; ✓$",
+      "$2 \\times (10 + 3) = 2 \\times 13 = 26 \\; \\color{#dc2626}{\\textbf{X}}$", "$5 + 7 + 10 = 22 \\; \\color{#dc2626}{\\textbf{X}}$",
+      ["Jadi, jawabannya persegi $s = 6$, persegi panjang $8 \\times 4$, dan segitiga sama sisi $s = 8$.", "So, the answers are the square $s = 6$, the $8 \\times 4$ rectangle, and the equilateral triangle $s = 8$."]] },
+  { t: "drag", q: ["Lapangan berbentuk persegi panjang $80$ m × $50$ m. Dina berlari $2$ putaran mengelilinginya. Seret jawaban ke kotak yang tepat.", "A rectangular field is $80$ m × $50$ m. Dina runs $2$ laps around it. Drag the answers into the correct boxes."],
+    zones: [{ label: ["Keliling lapangan", "Perimeter of the field"], cap: 1 }, { label: ["Jarak $2$ putaran", "Distance of $2$ laps"], cap: 1 }],
+    chips: [{ c: "$260$ m", z: 0 }, { c: "$520$ m", z: 1 }, { c: "$130$ m", z: -1 }, { c: "$4.000$ m", z: -1 }],
+    sol: ["$K = 2 \\times (80 + 50) = 2 \\times 130 = 260 \\text{ m}$",
+      ["$1$ putaran = $260$ m, jadi $2$ putaran:", "$1$ lap = $260$ m, so $2$ laps:"], "$2 \\times 260 = 520 \\text{ m}$",
+      ["$130$ m hanya $p + l$; $4.000$ adalah $80 \\times 50$ (luas).", "$130$ m is only $p + l$; $4{,}000$ is $80 \\times 50$ (area)."]] }
+];
+
+/* ---------- EXIT TICKET ---------- */
+Q.exit = [
+  { t: "mc", q: ["Keliling persegi panjang dengan $p = 9$ cm dan $l = 4$ cm adalah …", "The perimeter of a rectangle with $p = 9$ cm and $l = 4$ cm is …"],
+    opts: ["$26$ cm", "$13$ cm", "$36$ cm", "$22$ cm"], ans: 0,
+    sol: ["$K = 2 \\times (9 + 4) = 2 \\times 13 = 26 \\text{ cm}$"] },
+  { t: "fill", q: ["Segitiga sama sisi memiliki sisi $11$ cm. Kelilingnya adalah …", "An equilateral triangle has sides of $11$ cm. Its perimeter is …"],
+    blanks: [{ pre: "$K =$", post: "cm", ans: 33 }], sol: ["$K = 3 \\times s = 3 \\times 11 = 33 \\text{ cm}$"] },
+  { t: "tf", q: ["Tentukan Benar atau Salah.", "Decide True or False."],
+    items: [{ s: ["Keliling persegi dengan sisi $7$ cm adalah $49$ cm.", "The perimeter of a square with side $7$ cm is $49$ cm."], a: false },
+      { s: ["Satuan keliling sama dengan satuan panjang, misalnya cm atau m.", "The unit of perimeter is a unit of length, such as cm or m."], a: true }],
+    sol: [["$K = 4 \\times 7 = 28$ cm. ($49 = 7 \\times 7$ adalah luas.) → Salah.", "$K = 4 \\times 7 = 28$ cm. ($49 = 7 \\times 7$ is the area.) → False."],
+      ["Keliling adalah panjang, jadi satuannya cm, m, dst. → Benar.", "Perimeter is a length, so its units are cm, m, etc. → True."]] }
+];
+
+/* ================= TASK 1: Konsep keliling ================= */
+Q.t1 = [
+  { t: "mc", q: ["Keliling bangun datar adalah …", "The perimeter of a plane shape is …"],
+    opts: [["jumlah panjang semua sisi yang membatasi bangun", "the total length of all the sides around the shape"], ["luas daerah di dalam bangun", "the area of the region inside the shape"],
+      ["banyak sudut pada bangun", "the number of angles in the shape"], ["hasil kali panjang dan lebar", "the product of the length and width"]], ans: 0,
+    sol: [["Keliling = panjang seluruh garis tepi = jumlah semua sisi.", "Perimeter = the length of the whole boundary = the sum of all sides."],
+      ["Hasil kali panjang dan lebar adalah luas persegi panjang, bukan keliling.", "Length times width is the area of a rectangle, not its perimeter."]] },
+  { t: "fill", q: ["Hitung keliling segi empat berikut.", "Calculate the perimeter of this quadrilateral."],
+    fig: poly([[0, 0], [7, 0], [8, 5], [1, 6]], ["7 cm", "5 cm", "6 cm", "4 cm"], { w: 240, maxH: 150 }),
+    blanks: [{ pre: "$K =$", post: "cm", ans: 22 }],
+    sol: ["$K = 7 + 5 + 6 + 4 = 22$", ["Jadi, kelilingnya $22$ cm.", "So, the perimeter is $22$ cm."]] },
+  { t: "tf", q: ["Tentukan Benar atau Salah.", "Decide True or False."],
+    items: [{ s: ["Satuan keliling bisa mm, cm, m, atau km.", "Perimeter can be measured in mm, cm, m, or km."], a: true },
+      { s: ["Keliling persegi panjang dihitung dengan $p \\times l$.", "The perimeter of a rectangle is calculated with $p \\times l$."], a: false },
+      { s: ["Bangun yang berbeda bentuk bisa memiliki keliling yang sama.", "Shapes with different forms can have the same perimeter."], a: true }],
+    sol: [["Keliling adalah panjang → satuan panjang → Benar.", "Perimeter is a length → units of length → True."],
+      ["$p \\times l$ adalah luas. Keliling persegi panjang $= 2 \\times (p + l)$ → Salah.", "$p \\times l$ is area. The perimeter of a rectangle $= 2 \\times (p + l)$ → False."],
+      ["Contoh: persegi $s = 5$ ($K = 20$) dan persegi panjang $6 \\times 4$ ($K = 20$) → Benar.", "Example: square $s = 5$ ($K = 20$) and rectangle $6 \\times 4$ ($K = 20$) → True."]] },
+  { t: "multi", q: ["Kegiatan mana saja yang memerlukan perhitungan <b>keliling</b>?", "Which activities need a <b>perimeter</b> calculation?"],
+    opts: [["Memasang lampu hias di sekeliling jendela", "Hanging fairy lights around a window"], ["Menghitung banyak ubin untuk lantai", "Counting the tiles needed for a floor"],
+      ["Berlari mengelilingi taman", "Running around a park"], ["Memasang lis di tepi papan tulis", "Fitting a border around a whiteboard"], ["Mengecat permukaan meja", "Painting a table top"]], ans: [0, 2, 3],
+    sol: [["Lampu hias, berlari mengelilingi taman, dan lis papan tulis mengikuti tepi → keliling.", "Fairy lights, running around a park, and a whiteboard border follow the edge → perimeter."],
+      ["Ubin lantai dan mengecat meja menutupi permukaan → luas.", "Floor tiles and painting a table top cover the surface → area."]] },
+  { t: "fill", q: ["Setiap sisi petak $1$ cm. Hitung keliling bangun berwarna kuning.", "Each grid side is $1$ cm. Find the perimeter of the yellow shape."],
+    fig: gridFig(CELLS_L), blanks: [{ pre: "$K =$", post: "cm", ans: gridPerimeter(CELLS_L) }],
+    sol: [["Hitung ruas garis tepi (cokelat) sambil berjalan mengelilingi bangun, mulai dari kiri bawah.", "Count the edge segments (brown) while walking around the shape, starting from the bottom left."],
+      ["Bawah $4$, kanan $2$, langkah ke kiri $2$, naik $1$, atas $2$, kiri $3$.", "Bottom $4$, right $2$, step left $2$, up $1$, top $2$, left $3$."],
+      "$K = 4 + 2 + 2 + 1 + 2 + 3 = 14$", ["Jadi, kelilingnya $14$ cm.", "So, the perimeter is $14$ cm."]] },
+  { t: "sort", q: ["Urutkan bangun dari keliling <b>terkecil</b> ke <b>terbesar</b>.", "Order the shapes from the <b>smallest</b> to the <b>largest</b> perimeter."],
+    items: [["Segitiga, sisi $3$, $4$, $5$ cm", "Triangle, sides $3$, $4$, $5$ cm"], ["Persegi, $s = 4$ cm", "Square, $s = 4$ cm"],
+      ["Persegi panjang, $6$ cm × $3$ cm", "Rectangle, $6$ cm × $3$ cm"], ["Segi lima, setiap sisi $5$ cm", "Pentagon, each side $5$ cm"]],
+    sol: ["$3 + 4 + 5 = 12$", "$4 \\times 4 = 16$", "$2 \\times (6 + 3) = 18$", "$5 \\times 5 = 25$",
+      ["Urutan: $12 < 16 < 18 < 25$.", "Order: $12 < 16 < 18 < 25$."]] },
+  { t: "pair", q: ["Jodohkan panjang sisi-sisi bangun dengan kelilingnya (dalam cm).", "Match the side lengths of each shape with its perimeter (in cm)."],
+    pairs: [["$3, 4, 5$", "$12$"], ["$6, 6, 6$", "$18$"], ["$2, 5, 2, 5$", "$14$"], ["$4, 4, 4, 4, 4$", "$20$"]],
+    sol: ["$3 + 4 + 5 = 12$", "$6 + 6 + 6 = 18$", "$2 + 5 + 2 + 5 = 14$", "$4 + 4 + 4 + 4 + 4 = 5 \\times 4 = 20$"] },
+  { t: "mc", q: ["Berapa keliling segi enam berikut?", "What is the perimeter of this hexagon?"],
+    fig: poly([[0, 2], [4, 0], [9, 1], [10, 5], [6, 8], [1, 6]], ["3 cm", "5 cm", "4 cm", "6 cm", "2 cm", "4 cm"], { w: 250, maxH: 170 }),
+    opts: ["$24$ cm", "$22$ cm", "$26$ cm", "$20$ cm"], ans: 0,
+    sol: ["$K = 3 + 5 + 4 + 6 + 2 + 4$", "$= 8 + 4 + 6 + 2 + 4 = 24$", ["Jadi, kelilingnya $24$ cm. Pastikan semua $6$ sisi terhitung.", "So, the perimeter is $24$ cm. Make sure all $6$ sides are counted."]] },
+  { t: "drag", q: ["Kelompokkan satuan berikut.", "Group these units."],
+    zones: [{ label: ["Bisa untuk keliling", "Can be used for perimeter"] }, { label: ["Tidak untuk keliling", "Not for perimeter"] }],
+    chips: [{ c: "cm", z: 0 }, { c: "m", z: 0 }, { c: "mm", z: 0 }, { c: "km", z: 0 }, { c: "cm²", z: 1 }, { c: "kg", z: 1 }, { c: "liter", z: 1 }, { c: "m²", z: 1 }],
+    sol: [["Keliling = panjang → mm, cm, m, km.", "Perimeter = length → mm, cm, m, km."],
+      ["cm² dan m² untuk luas, kg untuk berat, liter untuk volume.", "cm² and m² are for area, kg for mass, litre for volume."]] },
+  { t: "fill", q: ["Semut berjalan mengelilingi tepi segitiga dengan sisi $9$ cm, $12$ cm, dan $15$ cm.", "An ant walks around the edge of a triangle with sides $9$ cm, $12$ cm and $15$ cm."],
+    blanks: [{ pre: ["Jarak 1 putaran", "Distance of 1 lap"], post: "cm", ans: 36 }, { pre: ["Jarak 2 putaran", "Distance of 2 laps"], post: "cm", ans: 72 }],
+    sol: ["$K = 9 + 12 + 15 = 36 \\text{ cm}$", ["$2$ putaran = $2$ kali keliling:", "$2$ laps = $2$ times the perimeter:"], "$2 \\times 36 = 72 \\text{ cm}$"] }
+];
+
+/* ================= TASK 2: Persegi & persegi panjang ================= */
+Q.t2 = [
+  { t: "fill", q: ["Hitung keliling persegi dengan sisi $13$ cm.", "Calculate the perimeter of a square with side $13$ cm."],
+    blanks: [{ pre: "$K =$", post: "cm", ans: 52 }], sol: ["$K = 4 \\times s = 4 \\times 13$", "$= 4 \\times 10 + 4 \\times 3 = 40 + 12 = 52$", ["Jadi, $K = 52$ cm.", "So, $K = 52$ cm."]] },
+  { t: "mc", q: ["Keliling persegi panjang dengan $p = 18$ cm dan $l = 7$ cm adalah …", "The perimeter of a rectangle with $p = 18$ cm and $l = 7$ cm is …"],
+    opts: ["$50$ cm", "$25$ cm", "$126$ cm", "$43$ cm"], ans: 0,
+    sol: ["$K = 2 \\times (p + l) = 2 \\times (18 + 7)$", "$= 2 \\times 25 = 50$", ["Jadi, $K = 50$ cm.", "So, $K = 50$ cm."]] },
+  { t: "tf", q: ["Tentukan Benar atau Salah.", "Decide True or False."],
+    items: [{ s: ["Keliling persegi dengan $s = 8$ cm adalah $4 \\times 8 = 32$ cm.", "The perimeter of a square with $s = 8$ cm is $4 \\times 8 = 32$ cm."], a: true },
+      { s: ["Keliling persegi panjang $12$ cm × $5$ cm adalah $12 + 5 = 17$ cm.", "The perimeter of a $12$ cm × $5$ cm rectangle is $12 + 5 = 17$ cm."], a: false },
+      { s: ["$2 \\times (p + l)$ hasilnya sama dengan $2 \\times p + 2 \\times l$.", "$2 \\times (p + l)$ gives the same result as $2 \\times p + 2 \\times l$."], a: true }],
+    sol: [["$4 \\times 8 = 32$ → Benar.", "$4 \\times 8 = 32$ → True."],
+      ["$12 + 5$ hanya dua sisi. $K = 2 \\times (12 + 5) = 34$ cm → Salah.", "$12 + 5$ is only two sides. $K = 2 \\times (12 + 5) = 34$ cm → False."],
+      ["Contoh $p = 3, l = 2$: $2 \\times 5 = 10$ dan $6 + 4 = 10$ → Benar.", "Example $p = 3, l = 2$: $2 \\times 5 = 10$ and $6 + 4 = 10$ → True."]] },
+  { t: "pair", q: ["Jodohkan bangun dengan kelilingnya.", "Match each shape with its perimeter."],
+    pairs: [[["Persegi, $s = 11$ cm", "Square, $s = 11$ cm"], "$44$ cm"], [["Persegi panjang $15$ cm × $6$ cm", "Rectangle $15$ cm × $6$ cm"], "$42$ cm"],
+      [["Persegi panjang $20$ cm × $3$ cm", "Rectangle $20$ cm × $3$ cm"], "$46$ cm"], [["Persegi, $s = 12$ cm", "Square, $s = 12$ cm"], "$48$ cm"]],
+    sol: ["$4 \\times 11 = 44$", "$2 \\times (15 + 6) = 2 \\times 21 = 42$", "$2 \\times (20 + 3) = 2 \\times 23 = 46$", "$4 \\times 12 = 48$"] },
+  { t: "sort", q: ["Urutkan langkah menghitung keliling persegi panjang $p = 9$ cm, $l = 6$ cm.", "Order the steps to find the perimeter of a rectangle with $p = 9$ cm, $l = 6$ cm."],
+    items: [["Tulis rumus: $K = 2 \\times (p + l)$", "Write the formula: $K = 2 \\times (p + l)$"], ["Substitusi: $K = 2 \\times (9 + 6)$", "Substitute: $K = 2 \\times (9 + 6)$"],
+      ["Hitung dalam kurung: $K = 2 \\times 15$", "Work out the brackets: $K = 2 \\times 15$"], ["Hasil: $K = 30$ cm", "Result: $K = 30$ cm"]],
+    sol: [["Rumus → substitusi → hitung kurung → kalikan dan tulis satuan.", "Formula → substitute → brackets → multiply and write the unit."]] },
+  { t: "multi", q: ["Persegi panjang mana saja yang kelilingnya $30$ cm?", "Which rectangles have a perimeter of $30$ cm?"],
+    opts: ["$10$ cm × $5$ cm", "$8$ cm × $7$ cm", "$12$ cm × $3$ cm", "$9$ cm × $5$ cm", "$20$ cm × $10$ cm"], ans: [0, 1, 2],
+    sol: [["Trik: $K = 30$ berarti $p + l = 30 : 2 = 15$.", "Trick: $K = 30$ means $p + l = 30 : 2 = 15$."],
+      "$10 + 5 = 15 \\; ✓ \\quad 8 + 7 = 15 \\; ✓ \\quad 12 + 3 = 15 \\; ✓$", "$9 + 5 = 14 \\; \\color{#dc2626}{\\textbf{X}} \\quad 20 + 10 = 30 \\; \\color{#dc2626}{\\textbf{X}}$"] },
+  { t: "fill", q: ["Persegi panjang memiliki panjang $2$ m dan lebar $80$ cm. Hitung kelilingnya dalam <b>cm</b>.", "A rectangle is $2$ m long and $80$ cm wide. Find its perimeter in <b>cm</b>."],
+    blanks: [{ pre: "$K =$", post: "cm", ans: 560 }],
+    sol: [["Samakan satuan dulu: $2$ m $= 200$ cm.", "Make the units the same first: $2$ m $= 200$ cm."], "$K = 2 \\times (200 + 80) = 2 \\times 280 = 560$",
+      ["Jadi, $K = 560$ cm.", "So, $K = 560$ cm."]] },
+  { t: "mc", q: ["Sebuah persegi dan persegi panjang $10$ cm × $6$ cm memiliki keliling yang sama. Berapa panjang sisi persegi?", "A square and a $10$ cm × $6$ cm rectangle have the same perimeter. How long is a side of the square?"],
+    opts: ["$8$ cm", "$16$ cm", "$4$ cm", "$32$ cm"], ans: 0,
+    sol: ["$K_{\\text{persegi panjang}} = 2 \\times (10 + 6) = 32 \\text{ cm}$", ["Keliling persegi juga $32$ cm, maka:", "The square's perimeter is also $32$ cm, so:"], "$s = 32 : 4 = 8 \\text{ cm}$"] },
+  { t: "drag", q: ["Perhatikan persegi panjang. Seret angka yang benar ke setiap kotak.", "Look at the rectangle. Drag the correct number into each box."],
+    fig: rectFig(16, 9, ["16 cm", "9 cm", null, null], { w: 260, maxH: 120 }),
+    zones: [{ label: "$p + l =$", cap: 1 }, { label: "$K = 2 \\times (p + l) =$", cap: 1 }],
+    chips: [{ c: "$25$", z: 0 }, { c: "$50$", z: 1 }, { c: "$144$", z: -1 }, { c: "$34$", z: -1 }],
+    sol: ["$p + l = 16 + 9 = 25$", "$K = 2 \\times 25 = 50 \\text{ cm}$", ["$144 = 16 \\times 9$ (luas); $34 = 16 + 2 \\times 9$ (salah rumus).", "$144 = 16 \\times 9$ (area); $34 = 16 + 2 \\times 9$ (wrong formula)."]] },
+  { t: "fill", q: ["Bingkai foto berbentuk persegi panjang $25$ cm × $20$ cm. Berapa cm kayu yang dibutuhkan untuk tepinya?", "A photo frame is a $25$ cm × $20$ cm rectangle. How many cm of wood are needed for its edge?"],
+    blanks: [{ pre: ["Panjang kayu", "Length of wood"], post: "cm", ans: 90 }],
+    sol: ["$K = 2 \\times (25 + 20) = 2 \\times 45 = 90$", ["Jadi, dibutuhkan $90$ cm kayu.", "So, $90$ cm of wood is needed."]] }
+];
+
+/* ================= TASK 3: Segitiga & segi empat lain ================= */
+Q.t3 = [
+  { t: "fill", q: ["Hitung keliling segitiga berikut.", "Calculate the perimeter of this triangle."],
+    fig: poly([[0, 0], [11, 0], [4, 7]], ["11 cm", "9 cm", "7 cm"], { w: 240, maxH: 140, fill: "#dcfce7", stroke: "#15803d" }),
+    blanks: [{ pre: "$K =$", post: "cm", ans: 27 }], sol: ["$K = a + b + c = 11 + 9 + 7 = 27$", ["Jadi, $K = 27$ cm.", "So, $K = 27$ cm."]] },
+  { t: "mc", q: ["Keliling segitiga sama sisi dengan sisi $14$ cm adalah …", "The perimeter of an equilateral triangle with side $14$ cm is …"],
+    opts: ["$42$ cm", "$28$ cm", "$196$ cm", "$56$ cm"], ans: 0,
+    sol: ["$K = 3 \\times s = 3 \\times 14 = 42$", ["$56 = 4 \\times 14$ (seperti persegi) → salah, segitiga hanya punya $3$ sisi.", "$56 = 4 \\times 14$ (like a square) → wrong, a triangle has only $3$ sides."]] },
+  { t: "fill", q: ["Segitiga sama kaki memiliki kaki $10$ cm dan alas $6$ cm. Hitung kelilingnya.", "An isosceles triangle has legs of $10$ cm and a base of $6$ cm. Find its perimeter."],
+    fig: poly([[0, 0], [6, 0], [3, 9.5]], ["6 cm", "10 cm", "10 cm"], { ticks: [0, 1, 1], w: 180, maxH: 150, fill: "#dcfce7", stroke: "#15803d" }),
+    blanks: [{ pre: "$K =$", post: "cm", ans: 26 }], sol: ["$K = 2 \\times a + b = 2 \\times 10 + 6 = 20 + 6 = 26$", ["Jadi, $K = 26$ cm.", "So, $K = 26$ cm."]] },
+  { t: "mc", q: ["Berapa keliling jajar genjang berikut?", "What is the perimeter of this parallelogram?"],
+    fig: poly([[0, 0], [12, 0], [15, 6], [3, 6]], ["12 cm", "8 cm", null, null], { ticks: [2, 1, 2, 1], w: 260, maxH: 110, fill: "#ede9fe", stroke: "#6d28d9" }),
+    opts: ["$40$ cm", "$20$ cm", "$96$ cm", "$32$ cm"], ans: 0,
+    sol: [["Sisi berhadapan jajar genjang sama panjang: $12, 8, 12, 8$.", "Opposite sides of a parallelogram are equal: $12, 8, 12, 8$."], "$K = 2 \\times (12 + 8) = 2 \\times 20 = 40$"] },
+  { t: "fill", q: ["Belah ketupat memiliki sisi $9$ cm. Hitung kelilingnya.", "A rhombus has sides of $9$ cm. Calculate its perimeter."],
+    blanks: [{ pre: "$K =$", post: "cm", ans: 36 }], sol: [["Keempat sisi belah ketupat sama panjang.", "All four sides of a rhombus are equal."], "$K = 4 \\times s = 4 \\times 9 = 36$"] },
+  { t: "mc", q: ["Layang-layang memiliki sisi pendek $6$ cm dan sisi panjang $11$ cm. Kelilingnya adalah …", "A kite has short sides of $6$ cm and long sides of $11$ cm. Its perimeter is …"],
+    fig: poly([[0, 7], [5, 10], [10, 7], [5, 0]], ["6 cm", null, "11 cm", null], { ticks: [1, 1, 2, 2], w: 180, maxH: 160, fill: "#ffedd5", stroke: "#c2410c" }),
+    opts: ["$34$ cm", "$17$ cm", "$66$ cm", "$28$ cm"], ans: 0,
+    sol: [["Layang-layang punya $2$ sisi $6$ cm dan $2$ sisi $11$ cm.", "A kite has $2$ sides of $6$ cm and $2$ sides of $11$ cm."], "$K = 2 \\times (6 + 11) = 2 \\times 17 = 34$"] },
+  { t: "fill", q: ["Hitung keliling trapesium berikut.", "Calculate the perimeter of this trapezium."],
+    fig: poly([[0, 0], [14, 0], [9.5, 8.5], [1.5, 8.5]], ["14 cm", "10 cm", "8 cm", "9 cm"], { w: 250, maxH: 140, fill: "#ffedd5", stroke: "#c2410c" }),
+    blanks: [{ pre: "$K =$", post: "cm", ans: 41 }], sol: ["$K = a + b + c + d = 14 + 10 + 8 + 9$", "$= 24 + 17 = 41$", ["Jadi, $K = 41$ cm.", "So, $K = 41$ cm."]] },
+  { t: "pair", q: ["Jodohkan bangun dengan rumus kelilingnya.", "Match each shape with its perimeter formula."],
+    pairs: [[["Persegi", "Square"], "$K = 4 \\times s$"], [["Persegi panjang", "Rectangle"], "$K = 2 \\times (p + l)$"],
+      [["Segitiga sama sisi", "Equilateral triangle"], "$K = 3 \\times s$"], [["Trapesium", "Trapezium"], "$K = a + b + c + d$"], [["Jajar genjang", "Parallelogram"], "$K = 2 \\times (a + b)$"]],
+    sol: [["Persegi 4 sisi sama → $4 \\times s$; segitiga sama sisi 3 sisi sama → $3 \\times s$.", "Square, 4 equal sides → $4 \\times s$; equilateral triangle, 3 equal sides → $3 \\times s$."],
+      ["Persegi panjang & jajar genjang: 2 pasang sisi sama → $2 \\times (\\ldots + \\ldots)$.", "Rectangle & parallelogram: 2 pairs of equal sides → $2 \\times (\\ldots + \\ldots)$."],
+      ["Trapesium sisi-sisinya bisa berbeda → jumlahkan semua.", "A trapezium's sides may all differ → add them all."]] },
+  { t: "drag", q: ["Kelompokkan bangun menurut kelilingnya.", "Group the shapes by their perimeter."],
+    zones: [{ label: ["Keliling $= 20$ cm", "Perimeter $= 20$ cm"] }, { label: ["Keliling $\\neq 20$ cm", "Perimeter $\\neq 20$ cm"] }],
+    chips: [{ c: ["Belah ketupat $s = 5$", "Rhombus $s = 5$"], z: 0 }, { c: ["Segitiga sama sisi $s = 7$", "Equilateral triangle $s = 7$"], z: 1 },
+      { c: ["Jajar genjang $6$ & $4$", "Parallelogram $6$ & $4$"], z: 0 }, { c: ["Layang-layang $3$ & $7$", "Kite $3$ & $7$"], z: 0 },
+      { c: ["Trapesium $5, 4, 5, 7$", "Trapezium $5, 4, 5, 7$"], z: 1 }, { c: ["Segitiga $6, 6, 8$", "Triangle $6, 6, 8$"], z: 0 }],
+    sol: ["$4 \\times 5 = 20 \\; ✓ \\qquad 3 \\times 7 = 21 \\; \\color{#dc2626}{\\textbf{X}}$", "$2 \\times (6 + 4) = 20 \\; ✓ \\qquad 2 \\times (3 + 7) = 20 \\; ✓$", "$5 + 4 + 5 + 7 = 21 \\; \\color{#dc2626}{\\textbf{X}} \\qquad 6 + 6 + 8 = 20 \\; ✓$",
+      ["(Semua dalam cm.)", "(All in cm.)"]] },
+  { t: "tf", q: ["Tentukan Benar atau Salah.", "Decide True or False."],
+    items: [{ s: ["Keliling jajar genjang dengan sisi $10$ cm dan $6$ cm adalah $32$ cm.", "The perimeter of a parallelogram with sides $10$ cm and $6$ cm is $32$ cm."], a: true },
+      { s: ["Keliling segitiga sama kaki dengan kaki $8$ cm dan alas $5$ cm adalah $2 \\times 5 + 8 = 18$ cm.", "The perimeter of an isosceles triangle with legs $8$ cm and base $5$ cm is $2 \\times 5 + 8 = 18$ cm."], a: false },
+      { s: ["Layang-layang memiliki dua pasang sisi berdekatan yang sama panjang.", "A kite has two pairs of equal adjacent sides."], a: true }],
+    sol: [["$2 \\times (10 + 6) = 32$ → Benar.", "$2 \\times (10 + 6) = 32$ → True."],
+      ["Yang dikali $2$ adalah <b>kaki</b>: $2 \\times 8 + 5 = 21$ cm → Salah.", "It is the <b>legs</b> that are doubled: $2 \\times 8 + 5 = 21$ cm → False."],
+      ["Sesuai sifat layang-layang → Benar.", "This is the property of a kite → True."]] }
+];
+
+/* ================= TASK 4: Mencari sisi & bangun gabungan ================= */
+Q.t4 = [
+  { t: "fill", q: ["Keliling persegi $64$ cm. Berapa panjang sisinya?", "A square's perimeter is $64$ cm. How long is each side?"],
+    blanks: [{ pre: "$s =$", post: "cm", ans: 16 }], sol: ["$s = K : 4 = 64 : 4 = 16$", ["Cek: $4 \\times 16 = 64$ ✓.", "Check: $4 \\times 16 = 64$ ✓."]] },
+  { t: "mc", q: ["Keliling persegi panjang $54$ cm dan panjangnya $17$ cm. Lebarnya adalah …", "A rectangle's perimeter is $54$ cm and its length is $17$ cm. Its width is …"],
+    opts: ["$10$ cm", "$20$ cm", "$37$ cm", "$27$ cm"], ans: 0,
+    sol: ["$p + l = 54 : 2 = 27$", "$l = 27 - 17 = 10$", ["Cek: $2 \\times (17 + 10) = 54$ ✓.", "Check: $2 \\times (17 + 10) = 54$ ✓."]] },
+  { t: "fill", q: ["Keliling segitiga sama sisi $45$ cm. Berapa panjang setiap sisinya?", "An equilateral triangle has a perimeter of $45$ cm. How long is each side?"],
+    blanks: [{ pre: "$s =$", post: "cm", ans: 15 }], sol: ["$s = K : 3 = 45 : 3 = 15$", ["Cek: $3 \\times 15 = 45$ ✓.", "Check: $3 \\times 15 = 45$ ✓."]] },
+  { t: "fill", q: ["Keliling sebuah segitiga $38$ cm. Dua sisinya $12$ cm dan $15$ cm. Berapa panjang sisi ketiga?", "A triangle's perimeter is $38$ cm. Two of its sides are $12$ cm and $15$ cm. How long is the third side?"],
+    fig: poly([[0, 0], [12, 0], [5, 7]], ["15 cm", "?", "12 cm"], { w: 240, maxH: 140, fill: "#dcfce7", stroke: "#15803d" }),
+    blanks: [{ pre: ["Sisi ketiga", "Third side"], post: "cm", ans: 11 }],
+    sol: [["Sisi ketiga = keliling dikurangi dua sisi yang diketahui.", "Third side = perimeter minus the two known sides."], "$38 - 12 - 15 = 26 - 15 = 11$",
+      ["Cek: $12 + 15 + 11 = 38$ ✓.", "Check: $12 + 15 + 11 = 38$ ✓."]] },
+  { t: "mc", q: ["Segitiga sama kaki kelilingnya $50$ cm dan alasnya $14$ cm. Panjang setiap kakinya adalah …", "An isosceles triangle has a perimeter of $50$ cm and a base of $14$ cm. Each leg is …"],
+    opts: ["$18$ cm", "$36$ cm", "$25$ cm", "$32$ cm"], ans: 0,
+    sol: [["Kurangi alas dulu, sisanya untuk $2$ kaki.", "Subtract the base first; the rest is for the $2$ legs."], "$50 - 14 = 36$", "$36 : 2 = 18$",
+      ["Cek: $18 + 18 + 14 = 50$ ✓.", "Check: $18 + 18 + 14 = 50$ ✓."]] },
+  { t: "fill", q: ["Cari $a$, $b$, lalu keliling bangun L berikut.", "Find $a$, $b$, and then the perimeter of this L-shape."],
+    fig: poly(L_T4, ["14 cm", "6 cm", "a", "b", "8 cm", "10 cm"], { w: 360, maxH: 230 }),
+    blanks: [{ pre: "$a =$", post: "cm", ans: 6 }, { pre: "$b =$", post: "cm", ans: 4 }, { pre: "$K =$", post: "cm", ans: 48 }],
+    sol: ["$a = 14 - 8 = 6$", "$b = 10 - 6 = 4$", "$K = 14 + 6 + 6 + 4 + 8 + 10 = 48$", ["Jadi, $a = 6$ cm, $b = 4$ cm, $K = 48$ cm.", "So, $a = 6$ cm, $b = 4$ cm, $K = 48$ cm."]] },
+  { t: "mc", q: ["Dua persegi bersisi $5$ cm ditempel berdampingan. Berapa keliling bangun gabungannya?", "Two squares with $5$ cm sides are joined side by side. What is the perimeter of the new shape?"],
+    fig: poly([[0, 0], [10, 0], [10, 5], [0, 5]], ["10 cm", "5 cm", null, "5 cm"], { dash: [[[5, 0], [5, 5]]], w: 260, maxH: 120 }),
+    opts: ["$30$ cm", "$40$ cm", "$50$ cm", "$25$ cm"], ans: 0,
+    sol: [["Sisi yang ditempel (garis putus-putus) berada di <b>dalam</b>, jadi tidak dihitung.", "The joined side (dashed line) is <b>inside</b>, so it is not counted."],
+      ["Bangun baru adalah persegi panjang $10$ cm × $5$ cm.", "The new shape is a $10$ cm × $5$ cm rectangle."], "$K = 2 \\times (10 + 5) = 30$",
+      ["$40$ cm salah karena menjumlahkan keliling dua persegi ($20 + 20$) termasuk sisi di dalam.", "$40$ cm is wrong because it adds both squares' perimeters ($20 + 20$), including the inside sides."]] },
+  { t: "multi", q: ["Pilih semua ukuran persegi panjang yang kelilingnya $40$ cm.", "Choose all rectangle sizes with a perimeter of $40$ cm."],
+    opts: ["$12$ cm × $8$ cm", "$15$ cm × $5$ cm", "$14$ cm × $6$ cm", "$16$ cm × $6$ cm", "$11$ cm × $8$ cm"], ans: [0, 1, 2],
+    sol: ["$p + l = 40 : 2 = 20$", "$12 + 8 = 20 \\; ✓ \\quad 15 + 5 = 20 \\; ✓ \\quad 14 + 6 = 20 \\; ✓$", "$16 + 6 = 22 \\; \\color{#dc2626}{\\textbf{X}} \\quad 11 + 8 = 19 \\; \\color{#dc2626}{\\textbf{X}}$"] },
+  { t: "sort", q: ["Keliling persegi panjang $36$ cm dan panjangnya $11$ cm. Urutkan langkah mencari lebarnya.", "A rectangle's perimeter is $36$ cm and its length is $11$ cm. Order the steps to find its width."],
+    items: ["$36 = 2 \\times (11 + l)$", "$11 + l = 36 : 2 = 18$", "$l = 18 - 11 = 7$", ["Lebar $= 7$ cm", "Width $= 7$ cm"]],
+    sol: [["Tulis rumus dengan angka → bagi $2$ → kurangi panjang → tulis jawaban.", "Write the formula with numbers → divide by $2$ → subtract the length → write the answer."]] },
+  { t: "drag", q: ["Bangun berbentuk huruf U. Lekukannya selebar $4$ cm dan sedalam $3$ cm. Seret jawaban ke kotak yang tepat.", "The shape is U-shaped. Its notch is $4$ cm wide and $3$ cm deep. Drag the answers into the correct boxes."],
+    fig: poly(U_T4, ["12 cm", "8 cm", "4 cm", "3 cm", null, null, "4 cm", "8 cm"], { w: 320, maxH: 200 }),
+    zones: [{ label: ["Jumlah sisi mendatar", "Sum of horizontal sides"], cap: 1 }, { label: ["Jumlah sisi tegak", "Sum of vertical sides"], cap: 1 }, { label: ["Keliling", "Perimeter"], cap: 1 }],
+    chips: [{ c: "$24$ cm", z: 0 }, { c: "$22$ cm", z: 1 }, { c: "$46$ cm", z: 2 }, { c: "$40$ cm", z: -1 }, { c: "$36$ cm", z: -1 }],
+    sol: [["Sisi mendatar: bawah $12$, atas kanan $4$, dasar lekukan $4$, atas kiri $4$.", "Horizontal sides: bottom $12$, top-right $4$, notch floor $4$, top-left $4$."], "$12 + 4 + 4 + 4 = 24$",
+      ["Sisi tegak: kanan $8$, kiri $8$, dan dua dinding lekukan $3$.", "Vertical sides: right $8$, left $8$, and two notch walls of $3$."], "$8 + 8 + 3 + 3 = 22$",
+      "$K = 24 + 22 = 46 \\text{ cm}$", ["$40$ cm salah karena lupa dua dinding lekukan.", "$40$ cm is wrong because it forgets the two notch walls."]] }
+];
+
+/* ================= TASK 5: Soal cerita ================= */
+Q.t5 = [
+  { t: "fill", q: ["Kebun Pak Tani berbentuk persegi panjang $25$ m × $15$ m. Berapa meter kawat untuk memagari sekelilingnya (1 lapis)?", "A farmer's garden is a $25$ m × $15$ m rectangle. How many metres of wire are needed to fence around it (1 layer)?"],
+    blanks: [{ pre: ["Panjang kawat", "Length of wire"], post: "m", ans: 80 }], sol: ["$K = 2 \\times (25 + 15) = 2 \\times 40 = 80 \\text{ m}$"] },
+  { t: "mc", q: ["Rina berlari $4$ putaran mengelilingi lapangan persegi bersisi $50$ m. Berapa jarak yang ditempuh Rina?", "Rina runs $4$ laps around a square field with $50$ m sides. How far does Rina run?"],
+    opts: ["$800$ m", "$200$ m", "$1.000$ m", "$400$ m"], ans: 0,
+    sol: [["Satu putaran: $K = 4 \\times 50 = 200$ m.", "One lap: $K = 4 \\times 50 = 200$ m."], ["Jarak $= 4 \\times 200 = 800$ m", "Distance $= 4 \\times 200 = 800$ m"], ["$200$ m hanya $1$ putaran.", "$200$ m is only $1$ lap."]] },
+  { t: "fill", q: ["Taplak meja persegi panjang $2$ m × $1$ m akan diberi renda di tepinya. Harga renda Rp3.000 per meter.", "A $2$ m × $1$ m rectangular tablecloth will have lace on its edge. Lace costs Rp3.000 per metre."],
+    blanks: [{ pre: ["Panjang renda", "Length of lace"], post: "m", ans: 6 }, { pre: ["Biaya", "Cost"], post: "rupiah", ans: 18000 }],
+    sol: ["$K = 2 \\times (2 + 1) = 2 \\times 3 = 6 \\text{ m}$", ["Biaya $= 6 \\times 3.000 = 18.000$", "Cost $= 6 \\times 3{,}000 = 18{,}000$"], ["Jadi, renda $6$ m dan biaya Rp18.000.", "So, $6$ m of lace and the cost is Rp18.000."]] },
+  { t: "tf", q: ["Bingkai A berbentuk persegi bersisi $20$ cm. Bingkai B berbentuk persegi panjang $25$ cm × $15$ cm. Tentukan Benar atau Salah.", "Frame A is a square with $20$ cm sides. Frame B is a $25$ cm × $15$ cm rectangle. Decide True or False."],
+    items: [{ s: ["Keliling A sama dengan keliling B.", "The perimeter of A equals the perimeter of B."], a: true },
+      { s: ["Bingkai B membutuhkan kayu lebih panjang daripada bingkai A.", "Frame B needs more wood than frame A."], a: false }],
+    sol: ["$K_A = 4 \\times 20 = 80 \\text{ cm}$", "$K_B = 2 \\times (25 + 15) = 2 \\times 40 = 80 \\text{ cm}$", ["Keliling sama ($80$ cm), jadi kayunya sama panjang. Pernyataan 1 Benar, pernyataan 2 Salah.", "Same perimeter ($80$ cm), so the same length of wood. Statement 1 True, statement 2 False."]] },
+  { t: "mc", q: ["Seutas kawat sepanjang $100$ cm dibentuk menjadi persegi tanpa sisa. Panjang sisi persegi adalah …", "A $100$ cm wire is bent into a square with nothing left over. Each side of the square is …"],
+    opts: ["$25$ cm", "$50$ cm", "$10$ cm", "$20$ cm"], ans: 0, sol: [["Panjang kawat = keliling persegi.", "Wire length = perimeter of the square."], "$s = 100 : 4 = 25 \\text{ cm}$"] },
+  { t: "fill", q: ["Di sekeliling kolam persegi panjang $12$ m × $8$ m akan ditanam pohon setiap $4$ m.", "Trees will be planted every $4$ m around a $12$ m × $8$ m rectangular pond."],
+    blanks: [{ pre: ["Keliling kolam", "Perimeter of the pond"], post: "m", ans: 40 }, { pre: ["Banyak pohon", "Number of trees"], ans: 10 }],
+    sol: ["$K = 2 \\times (12 + 8) = 40 \\text{ m}$", ["Pada jalur tertutup (mengelilingi), banyak pohon = keliling : jarak.", "On a closed path (going all the way round), number of trees = perimeter : spacing."], "$40 : 4 = 10 \\text{ pohon / trees}$"] },
+  { t: "multi", q: ["Doni punya pita $60$ cm. Tepi bangun mana saja yang bisa ia hias seluruhnya dengan pita itu (pita cukup)?", "Doni has $60$ cm of ribbon. Which shapes can he decorate all the way around with it (enough ribbon)?"],
+    opts: [["Persegi $s = 15$ cm", "Square $s = 15$ cm"], ["Persegi panjang $20$ cm × $12$ cm", "Rectangle $20$ cm × $12$ cm"], ["Segitiga sama sisi $s = 18$ cm", "Equilateral triangle $s = 18$ cm"],
+      ["Persegi panjang $16$ cm × $13$ cm", "Rectangle $16$ cm × $13$ cm"], ["Belah ketupat $s = 16$ cm", "Rhombus $s = 16$ cm"]], ans: [0, 2, 3],
+    sol: [["Pita cukup jika keliling $\\le 60$ cm.", "The ribbon is enough if the perimeter is $\\le 60$ cm."],
+      "$4 \\times 15 = 60 \\; ✓ \\quad 2 \\times (20 + 12) = 64 \\; \\color{#dc2626}{\\textbf{X}}$", "$3 \\times 18 = 54 \\; ✓ \\quad 2 \\times (16 + 13) = 58 \\; ✓ \\quad 4 \\times 16 = 64 \\; \\color{#dc2626}{\\textbf{X}}$"] },
+  { t: "sort", q: ["Urutkan jarak lari dari yang <b>terpendek</b> ke <b>terjauh</b>.", "Order the running distances from the <b>shortest</b> to the <b>longest</b>."],
+    items: [["Cici: $3$ putaran segitiga sama sisi $s = 30$ m", "Cici: $3$ laps of an equilateral triangle $s = 30$ m"], ["Ani: $2$ putaran persegi panjang $50$ m × $30$ m", "Ani: $2$ laps of a $50$ m × $30$ m rectangle"],
+      ["Budi: $1$ putaran persegi $s = 90$ m", "Budi: $1$ lap of a square $s = 90$ m"], ["Dedi: $1$ putaran persegi panjang $120$ m × $80$ m", "Dedi: $1$ lap of a $120$ m × $80$ m rectangle"]],
+    sol: ["$\\text{Cici: } 3 \\times (3 \\times 30) = 3 \\times 90 = 270 \\text{ m}$", "$\\text{Ani: } 2 \\times [2 \\times (50 + 30)] = 2 \\times 160 = 320 \\text{ m}$",
+      "$\\text{Budi: } 4 \\times 90 = 360 \\text{ m}$", "$\\text{Dedi: } 2 \\times (120 + 80) = 400 \\text{ m}$", ["Urutan: Cici → Ani → Budi → Dedi.", "Order: Cici → Ani → Budi → Dedi."]] },
+  { t: "pair", q: ["Jodohkan situasi dengan jawabannya.", "Match each situation with its answer."],
+    pairs: [[["Pagar taman persegi bersisi $7$ m", "Fence for a square park with $7$ m sides"], "$28$ m"], [["Lis bingkai $30$ cm × $20$ cm", "Border for a $30$ cm × $20$ cm frame"], "$100$ cm"],
+      [["Lari $2$ putaran persegi panjang $40$ m × $10$ m", "Running $2$ laps of a $40$ m × $10$ m rectangle"], "$200$ m"], [["Pita tepi segitiga sama sisi $15$ cm", "Ribbon around an equilateral triangle of $15$ cm"], "$45$ cm"]],
+    sol: ["$4 \\times 7 = 28 \\text{ m}$", "$2 \\times (30 + 20) = 100 \\text{ cm}$", "$2 \\times [2 \\times (40 + 10)] = 2 \\times 100 = 200 \\text{ m}$", "$3 \\times 15 = 45 \\text{ cm}$"] },
+  { t: "drag", q: ["Pak Budi punya kawat $50$ m untuk memagari kebun $12$ m × $8$ m. Seret jawaban ke kotak yang tepat.", "Mr. Budi has $50$ m of wire to fence a $12$ m × $8$ m garden. Drag the answers into the correct boxes."],
+    zones: [{ label: ["Keliling kebun", "Perimeter of the garden"], cap: 1 }, { label: ["Sisa kawat", "Wire left over"], cap: 1 }],
+    chips: [{ c: "$40$ m", z: 0 }, { c: "$10$ m", z: 1 }, { c: "$96$ m", z: -1 }, { c: "$20$ m", z: -1 }],
+    sol: ["$K = 2 \\times (12 + 8) = 40 \\text{ m}$", ["Sisa kawat $= 50 - 40 = 10$ m", "Wire left $= 50 - 40 = 10$ m"], ["$96 = 12 \\times 8$ (luas), $20 = 12 + 8$ (setengah keliling).", "$96 = 12 \\times 8$ (area), $20 = 12 + 8$ (half the perimeter)."]] }
+];
+
+if (typeof module !== "undefined") module.exports = { Q: Q, FIGS: FIGS, gridPerimeter: gridPerimeter, CELLS_L: CELLS_L, CELLS_5x3: CELLS_5x3, CELLS_3x2: CELLS_3x2 };
+
+</script>
+<script>
+/* ================= ENGINE ================= */
+(function () {
+  "use strict";
+  var TYPE = {
+    mc: ["Pilihan Ganda", "Multiple Choice", "Pilih <b>satu</b> jawaban yang benar.", "Choose <b>one</b> correct answer.", "🔘"],
+    multi: ["Pilihan Ganda Kompleks", "Multiple Response", "Pilih <b>semua</b> jawaban yang benar (bisa lebih dari satu).", "Select <b>all</b> correct answers (there may be more than one).", "☑️"],
+    fill: ["Isian Singkat", "Fill in the Blank", "Tulis jawabanmu berupa angka di dalam kotak.", "Type your answer as a number in the box.", "✏️"],
+    tf: ["Benar atau Salah", "True or False", "Tentukan apakah setiap pernyataan <b>Benar</b> atau <b>Salah</b>.", "Decide whether each statement is <b>True</b> or <b>False</b>.", "⚖️"],
+    sort: ["Mengurutkan", "Sorting", "Seret kartu (atau pakai tombol ▲ ▼) untuk menyusun urutan yang benar.", "Drag the cards (or use the ▲ ▼ buttons) to put them in the correct order.", "🔢"],
+    pair: ["Menjodohkan", "Matching", "Klik satu kartu di kiri, lalu klik pasangannya di kanan. Klik lagi untuk membatalkan.", "Click a card on the left, then click its match on the right. Click again to undo.", "🔗"],
+    drag: ["Seret dan Lepas", "Drag and Drop", "Seret kartu ke kotak yang tepat (atau klik kartu, lalu klik kotak).", "Drag each card into the correct box (or click a card, then click a box).", "🖐️"]
+  };
+  var PAIR_COLORS = ["#2563eb", "#db2777", "#16a34a", "#ea580c", "#7c3aed", "#0891b2"];
+
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function shuffleIdx(n) {
+    var idx = []; for (var i = 0; i < n; i++) idx.push(i);
+    if (n < 2) return idx;
+    var r; var tries = 0;
+    do { r = shuffle(idx); tries++; } while (tries < 6 && r.every(function (v, k) { return v === k; }));
+    return r;
+  }
+  function bi(x, cls) {
+    if (Array.isArray(x)) return '<div class="bi ' + (cls || "") + '"><div class="id">' + x[0] + '</div><div class="en">' + x[1] + '</div></div>';
+    return '<div class="bi ' + (cls || "") + '"><div class="id">' + x + '</div></div>';
+  }
+  function bil(x) { // inline (for chips/options)
+    if (Array.isArray(x)) return '<span class="idl">' + x[0] + '</span><span class="enl">' + x[1] + '</span>';
+    return '<span class="idl">' + x + '</span>';
+  }
+  function renderMath(el) {
+    if (window.renderMathInElement) {
+      renderMathInElement(el, { delimiters: [{ left: "$$", right: "$$", display: true }, { left: "$", right: "$", display: false }], throwOnError: false });
+    }
+  }
+  function norm(v) {
+    v = String(v).trim().toLowerCase().replace(/rp|\s/g, "");
+    if (/^\d{1,3}([.,]\d{3})+$/.test(v)) v = v.replace(/[.,]/g, "");
+    v = v.replace(",", ".");
+    return v;
+  }
+  function sameNum(a, b) {
+    var x = parseFloat(norm(a)), y = parseFloat(norm(b));
+    return norm(a) !== "" && !isNaN(x) && Math.abs(x - y) < 1e-9 && /^-?\d*\.?\d+$/.test(norm(a));
+  }
+
+  var SCORE = {};
+  function updateScore(sec) {
+    var el = document.getElementById("score-" + sec); if (!el) return;
+    var st = SCORE[sec], c = 0; st.forEach(function (v) { if (v) c++; });
+    el.innerHTML = '⭐ Skor / <i>Score</i>: <b>' + c + '</b> / ' + st.length;
+    el.classList.toggle("full", c === st.length);
+  }
+
+  function build(sec, list) {
+    var box = document.getElementById("q-" + sec); if (!box) return;
+    SCORE[sec] = list.map(function () { return false; });
+    box.innerHTML = "";
+    list.forEach(function (q, i) { box.appendChild(card(sec, q, i)); });
+    renderMath(box);
+    updateScore(sec);
+  }
+
+  function card(sec, q, i) {
+    var T = TYPE[q.t], el = document.createElement("div");
+    el.className = "qcard";
+    var html = '<div class="qhead"><span class="qnum">' + (i + 1) + '</span><span class="qtitle">Soal ' + (i + 1) + ' · <i>Question ' + (i + 1) + '</i></span>' +
+      '<span class="qtype">' + T[4] + ' ' + T[0] + ' · <i>' + T[1] + '</i></span></div>';
+    html += bi(q.q, "qtext");
+    html += '<div class="instr">' + T[2] + ' <i>' + T[3] + '</i>';
+    if (q.t === "drag" && q.chips.some(function (c) { return c.z === -1; })) html += ' Tidak semua kartu dipakai. <i>Not every card is used.</i>';
+    html += '</div>';
+    if (q.fig) html += '<div class="fig">' + q.fig + '</div>';
+    html += '<div class="qbody"></div>';
+    html += '<div class="qactions"><button class="btn check">✔ Periksa · <i>Check</i></button><button class="btn ghost retry">↺ Acak Ulang · <i>Reshuffle</i></button></div>';
+    html += '<div class="feedback" aria-live="polite"></div>';
+    html += '<details class="sol"><summary>💡 Lihat Pembahasan · <i>Show Solution</i></summary><div class="solbody">' +
+      (q.sol || []).map(function (s, k) { return '<div class="step"><span class="stepn">' + (k + 1) + '</span>' + bi(s) + '</div>'; }).join("") + '</div></details>';
+    el.innerHTML = html;
+    var body = el.querySelector(".qbody");
+    var api = RENDER[q.t](body, q, sec + "-" + i);
+    el.querySelector(".check").onclick = function () {
+      var r = api.check(), fb = el.querySelector(".feedback");
+      SCORE[sec][i] = r === true; updateScore(sec);
+      el.classList.remove("ok", "bad");
+      if (r === true) { el.classList.add("ok"); fb.innerHTML = '🎉 <b>Benar! Hebat!</b> <i>Correct! Great job!</i>'; }
+      else if (r === null) { fb.innerHTML = '⚠️ <b>Lengkapi dulu semua jawaban.</b> <i>Please complete all answers first.</i>'; }
+      else { el.classList.add("bad"); fb.innerHTML = '❌ <b>Belum tepat.</b> Bagian yang salah ditandai merah. Coba lagi atau buka pembahasan. <i>Not quite. Wrong parts are marked red. Try again or open the solution.</i>'; }
+    };
+    el.querySelector(".retry").onclick = function () {
+      var fresh = card(sec, q, i); el.replaceWith(fresh); renderMath(fresh); SCORE[sec][i] = false; updateScore(sec);
+    };
+    return el;
+  }
+
+  var RENDER = {};
+  RENDER.mc = function (body, q, id) {
+    var order = shuffleIdx(q.opts.length), L = "ABCDEFG";
+    body.innerHTML = '<div class="opts">' + order.map(function (o, k) {
+      return '<label class="opt"><input type="radio" name="r' + id + '" value="' + o + '"><span class="letter">' + L[k] + '</span><span class="otext">' + bil(q.opts[o]) + '</span></label>';
+    }).join("") + '</div>';
+    return { check: function () {
+      var sel = body.querySelector("input:checked");
+      body.querySelectorAll(".opt").forEach(function (l) { l.classList.remove("right", "wrong"); });
+      if (!sel) return null;
+      var ok = +sel.value === q.ans;
+      sel.closest(".opt").classList.add(ok ? "right" : "wrong");
+      return ok;
+    } };
+  };
+  RENDER.multi = function (body, q, id) {
+    var order = shuffleIdx(q.opts.length), L = "ABCDEFG";
+    body.innerHTML = '<div class="opts">' + order.map(function (o, k) {
+      return '<label class="opt"><input type="checkbox" value="' + o + '"><span class="letter sq">' + L[k] + '</span><span class="otext">' + bil(q.opts[o]) + '</span></label>';
+    }).join("") + '</div>';
+    return { check: function () {
+      var any = false, ok = true;
+      body.querySelectorAll(".opt").forEach(function (l) {
+        var inp = l.querySelector("input"), v = +inp.value, should = q.ans.indexOf(v) >= 0;
+        l.classList.remove("right", "wrong");
+        if (inp.checked) any = true;
+        if (inp.checked !== should) { ok = false; if (inp.checked) l.classList.add("wrong"); }
+        else if (inp.checked) l.classList.add("right");
+      });
+      if (!any) return null;
+      return ok;
+    } };
+  };
+  RENDER.fill = function (body, q) {
+    body.innerHTML = '<div class="blanks">' + q.blanks.map(function (b, k) {
+      var pre = b.pre ? (Array.isArray(b.pre) ? '<span class="bpre">' + b.pre[0] + ' <i>/ ' + b.pre[1] + '</i> =</span>' : '<span class="bpre">' + b.pre + '</span>') : '';
+      return '<div class="blank">' + pre + '<input type="text" inputmode="decimal" autocomplete="off" data-k="' + k + '" placeholder="…">' + (b.post ? '<span class="bpost">' + b.post + '</span>' : '') + '</div>';
+    }).join("") + '</div>';
+    body.querySelectorAll("input").forEach(function (inp) {
+      inp.addEventListener("keydown", function (e) { if (e.key === "Enter") body.closest(".qcard").querySelector(".check").click(); });
+    });
+    return { check: function () {
+      var ok = true, empty = false;
+      body.querySelectorAll("input").forEach(function (inp) {
+        var b = q.blanks[+inp.dataset.k];
+        inp.classList.remove("right", "wrong");
+        if (inp.value.trim() === "") { empty = true; return; }
+        var good = [].concat(b.ans).some(function (a) { return sameNum(inp.value, a); });
+        inp.classList.add(good ? "right" : "wrong"); if (!good) ok = false;
+      });
+      if (empty) return null;
+      return ok;
+    } };
+  };
+  RENDER.tf = function (body, q, id) {
+    body.innerHTML = '<div class="tflist">' + q.items.map(function (it, k) {
+      var btns = shuffle([true, false]).map(function (v) {
+        return '<label class="tfbtn ' + (v ? "t" : "f") + '"><input type="radio" name="tf' + id + '-' + k + '" value="' + v + '">' + (v ? '✔ Benar <i>True</i>' : '✘ Salah <i>False</i>') + '</label>';
+      }).join("");
+      return '<div class="tfrow" data-k="' + k + '"><div class="tfs">' + bi(it.s) + '</div><div class="tfbtns">' + btns + '</div></div>';
+    }).join("") + '</div>';
+    return { check: function () {
+      var ok = true, empty = false;
+      body.querySelectorAll(".tfrow").forEach(function (row) {
+        var it = q.items[+row.dataset.k], sel = row.querySelector("input:checked");
+        row.classList.remove("right", "wrong");
+        if (!sel) { empty = true; return; }
+        var good = (sel.value === "true") === it.a; row.classList.add(good ? "right" : "wrong"); if (!good) ok = false;
+      });
+      if (empty) return null;
+      return ok;
+    } };
+  };
+  RENDER.sort = function (body, q) {
+    var order = shuffleIdx(q.items.length);
+    body.innerHTML = '<ol class="sortlist">' + order.map(function (o) {
+      return '<li class="sortitem" draggable="true" data-o="' + o + '"><span class="grip">⋮⋮</span><span class="stext">' + bil(q.items[o]) + '</span><span class="arrows"><button class="up" title="Naik / Up">▲</button><button class="down" title="Turun / Down">▼</button></span></li>';
+    }).join("") + '</ol>';
+    var list = body.querySelector(".sortlist"), dragEl = null;
+    list.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      var li = b.closest("li");
+      if (b.classList.contains("up") && li.previousElementSibling) list.insertBefore(li, li.previousElementSibling);
+      if (b.classList.contains("down") && li.nextElementSibling) list.insertBefore(li.nextElementSibling, li);
+      clear();
+    });
+    list.addEventListener("dragstart", function (e) { dragEl = e.target.closest("li"); if (dragEl) { dragEl.classList.add("dragging"); e.dataTransfer.effectAllowed = "move"; try { e.dataTransfer.setData("text/plain", "x"); } catch (er) { } } });
+    list.addEventListener("dragend", function () { if (dragEl) dragEl.classList.remove("dragging"); dragEl = null; clear(); });
+    list.addEventListener("dragover", function (e) {
+      e.preventDefault(); if (!dragEl) return;
+      var over = e.target.closest("li"); if (!over || over === dragEl) return;
+      var r = over.getBoundingClientRect();
+      if (e.clientY < r.top + r.height / 2) list.insertBefore(dragEl, over); else list.insertBefore(dragEl, over.nextElementSibling);
+    });
+    function clear() { list.querySelectorAll("li").forEach(function (l) { l.classList.remove("right", "wrong"); }); }
+    return { check: function () {
+      var ok = true;
+      list.querySelectorAll("li").forEach(function (li, k) {
+        var good = +li.dataset.o === k; li.classList.remove("right", "wrong"); li.classList.add(good ? "right" : "wrong"); if (!good) ok = false;
+      });
+      return ok;
+    } };
+  };
+  RENDER.pair = function (body, q) {
+    var lo = shuffleIdx(q.pairs.length), ro = shuffleIdx(q.pairs.length);
+    body.innerHTML = '<div class="pairwrap"><div class="pcol left">' + lo.map(function (o) {
+      return '<div class="pitem" data-side="L" data-o="' + o + '"><span class="pbadge"></span>' + bil(q.pairs[o][0]) + '</div>';
+    }).join("") + '</div><div class="pcol right">' + ro.map(function (o) {
+      return '<div class="pitem" data-side="R" data-o="' + o + '"><span class="pbadge"></span>' + bil(q.pairs[o][1]) + '</div>';
+    }).join("") + '</div></div>';
+    var map = {}, selL = null, used = [];
+    function paint() {
+      body.querySelectorAll(".pitem").forEach(function (p) {
+        p.classList.remove("sel", "right", "wrong"); p.style.borderColor = ""; p.querySelector(".pbadge").textContent = ""; p.querySelector(".pbadge").style.background = "";
+      });
+      var n = 0;
+      Object.keys(map).forEach(function (l) {
+        var col = PAIR_COLORS[n % PAIR_COLORS.length]; n++;
+        var a = body.querySelector('.pitem[data-side="L"][data-o="' + l + '"]'), b = body.querySelector('.pitem[data-side="R"][data-o="' + map[l] + '"]');
+        [a, b].forEach(function (x) { x.style.borderColor = col; var bd = x.querySelector(".pbadge"); bd.textContent = n; bd.style.background = col; });
+      });
+      if (selL !== null) body.querySelector('.pitem[data-side="L"][data-o="' + selL + '"]').classList.add("sel");
+    }
+    body.addEventListener("click", function (e) {
+      var p = e.target.closest(".pitem"); if (!p) return;
+      var o = p.dataset.o;
+      if (p.dataset.side === "L") {
+        if (map[o] !== undefined) { delete map[o]; selL = null; }
+        else selL = (selL === o ? null : o);
+      } else {
+        var owner = Object.keys(map).filter(function (l) { return map[l] === o; })[0];
+        if (owner !== undefined) { delete map[owner]; }
+        else if (selL !== null) { map[selL] = o; selL = null; }
+      }
+      paint();
+    });
+    return { check: function () {
+      if (Object.keys(map).length < q.pairs.length) return null;
+      var ok = true;
+      Object.keys(map).forEach(function (l) {
+        var good = l === map[l];
+        [body.querySelector('.pitem[data-side="L"][data-o="' + l + '"]'), body.querySelector('.pitem[data-side="R"][data-o="' + map[l] + '"]')].forEach(function (x) { x.classList.add(good ? "right" : "wrong"); });
+        if (!good) ok = false;
+      });
+      return ok;
+    } };
+  };
+  RENDER.drag = function (body, q) {
+    var order = shuffleIdx(q.chips.length);
+    body.innerHTML = '<div class="pool dz" data-z="-1"><div class="dzlabel">🧺 Kartu · <i>Cards</i></div><div class="dzin">' + order.map(function (o) {
+      return '<div class="chip" draggable="true" data-o="' + o + '">' + bil(q.chips[o].c) + '</div>';
+    }).join("") + '</div></div><div class="zones">' + q.zones.map(function (z, k) {
+      return '<div class="zone dz" data-z="' + k + '" data-cap="' + (z.cap || 0) + '"><div class="dzlabel">' + bil(z.label) + '</div><div class="dzin"></div></div>';
+    }).join("") + '</div>';
+    var drag = null, picked = null;
+    function moveTo(chip, zone) {
+      var cap = +zone.dataset.cap || 0, inn = zone.querySelector(".dzin");
+      if (cap && inn.children.length >= cap && chip.parentNode !== inn) {
+        body.querySelector(".pool .dzin").appendChild(inn.children[0]);
+      }
+      inn.appendChild(chip);
+      body.querySelectorAll(".chip").forEach(function (c) { c.classList.remove("right", "wrong"); });
+    }
+    body.addEventListener("dragstart", function (e) { var c = e.target.closest(".chip"); if (c) { drag = c; c.classList.add("dragging"); try { e.dataTransfer.setData("text/plain", "x"); } catch (er) { } } });
+    body.addEventListener("dragend", function () { if (drag) drag.classList.remove("dragging"); drag = null; body.querySelectorAll(".dz").forEach(function (z) { z.classList.remove("hover"); }); });
+    body.addEventListener("dragover", function (e) { var z = e.target.closest(".dz"); if (z) { e.preventDefault(); z.classList.add("hover"); } });
+    body.addEventListener("dragleave", function (e) { var z = e.target.closest(".dz"); if (z && !z.contains(e.relatedTarget)) z.classList.remove("hover"); });
+    body.addEventListener("drop", function (e) { var z = e.target.closest(".dz"); if (z && drag) { e.preventDefault(); z.classList.remove("hover"); moveTo(drag, z); } });
+    body.addEventListener("click", function (e) {
+      var c = e.target.closest(".chip");
+      if (c) { if (picked === c) { c.classList.remove("picked"); picked = null; } else { if (picked) picked.classList.remove("picked"); picked = c; c.classList.add("picked"); } e.stopPropagation(); return; }
+      var z = e.target.closest(".dz");
+      if (z && picked) { picked.classList.remove("picked"); moveTo(picked, z); picked = null; }
+    });
+    return { check: function () {
+      var ok = true, pool = body.querySelector(".pool .dzin");
+      var needed = q.chips.filter(function (c) { return c.z !== -1; }).length, placed = 0;
+      body.querySelectorAll(".zone .chip").forEach(function () { placed++; });
+      if (placed === 0) return null;
+      body.querySelectorAll(".chip").forEach(function (c) {
+        var want = q.chips[+c.dataset.o].z, z = +c.closest(".dz").dataset.z;
+        c.classList.remove("right", "wrong");
+        if (z === -1) { if (want !== -1) ok = false; return; }
+        var good = want === z; c.classList.add(good ? "right" : "wrong"); if (!good) ok = false;
+      });
+      if (placed < needed && ok === false && pool.children.length) { /* incomplete */ }
+      return ok;
+    } };
+  };
+
+  /* ================= PAGE ================= */
+  function show(id) {
+    document.querySelectorAll(".section").forEach(function (s) { s.classList.toggle("active", s.id === id); });
+    document.querySelectorAll(".nav a").forEach(function (a) { a.classList.toggle("active", a.dataset.target === id); });
+    document.querySelector(".main").scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    try { history.replaceState(null, "", "#" + id); } catch (e) { }
+  }
+  window.LESSON_SHOW = show;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("[data-fig]").forEach(function (d) { d.innerHTML = FIGS[d.dataset.fig] || ""; });
+    Object.keys(Q).forEach(function (k) { build(k, Q[k]); });
+    renderMath(document.body);
+    document.querySelectorAll(".nav a").forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); show(a.dataset.target); }); });
+    document.querySelectorAll("[data-go]").forEach(function (b) { b.addEventListener("click", function () { show(b.dataset.go); }); });
+    var m = document.getElementById("rulesModal");
+    document.getElementById("rulesBtn").onclick = function () { m.classList.add("open"); };
+    m.addEventListener("click", function (e) { if (e.target === m || e.target.closest(".close")) m.classList.remove("open"); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") m.classList.remove("open"); });
+    var h = (location.hash || "").slice(1);
+    show(document.getElementById(h) && document.getElementById(h).classList.contains("section") ? h : "s-warmup");
+  });
+})();
+
+</script>
+</body>
+</html>
